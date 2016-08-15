@@ -39,7 +39,7 @@ Open an ssh sessions to the VMs, set the password for root and allow ssh root ss
 MY_KEY_FILE=~/.ssh/my-key.pem
 PASSWORD=[pick an admin password]
 NODE_IP=...
-ssh -i $MY_KEY_FILE -oStrictHostKeyChecking=no ubuntu@$NODE_IP
+ssh -i $MY_KEY_FILE -oStrictHostKeyChecking=no ubuntu@$NODE_IP "PASSWORD=$PASSWORD"
 sudo su
 cat /etc/ssh/sshd_config | sed 's/PermitRootLogin without-password/PermitRootLogin yes/g' | sed 's/PasswordAuthentication no/PasswordAuthentication yes/g' > here; mv here /etc/ssh/sshd_config
 service ssh restart
