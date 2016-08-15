@@ -1,8 +1,10 @@
 I work for MapR. MapR sells a Hadoop based platform called the "MapR Converged Data Platform". Enterprises purchase this technology for a lot of reasons, but generally speaking, it's because they find it to be faster, more reliable, and easier to use than alternative platforms.
 
-When getting acquainted with new technologies I believe users should be able to get started without spending more than 15 minutes setting up a sandbox environment. MapR provides a couple different ways to get started, and in particular, the sandbox VMs are a great turnkey way to run hadoop on your laptop. But for a more enterprise ready use-case, let me show you how to build a 3-node Hadoop cluster in Amazon EC2 within 15 minutes.
+When getting acquainted with new technologies I believe users should be able to get started without spending more than 15 minutes setting up a sandbox environment. MapR provides a couple different ways to get started, and in particular their Sandbox VMs and tutorials are excellent ways to get your hands dirty within the limits of a workstation running Visual VM. However, in order for those sandbox environments to run on laptops they are necessarily very limited on memory and disk resources.
 
-This procedure quires that you have the Amazon EC2 command-line toolkit installed.
+For a more enterprise ready sandbox, you might want to just install MapR on the Azure or Amazon cloud. That's what I'm going to show you now. How to build a 3-node Hadoop cluster on Amazon EC2 in 15 minutes:
+
+This procedure requires that you have the Amazon EC2 command-line toolkit installed.
 
 Provision cluster nodes
 -----------------------
@@ -23,15 +25,15 @@ Provision cluster nodes
 	done
 {% endhighlight %}
 
-2. be sure to open all inbound ports for 172.0.0.0/8 in the security group
+2. Be sure to open all inbound ports for 172.0.0.0/8 in the security group
 
-3. after the vms starts, run this command to get their IDs and IPs:
+3. After the VMs starts, run this command to get their IDs and IPs:
 
 {% highlight bash %}
 	aws ec2 describe-instances --filters "Name=tag:Name,Values=iandow*" --output json | grep InstanceId | cut -f 4 -d '"' | while read ID; do publicIP=`aws ec2 describe-instances --instance-ids $ID --query 'Reservations[0].Instances[0].PublicIpAddress'`; privateIP=`aws ec2 describe-instances --instance-ids $ID --query 'Reservations[0].Instances[0].PrivateIpAddress'`; DNS=`aws ec2 describe-instances --instance-ids $ID --query 'Reservations[0].Instances[0].PrivateDnsName'`; echo -e $ID\\n\\t$publicIP\\t$privateIP\\t$DNS;  done 
 {% endhighlight %}
 
-4. ssh to the VMs, set the password for root and allow ssh root ssh access, like this:
+4. Open an ssh sessions to the VMs, set the password for root and allow ssh root ssh access, like this:
 
 {% highlight bash %}
 	MY_KEY_FILE=~/.ssh/my-key.pem
@@ -70,7 +72,6 @@ aws ec2 authorize-security-group-ingress --group-name iandow-sg --protocol tcp -
 Once you log onto the webui, you should see a page that looks like this:
 
 !(https://github.com/iandow/iandow.github.io/blob/master/img/mapr%20installer.png)
-
 
 
 Here's another useful one-liner for removing your cluster nodes:
