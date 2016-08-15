@@ -9,33 +9,31 @@ This procedure requires that you have the Amazon EC2 command-line toolkit instal
 Provision cluster nodes
 -----------------------
 
-1. Create three new virtual servers ubuntu m3.large instance.
+Create three new virtual servers ubuntu m3.large instance.
 
-	```
-	{% highlight bash %}
-	NUM_NODES=3
-	SECURITY_GROUP=iandow-sg
-	# ------------ Don't edit below this line -------- #
-	for i in `seq 1 $NUM_NODES`; do 
-	ID=`aws ec2 run-instances --image-id ami-9abea4fb --security-group-ids $SECURITY_GROUP --count 1 --instance-type m3.xlarge --key-name iandow-key --output json | grep InstanceId | cut -f 4 -d '"'`
-	aws ec2 create-tags --resources $ID --tags "Key=Name,Value=iandow$i"
-	publicIP=`aws ec2 describe-instances --instance-ids $ID --query 'Reservations[0].Instances[0].PublicIpAddress'`
-	privateIP=`aws ec2 describe-instances --instance-ids $ID --query 'Reservations[0].Instances[0].PrivateIpAddress'`
-	echo $ID
-	echo -e \\t$publicIP\\t$privateIP
-	done
-	{% endhighlight %}
-	```
+{% highlight bash %}
+NUM_NODES=3
+SECURITY_GROUP=iandow-sg
+# ------------ Don't edit below this line -------- #
+for i in `seq 1 $NUM_NODES`; do 
+ID=`aws ec2 run-instances --image-id ami-9abea4fb --security-group-ids $SECURITY_GROUP --count 1 --instance-type m3.xlarge --key-name iandow-key --output json | grep InstanceId | cut -f 4 -d '"'`
+aws ec2 create-tags --resources $ID --tags "Key=Name,Value=iandow$i"
+publicIP=`aws ec2 describe-instances --instance-ids $ID --query 'Reservations[0].Instances[0].PublicIpAddress'`
+privateIP=`aws ec2 describe-instances --instance-ids $ID --query 'Reservations[0].Instances[0].PrivateIpAddress'`
+echo $ID
+echo -e \\t$publicIP\\t$privateIP
+done
+{% endhighlight %}
 
-2. Be sure to open all inbound ports for 172.0.0.0/8 in the security group
+Be sure to open all inbound ports for 172.0.0.0/8 in the security group
 
-3. After the VMs starts, run this command to get their IDs and IPs:
+After the VMs starts, run this command to get their IDs and IPs:
 
 {% highlight bash %}
 aws ec2 describe-instances --filters "Name=tag:Name,Values=iandow*" --output json | grep InstanceId | cut -f 4 -d '"' | while read ID; do publicIP=`aws ec2 describe-instances --instance-ids $ID --query 'Reservations[0].Instances[0].PublicIpAddress'`; privateIP=`aws ec2 describe-instances --instance-ids $ID --query 'Reservations[0].Instances[0].PrivateIpAddress'`; DNS=`aws ec2 describe-instances --instance-ids $ID --query 'Reservations[0].Instances[0].PrivateDnsName'`; echo -e $ID\\n\\t$publicIP\\t$privateIP\\t$DNS;  done 
 {% endhighlight %}
 
-4. Open an ssh sessions to the VMs, set the password for root and allow ssh root ssh access, like this:
+Open an ssh sessions to the VMs, set the password for root and allow ssh root ssh access, like this:
 
 {% highlight bash %}
 MY_KEY_FILE=~/.ssh/my-key.pem
