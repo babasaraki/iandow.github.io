@@ -11,6 +11,7 @@ Provision cluster nodes
 
 1. Create three new virtual servers ubuntu m3.large instance.
 
+  ```
   {% highlight bash %}
   NUM_NODES=3
   SECURITY_GROUP=iandow-sg
@@ -24,6 +25,7 @@ Provision cluster nodes
  echo -e \\t$publicIP\\t$privateIP
   done
   {% endhighlight %}
+  ```
 
 2. Be sure to open all inbound ports for 172.0.0.0/8 in the security group
 
