@@ -17,18 +17,18 @@ baseurl: ""
 title: Big Endian Data
 
 # Short description of your site
-description: A virtual proof that name is awesome!
+description: A personal blog on big data software development.
 
 # --- Navigation bar options --- #
 
 # List of links in the navigation bar
 navbar-links:
   About Me: "aboutme"
-  Resources:
-    - Beautiful Jekyll: "http://deanattali.com/beautiful-jekyll/"
-    - Learn markdown: "http://www.markdowntutorial.com/"
-    - GitHub Pages: "https://pages.github.com/"
-  Author's home: "http://deanattali.com"
+  #Resources:
+  #  - Beautiful Jekyll: "http://deanattali.com/beautiful-jekyll/"
+  #  - Learn markdown: "http://www.markdowntutorial.com/"
+  #  - GitHub Pages: "https://pages.github.com/"
+  #Author's home: "http://twitter.com/iandownard"
 
 # Image to show in the navigation bar - image must be a square (width = height)
 # Remove this parameter if you don't want an image in the navbar
@@ -39,40 +39,40 @@ avatar: "/img/avatar-icon.png"
 # Change all these values or delete the ones you don't want.
 # Important: you must keep the "name" parameter, everything else you can remove
 author:
-  name: Some Person
-  email: "youremail@domain.com"
-  facebook: yourname  # eg. daattali
-  github: yourname    # eg. daattali
-  twitter: yourname   # eg. daattali
-  linkedin: yourname  # eg. daattali
-  xing: yourname      # eg. daattali
-  stackoverflow: yourlink  # eg. "3943160/daattali"
-  instagram: yourname # eg. daattali
-  youtube: yourlink # eg. user/daattali or channel/daattali
+  name: Ian Downard
+  #email: "youremail@domain.com"
+  #facebook: yourname  # eg. daattali
+  github: iandow    # eg. daattali
+  twitter: iandownard   # eg. daattali
+  linkedin: iandownard  # eg. daattali
+  #xing: yourname      # eg. daattali
+  stackoverflow: 5728283/ian-downard  # eg. "3943160/daattali"
+  #instagram: yourname # eg. daattali
+  #youtube: yourlink # eg. user/daattali or channel/daattali
 
 # Select which links to show in the footer
 footer-links-active:
   rss: false
-  facebook: true
-  email: true
+  facebook: false
+  email: false
   twitter: true
   github: true
-  linkedin: false
+  linkedin: true
   xing: false
-  stackoverflow: false
+  stackoverflow: true
   instagram: false
   youtube: false
 
 # Select which share links to show in posts
 share-links-active:
   twitter: true
-  facebook: true
+  facebook: false
   google: false
   linkedin: true
 
 # How to display the link to the website in the footer
 # Remove this if you don't want a link in the footer
-url-pretty: "MyWebsite.com"  # eg. "deanattali.com/beautiful-jekyll"
+# url-pretty: "MyWebsite.com"  # eg. "deanattali.com/beautiful-jekyll"
 
 # --- Misc --- #
 
@@ -80,7 +80,7 @@ url-pretty: "MyWebsite.com"  # eg. "deanattali.com/beautiful-jekyll"
 #disqus: ""
 
 # Fill in your Google Analytics ID to track your website using GA
-#google_analytics: ""
+google_analytics: "UA-82477270-1"
 
 # --- Don't need to touch anything below here (but you can if you want) --- #
 
