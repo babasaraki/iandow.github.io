@@ -70,7 +70,7 @@ aws ec2 authorize-security-group-ingress --group-name iandow-sg --protocol tcp -
 
 Once you log onto the webui, you should see a page that looks like this:
 
-![](https://github.com/iandow/iandow.github.io/blob/master/img/mapr%20installer.png)
+![MapR Installer](https://github.com/iandow/iandow.github.io/blob/master/img/mapr%20installer.png)
 
 
 Here's another useful one-liner for removing your cluster nodes. This will delete all the instances I've tagged with "iandow":
