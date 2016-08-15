@@ -73,7 +73,7 @@ Once you log onto the webui, you should see a page that looks like this:
 ![MapR Installer](http://iandow.github.io/img/mapr%20installer.png)
 
 
-Here's another useful one-liner for removing your cluster nodes. This will delete all the instances I've tagged with "iandow":
+When you're done using your cluster, you may want remove your nodes. Here's a useful one-liner for doing that. This will delete all the instances I've tagged with "iandow":
 	
 {% highlight bash %}
 aws ec2 describe-instances --filters "Name=tag:Name,Values=iandow*" --output json | grep InstanceId | cut -f 4 -d '"' | while read ID; do aws ec2 terminate-instances --instance-ids $ID; done
