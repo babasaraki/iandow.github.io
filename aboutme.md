@@ -9,7 +9,7 @@ My name is Ian Downard. I am a technical evangelist for [MapR Technologies](http
 
 Here are a few examples of work I've published which I’m pretty proud of:
 
-* [www.mthoodlookouts.com](http://www.mthoodlookouts.com) - A hobby project. This little web app helps me be the first to know when sites on recreation.gov become available to reserve. It also tweets notifications, [@mthoodlookouts](https://twitter.com/mthoodlookouts).
+* [www.mthoodlookouts.com](http://www.mthoodlookouts.com) - A hobby project. This little web app helps me be the first to know when sites on recreation.gov become available to reserve. It also tweets notifications to [@mthoodlookouts](https://twitter.com/mthoodlookouts).
 
 * [appinternals.trafficmanager.net](http://appinternals.trafficmanager.net) - An interactive demo for performance monitoring software from Riverbed Technology. This is also a good demo of web annotations from www.walkme.com.
 
