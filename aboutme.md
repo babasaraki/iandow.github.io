@@ -11,7 +11,7 @@ I currently live in Portland, Oregon. I grew up in rural Missouri in an old hous
 
 ### Portfolio
 
-Artists keep a portfolio of their work, and I've often wondered why more software geeks don't do the same thing.Here are a few examples of work I've published which I enjoy showing off:
+Artists keep a portfolio of their work, and I've often wondered why more software geeks don't do the same thing. Here are a few examples of work I've published which I enjoy showing off.
 
 * [www.mthoodlookouts.com](http://www.mthoodlookouts.com) - A hobby project. This little web app helps me be the first to know when sites on recreation.gov become available to reserve. It also tweets notifications to [@mthoodlookouts](https://twitter.com/mthoodlookouts).
 
