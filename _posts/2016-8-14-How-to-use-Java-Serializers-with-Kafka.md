@@ -4,8 +4,12 @@ I've been using Kafka recently for some self-discovery type projects. I've used 
 
 So what are serializers? Serializers define how objects can be translated to a byte-stream format. Byte streams are the universal language that operating systems use for I/O, such as for reading or writting objects to a file or database. Serialization is necessary in order to replicate application state across nodes in a cluster. Java provides a default serializer for every object, descibed [here](https://docs.oracle.com/javase/7/docs/platform/serialization/spec/serial-arch.html). You can define your own custom serliazer, as described [here](http://thecodersbreakfast.net/index.php?post/2011/05/12/Serialization-and-magic-methods).
 
-Kafka stores and transports byte arrays in its queue. The String and Byte array serializers are provided by Kafka out-of-the-box, but if you use them for objects which are not Strings or byte arrays, you will be using Java's default serializer for your objects. 
-The problem with that is that by using the default java serializer for Kafka you may create highly unportable serialization that other languages may have trouble decoding. 
+Kafka stores and transports byte arrays in its queue. The String and Byte array serializers are provided by Kafka out-of-the-box, but if you use them for objects which are not Strings or byte arrays, you will be using Java's default serializer for your objects. If the JVM is unable to serialize your object using the default serializer, you will get a run-time error, like this:
+
+
+	Exception in thread "Thread-2" org.apache.kafka.common.errors.SerializationException: Can't convert key of class java.time.LocalTime to class class org.apache.kafka.common.serialization.StringSerializer specified in key.serializer
+
+Even if the default serializer works for your objects, you should still be careful using it because Java's serializer may not be compatible with the default serializers in other languages. In other words, by using the default Java serializer for Kafka you may create unportable serialization that other languages may have trouble decoding. 
 
 You can create your own serializer for Kafka. A good example of that is [here](http://niels.nu/blog/2016/kafka-custom-serializers.html). 
 
