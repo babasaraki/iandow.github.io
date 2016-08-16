@@ -3,7 +3,7 @@ layout: page
 title: About me
 ---
 
-My name is Ian Downard. I am a technical evangelist for [MapR Technologies](http://www.mapr.com). My career has focused on developing tools for optimizing the performance of networks and applications. Currently, I'm focused on finding and promoting new ways businesses can be successful using MapR's Converged Data Platform for big data applications. I frequently attend the Java and Azure user groups in Portland, Oregon. I grew up in rural Missouri, in an old house overlooking the beautiful Bourbeuse River near Union, Missouri. My participation with social media is primarily on Twitter [@iandownard](http://twitter.com/iandownard).
+My name is Ian Downard. I am a technical evangelist for [MapR Technologies](http://www.mapr.com). My career has focused on developing tools for optimizing the performance of networks and applications. Currently, I'm focused on finding and promoting new ways businesses can be successful using MapR's Converged Data Platform for big data applications. I frequently attend the Java and Azure user groups in Portland, Oregon. I grew up in rural Missouri in an old house overlooking the beautiful Bourbeuse River near Union, Missouri. My participation with social media is primarily on Twitter [@iandownard](http://twitter.com/iandownard).
 
 ### Portfolio
 
