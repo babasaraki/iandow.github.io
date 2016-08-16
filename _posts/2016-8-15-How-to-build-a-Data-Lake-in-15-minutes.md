@@ -1,15 +1,13 @@
-I work for MapR. MapR sells a Hadoop based platform called the "MapR Converged Data Platform". Enterprises purchase this technology for a lot of reasons, but generally speaking, it's because they find it to be faster, more reliable, and easier to use than alternative platforms.
+When getting acquainted with new technologies I believe users should be able to get started without spending more than 15 minutes setting up a sandbox environment. But when it comes to setting up big data sandbox environments, 15 minutes is a lofty goal. MapR offers a Hadoop based platform called the "MapR Converged Data Platform", which conveniently includes a most of the big data software you're likely to need, and they also provide a couple different ways to get started. In particular their [Sandbox VMs](https://www.mapr.com/products/mapr-sandbox-hadoop) and tutorials are excellent ways to get your hands dirty within the limits of a workstation running Visual VM. However, in order for those sandbox environments to run on laptops they are necessarily very limited on memory and disk resources.
 
-When getting acquainted with new technologies I believe users should be able to get started without spending more than 15 minutes setting up a sandbox environment. MapR provides a couple different ways to get started, and in particular their [Sandbox VMs](https://www.mapr.com/products/mapr-sandbox-hadoop) and tutorials are excellent ways to get your hands dirty within the limits of a workstation running Visual VM. However, in order for those sandbox environments to run on laptops they are necessarily very limited on memory and disk resources.
+For a more enterprise ready sandbox which can scale, you might want to just install MapR on the Azure or Amazon cloud. That's what I'm going to show you how to do now. 
 
-For a more enterprise ready sandbox, you might want to just install MapR on the Azure or Amazon cloud. That's what I'm going to show you now. How to build a 3-node Hadoop cluster on Amazon EC2 in 15 minutes:
+How to build a 3-node Hadoop cluster on Amazon EC2 in 15 minutes:
+-----------------------------------------------------------------
 
 This procedure requires that you have the Amazon EC2 command-line toolkit installed.
 
-Provision cluster nodes
------------------------
-
-Create three new virtual servers ubuntu m3.large instance.
+First, we need to provision cluster nodes. The following script will create three new virtual servers ubuntu m3.large instance.
 
 {% highlight bash %}
 NUM_NODES=3
