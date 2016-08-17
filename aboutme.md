@@ -3,7 +3,7 @@ layout: page
 title: About me
 ---
 
-Myy name is Ian Downard. I am a technical evangelist for [MapR Technologies](http://www.mapr.com). My career has focused on developing tools for optimizing the performance of applications. Currently, I'm focused on finding and promoting ways businesses can be successful with big data applications. 
+My name is Ian Downard. I am a technical evangelist for [MapR Technologies](http://www.mapr.com). My career has focused on developing tools for optimizing the performance of applications. Currently, I'm focused on finding and promoting ways businesses can be successful with big data applications. 
 
 I work from home, so I make an extra effort to engage with people in person. For example, I regularly attend my local Java and big data user groups, and I occasionally meet with a [career coach](http://www.portlandcoachingcollective.com/faqs/) who helps me gain a deeper understanding of myself and align what I value with what I do in my career.
 
