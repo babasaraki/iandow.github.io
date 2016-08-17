@@ -5,7 +5,7 @@ First we need to install the JProfiler profiling agent on the cluster node where
 Back on your laptop, open JProfiler. I'm currently using JProfiler version 9.2.
 
 <center>
-<img src="http://iandow.github.io/img/JProfiler001.png" width="25%">
+<img src="http://iandow.github.io/img/JProfiler001.png" width="33%">
 </center>
 
 Next, open the Start Center.
@@ -22,7 +22,9 @@ Under the JVM Settings, specify IP address and port to the profiling agent.
 
 Once you click OK, it will wait on the following screen until you start your remote application.
 
-![JProfiler005](http://iandow.github.io/img/JProfiler005.png)
+<center>
+<img src="http://iandow.github.io/img/JProfiler005.png" width="33%">
+</center>
 
 Finally, start your remote application with the profiling agent specified in the -agentpath command line argument, like this:
 
