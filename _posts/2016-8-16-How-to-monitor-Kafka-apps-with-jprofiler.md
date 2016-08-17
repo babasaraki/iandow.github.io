@@ -4,7 +4,7 @@ First we need to install the JProfiler profiling agent on the cluster node where
 
 Back on your laptop, open JProfiler. I'm currently using JProfiler version 9.2.
 
-![JProfiler001](http://iandow.github.io/img/JProfiler001.png)
+![JProfiler001](http://iandow.github.io/img/JProfiler001.png =100x20)
 
 Next, open the Start Center.
 
