@@ -7,7 +7,7 @@ My name is Ian Downard. I am a technical evangelist for [MapR Technologies](http
 
 I work from home, so I make an extra effort to engage with people in person. For example, I regularly attend my local Java and big data user groups, and I occasionally meet with a [career coach](http://www.portlandcoachingcollective.com/faqs/) who helps me gain a deeper understanding of myself and align what I value with what I do in my career.
 
-I currently live in Portland, Oregon. I grew up in rural Missouri in an old house overlooking the beautiful Bourbeuse River near Union, Missouri. My participation with social media is primarily on Twitter [@iandownard](http://twitter.com/iandownard).
+I currently live in Portland, Oregon, but I grew up in rural Missouri in an old house near a town called Union. My participation with social media is primarily on Twitter [@iandownard](http://twitter.com/iandownard).
 
 ### Portfolio
 
