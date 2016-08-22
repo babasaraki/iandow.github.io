@@ -13,7 +13,7 @@ I currently live in Portland, Oregon, but I grew up in rural Missouri in an old 
 
 Artists keep a portfolio of their work, and I've often wondered why more software developers don't do the same thing. Here are a few examples of work I've published which I enjoy showing off.
 
-* [www.mthoodlookouts.com](http://www.mthoodlookouts.com) - A hobby project. This is web app and Twitter bot that helps me be the first to know when sites on recreation.gov become available to reserve. It also tweets notifications to [@mthoodlookouts](https://twitter.com/mthoodlookouts).
+* [www.mthoodlookouts.com](http://www.mthoodlookouts.com) - A hobby project. This is web app and Twitter bot that helps me be the first to know when sites on recreation.gov become available to reserve. It also tweets notifications to [@mthoodlookouts](https://twitter.com/mthoodlookouts). Code for this app is at [https://github.com/iandow/bookfast](https://github.com/iandow/bookfast)
 
 * [appinternals.trafficmanager.net](http://appinternals.trafficmanager.net) - An interactive demo for performance monitoring software from Riverbed Technology. This is also a good demo of web annotations from www.walkme.com.
 
