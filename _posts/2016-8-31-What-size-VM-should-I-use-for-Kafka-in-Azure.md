@@ -6,10 +6,10 @@ The results of my study are shown in the following table:
 
 | VM Size       | Price   |CPU      | Memory | Kafka Ingest Time | Kafka Ingest Rate |
 | ------------- |---------|----------|--------|-------------------|-------------------|
+| GOAL          |         |          |        | 60 s              | 227 Mbps          |
 | Standard_DS11 | $145/mo | 2 cores  | 14 GB  | 124 s             | 110 Mbps          |
 | Standard_DS12 | $290/mo | 4 cores  | 28 GB  | 64 s              | 213 Mbps          |
-| *Standard_DS4*  | $458/mo | 8 cores  | 28 GB  | 96 s              | 142 Mbps          |
-| GOAL !!!      |         |          |        | 60 s              | 227 Mbps          |
+| Standard_DS4  | $458/mo | 8 cores  | 28 GB  | 96 s              | 142 Mbps          |
 | Standard_DS13 | $580/mo | 8 cores  | 56 GB  | 84 s              | 162 Mbps          |
 | Standard_DS14 | $1147/mo| 16 cores | 112 GB | 77 s              | 177 Mbps          |
 
