@@ -7,7 +7,7 @@ tags: [azure, kafka]
 I've been using Azure for hosting a 3 node MapR cluster with which I'm running a streaming application that uses Kafka and Spark to process a fast data stream. My use case requires that I be able to ingest 1.7 GB of data into Kafka within 1 minute (approximately 227 Mbps). Since this is a relatively high I/O workload, I know I need my cluster nodes to run on Azure's premium storage tier which uses high-performance solid-state drives (SSDs) for virtual machine disks, but within that tier I wasn't sure which of the [Azure VM sizes](https://azure.microsoft.com/en-us/documentation/articles/virtual-machines-windows-sizes/) would be optimal (i.e. cheapest) for my application. So I ran a simple experiment. 
 
 <center>
-<img src="http://iandow.github.io/img/Azure%20VM%20sizes.png" width="33%">
+<img src="http://iandow.github.io/img/Azure%20VM%20sizes.png" width="80%">
 </center>
 
 Starting with the smallest/cheapest VM size in the DS-series, I timed how long it took a simple Kafka stream producer to publish data in a 1.7 GB file residing on local storage to a single topic, and increased the VM sizes until the producer could complete within 60 seconds.
