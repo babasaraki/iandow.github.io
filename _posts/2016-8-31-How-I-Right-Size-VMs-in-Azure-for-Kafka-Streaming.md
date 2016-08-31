@@ -1,7 +1,7 @@
 ---
 layout: post
-title: How to VM
-tags: [pirates, random]
+title: How to "Right Size" VMs in Azure for Kafka Streaming
+tags: [azure, kafka]
 ---
 
 I've been using Azure for hosting a 3 node MapR cluster with which I'm running a streaming application that uses Kafka and Spark to process a fast data stream. My use case requires that I be able to ingest 1.7 GB of data into Kafka within 1 minute (approximately 227 Mbps). Since this is a relatively high I/O workload, I know I need my cluster nodes to run on Azure's premium storage tier which uses high-performance solid-state drives (SSDs) for virtual machine disks, but within that tier I wasn't sure which of the [Azure VM sizes](https://azure.microsoft.com/en-us/documentation/articles/virtual-machines-windows-sizes/) would be optimal (i.e. cheapest) for my application. So I ran a simple experiment. 
