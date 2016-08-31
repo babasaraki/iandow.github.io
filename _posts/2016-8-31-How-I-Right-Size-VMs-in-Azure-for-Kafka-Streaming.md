@@ -1,6 +1,6 @@
 ---
 layout: post
-title: How to
+title: How to VM
 tags: [pirates, random]
 ---
 
