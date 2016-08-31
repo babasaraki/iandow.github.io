@@ -1,3 +1,9 @@
+---
+layout: post
+title: How To Use Java Serializers With Kafka
+tags: [java, kafka]
+---
+
 Apache Kafka is a distributed pub-sub messaging system that scales horizontally and has built-in message durability and delivery guarantees. It's a cluster-based technology and has evolved from its origins at LinkedIn to become the defacto standard messaging system enterprises use to move massive amounts of data through transformation pipelines.
 
 I've been using Kafka recently for some self-discovery type projects. I've used it to stream packet data from tcpdump processes so that I can visualize network performance stats in R Studio, and I've used it to process a massive stream of data reprepresenting real-time stock transactions on the New York Stock exchange. One of the things I've stuggled with is achieving the throughput I need to keep up with these real-time data streams. There are a lot of different use-case specific parameters and approaches to performance optimizations for Kafka, but the one parameter I want to talk about here is the data *serializer*.
