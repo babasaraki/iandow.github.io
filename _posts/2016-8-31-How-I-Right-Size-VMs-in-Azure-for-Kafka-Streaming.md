@@ -47,3 +47,7 @@ The answer is, no. It doesn't matter. If your processing is limited to one node,
 
 This unscientific study was a quick and dirty attempt to determine which Azure VM size would be the cheapest configuration for my Kafka streaming workload. There are a lot of ways to tune Kafka applications to get the most out of your hardware and there are more precise ways to measure performance than what I did but my results allowed me to make an educated guess that the DS4 or DS4v2 VM sizes should allow my application to run fast enough, at minimal expense.
 
+# Reference:
+
+Here's a good survey on the performance differences between the various Azure VM Sizes:
+[http://cloudspectator.com/microsoft-azure-dv2-vs-ds-comparison/](http://cloudspectator.com/microsoft-azure-dv2-vs-ds-comparison/)
