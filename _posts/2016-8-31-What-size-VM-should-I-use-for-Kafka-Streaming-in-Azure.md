@@ -1,17 +1,17 @@
-I've been using Azure for hosting a 3 node MapR cluster with which I'm running a streaming application that uses Kafka, Spark Streaming, and Spark SQL APIs to process a fast data stream. My use-case requires that I be able to ingest 1.7GB of data into Kafka within 1 minute (apx 227Mbps). Since this is a relatively high I/O workload, I know I need my cluster nodes to run on Azure's premium storage tier, which uses high-performance solid-state drives (SSDs) for virtual machine disks, but within tier I wasn't sure which of the [Azure VM sizes](https://azure.microsoft.com/en-us/documentation/articles/virtual-machines-windows-sizes/) would be optimal (i.e. cheapest) for my application. So I ran a simple experiment. 
+I've been using Azure for hosting a 3 node MapR cluster with which I'm running a streaming application that uses Kafka and Spark to process a fast data stream. My use case requires that I be able to ingest 1.7 GB of data into Kafka within 1 minute (approximately 227 Mbps). Since this is a relatively high I/O workload, I know I need my cluster nodes to run on Azure's premium storage tier which uses high-performance solid-state drives (SSDs) for virtual machine disks, but within that tier I wasn't sure which of the [Azure VM sizes](https://azure.microsoft.com/en-us/documentation/articles/virtual-machines-windows-sizes/) would be optimal (i.e. cheapest) for my application. So I ran a simple experiment. 
 
-Starting with the smallest/cheapest VM sizein the DS-series, I used a simple Kafka stream producer to publish data from a 1.7GB file residing on local storage, until that dataset could be publishing withing 60 seconds. 
+Starting with the smallest/cheapest VM size in the DS-series, I timed how long it took a simple Kafka stream producer to publish data in a 1.7 GB file residing on local storage to a single topic, and increased the VM sizes until the producer could complete within 60 seconds.
 
 The results of my study are shown in the following table:
 
-| VM Size       | CPU      | Memory | Kafka Ingest Time | Kafka Ingest Rate |
-| ------------- |----------|--------|-------------------|-------------------|
-| Standard_DS4  | 8 cores  | 28 GB  | 96 s              | 142 Mbps          |
-| Standard_DS11 | 2 cores  | 14 GB  | 124 s             | 110 Mbps          |
-| Standard_DS12 | 4 cores  | 28 GB  | 64 s              | 213 Mbps          |
-|:    GOAL     :|          |        | 60 s              | 227 Mbps          |
-| Standard_DS13 | 8 cores  | 56 GB  | 84 s              | 162 Mbps          |
-| Standard_DS14 | 16 cores | 112 GB | 77 s              | 177 Mbps          |
+| VM Size       | Price   |CPU      | Memory | Kafka Ingest Time | Kafka Ingest Rate |
+| ------------- |---------|----------|--------|-------------------|-------------------|
+| GOAL          |         |          |        | 60 s              | 227 Mbps          |
+| Standard_DS11 | $145/mo | 2 cores  | 14 GB  | 124 s             | 110 Mbps          |
+| Standard_DS12 | $290/mo | 4 cores  | 28 GB  | 64 s              | 213 Mbps          |
+| Standard_DS4  | $458/mo | 8 cores  | 28 GB  | 96 s              | 142 Mbps          |
+| Standard_DS13 | $580/mo | 8 cores  | 56 GB  | 84 s              | 162 Mbps          |
+| Standard_DS14 | $1147/mo| 16 cores | 112 GB | 77 s              | 177 Mbps          |
 
 
 Here's the one-liner I used for resizing my cluster:
@@ -35,4 +35,4 @@ The answer is, no. It doesn't matter. If your processing is limited to one node,
 
 # Conclusion:
 
-This unscientific study was a quick and dirty attempt to determine which Azure VM size would be the cheapest configuration for my Kafka streaming workload. There are a lot of ways to tune Kafka applications to get the most out of your hardware, and there are more precise ways to measure performance than what I did, but my results allowed me to make an educated guess on which VM sizes are optimal for my application.
+This unscientific study was a quick and dirty attempt to determine which Azure VM size would be the cheapest configuration for my Kafka streaming workload. There are a lot of ways to tune Kafka applications to get the most out of your hardware and there are more precise ways to measure performance than what I did but my results allowed me to make an educated guess on which VM sizes would be a good starting point for my application.
