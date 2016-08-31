@@ -1,6 +1,4 @@
-Last week MapR released a new version of their Converged Data Platform. Today I installed it on Azure, and kept notes on all the commands I used. It's possible to automate this installation, and I'm pretty sure MapR has documented how to do that, but until I find that doc, here are the commands I use. This is automation for dummy's, meaning, you can just copy and paste (some but not all of) these commands.
-
-Needless to say, you should know what these commands do before you blindly copy and paste.
+Last week MapR released a new version of their Converged Data Platform. Today I installed it on Azure, and kept notes on all the commands I used. It's possible to automate this installation, and I'm pretty sure MapR has documented how to do that, but until I find that doc, here are the commands I use. This is what I like to call, "Automation for Dummy's", meaning, you can just copy and paste (some but not all of) these commands.  Needless to say, you should know what these commands do before you blindly copy and paste.
 
 
 {% highlight bash %}
@@ -108,4 +106,11 @@ In the webui installer, specify the internal IPs for the node names, and specify
 
 The webui installer will run for about 30 minutes before it completes.
 
+
+If you like saving money, you'll probably want to only run these cluster machines when you actually need them. I usually power off my VMs at the end of my work day.  Here's a useful one-liner to start and stop a series of VMs:
+
+{% highlight bash %}
+azure login
+for NODENAME in nodea nodeb nodec; do azure vm start --resource-group iansandbox $NODENAME & done
+{% endhighlight %}
 
