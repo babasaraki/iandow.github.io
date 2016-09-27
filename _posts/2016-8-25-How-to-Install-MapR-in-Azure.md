@@ -9,6 +9,8 @@ Last week MapR released a new version of their Converged Data Platform. Today I 
 
 {% highlight bash %}
 RESOURCE_GROUP=iansandbox
+ADMIN_USER=mapr
+ ADMIN_PASSWORD='changeme!'
 ####################################
 # Setup preliminary group assets
 ####################################
@@ -30,7 +32,7 @@ for NODENAME in nodea nodeb nodec; do
 azure network public-ip create --resource-group $RESOURCE_GROUP --location westus --domain-name-label $NODENAME --name $NODENAME-publicip
 azure network nic create --resource-group $RESOURCE_GROUP --location westus --subnet-vnet-name $RESOURCE_GROUP-vnet --subnet-name $RESOURCE_GROUP-subnet --public-ip-name $NODENAME-publicip --network-security-group-name $RESOURCE_GROUP --name $NODENAME-nic 
 azure vm create --resource-group $RESOURCE_GROUP --location westus --os-type linux --nic-name $NODENAME-nic --vnet-name hadoosummit-vnet  --vnet-subnet-name $RESOURCE_GROUP-subnet --storage-account-name $RESOURCE_GROUP --image-urn canonical:UbuntuServer:14.04.4-LTS:latest --vm-size Standard_DS11 --ssh-publickey-file ~/.ssh/id_rsa-azure.pub --admin-username mapr --name $NODENAME
-azure vm disk attach-new --resource-group $RESOURCE_GROUP --vm-name $NODENAME 100
+azure vm disk attach-new --resource-group $RESOURCE_GROUP --vm-name $NODENAME 1000
 done
 
 
@@ -55,64 +57,74 @@ azure network public-ip delete --resource-group $RESOURCE_GROUP --name nodec-pub
 # Install the Oracle JDK
 #########################
 for NODENAME in nodea nodeb nodec; do
-ssh -i ~/.ssh/id_rsa-azure -oStrictHostKeyChecking=no mapr@$NODENAME.westus.cloudapp.azure.com sudo apt-get install python-software-properties
-ssh -i ~/.ssh/id_rsa-azure -oStrictHostKeyChecking=no mapr@$NODENAME.westus.cloudapp.azure.com sudo add-apt-repository ppa:webupd8team/java
-ssh -i ~/.ssh/id_rsa-azure -oStrictHostKeyChecking=no mapr@$NODENAME.westus.cloudapp.azure.com sudo apt-get update
+ssh -i ~/.ssh/id_rsa-azure -oStrictHostKeyChecking=no $ADMIN_USER@$NODENAME.westus.cloudapp.azure.com sudo apt-get install python-software-properties
+ssh -i ~/.ssh/id_rsa-azure -oStrictHostKeyChecking=no $ADMIN_USER@$NODENAME.westus.cloudapp.azure.com sudo add-apt-repository ppa:webupd8team/java
+ssh -i ~/.ssh/id_rsa-azure -oStrictHostKeyChecking=no $ADMIN_USER@$NODENAME.westus.cloudapp.azure.com sudo apt-get update
 done
-# this command won't work in the for loop
-echo -e "Y\ny\n" | ssh -i ~/.ssh/id_rsa-azure -oStrictHostKeyChecking=no mapr@nodea.westus.cloudapp.azure.com sudo apt-get install oracle-java8-installer
-echo -e "Y\ny\n" | ssh -i ~/.ssh/id_rsa-azure -oStrictHostKeyChecking=no mapr@nodeb.westus.cloudapp.azure.com sudo apt-get install oracle-java8-installer
-echo -e "Y\ny\n" | ssh -i ~/.ssh/id_rsa-azure -oStrictHostKeyChecking=no mapr@nodec.westus.cloudapp.azure.com sudo apt-get install oracle-java8-installer
 
+for NODENAME in nodea nodeb nodeb; do echo -e "Y\ny\n" | ssh -i ~/.ssh/id_rsa-azure -oStrictHostKeyChecking=no $ADMIN_USER@$NODENAME.westus.cloudapp.azure.com sudo apt-get install oracle-java8-installer; done
 
-# (optional) On each azure node, make sure swap space is enabled
+##############################
+# (optional) Enable swap space
+##############################
 for NODENAME in nodea nodeb nodec; do
-ssh -i ~/.ssh/id_rsa-azure -oStrictHostKeyChecking=no mapr@$NODENAME.westus.cloudapp.azure.com sudo sed -i 's/ResourceDisk.EnableSwap=n/ResourceDisk.EnableSwap=y/g' /etc/waagent.conf
-ssh -i ~/.ssh/id_rsa-azure -oStrictHostKeyChecking=no mapr@$NODENAME.westus.cloudapp.azure.com sudo sed -i 's/ResourceDisk.SwapSizeMB=0/ResourceDisk.SwapSizeMB=5120/g' /etc/waagent.conf
-ssh -i ~/.ssh/id_rsa-azure -oStrictHostKeyChecking=no mapr@$NODENAME.westus.cloudapp.azure.com sudo service walinuxagent restart
+ssh -i ~/.ssh/id_rsa-azure -oStrictHostKeyChecking=no $ADMIN_USER@$NODENAME.westus.cloudapp.azure.com sudo sed -i 's/ResourceDisk.EnableSwap=n/ResourceDisk.EnableSwap=y/g' /etc/waagent.conf
+ssh -i ~/.ssh/id_rsa-azure -oStrictHostKeyChecking=no $ADMIN_USER@$NODENAME.westus.cloudapp.azure.com sudo sed -i 's/ResourceDisk.SwapSizeMB=0/ResourceDisk.SwapSizeMB=5120/g' /etc/waagent.conf
+ssh -i ~/.ssh/id_rsa-azure -oStrictHostKeyChecking=no $ADMIN_USER@$NODENAME.westus.cloudapp.azure.com sudo service walinuxagent restart
 done
 
 
 # make sure you can ssh from one node to another (manually). If not, you're likely to get an error during the webui installer.
 
+#####################
+# Add SSH public keys
+#####################
+
 for NODENAME in nodea nodeb nodec; do
-ssh -i ~/.ssh/id_rsa-azure -oStrictHostKeyChecking=no mapr@$NODENAME.westus.cloudapp.azure.com "sudo sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config"
-scp -i ~/.ssh/id_rsa-azure -oStrictHostKeyChecking=no ~/.ssh/id_rsa-azure.pub mapr@$NODENAME.westus.cloudapp.azure.com:~/.ssh
-ssh -i ~/.ssh/id_rsa-azure -oStrictHostKeyChecking=no mapr@$NODENAME.westus.cloudapp.azure.com "cat ~/.ssh/id_rsa-azure.pub >> ~/.ssh/authorized_keys"
-ssh -i ~/.ssh/id_rsa-azure -oStrictHostKeyChecking=no mapr@iannodec.westus.cloudapp.azure.com "sudo service ssh restart"
+ssh -i ~/.ssh/id_rsa-azure -oStrictHostKeyChecking=no $ADMIN_USER@$NODENAME.westus.cloudapp.azure.com "sudo sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config"
+scp -i ~/.ssh/id_rsa-azure -oStrictHostKeyChecking=no ~/.ssh/id_rsa-azure.pub $ADMIN_USER@$NODENAME.westus.cloudapp.azure.com:~/.ssh
+scp -i ~/.ssh/id_rsa-azure -oStrictHostKeyChecking=no ~/.ssh/id_rsa-azure.pub $ADMIN_USER@$NODENAME.westus.cloudapp.azure.com:~/.ssh
+ssh -i ~/.ssh/id_rsa-azure -oStrictHostKeyChecking=no $ADMIN_USER@$NODENAME.westus.cloudapp.azure.com "cat ~/.ssh/id_rsa-azure.pub >> ~/.ssh/authorized_keys"
+ssh -i ~/.ssh/id_rsa-azure -oStrictHostKeyChecking=no $ADMIN_USER@$NODENAME.westus.cloudapp.azure.com "sudo service ssh restart"
 done
 
 ########################
 # Setup swap space 1.4GB
 ########################
-SSH onto each node and run these commands:
-sudo swapon -s
-sudo dd if=/dev/zero of=/mnt/swapfile bs=1400M count=1
-sudo chmod 600 /mnt/swapfile
-sudo mkswap /mnt/swapfile
-sudo swapon /mnt/swapfile
-sudo swapon -s
-free -m
-echo "/mnt/swapfile   none    swap    sw    0   0" >> /etc/fstab
+for NODENAME in nodea nodeb nodec; do
+ssh -i ~/.ssh/id_rsa-azure -oStrictHostKeyChecking=no $ADMIN_USER@$NODENAME.westus.cloudapp.azure.com "sudo swapon -s"
+ssh -i ~/.ssh/id_rsa-azure -oStrictHostKeyChecking=no $ADMIN_USER@$NODENAME.westus.cloudapp.azure.com "sudo dd if=/dev/zero of=/mnt/swapfile bs=1400M count=1"
+ssh -i ~/.ssh/id_rsa-azure -oStrictHostKeyChecking=no $ADMIN_USER@$NODENAME.westus.cloudapp.azure.com "sudo chmod 600 /mnt/swapfile"
+ssh -i ~/.ssh/id_rsa-azure -oStrictHostKeyChecking=no $ADMIN_USER@$NODENAME.westus.cloudapp.azure.com "sudo mkswap /mnt/swapfile"
+ssh -i ~/.ssh/id_rsa-azure -oStrictHostKeyChecking=no $ADMIN_USER@$NODENAME.westus.cloudapp.azure.com "sudo swapon /mnt/swapfile"
+ssh -i ~/.ssh/id_rsa-azure -oStrictHostKeyChecking=no $ADMIN_USER@$NODENAME.westus.cloudapp.azure.com "sudo swapon -s"
+ssh -i ~/.ssh/id_rsa-azure -oStrictHostKeyChecking=no $ADMIN_USER@$NODENAME.westus.cloudapp.azure.com "sudo free -m"
+ssh -i ~/.ssh/id_rsa-azure -oStrictHostKeyChecking=no $ADMIN_USER@$NODENAME.westus.cloudapp.azure.com "sudo su -c \"echo '/mnt/swapfile   none    swap    sw    0   0' >> /etc/fstab\""
+done
 
-# Set the mapr user password on each node
-passwd mapr
+#############################
+# Set the admin user password
+#############################
+HISTCONTROL=ignoreboth
+for NODENAME in nodea nodeb nodec; do
+ssh -i ~/.ssh/id_rsa-azure -oStrictHostKeyChecking=no $ADMIN_USER@$NODENAME.westus.cloudapp.azure.com "echo -e \"${ADMIN_PASSWORD}\n${ADMIN_PASSWORD}\" | sudo passwd mapr"; done
+unset ADMIN_PASSWORD
 
-# You must run mapr-setup.sh manually, so ssh login to nodea and do this:
+##############################################################################################
+# Run the mapr-setup.sh utility. This must be run manually, so ssh login to nodea and do this:
+##############################################################################################
 wget http://package.mapr.com/releases/installer/mapr-setup.sh -P /tmp
 chmod 700 /tmp/mapr-setup.sh
-sudo su
-
-bash /tmp/mapr-setup.sh
-
+sudo bash /tmp/mapr-setup.sh
 {% endhighlight %}
 
-After the mapr-setup.sh script ends, it should advise you to open a URL, like https://nodea.westus.cloudapp.azure.com:9443 and login with mapr.
+When the script prompts you for anything, just accept the defaults.
 
-In the webui installer, specify the internal IPs for the node names, and specify /dev/sdc for the target installation disk.
+Once the mapr-setup.sh script ends, open https://nodea.westus.cloudapp.azure.com:9443 and login with the username you specified with `$ADMIN_USER`.
+
+On the "Configure Nodes" page of the webui installer, specify the internal IPs for the node names, and specify /dev/sdc for the target installation disk.
 
 The webui installer will run for about 30 minutes before it completes.
-
 
 If you like saving money, you'll probably want to only run these cluster machines when you actually need them. I usually power off my VMs at the end of my work day.  Here's a useful one-liner to start and stop a series of VMs:
 
