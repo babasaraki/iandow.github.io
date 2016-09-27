@@ -23,6 +23,7 @@ The results of my study are shown in the following table:
 | Standard_DS13 | $580/mo | 8 cores  | 56 GB  | 84 s              | 162 Mbps          |
 | Standard_DS14 | $1147/mo| 16 cores | 112 GB | 77 s              | 177 Mbps          |
 
+So, it looks like DS4 is the cheapest server size that can meet my 227 Mbps requirement.
 
 Here's the one-liner I used for resizing my cluster:
 
