@@ -8,28 +8,29 @@ Last week MapR released a new version of their Converged Data Platform. Today I 
 
 
 {% highlight bash %}
+RESOURCE_GROUP=iansandbox
 ####################################
 # Setup preliminary group assets
 ####################################
 azure login
 azure config mode arm
-azure group create --location westus --name hadoopsummit
+azure group create --location westus --name $RESOURCE_GROUP
 
-azure network nsg create --resource-group hadoopsummit --location westus --name hadoopsummit
-azure network nsg rule create --resource-group hadoopsummit --nsg-name hadoopsummit --name AllowAll-from_me --priority 100 --source-address-prefix `curl ifconfig.co`/32 --destination-port-range 0-65535
+azure network nsg create --resource-group $RESOURCE_GROUP --location westus --name $RESOURCE_GROUP
+azure network nsg rule create --resource-group $RESOURCE_GROUP --nsg-name $RESOURCE_GROUP --name AllowAll-from_me --priority 100 --source-address-prefix `curl ifconfig.co`/32 --destination-port-range 0-65535
 	
-azure storage account create --resource-group hadoopsummit --location westus --sku-name LRS --kind Storage hadoopsummit
-azure network vnet create --resource-group hadoopsummit --location westus --name hadoopsummit-vnet
-azure network vnet subnet create --resource-group hadoopsummit --vnet-name hadoopsummit-vnet --address-prefix 10.1.1.0/24 --name hadoopsummit-subnet
+azure storage account create --resource-group $RESOURCE_GROUP --location westus --sku-name LRS --kind Storage $RESOURCE_GROUP
+azure network vnet create --resource-group $RESOURCE_GROUP --location westus --name $RESOURCE_GROUP-vnet
+azure network vnet subnet create --resource-group $RESOURCE_GROUP --vnet-name $RESOURCE_GROUP-vnet --address-prefix 10.1.1.0/24 --name $RESOURCE_GROUP-subnet
 
 ####################################
 # Provision the VMs
 ####################################
 for NODENAME in nodea nodeb nodec; do
-azure network public-ip create --resource-group hadoopsummit --location westus --domain-name-label $NODENAME --name $NODENAME-publicip
-azure network nic create --resource-group hadoopsummit --location westus --subnet-vnet-name hadoopsummit-vnet --subnet-name hadoopsummit-subnet --public-ip-name $NODENAME-publicip --network-security-group-name hadoopsummit --name $NODENAME-nic 
-azure vm create --resource-group hadoopsummit --location westus --os-type linux --nic-name $NODENAME-nic --vnet-name hadoosummit-vnet  --vnet-subnet-name hadoopsummit-subnet --storage-account-name hadoopsummit --image-urn canonical:UbuntuServer:14.04.4-LTS:latest --vm-size Standard_DS11 --ssh-publickey-file ~/.ssh/id_rsa-azure.pub --admin-username mapr --name $NODENAME
-azure vm disk attach-new --resource-group HADOOPSUMMIT --vm-name $NODENAME 100
+azure network public-ip create --resource-group $RESOURCE_GROUP --location westus --domain-name-label $NODENAME --name $NODENAME-publicip
+azure network nic create --resource-group $RESOURCE_GROUP --location westus --subnet-vnet-name $RESOURCE_GROUP-vnet --subnet-name $RESOURCE_GROUP-subnet --public-ip-name $NODENAME-publicip --network-security-group-name $RESOURCE_GROUP --name $NODENAME-nic 
+azure vm create --resource-group $RESOURCE_GROUP --location westus --os-type linux --nic-name $NODENAME-nic --vnet-name hadoosummit-vnet  --vnet-subnet-name $RESOURCE_GROUP-subnet --storage-account-name $RESOURCE_GROUP --image-urn canonical:UbuntuServer:14.04.4-LTS:latest --vm-size Standard_DS11 --ssh-publickey-file ~/.ssh/id_rsa-azure.pub --admin-username mapr --name $NODENAME
+azure vm disk attach-new --resource-group $RESOURCE_GROUP --vm-name $NODENAME 100
 done
 
 
@@ -37,17 +38,17 @@ done
 ####################################################
 # When you're done with the VMs, cleanup like this.
 ####################################################
-azure network vnet delete --resource-group hadoopsummit --name hadoopsummit-vnet
-azure network vnet subnet delete --resource-group hadoopsummit --vnet-name hadoopsummit-vnet --name hadoopsummit-subnet -q
-azure vm delete --resource-group HADOOPSUMMIT --name nodea -q
-azure vm delete --resource-group HADOOPSUMMIT --name nodeb -q
-azure vm delete --resource-group HADOOPSUMMIT --name nodec -q
-azure network nic delete --resource-group HADOOPSUMMIT --name nodea-nic -q
-azure network nic delete --resource-group HADOOPSUMMIT --name nodeb-nic -q
-azure network nic delete --resource-group HADOOPSUMMIT --name nodec-nic -q
-azure network public-ip delete --resource-group HADOOPSUMMIT --name nodea-publicip -q
-azure network public-ip delete --resource-group HADOOPSUMMIT --name nodeb-publicip -q
-azure network public-ip delete --resource-group HADOOPSUMMIT --name nodec-publicip -q
+azure network vnet delete --resource-group $RESOURCE_GROUP --name $RESOURCE_GROUP-vnet
+azure network vnet subnet delete --resource-group $RESOURCE_GROUP --vnet-name $RESOURCE_GROUP-vnet --name $RESOURCE_GROUP-subnet -q
+azure vm delete --resource-group $RESOURCE_GROUP --name nodea -q
+azure vm delete --resource-group $RESOURCE_GROUP --name nodeb -q
+azure vm delete --resource-group $RESOURCE_GROUP --name nodec -q
+azure network nic delete --resource-group $RESOURCE_GROUP --name nodea-nic -q
+azure network nic delete --resource-group $RESOURCE_GROUP --name nodeb-nic -q
+azure network nic delete --resource-group $RESOURCE_GROUP --name nodec-nic -q
+azure network public-ip delete --resource-group $RESOURCE_GROUP --name nodea-publicip -q
+azure network public-ip delete --resource-group $RESOURCE_GROUP --name nodeb-publicip -q
+azure network public-ip delete --resource-group $RESOURCE_GROUP --name nodec-publicip -q
 
 
 #########################
