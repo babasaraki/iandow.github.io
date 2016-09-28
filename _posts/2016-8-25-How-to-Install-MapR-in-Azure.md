@@ -7,7 +7,7 @@ tags: [azure, mapr]
 Last week MapR released a new version of their Converged Data Platform. Today I installed it on Azure, and kept notes on all the commands I used. It's possible to automate this installation, and I'm pretty sure MapR has documented how to do that, but until I find that doc, here are the commands I use. This is what I like to call, "Automation for Dummy's", meaning, you can just copy and paste (some but not all of) these commands.  Needless to say, you should know what these commands do before you blindly copy and paste.
 
 
-{% highlight bash %}
+{% highlight bash linenos %}
 RESOURCE_GROUP=iansandbox
 ADMIN_USER=mapr
  ADMIN_PASSWORD='changeme!'
@@ -34,24 +34,6 @@ azure network nic create --resource-group $RESOURCE_GROUP --location westus --su
 azure vm create --resource-group $RESOURCE_GROUP --location westus --os-type linux --nic-name $NODENAME-nic --vnet-name hadoosummit-vnet  --vnet-subnet-name $RESOURCE_GROUP-subnet --storage-account-name $RESOURCE_GROUP --image-urn canonical:UbuntuServer:14.04.4-LTS:latest --vm-size Standard_DS11 --ssh-publickey-file ~/.ssh/id_rsa-azure.pub --admin-username mapr --name $NODENAME
 azure vm disk attach-new --resource-group $RESOURCE_GROUP --vm-name $NODENAME 1000
 done
-
-
-
-####################################################
-# When you're done with the VMs, cleanup like this.
-####################################################
-azure network vnet delete --resource-group $RESOURCE_GROUP --name $RESOURCE_GROUP-vnet
-azure network vnet subnet delete --resource-group $RESOURCE_GROUP --vnet-name $RESOURCE_GROUP-vnet --name $RESOURCE_GROUP-subnet -q
-azure vm delete --resource-group $RESOURCE_GROUP --name nodea -q
-azure vm delete --resource-group $RESOURCE_GROUP --name nodeb -q
-azure vm delete --resource-group $RESOURCE_GROUP --name nodec -q
-azure network nic delete --resource-group $RESOURCE_GROUP --name nodea-nic -q
-azure network nic delete --resource-group $RESOURCE_GROUP --name nodeb-nic -q
-azure network nic delete --resource-group $RESOURCE_GROUP --name nodec-nic -q
-azure network public-ip delete --resource-group $RESOURCE_GROUP --name nodea-publicip -q
-azure network public-ip delete --resource-group $RESOURCE_GROUP --name nodeb-publicip -q
-azure network public-ip delete --resource-group $RESOURCE_GROUP --name nodec-publicip -q
-
 
 #########################
 # Install the Oracle JDK
@@ -133,3 +115,19 @@ azure login
 for NODENAME in nodea nodeb nodec; do azure vm start --resource-group iansandbox $NODENAME & done
 {% endhighlight %}
 
+
+
+When you're done with the VMs, cleanup like this:
+-------------------------------------------------
+{% highlight bash %}
+azure network vnet delete --resource-group $RESOURCE_GROUP --name $RESOURCE_GROUP-vnet
+azure network vnet subnet delete --resource-group $RESOURCE_GROUP --vnet-name $RESOURCE_GROUP-vnet --name $RESOURCE_GROUP-subnet -q
+for NODENAME in nodea nodeb nodec; do
+azure vm delete --resource-group $RESOURCE_GROUP --name $NODENAME -q
+azure network nic delete --resource-group $RESOURCE_GROUP --name $NODENAME-nic -q
+azure network public-ip delete --resource-group $RESOURCE_GROUP --name $NODENAME-publicip -q
+done;
+{% endhighlight %}
+
+
+for NODENAME in finserv-a finserv-b finserv-c; do
