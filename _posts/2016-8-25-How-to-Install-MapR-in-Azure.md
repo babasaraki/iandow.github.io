@@ -10,6 +10,8 @@ Last week MapR released a new version of their Converged Data Platform. Today I 
 {% highlight bash linenos %}
 RESOURCE_GROUP=iansandbox
 ADMIN_USER=mapr
+# This next property tells bash to avoid putting the password declaration in its history
+HISTCONTROL=ignoreboth
  ADMIN_PASSWORD='changeme!'
 ####################################
 # Setup preliminary group assets
@@ -44,19 +46,9 @@ ssh -i ~/.ssh/id_rsa-azure -oStrictHostKeyChecking=no $ADMIN_USER@$NODENAME.west
 ssh -i ~/.ssh/id_rsa-azure -oStrictHostKeyChecking=no $ADMIN_USER@$NODENAME.westus.cloudapp.azure.com sudo apt-get update
 done
 
-for NODENAME in nodea nodeb nodeb; do echo -e "Y\ny\n" | ssh -i ~/.ssh/id_rsa-azure -oStrictHostKeyChecking=no $ADMIN_USER@$NODENAME.westus.cloudapp.azure.com sudo apt-get install oracle-java8-installer; done
-
-##############################
-# (optional) Enable swap space
-##############################
-for NODENAME in nodea nodeb nodec; do
-ssh -i ~/.ssh/id_rsa-azure -oStrictHostKeyChecking=no $ADMIN_USER@$NODENAME.westus.cloudapp.azure.com sudo sed -i 's/ResourceDisk.EnableSwap=n/ResourceDisk.EnableSwap=y/g' /etc/waagent.conf
-ssh -i ~/.ssh/id_rsa-azure -oStrictHostKeyChecking=no $ADMIN_USER@$NODENAME.westus.cloudapp.azure.com sudo sed -i 's/ResourceDisk.SwapSizeMB=0/ResourceDisk.SwapSizeMB=5120/g' /etc/waagent.conf
-ssh -i ~/.ssh/id_rsa-azure -oStrictHostKeyChecking=no $ADMIN_USER@$NODENAME.westus.cloudapp.azure.com sudo service walinuxagent restart
+for NODENAME in nodea nodeb nodeb; do 
+echo -e "Y\ny\n" | ssh -i ~/.ssh/id_rsa-azure -oStrictHostKeyChecking=no $ADMIN_USER@$NODENAME.westus.cloudapp.azure.com sudo apt-get install oracle-java8-installer; 
 done
-
-
-# make sure you can ssh from one node to another (manually). If not, you're likely to get an error during the webui installer.
 
 #####################
 # Add SSH public keys
@@ -70,10 +62,14 @@ ssh -i ~/.ssh/id_rsa-azure -oStrictHostKeyChecking=no $ADMIN_USER@$NODENAME.west
 ssh -i ~/.ssh/id_rsa-azure -oStrictHostKeyChecking=no $ADMIN_USER@$NODENAME.westus.cloudapp.azure.com "sudo service ssh restart"
 done
 
-########################
-# Setup swap space 1.4GB
-########################
+
+##################################
+# (optional) Configure swap space
+##################################
 for NODENAME in nodea nodeb nodec; do
+ssh -i ~/.ssh/id_rsa-azure -oStrictHostKeyChecking=no $ADMIN_USER@$NODENAME.westus.cloudapp.azure.com sudo sed -i 's/ResourceDisk.EnableSwap=n/ResourceDisk.EnableSwap=y/g' /etc/waagent.conf
+ssh -i ~/.ssh/id_rsa-azure -oStrictHostKeyChecking=no $ADMIN_USER@$NODENAME.westus.cloudapp.azure.com sudo sed -i 's/ResourceDisk.SwapSizeMB=0/ResourceDisk.SwapSizeMB=5120/g' /etc/waagent.conf
+ssh -i ~/.ssh/id_rsa-azure -oStrictHostKeyChecking=no $ADMIN_USER@$NODENAME.westus.cloudapp.azure.com sudo service walinuxagent restart
 ssh -i ~/.ssh/id_rsa-azure -oStrictHostKeyChecking=no $ADMIN_USER@$NODENAME.westus.cloudapp.azure.com "sudo swapon -s"
 ssh -i ~/.ssh/id_rsa-azure -oStrictHostKeyChecking=no $ADMIN_USER@$NODENAME.westus.cloudapp.azure.com "sudo dd if=/dev/zero of=/mnt/swapfile bs=1400M count=1"
 ssh -i ~/.ssh/id_rsa-azure -oStrictHostKeyChecking=no $ADMIN_USER@$NODENAME.westus.cloudapp.azure.com "sudo chmod 600 /mnt/swapfile"
@@ -87,24 +83,25 @@ done
 #############################
 # Set the admin user password
 #############################
-HISTCONTROL=ignoreboth
 for NODENAME in nodea nodeb nodec; do
-ssh -i ~/.ssh/id_rsa-azure -oStrictHostKeyChecking=no $ADMIN_USER@$NODENAME.westus.cloudapp.azure.com "echo -e \"${ADMIN_PASSWORD}\n${ADMIN_PASSWORD}\" | sudo passwd mapr"; done
+ssh -i ~/.ssh/id_rsa-azure -oStrictHostKeyChecking=no $ADMIN_USER@$NODENAME.westus.cloudapp.azure.com "echo -e \"${ADMIN_PASSWORD}\n${ADMIN_PASSWORD}\" | sudo passwd mapr"; 
+done
 unset ADMIN_PASSWORD
+{% endhighlight %}
 
-##############################################################################################
-# Run the mapr-setup.sh utility. This must be run manually, so ssh login to nodea and do this:
-##############################################################################################
+Next, run the mapr-setup.sh utility on one of your nodes. *This must be run manually*, so ssh login to a cluster node and do this:
+
+{% highlight bash %}
 wget http://package.mapr.com/releases/installer/mapr-setup.sh -P /tmp
 chmod 700 /tmp/mapr-setup.sh
-sudo bash /tmp/mapr-setup.sh
+echo -e "\n\n\n" | sudo bash /tmp/mapr-setup.sh
 {% endhighlight %}
 
 When the script prompts you for anything, just accept the defaults.
 
 Once the mapr-setup.sh script ends, open https://nodea.westus.cloudapp.azure.com:9443 and login with the username you specified with `$ADMIN_USER`.
 
-On the "Configure Nodes" page of the webui installer, specify the internal IPs for the node names, and specify /dev/sdc for the target installation disk.
+On the "Configure Nodes" page of the webui installer, specify the internal IPs for the node names, and specify /dev/sdc for the target installation disk. *DO NOT* use the internal DNS when you specify the node names. Use the internal IPs, instead. Azure generates really long internal DNS names that can cause the MapR installer to fail if you choose to use the use the optional MySQL service.
 
 The webui installer will run for about 30 minutes before it completes.
 
@@ -117,8 +114,8 @@ for NODENAME in nodea nodeb nodec; do azure vm start --resource-group iansandbox
 
 
 
-When you're done with the VMs, cleanup like this:
--------------------------------------------------
+## When you're done with the VMs, cleanup like this:
+
 {% highlight bash %}
 azure network vnet delete --resource-group $RESOURCE_GROUP --name $RESOURCE_GROUP-vnet
 azure network vnet subnet delete --resource-group $RESOURCE_GROUP --vnet-name $RESOURCE_GROUP-vnet --name $RESOURCE_GROUP-subnet -q
@@ -128,6 +125,3 @@ azure network nic delete --resource-group $RESOURCE_GROUP --name $NODENAME-nic -
 azure network public-ip delete --resource-group $RESOURCE_GROUP --name $NODENAME-publicip -q
 done;
 {% endhighlight %}
-
-
-for NODENAME in finserv-a finserv-b finserv-c; do
