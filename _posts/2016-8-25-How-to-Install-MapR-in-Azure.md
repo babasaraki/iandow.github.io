@@ -109,12 +109,13 @@ If you like saving money, you'll probably want to only run these cluster machine
 
 {% highlight bash %}
 azure login
-for NODENAME in nodea nodeb nodec; do azure vm start --resource-group iansandbox $NODENAME & done
+for NODENAME in nodea nodeb nodec; do azure vm start --resource-group iansandbox $NODENAME & 
+done
 {% endhighlight %}
 
 
 
-## When you're done with the VMs, cleanup like this:
+### When you're done with the VMs, cleanup like this:
 
 {% highlight bash %}
 azure network vnet delete --resource-group $RESOURCE_GROUP --name $RESOURCE_GROUP-vnet
