@@ -4,7 +4,9 @@ title: How to quickly get started using Kafka
 tags: [azure, mapr, kafka]
 ---
 
-If you've just started learning about Apache Kafka, here's a useful guide on how to quickly install Kafka and run some simple producer / consumer experiments. 
+This post describes how to quickly install Apache Kafka and run some simple producer and consumer experiments.
+
+[Apache Kafka](http://kafka.apache.org) is a distributed streaming platform. It lets you publish and subscribe to streams of data like a messaging system. You can also use it to store streams of data in a distributed cluster and process those streams in real-time.
 
 ### Step 1: Create an Ubuntu server
 
@@ -47,7 +49,7 @@ We just started a single Kafka broker, which is just a cluster of size one. This
 
 ## Java producer and consumer examples
 
-Here's an example of a Java consumer [citation](http://www.tutorialspoint.com/apache_kafka/apache_kafka_consumer_group_example.htm):
+Here's an example of a Java consumer [[citation]](http://www.tutorialspoint.com/apache_kafka/apache_kafka_consumer_group_example.htm):
 
 {% highlight java %}
 import java.util.Properties;
