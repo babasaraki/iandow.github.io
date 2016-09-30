@@ -8,6 +8,8 @@ This post describes how to quickly install Apache Kafka and run some simple prod
 
 [Apache Kafka](http://kafka.apache.org) is a distributed streaming platform. It lets you publish and subscribe to streams of data like a messaging system. You can also use it to store streams of data in a distributed cluster and process those streams in real-time.
 
+![Apache Kafka](https://camo.githubusercontent.com/86d905476699c7e01e14992d4ee40f3c04ff0a91/687474703a2f2f7777772e626f676f746f626f676f2e636f6d2f4861646f6f702f696d616765732f45636f73797374656d2f4b61666b612e706e67)
+
 ### Step 1: Create an Ubuntu server
 
 This post is about installing Kafka, not Ubuntu, but if you don't have an Ubuntu server currently available, then I suggest creating one in Azure or Amazon AWS.
