@@ -1,7 +1,7 @@
 ---
 layout: post
 title: JUnit examples for Kafka apps.
-tags: [azure, mapr, kafka]
+tags: [azure, mapr, kafka, junit, R]
 ---
 
 [Apache Kafka](http://kafka.apache.org) is a distributed streaming platform. It lets you publish and subscribe to streams of data like a messaging system. You can also use it to store streams of data in a distributed cluster and process those streams in real-time. However, sometimes it can be challenging to publish or consume data at a rate that keeps up with real-time. Optimizing the speed of your producers or consumers involves knowing what specific values to use for a variety of performance related variables:
@@ -261,7 +261,7 @@ abline(v=18.5, col='lightgray')
 dev.off()
 {% endhighlight %}
 
-Here is what the image from that R script looks like:
+Once you download thread-count.csv to your working directory, you can run that R script with ``` Rscript draw-speed-graphs.r```, which should generate an image file "thread.png" that should look something like this:
 
 ![ThreadsVsTopics](http://iandow.github.io/img/kafka_threads_vs_topics.png)
 
