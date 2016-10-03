@@ -1,8 +1,12 @@
 ---
 layout: post
-title: JUnit examples for Kafka apps.
+title: How to Tune Kafka for Optimizing Throughput Performance
 tags: [azure, mapr, kafka, junit, R]
 ---
+
+Finding the optimal set of configurations for Kafka in order to achieve the fastest possible throughput for real time/stream analytics can be a time-consuming process of trial and error. Automating that process with paramterized JUnit tests can be an excellent way to find optimal Kafka configurations without guess work and without wasting time.
+
+## What factors impact Kafka performance?
 
 [Apache Kafka](http://kafka.apache.org) is a distributed streaming platform. It lets you publish and subscribe to streams of data like a messaging system. You can also use it to store streams of data in a distributed cluster and process those streams in real-time. However, sometimes it can be challenging to publish or consume data at a rate that keeps up with real-time. Optimizing the speed of your producers or consumers involves knowing what specific values to use for a variety of performance related variables:
 
@@ -18,7 +22,9 @@ tags: [azure, mapr, kafka, junit, R]
 
 One method of tuning these parameters is to just run a series of incremental unit tests designed to measure throughput over a range of values for a single parameter. JUnit provides an excellent means of performing parameterized unit tests. 
 
-*What is JUnit?* [JUnit](https://en.wikipedia.org/wiki/JUnit) is a unit testing framework for the Java programming language and is by far the most popular framework for developing test cases in Java. 
+## What is JUnit?
+
+[JUnit](https://en.wikipedia.org/wiki/JUnit) is a unit testing framework for the Java programming language and is by far the most popular framework for developing test cases in Java. 
 
 I recently developed some test cases to gauge optimal configurations to maximize the speed of publishing messages with the Kafka API. In fact, these unit tests don't so much test anything as produce speed data so that different configurations of producer threads can be adjusted to get optimal performance under different conditions. 
 
@@ -276,7 +282,7 @@ The three primary factors I found most important in producing messages as fast a
 2. Number of Kafka topics
 3. Number of partitions per Kafka topic
 
-JUnit's capacity for running parameterized tests is an excellent way to generate quantitative results that can be used to optimize the throughput of your Kafka producers and consumers.
+JUnit's capacity for running parameterized tests is an excellent way to generate quantitative results that can be used to optimize the throughput of your Kafka stream analytics.
 
 ### Fewer topics is better.
 
