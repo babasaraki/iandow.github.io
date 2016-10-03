@@ -271,6 +271,10 @@ Once you download thread-count.csv to your working directory, you can run that R
 
 ![ThreadsVsTopics](http://iandow.github.io/img/kafka_threads_vs_topics.png)
 
+### Fewer topics is better.
+
+In the image shown above, I observed that the more topics a Kafka producer has to send to the slower it will run. In other words, it's faster to send 1000 messages to a single topic that to send 500 messages to 2 topics in the same Kafka broker. In my specific test environment, it seemed apparent that performance would significantly degrade if any of my producer threads were sending to more than 200 topics.  Therefore, it is important to maintain an affitinty between producer thread and Kafka topics, such that any given topic will always be populated by the same producer thread.
+
 In case you're curious, I got that result on a single-node Kafka cluster (kafka_2.11-0.10.0.0) running on Ubuntu Linux (canonical:UbuntuServer:14.04.4-LTS) on a DS14-series server in Azure (the Standard DS14 has 16 cores and 112 GB memory).
 
 
@@ -284,9 +288,7 @@ The three primary factors I found most important in producing messages as fast a
 
 JUnit's capacity for running parameterized tests is an excellent way to generate quantitative results that can be used to optimize the throughput of your Kafka stream analytics.
 
-### Fewer topics is better.
-
-In the example shown above, I observed that the more topics a Kafka producer has to send to the slower it will run. In other words, it's faster to send 1000 messages to a single topic that to send 500 messages to 2 topics in the same Kafka broker. In my specific test environment, it seemed apparent that performance would significantly degrade if my producers were sending to more than 200 topics.  Therefore, it is important to maintain an affitinty between producer thread and Kafka topics, such that any given topic will always be populated by the same producer thread.
+The most important finding in our study was that it is very important to maintain an affitinty between producer threads and Kafka topics, such that any given topic will always be populated by the same producer thread.  Knowing exactly how many topics can be handled by a producer thread will vary from system to system, but in our case we found optimal performance when no more than 200 topics were handled by each producer thread.
 
 
 The code in this post is contained in the following github repository:
