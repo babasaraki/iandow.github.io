@@ -1,7 +1,7 @@
 ---
 layout: post
 title: How to Tune Kafka for Optimizing Throughput Performance
-tags: [azure, mapr, kafka, junit, R]
+tags: [Kafka, Performance, JUnit, R]
 ---
 
 Finding the optimal set of configurations for Kafka in order to achieve the fastest possible throughput for real time/stream analytics can be a time-consuming process of trial and error. Automating that process with parametrized JUnit tests can be an excellent way to find optimal Kafka configurations without guess work and without wasting time.
@@ -34,8 +34,6 @@ Note, this code and documentation for compiling and running it is contained in t
 [https://github.com/mapr-demos/finserv-application-blueprint](https://github.com/mapr-demos/finserv-application-blueprint)
 
 {% highlight java linenos %}
-package com.mapr.demo.finserv;
-
 import com.google.common.collect.Lists;
 import com.google.common.io.Resources;
 import org.apache.kafka.clients.producer.KafkaProducer;
@@ -59,7 +57,6 @@ import java.util.concurrent.*;
  */
 @RunWith(Parameterized.class)
 public class ThreadCountSpeedTest {
-    private static final String STREAM = "/mapr/my.cluster.com/user/mapr/taq";
     private static final double TIMEOUT = 30;  // seconds
     private static final int BATCH_SIZE = 1000000;  // The unit of measure for throughput is "batch size" per second
     // e.g. Throughput = X "millions of messages" per sec
@@ -136,7 +133,7 @@ public class ThreadCountSpeedTest {
         List<String> ourTopics = Lists.newArrayList();
         for (int i = 0; i < topicCount; i++) {
             // Topic names will look like, "t-00874"
-            ourTopics.add(String.format("%s:t-%05d", STREAM, i));
+            ourTopics.add(String.format("t-%05d", i));
         }
 
         // Create a message containing random bytes. We'll send this message over and over again
