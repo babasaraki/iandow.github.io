@@ -4,7 +4,7 @@ title: How to Tune Kafka for Optimizing Throughput Performance
 tags: [azure, mapr, kafka, junit, R]
 ---
 
-Finding the optimal set of configurations for Kafka in order to achieve the fastest possible throughput for real time/stream analytics can be a time-consuming process of trial and error. Automating that process with paramterized JUnit tests can be an excellent way to find optimal Kafka configurations without guess work and without wasting time.
+Finding the optimal set of configurations for Kafka in order to achieve the fastest possible throughput for real time/stream analytics can be a time-consuming process of trial and error. Automating that process with parametrized JUnit tests can be an excellent way to find optimal Kafka configurations without guess work and without wasting time.
 
 ## What factors impact Kafka performance?
 
@@ -12,13 +12,13 @@ Finding the optimal set of configurations for Kafka in order to achieve the fast
 
 1. How many worker threads should my producers (or consumers) have?
 2. How many topics should my producers send to?
-2. How many paritions should my topics have?
+2. How many partitions should my topics have?
 3. Should I enable compression? If so, should I use the gzip, snappy, or lz4 codec?
 4. How long should my producers wait to allow other records to be sent so that the sends can be batched together?
 5. How large should I make those batches?
 6. What's the smallest virtual machine configuration that I can use to achieve my real-time throughput requirements?
 
-(By the way, from my experience I found that the first three factors are the most significant - number of threads per producer, number of topics they send to, and the number of paritions in each topic.  I didn't spend much time optimizing the parameters for batching, but my instinct tells me they don't matter as much).
+(By the way, from my experience I found that the first three factors are the most significant - number of threads per producer, number of topics they send to, and the number of partitions in each topic.  I didn't spend much time optimizing the parameters for batching, but my instinct tells me they don't matter as much).
 
 One method of tuning these parameters is to just run a series of incremental unit tests designed to measure throughput over a range of values for a single parameter. JUnit provides an excellent means of performing parameterized unit tests. 
 
@@ -26,11 +26,11 @@ One method of tuning these parameters is to just run a series of incremental uni
 
 [JUnit](https://en.wikipedia.org/wiki/JUnit) is a unit testing framework for the Java programming language and is by far the most popular framework for developing test cases in Java. 
 
-I recently developed some test cases to gauge optimal configurations to maximize the speed of publishing messages with the Kafka API. In fact, these unit tests don't so much test anything as produce speed data so that different configurations of producer threads can be adjusted to get optimal performance under different conditions. 
+I recently developed some JUnit tests to find which Kafka configurations would maximize the speed at which I could publish messages into a Kafka stream. In fact, these unit tests don't so much test anything as produce speed data so that different configurations of Kafka producers can be adjusted to get optimal performance under different conditions. 
 
-The following example is a unit test that parameterizes threads and topics.  This was extremely helpful in understanding how many threads to allocate to my producers, and it was also very revealing to see at what point Kafka (in its default out-of-the-box configuration) could not handle any more topics. (Disclaimer: I didn't really question the result which showed my producers failing beyond 200 topics per producer thread. I just tried to limit my producers to fewer than 200 topics).
+The following is one example of a unit test I used to parameterize threads and topics. I found this test extremely helpful in understanding how many threads I should allocate to my producers. It was also very revealing to see at what point Kafka (in its default out-of-the-box configuration) could not handle any more topics. 
 
-Note, this code and documentation for compiling and running it is contained in the following github repository:
+Note, this code and documentation for compiling and running it is contained in the following GitHub repository:
 [https://github.com/mapr-demos/finserv-application-blueprint](https://github.com/mapr-demos/finserv-application-blueprint)
 
 {% highlight java linenos %}
@@ -234,7 +234,7 @@ public class ThreadCountSpeedTest {
 }
 {% endhighlight %}
 
-Here is what my maven dependency for Junit looks like in pom.xml:
+Here is what my maven dependency for JUnit looks like in pom.xml:
 
 {% highlight bash %}
 <dependency>
@@ -267,13 +267,15 @@ abline(v=18.5, col='lightgray')
 dev.off()
 {% endhighlight %}
 
-Once you download thread-count.csv to your working directory, you can run that R script with ``` Rscript draw-speed-graphs.r```, which should generate an image file "thread.png" that should look something like this:
+Once you download thread-count.csv to your working directory, you can run that R script with ```Rscript draw-speed-graphs.r```, which should generate an image file "thread.png" that should look something like this:
 
 ![ThreadsVsTopics](http://iandow.github.io/img/kafka_threads_vs_topics.png)
 
 ### Fewer topics is better.
 
-In the image shown above, I observed that the more topics a Kafka producer has to send to the slower it will run. In other words, it's faster to send 1000 messages to a single topic that to send 500 messages to 2 topics in the same Kafka broker. In my specific test environment, it seemed apparent that performance would significantly degrade if any of my producer threads were sending to more than 200 topics.  Therefore, it is important to maintain an affitinty between producer thread and Kafka topics, such that any given topic will always be populated by the same producer thread.
+In the image shown above, I observed that the more topics a Kafka producer has to send to the slower it will run. In other words, it's faster to send 1000 messages to a single topic that to send 500 messages to 2 topics in the same Kafka broker. In my specific test environment, it seemed apparent that performance would significantly degrade if any of my producer threads were sending to more than 200 topics.  Therefore, it is important to maintain an affinity between producer thread and Kafka topics, such that any given topic will always be populated by the same producer thread.
+
+*Disclaimer:* I didn't really question the result which showed my producers failing beyond 200 topics per producer thread. I just tried to limit my producers to fewer than 200 topics.
 
 In case you're curious, I got that result on a single-node Kafka cluster (kafka_2.11-0.10.0.0) running on Ubuntu Linux (canonical:UbuntuServer:14.04.4-LTS) on a DS14-series server in Azure (the Standard DS14 has 16 cores and 112 GB memory).
 
@@ -288,9 +290,9 @@ The three primary factors I found most important in producing messages as fast a
 
 JUnit's capacity for running parameterized tests is an excellent way to generate quantitative results that can be used to optimize the throughput of your Kafka stream analytics.
 
-The most important finding in our study was that it is very important to maintain an affitinty between producer threads and Kafka topics, such that any given topic will always be populated by the same producer thread.  Knowing exactly how many topics can be handled by a producer thread will vary from system to system, but in our case we found optimal performance when no more than 200 topics were handled by each producer thread.
+The most important finding in our study was that it is very important to maintain an affinity between producer threads and Kafka topics, such that any given topic will always be populated by the same producer thread.  Knowing exactly how many topics can be handled by a producer thread will vary from system to system, but in our case we found optimal performance when no more than 200 topics were handled by each producer thread.
 
 
-The code in this post is contained in the following github repository:
+The code in this post is contained in the following GitHub repository:
 [https://github.com/mapr-demos/finserv-application-blueprint](https://github.com/mapr-demos/finserv-application-blueprint)
 
