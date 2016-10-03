@@ -4,7 +4,7 @@ title: JUnit examples for Kafka apps.
 tags: [azure, mapr, kafka]
 ---
 
-[Apache Kafka](http://kafka.apache.org) is a distributed streaming platform. It lets you publish and subscribe to streams of data like a messaging system. You can also use it to store streams of data in a distributed cluster and process those streams in real-time. However, sometimes it can be challenging to publish or consume data at a rate that keeps up with real-time. Optimizing the speed of your producers or consumers involves knowing what specific values to use for a variety of performance related variables.  Such as,
+[Apache Kafka](http://kafka.apache.org) is a distributed streaming platform. It lets you publish and subscribe to streams of data like a messaging system. You can also use it to store streams of data in a distributed cluster and process those streams in real-time. However, sometimes it can be challenging to publish or consume data at a rate that keeps up with real-time. Optimizing the speed of your producers or consumers involves knowing what specific values to use for a variety of performance related variables:
 
 1. How many worker threads should my producers (or consumers) have?
 2. How many topics should my producers send to?
@@ -270,9 +270,6 @@ In case you're curious, I got that result on a single-node Kafka cluster (kafka_
 
 ## Conclusion
 
-The code in this post is contained in the following github repository:
-[https://github.com/mapr-demos/finserv-application-blueprint](https://github.com/mapr-demos/finserv-application-blueprint)
-
 The three primary factors I found most important in producing messages as fast as possible to Kafka are:
 
 1. Number of concurrent Producers
@@ -285,4 +282,7 @@ JUnit's capacity for running parameterized tests is an excellent way to generate
 
 In the example shown above, I observed that the more topics a Kafka producer has to send to the slower it will run. In other words, it's faster to send 1000 messages to a single topic that to send 500 messages to 2 topics in the same Kafka broker. In my specific test environment, it seemed apparent that performance would significantly degrade if my producers were sending to more than 200 topics.  Therefore, it is important to maintain an affitinty between producer thread and Kafka topics, such that any given topic will always be populated by the same producer thread.
 
+
+The code in this post is contained in the following github repository:
+[https://github.com/mapr-demos/finserv-application-blueprint](https://github.com/mapr-demos/finserv-application-blueprint)
 
