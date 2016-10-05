@@ -21,7 +21,6 @@ Below, I'm going to show you a Java application the consumes from MapR Streams u
 Here is the Java code that illustrates how to consume from a MapR Stream using the Kafka API and persist each streamed record as a JSON document in Mapr-DB:
 	
 [Persister.java](https://gist.github.com/iandow/f6376264c2281d1c0e3a2485e86c9f23)
-[Tick.java](https://gist.github.com/iandow/92d3276e50a7e77f41e69f5c69c8563b)
 
 In that example, I read records from a MapR Stream, like this:
 {% highlight java %}
@@ -32,7 +31,7 @@ while (iter.hasNext())
     ConsumerRecord<String, byte[]> record = iter.next();
 {% endhighlight %}
 
-Then I cast them to a JSON annotated POJO class called "Tick", like this:
+Then I cast them to a JSON annotated POJO defined in [Tick.java](https://gist.github.com/iandow/92d3276e50a7e77f41e69f5c69c8563b), like this:
 {% highlight java %}
 Tick tick = new Tick(record.value());
 {% endhighlight %}
@@ -62,13 +61,13 @@ mapr dbshell
 
 Here's how I read it with Drill:
 
-{% highlight bash %} 
+{% highlight bash %}
 /opt/mapr/drill/drill-1.6.0/bin/sqlline -u jdbc:drill:
 {% endhighlight %}
 
 Either of the following two SELECT statements will work:
 
-{% highlight sql %} 
+{% highlight sql %}
 SELECT * FROM dfs.`/mapr/ian.cluster.com/user/mapr/ticktable`;
 SELECT * FROM dfs.`/user/mapr/ticktable`;
 {% endhighlight %} 
