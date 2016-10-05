@@ -85,5 +85,5 @@ The code I referenced was mostly copied from the following reference application
  
 Here are some useful links to APIs and utilities I used above:
 
-	- [mapr dbshell](http://maprdocs.mapr.com/home/MapR-DB/JSON_DB/getting_started_json_ojai_using_maprdb_shell.html)
-	- [MapRDB Javadoc](http://maprdocs.mapr.com/apidocs/maprdb_json/51/com/mapr/db/MapRDB.html)
+- [mapr dbshell](http://maprdocs.mapr.com/home/MapR-DB/JSON_DB/getting_started_json_ojai_using_maprdb_shell.html)
+- [MapRDB Javadoc](http://maprdocs.mapr.com/apidocs/maprdb_json/51/com/mapr/db/MapRDB.html)
