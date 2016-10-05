@@ -12,16 +12,35 @@ This post describes how to quickly install Apache Kafka and run some simple prod
 
 This post is about installing Kafka, not Ubuntu, but if you don't have an Ubuntu server currently available, then I suggest creating one in Azure or Amazon AWS.
 
-### Step 2: Download Kafka
+### Step 2: Download and Install Kafka
 
-[Download](https://www.apache.org/dyn/closer.cgi?path=/kafka/0.10.0.0/kafka_2.11-0.10.0.0.tgz) the latest release and untar it.
+Downloading and installing Kafka is a piece of cake. Just [download](http://kafka.apache.org/downloads.html) the latest release and untar it, like this:
 
 ```
-tar -xzf kafka_2.11-0.10.0.0.tgz
-cd kafka_2.11-0.10.0.0
+wget http://apache.cs.utah.edu/kafka/0.10.0.1/kafka_2.11-0.10.0.1.tgz
+tar -xzf kafka_2.11-0.10.0.1.tgz
+cd kafka_2.11-0.10.0.1
 ```
 
 Congratulations, you just installed Kafka. Zookeeper was also in that tar ball, so you have that too. Kafka uses ZooKeeper, and we'll start both services in the next step.
+
+I also recommend you setup Kafka to start automatically on bootup.  If you're running Ubuntu, here's how you would do that:
+
+sudo cp -R ~/kafka_2.11-0.10.0.1 /usr/local/
+
+Put these two lines in /etc/init.d/zeppelin:
+
+    test -e /usr/local/zeppelin-0.7.0-SNAPSHOT/bin/zeppelin-daemon.sh || exit 1
+    exec /usr/local/zeppelin-0.7.0-SNAPSHOT/bin/zeppelin-daemon.sh $@
+
+Then create the service with the command ```sudo update-rc.d zeppelin defaults```. Now you should be able to start and stop the zeppelin daemon like this:
+
+    sudo service zeppelin start
+    sudo service zeppelin status
+    sudo service zeppelin stop
+
+If you want to remove the Zeppelin daemon service later, run ```update-rc.d -f zeppelin remove```. 
+
 
 ### Step 3: Start Kafka and Zookeeper
 
