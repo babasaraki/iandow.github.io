@@ -4,7 +4,7 @@ title: How to quickly get started using Kafka
 tags: [azure, mapr, kafka]
 ---
 
-This post describes how to quickly install Apache Kafka and run some simple producer and consumer experiments.
+This post describes how to quickly install Apache Kafka on a one node cluster and run some simple producer and consumer experiments.
 
 [Apache Kafka](http://kafka.apache.org) is a distributed streaming platform. It lets you publish and subscribe to streams of data like a messaging system. You can also use it to store streams of data in a distributed cluster and process those streams in real-time.
 
@@ -24,25 +24,40 @@ cd kafka_2.11-0.10.0.1
 
 Congratulations, you just installed Kafka. Zookeeper was also in that tar ball, so you have that too. Kafka uses ZooKeeper, and we'll start both services in the next step.
 
-I also recommend you setup Kafka to start automatically on bootup.  If you're running Ubuntu, here's how you would do that:
+#### Setup Kafka to start automatically on bootup
+Here's how I configure Kafka to start automatically on Ubuntu 14.04:
 
-sudo cp -R ~/kafka_2.11-0.10.0.1 /usr/local/
+{% highlight bash %}
+sudo su
+cp -R ~/kafka_2.11-0.10.0.1 /opt
+ln -s /opt/kafka_2.11-0.10.0.1 /opt/kafka
+{% endhighlight %}
 
-Put these two lines in /etc/init.d/zeppelin:
+Copy the following init script to /etc/init.d/kafka:
 
-    test -e /usr/local/zeppelin-0.7.0-SNAPSHOT/bin/zeppelin-daemon.sh || exit 1
-    exec /usr/local/zeppelin-0.7.0-SNAPSHOT/bin/zeppelin-daemon.sh $@
+<script src="https://gist.github.com/superscott/a1c67871cdd54b0c8693.js"></script>
 
-Then create the service with the command ```sudo update-rc.d zeppelin defaults```. Now you should be able to start and stop the zeppelin daemon like this:
+Make the kafka service with these commands:
 
-    sudo service zeppelin start
-    sudo service zeppelin status
-    sudo service zeppelin stop
+{% highlight bash %}
+chmod 755 /etc/init.d/kafka
+update-rc.d kafka defaults
+{% endhighlight %}
 
-If you want to remove the Zeppelin daemon service later, run ```update-rc.d -f zeppelin remove```. 
+Now you should be able to start and stop the kafka service like this:
+
+{% highlight bash %}
+sudo service kafka start
+sudo service kafka status
+sudo service kafka stop
+{% endhighlight %}
+
+If you want to remove the Kafka service later, run `update-rc.d -f kafka remove`. 
 
 
-### Step 3: Start Kafka and Zookeeper
+### Step 3: Start Kafka and Zookeeper 
+
+If you created a Kafka daemon service as described above, then just run `sudo service kafka start`, otherwise start it manually as described below.
 
 First start the ZooKeeper service, like this:
 

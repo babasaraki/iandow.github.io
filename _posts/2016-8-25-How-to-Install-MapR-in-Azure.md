@@ -48,6 +48,8 @@ done
 
 for NODENAME in nodea nodeb nodeb; do 
 echo -e "Y\ny\n" | ssh -i ~/.ssh/id_rsa-azure -oStrictHostKeyChecking=no $ADMIN_USER@$NODENAME.westus.cloudapp.azure.com sudo apt-get install oracle-java8-installer; 
+# (Yes, you really do need to run this command twice.)
+echo -e "Y\ny\n" | ssh -i ~/.ssh/id_rsa-azure -oStrictHostKeyChecking=no $ADMIN_USER@$NODENAME.westus.cloudapp.azure.com sudo apt-get install oracle-java8-installer; 
 done
 
 #####################
