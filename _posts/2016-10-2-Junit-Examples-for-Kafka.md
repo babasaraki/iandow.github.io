@@ -1,6 +1,6 @@
 ---
 layout: post
-title: How to Tune Kafka for Optimizing Throughput and Performance
+title: How to Use JUnit to Optimize Throughput in Kafka Streams 
 tags: [Kafka, Performance, JUnit, R]
 ---
 
