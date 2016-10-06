@@ -4,7 +4,9 @@ title: How to deploy a 3 node Kafka cluster in Azure
 tags: [azure, kafka, cluster]
 ---
 
-The following script will deploy a 3 node Kafka cluster in Azure:
+In an earlier post I described how to setup a single node Kafka cluster in Azure so that you can quickly familiarize yourself with basic Kafka operations. However, most real world Kafka applications will run on more than one node to take advantage of Kafka's replication features for fault tolerance. So here I'm going to provide a script you can use to deploy a multi-node Kafka cluster in Azure.
+
+The following script will deploy a 3 node Kafka cluster in Azure.
 
 
 {% highlight bash linenos %}
@@ -96,23 +98,25 @@ Now lets validate that it's working, like this:
 
 Create a topic.
     
-    ```/opt/kafka/bin/kafka-topics.sh --create --zookeeper nodea:2181,nodeb:2181,nodec:2181 --replication-factor 3 --partitions 1 --topic kafkatest```
+    /opt/kafka/bin/kafka-topics.sh --create --zookeeper nodea:2181,nodeb:2181,nodec:2181 --replication-factor 3 --partitions 1 --topic kafkatest
 
 This will create a kafkatest-0 folder in the Kafka logdir (e.g. /tmp/kafka-logs) on all the three machines.
 
-Fire up a producer on one machine and a consumer on another.
+Fire up a producer on one machine:
 
-    ```/opt/kafka/bin/kafka-console-producer.sh --broker-list nodea:9092,nodeb:9092,nodec:9092 --topic kafkatest```
+    ssh mapr@nodea.westus.cloudapp.azure.com sudo /opt/kafka/bin/kafka-console-producer.sh --broker-list nodea:9092,nodeb:9092,nodec:9092 --topic kafkatest
 
-    ```/opt/kafka/bin/kafka-console-consumer.sh --zookeeper nodea:2181,nodeb:2181,nodec:2181 --topic kafkatest --from-beginning```
+...and a consumer on another:
+
+    ssh mapr@nodeb.westus.cloudapp.azure.com sudo /opt/kafka/bin/kafka-console-consumer.sh --zookeeper nodea:2181,nodeb:2181,nodec:2181 --topic kafkatest --from-beginning
 
 On the producer console enter some text.
 
-    bla bla kafka is working bla bla
     this is a test
-     
+    bla bla _kafka_is_working_ bla bla
+    
 Now on the consumer you should immediately see the text you entered.
     
-And done! You just finished building a three node Kafka cluster in Azure.
+And done! You just finished building a three node Kafka cluster in Azure.  We created a topic that was replicated across all three nodes of in our cluster and proved its functionality by sending and consuming messages from the topic. You could further demonstrate the fault tolerance of that replication by failing each (but not all) of the cluster nodes and observing that the messages we published to our topic are available as long as one cluster node remains alive.
 
 
