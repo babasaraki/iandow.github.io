@@ -64,6 +64,7 @@ ssh mapr@$NODENAME.westus.cloudapp.azure.com sudo mv kafka_2.11-0.10.0.1 /opt
 ssh mapr@$NODENAME.westus.cloudapp.azure.com sudo ln -s /opt/kafka_2.11-0.10.0.1 /opt/kafka
 ssh mapr@$NODENAME.westus.cloudapp.azure.com "sudo wget https://gist.githubusercontent.com/iandow/9efb351a7d15592583508b1e5be55184/raw/066e97b4613a54af696bdb99eb2398b698f68582/kafka && sudo mv kafka /etc/init.d/kafka && chmod 755 /etc/init.d/kafka && update-rc.d kafka defaults
 "
+done
 
 ######################
 # Update Kafka config
@@ -116,7 +117,9 @@ On the producer console enter some text.
     bla bla _kafka_is_working_ bla bla
     
 Now on the consumer you should immediately see the text you entered.
-    
-And done! You just finished building a three node Kafka cluster in Azure.  We created a topic that was replicated across all three nodes of in our cluster and proved its functionality by sending and consuming messages from the topic. You could further demonstrate the fault tolerance of that replication by failing each (but not all) of the cluster nodes and observing that the messages we published to our topic are available as long as one cluster node remains alive.
+ 
+# Conclusion
+
+We just built a three node Kafka cluster in Azure.  We created a topic that was replicated across all three nodes in our cluster and proved its functionality by sending and consuming messages from the topic. You could further demonstrate the fault tolerance of that replication by failing each (but not all) of the cluster nodes and observing that the consumer can still read all the messages in our topic.
 
 
