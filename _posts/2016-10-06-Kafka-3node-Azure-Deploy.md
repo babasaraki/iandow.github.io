@@ -74,6 +74,8 @@ for NODENAME in nodea nodeb nodeb; do
 ssh mapr@$NODENAME.westus.cloudapp.azure.com sudo sed -i 's/zookeeper.connect=localhost:2181/zookeeper.connect=nodea:2181,nodeb:2181,nodec:2181/g' /opt/kafka/config/server.properties
 ssh mapr@$NODENAME.westus.cloudapp.azure.com sudo sed -i 's/broker.id=0/broker.id=$BROKER_ID/g' /opt/kafka/config/server.properties
 let BROKER_ID=$BROKER_ID+1
+ssh mapr@$NODENAME.westus.cloudapp.azure.com "sudo mkdir $(grep dataDir /opt/kafka/config/zookeeper.properties | cut -f 2 -d '=')"
+ssh mapr@$NODENAME.westus.cloudapp.azure.com "sudo echo $BROKER_ID > $(grep dataDir /opt/kafka/config/zookeeper.properties | cut -f 2 -d '=')/myid"
 done
 
 ##########################
@@ -117,7 +119,32 @@ On the producer console enter some text.
     bla bla _kafka_is_working_ bla bla
     
 Now on the consumer you should immediately see the text you entered.
- 
+
+# Using Kafka as a service with Heroku
+
+Heroku probably provides the easiest way to setup a 3 node Kafka cluster. Their "Kafka as a service" offering is described at [https://devcenter.heroku.com/articles/kafka-on-heroku](https://devcenter.heroku.com/articles/kafka-on-heroku).  The script and video show the commands you can use to quickly demo it's functionality.
+
+{% highlight bash %}
+APP=my-app-name-$RANDOM
+git clone https://github.com/heroku/heroku-kafka-demo-java.git
+cd heroku-kafka-demo-java/
+heroku create $APP
+heroku plugins:install heroku-kafka --app $APP
+heroku addons:create heroku-kafka:standard-0 --app $APP
+time heroku kafka:wait --app $APP
+heroku kafka:topics:create messages --app $APP
+heroku kafka:topics:info messages --app $APP
+git push heroku master
+heroku open
+heroku log
+heroku kafka:topics:info messages --app $APP
+heroku config:get KAFKA_URL --app $APP
+heroku config:get KAFKA_TOPIC --app $APP
+heroku destroy -c $APP -a $APP
+{% endhighlight %}
+
+<script type="text/javascript" src="https://asciinema.org/a/atvqxzz13sga59ugwlumy48df.js" id="asciicast-atvqxzz13sga59ugwlumy48df" async></script>
+
 # Conclusion
 
 We just built a three node Kafka cluster in Azure.  We created a topic that was replicated across all three nodes in our cluster and proved its functionality by sending and consuming messages from the topic. You could further demonstrate the fault tolerance of that replication by failing each (but not all) of the cluster nodes and observing that the consumer can still read all the messages in our topic.
