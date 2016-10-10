@@ -124,6 +124,11 @@ Now on the consumer you should immediately see the text you entered.
 
 Heroku probably provides the easiest way to setup a 3 node Kafka cluster. Their "Kafka as a service" offering is described at [https://devcenter.heroku.com/articles/kafka-on-heroku](https://devcenter.heroku.com/articles/kafka-on-heroku).  The script and video show the commands you can use to quickly demo it's functionality.
 
+I also posted a Kafka application on GitHub that you can run with Heroku. Here is a link to that code:
+
+[https://github.com/iandow/heroku-kafka-demo-java](https://github.com/iandow/heroku-kafka-demo-java)
+
+
 {% highlight bash %}
 APP=my-app-name-$RANDOM
 git clone https://github.com/heroku/heroku-kafka-demo-java.git
