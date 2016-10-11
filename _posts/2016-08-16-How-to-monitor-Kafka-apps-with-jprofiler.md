@@ -4,7 +4,10 @@ title: How To Monitor Kafka Apps With Jprofiler
 tags: [jprofiler, kafka]
 ---
 
-I've been spending a lot of time trying to maximize throughput for a Kafka data streaming pipeline. A large part of this effort has involved optimizations to data structures in my Java code. Generally speaking, anytime I use a data structure which is not a byte array, I sacrifice performance. But to precisely diagnose where and why my code is running inefficiently I use JProfiler. Here's how I connect JProfiler on my laptop to monitor a Kafka consumer process running on my remote cluster:
+I've been spending a lot of time trying to maximize throughput for a Kafka data streaming pipeline. A large part of this effort has involved optimizations to data structures in my Java code. Generally speaking, anytime I use a data structure which is not a byte array, I sacrifice performance. But to precisely diagnose where and why my code is running inefficiently I use JProfiler. I like JProfiler because it integrates well with IntelliJ on my Mac and its user interface is nicely polished. You can learn more about JProfiler at [http://www.ej-technologies.com/products/jprofiler/overview.html](http://www.ej-technologies.com/products/jprofiler/overview.html).
+
+
+Here's how I connect JProfiler on my laptop to monitor a Kafka consumer process running on my remote cluster:
 
 First we need to install the JProfiler profiling agent on the cluster node where our application runs. Download the Jprofiler agent from [https://www.ej-technologies.com/download/jprofiler/files](https://www.ej-technologies.com/download/jprofiler/files). If you're using Linux, installation is easy. I just untar'd it to my home directory.
 
