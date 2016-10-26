@@ -12,16 +12,12 @@ One of the challenges when working with streams, especially streams of fast data
 
 ![streams_db_dataflow](http://iandow.github.io/img/persist-kafka-json-streams-mapr-02.png)
 
-Let's illustrate these concepts with an example that accomplishes the following tasks:
+Let's illustrate these concepts with an example that persists streaming data in 5 simple steps:
 
 1. Setup stream and database connections.
-
 2. Consume records from a MapR stream using the standard Kafka API.
-
 3. Convert each consumed record to a JSON object.
-
 4. Persist that JSON object in MapR-DB.
-
 5. Update the stream cursor to ensure graceful recovery should a stream consumer fail.
 
 # Step 1: Setup stream and database connections
@@ -29,7 +25,6 @@ Let's illustrate these concepts with an example that accomplishes the following 
 Before we can do anything interesting we first have to setup our stream and database connections. We'll use the following two options that relate to fault tolerance:
 
 * We disable the `enable.auto.commit` consumer option in order to commit stream cursors only after their corresponding records have been writing to the database.
-
 * We disable the `BUFFERWRITE` table option in order to ensure database writes are not buffered on the client.
 With these options we're sacrificing speed for higher fault tolerance but we can compensate for that tradeoff by creating more topic partitions and running more concurrent consumers in parallel.
 
