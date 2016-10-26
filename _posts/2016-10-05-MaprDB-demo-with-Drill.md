@@ -1,50 +1,101 @@
 ---
 layout: post
-title: How To Persist Kafka JSON Streams in MapR-DB and query with SQL using Apache Drill
+title: How to persist Kafka streams as JSON in No-SQL storage
 tags: [mapr, kafka, maprdb, drill, json]
 ---
 
 # Streaming data is like, "Now you see it. Now you don't!"
 
-One of the challenges when working with streams, especially streams of fast data, is the transitory nature of the data. Streams are characterized by a Time To Live (TTL) which defines the age at which messages are deleted. Ideally, noone would want messages older than the TTL, and for many applications that's a valid assumption. For example, in IoT applications sensor data probably has little to no value after it has aged. But in other cases, such as with insurance or banking applications, record-retention laws often require data to be persisted far beyond the point at which the data has any practical value to streaming analytics. In these cases, we must be able to persist streaming data without loosing any messages even if the responsiveness of our database lags behind the throughput of our stream or our stream consumers suffer an unexpected failure.
+One of the challenges when working with streams, especially streams of fast data, is the transitory nature of the data. Kafka streams are characterized by a retention period that defines the point at which messages will be permanently deleted. For many applications, such as those fed by streams of rapidly generated sensor data, the retention period is a desirable and convenient way to purge stale data, but in other cases, such as with insurance or banking applications, record-retention laws may require data to be persisted far beyond the point at which that data has any practical value to streaming analytics. This is challenging in situations where rapidly ingested data creates pressure on stream consumers designed to write streaming records to a database. Even if we can ensure these consumers keep up, we still need to guarantee zero data loss in the unlikely event that they do fail.
 
-# How can I write Responsive and Elastic stream consumers?
+*MapR Streams and MapR-DB work together to provide a scalable and fault tolerant way to save streaming data in long-term storage.* They both have a distributed, scale-out design based on the MapR Converged Data Platform. Furthermore, as a NoSQL data store MapR-DB makes it easy to persist data with the same schema encoded into streams. This is not only convenient for the developer but also minimizes the work required to transform streaming records into persistable objects.
 
-The Kafka API allows us to update consumer cursor positions for streams whenever we want, so if we only update the cursor after we've processed a message, then we can avoid skipping messages. And by replicating topics across a cluster of nodes (even spanning various geographic locations) we can be very resilient to failures. Resiliency? Check!
+![streams_db_dataflow](http://iandow.github.io/img/persist-kafka-json-streams-mapr-02.png)
 
-Kafka also allows us to partition our topics so we can consume messages from a stream in a distributed and concurrent manner. That allows us to scale up and down in response to changes in streaming throughput. Elasticity? Check!
+Let's illustrate these concepts with an example that accomplishes the following tasks:
 
-# What does this look like in code?
+1. Setup stream and database connections.
 
-Below, I'm going to show you a Java application the consumes from MapR Streams using the Kafka API and persists each consumed message to MapR-DB. I will also show you how to query those database tables with SQL using [Apache Drill](https://drill.apache.org/). Why Drill? Because it allows us to use ANSI-SQL to query a non-relational datastore, containing schemaless records, like JSON.
- 
-Here is the Java code that illustrates how to consume from a MapR Stream using the Kafka API and persist each streamed record as a JSON document in Mapr-DB:
-	
-[Persister.java](https://gist.github.com/iandow/f6376264c2281d1c0e3a2485e86c9f23)
+2. Consume records from a MapR stream using the standard Kafka API.
 
-In that example, I read records from a MapR Stream, like this:
+3. Convert each consumed record to a JSON object.
+
+4. Persist that JSON object in MapR-DB.
+
+5. Update the stream cursor to ensure graceful recovery should a stream consumer fail.
+
+# Step 1: Setup stream and database connections
+
+Before we can do anything interesting we first have to setup our stream and database connections. We'll use the following two options that relate to fault tolerance:
+
+* We disable the `enable.auto.commit` consumer option in order to commit stream cursors only after their corresponding records have been writing to the database.
+
+* We disable the `BUFFERWRITE` table option in order to ensure database writes are not buffered on the client.
+With these options we're sacrificing speed for higher fault tolerance but we can compensate for that tradeoff by creating more topic partitions and running more concurrent consumers in parallel.
+
+So, here is what our database and consumer configurations look like:
+
 {% highlight java %}
-ConsumerRecords<String, byte[]> msg = consumer.poll(TIMEOUT);
-...
+Table table;
+String tableName = "/user/mapr/ticktable";
+if (MapRDB.tableExists(tableName)) {
+    table = MapRDB.getTable(tableName);
+} else {
+    table = MapRDB.createTable(tableName);
+}
+table.setOption(Table.TableOption.BUFFERWRITE, false);
+Properties props = new Properties();
+props.put("enable.auto.commit","false");
+props.put("group.id", “mygroup”);
+props.put("auto.offset.reset", "earliest");
+props.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
+props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
+consumer = new KafkaConsumer<String, String>(props);
+List<String> topics = new ArrayList<>();
+topics.add(topic);
+consumer.subscribe(topics);
+{% endhighlight %}
+
+# Step 2: Consume records from the stream
+
+To consume records from a stream, you first poll the stream. This gives you a collection of ConsumerRecords which you then iterate through in order to access each individual stream record. This is standard Kafka API stuff, and it looks like this:
+
+{% highlight java %}
+ConsumerRecords<String, byte[]> records = consumer.poll(TIMEOUT);
 Iterator<ConsumerRecord<String, byte[]>> iter = msg.iterator();
 while (iter.hasNext()) 
+{
     ConsumerRecord<String, byte[]> record = iter.next();
+}
 {% endhighlight %}
 
-Then I cast them to a JSON annotated POJO defined in [Tick.java](https://gist.github.com/iandow/92d3276e50a7e77f41e69f5c69c8563b), like this:
+# Step 3: Convert streamed records to JSON
+
+Before we write consumer records to the database, we need to put each record in a format that has columns. In our example we’re streaming byte arrays, which by themselves have no field related attributes, so we need to convert these byte arrays into a type containing attributes that will correspond to columns in our database. We’ll do this with a Java object, defined in [Tick.java](https://gist.github.com/iandow/92d3276e50a7e77f41e69f5c69c8563b), which uses the @JsonProperty annotation to conveniently convert Tick objects encoded as byte arrays into a JSON document, like this:
+
 {% highlight java %}
 Tick tick = new Tick(record.value());
-{% endhighlight %}
-
-Then I create a MapRDB Document from that object, like this:
-{% highlight java %}
 Document document = MapRDB.newDocument((Object)tick);
 {% endhighlight %}
 
-And I write each Document to a table in MapR-FS, like this:
+# Step 4: Persist the JSON document to MapR-DB
+
+This part is easy. We can insert each JSON document as a new row to a table in MapR-DB with one line of code, like this:
+
 {% highlight java %}
 table.insertOrReplace(tick.getTradeSequenceNumber(), document);
 {% endhighlight %}
+
+The first parameter in the insertOrReplace method is Document ID (or rowkey). It’s a property of our dataset that the value returned by tick.getTradeSequenceNumber() is unique for each record, so we’re referencing that as the Document ID for our table insert in order to avoid persisting duplicate records even if duplicate messages are consumed from the stream. This guarantees idempotency in our stream consumer.
+
+# Step 5: Update the stream cursor
+
+Finally, we’ll update the cursor in our stream topic. In the unlikely event that our stream consumer fails, this ensures that a new consumer will be able to continue working from where the last consumer left off.
+
+{% highlight java %}
+consumer.commitSync();
+{% endhighlight %}
+
 
 # How do I query MapR-DB tables?
 
@@ -74,13 +125,13 @@ SELECT * FROM dfs.`/user/mapr/ticktable`;
 
 ![SQL Result](http://iandow.github.io/img/drill_query.png)
 
+# Summary
+
+The design we just outlined provides a highly scalable approach to persisting stream data. It ensures thread-safety by processing immutable stream data with idempotent stream consumers and achieves fault tolerance by updating stream cursors only after records have been persisted in MapR-DB. This represents an elastic, responsive, resilient, and message-driven design consistent with the characteristics of reactive microservices. This is a reliable approach to persisting Kafka streams in long-term NoSQL storage.
+
+If you'd like to see a complete example application that uses the techniques described in this post, check out the [Persister.java](https://github.com/mapr-demos/finserv-application-blueprint/blob/master/src/main/java/com/mapr/demo/finserv/Persister.java) on GitHub.
+
 # References
-
-I used Java 8 and MapR 5.2 to develop this example.
- 
-The code I referenced was mostly copied from the following reference application, which includes documentation on how to compile and run:
-
-[GitHub - mapr-demos/finserv-application-blueprint](https://github.com/mapr-demos/finserv-application-blueprint): Example blueprint application for processing high-speed trading data. 
  
 Here are some useful links to APIs and utilities I used above:
 
