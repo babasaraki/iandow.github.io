@@ -17,7 +17,7 @@ Artists keep a portfolio of their work, and I've often wondered why more softwar
 
 * [appinternals.trafficmanager.net](http://appinternals.trafficmanager.net) - An interactive demo for performance monitoring software from Riverbed Technology. This is also a good demo of web annotations from www.walkme.com.
 
-* [Blog](http://www.riverbed.com/blogs/authors/ian-downard.html) - Miscellaneous blog articles for Riverbed.
+* [Professional Blog](https://www.mapr.com/blog/author/ian-downard) - Blog articles I've written for MapR.
 
 * [Video](http://www.voltaicsystems.com/blog/solar-powered-chicken-coop/) - Evidence of my chicken coop madness.
 
