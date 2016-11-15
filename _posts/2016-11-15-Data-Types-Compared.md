@@ -4,7 +4,28 @@ title: What data class types provide the lightest overhead for Kafka pipeline pr
 tags: [java, kafka]
 ---
 
-The types you choose to use to represent data can have a big impact on how fast you can stream that data through Kafka. A typical Kafka pipeline includes multiple stages that access streaming data to perform some kind of operation. Normally, stream consumers will need to access attributes for the objects being streamed. How that access is provided can have a big impact on how fast a stream processor can run. In this blog post we'll explore the following three popular data types used for streaming data in Kafka:
+The types you choose to use to represent data can have a big impact on how fast you can stream that data through Kafka. A typical Kafka pipeline includes multiple stages that access streaming data to perform some kind of operation. Each intermediate pipeline processor will probably consume messages from one topic, perform some operation on those messages, then publish the result to a new topic. Each processor will deserialize a message from Kafka, access one or more attributes in the message, perform some operation on that data, then serialize the result, and publish it to a new topic. Essentially, the operations that happen over and over again throughout the pipeline are 1) serialization (and deserialization) and 2) accessing streaming record attributes.  Lets look at each of these individually...
+
+# What Serializers provide the most efficient conversion to/from byte arrays?
+
+Kafka transports bytes. When you publish records to a Kafka topic, you must specify a serializer which can convert your data objects to bytes. Kafka provides two serializers out of the box. They are StringSerializer and ByteArraySerializer. To better understand when you would you use these, consider the case where textual data (e.g. JSON) read from a file or socket, is ingested into Kafka. How should you stream this data?
+
+1. Create and stream a JSON object with the StringSerializer for each row of text?
+2. Create a POJO with attributes corresponding to all the fields you expect to ingest?
+3. Create a data type with a single byte array attribute, and getter methods that return data fields by indexing into predefined positions in the byte array.
+
+Option #1 provides a flexible schema that won't bomb out when unexpected record formats are ingested.  But parsing the incoming text can be prohibitively expensive for fast data streams.
+
+Option #2 makes it easy to access attributes once the POJO has been instantiated, but compound data types are more costly to work with than native types because object attributes can potentially reside in inefficient memory locations.  And again, parsing is expensive and potentially prohibitive for fast data streams.  Furthermore, this approach offers no flexibility for ingesting data containing unexpected fields. And finally, this approach requires that you implement a custom serializer.
+
+Option #3 is probably the fastest. Keeping our data in one large array has the best possible locality and since all the data is on one area of memory cache-thrashing will be kept to a minimum. It also allows us to stream byte arrays with Kafka's native ByteArray serializer. We can still facilitate access to data fields with getter methods that return a substring of byte array, however this approach does not accomodate flexible schemas. If incoming data contains unexpected fields or field lengths, ingesting the data may fail, or worse, silently ingest in a corrupt format.
+
+As far as speed goes, the closer you work with byte arrays, the better. But for the purposes of flexible schemas, sometimes it's necessary to use data formats such as stringified JSON or Avro encoding (see below).
+
+
+# What Data Types provide the most efficient access to attributes?
+
+Normally, stream consumers will need to access attributes for the objects being streamed. How that access is provided can have a big impact on how fast a stream processor can run. In this blog post we'll explore the following three popular data types used for streaming data in Kafka:
 
 1. Avro 
 2. POJO
