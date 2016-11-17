@@ -42,7 +42,8 @@ hr.small {
   border-color: inherit;
   border-radius: 3px;
 }
-.margin-override {
+.override {
+  font-size: 18px;
   margin: 0px 0;
 }
 .main-content {
