@@ -2,6 +2,7 @@
 layout: post
 title: How to deploy a 3 node Kafka cluster in Azure
 tags: [azure, kafka, cluster]
+bigimg: /img/stacks.jpg
 ---
 
 In an earlier post I described how to setup a single node Kafka cluster in Azure so that you can quickly familiarize yourself with basic Kafka operations. However, most real world Kafka applications will run on more than one node to take advantage of Kafka's replication features for fault tolerance. So here I'm going to provide a script you can use to deploy a multi-node Kafka cluster in Azure.
