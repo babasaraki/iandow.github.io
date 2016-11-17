@@ -5,6 +5,10 @@ tags: [azure, mapr]
 bigimg: img/clouds.jpg
 ---
 
+If find this tutorial useful, please consider [supporting me](https://www.paypal.me/iandownard/15) for the countless hours I put into writting it :)
+
+---
+
 Last week MapR released a new version of their Converged Data Platform. Today I installed it on Azure, and kept notes on all the commands I used. It's possible to automate this installation, and I'm pretty sure MapR has documented how to do that, but until I find that doc, here are the commands I use. This is what I like to call, "Automation for Dummy's", meaning, you can just copy and paste (some but not all of) these commands.  Needless to say, you should know what these commands do before you blindly copy and paste.
 
 
