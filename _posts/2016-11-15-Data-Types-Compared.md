@@ -46,7 +46,7 @@ Normally, stream consumers will need to access attributes for the objects being 
 	}
 {% endhighlight %}
 
-The nice thing about Avro is that it gives you an easy way to define a schema that can be used to enforce schema-compliance on record creation and can be used to serialize and deserialize records to/from Kafka native byte streams. 
+The nice thing about Avro is that it gives you an easy way to define a schema that can be used to enforce the structure of  records and can be used to serialize and deserialize records to/from Kafka native byte streams. 
 
 Everyone's familiar with Plain Old Java Objects (POJOs) and JSON Strings, so I won't go into those.
 
