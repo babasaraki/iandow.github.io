@@ -42,7 +42,9 @@ hr.small {
   border-color: inherit;
   border-radius: 3px;
 }
-
+.margin-override {
+  margin: 0px 0;
+}
 .main-content {
   padding-top: 80px;
 }
