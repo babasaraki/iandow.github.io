@@ -46,7 +46,7 @@ hr.small {
   margin: 0px 0;
 }
 .font-override {
-  font-size: 18px;
+  font-size: 18px !important;
 }
 .main-content {
   padding-top: 80px;
