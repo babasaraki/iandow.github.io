@@ -1,7 +1,9 @@
 ---
 layout: post
 title: What data class types provide the lightest overhead for Kafka pipeline processors?
+subtitle: Choose one: JSON, POJO, ByteArrays, or Avro?
 tags: [java, kafka]
+bigimg: /img/highway.jpg
 ---
 
 The types you choose to use to represent data can have a big impact on how fast you can stream that data through Kafka. A typical Kafka pipeline includes multiple stages that access streaming data to perform some kind of operation. Each intermediate pipeline processor will probably consume messages from one topic, perform some operation on those messages, then publish the result to a new topic. Each processor will deserialize a message from Kafka, access one or more attributes in the message, perform some operation on that data, then serialize the result, and publish it to a new topic. Essentially, the operations that happen over and over again throughout the pipeline are 1) serialization (and deserialization) and 2) accessing streaming record attributes.  Lets look at each of these individually...
