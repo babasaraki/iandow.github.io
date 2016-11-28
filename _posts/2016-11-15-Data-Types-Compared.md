@@ -29,9 +29,9 @@ Kafka transports bytes. When you publish records to a Kafka topic, you must spec
 
 How should you stream this data?
 
-Option #1: Create and stream a JSON object with the StringSerializer for each row of text?
-Option #2: Create a POJO with attributes corresponding to all the fields you expect to ingest?
-Option #3: Create a data type with a single byte array attribute, and getter methods that return data fields by indexing into predefined positions in the byte array.
+1. Create and stream a JSON object with the StringSerializer for each row of text?
+2. Create a POJO with attributes corresponding to all the fields you expect to ingest?
+3. Create a data type with a single byte array attribute, and getter methods that return data fields by indexing into predefined positions in the byte array.
 
 Option #1's pseudocode looks like this:
 
