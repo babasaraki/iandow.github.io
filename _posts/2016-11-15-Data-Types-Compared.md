@@ -27,36 +27,124 @@ Kafka transports bytes. When you publish records to a Kafka topic, you must spec
     080449201DAA T 00000075100000105400N0000000000000010CT100410081006 
     080449201DAA T 00000031300000088700N0000000000000011CT1004100810081007 
 
-How should you stream this data?
+How should you stream this data? 
 
-1. Create and stream a JSON object with the StringSerializer for each row of text?
-2. Create a POJO with attributes corresponding to all the fields you expect to ingest?
-3. Create a data type with a single byte array attribute, and getter methods that return data fields by indexing into predefined positions in the byte array.
+1. Would you create and stream a JSON object with the StringSerializer for each row of text?
+2. Would you create a POJO with attributes corresponding to all the fields you expect to ingest?
+3. Would you create a data type with a single byte array attribute, and getter methods that return data fields by indexing into predefined positions in the byte array?
 
-Option #1's pseudocode looks like this:
+## Option #1
+
+For option #1 we would represent each record as a javax.json.JSONObject type. Parsing and processing would look like this:
 
 {% highlight java %}
-// raw_data is a string read from a file, socket,
-// or a string dequeued from a Kafka topic
-String raw_data = reader.readLine();
-JSONObject json_data = new JSONObject();
-// parse raw data into a JSON object
-json_data.put("date", raw_data.substring(0,9));
-json_data.put("symbol", raw_data.substring(9,16));
-json_data.put("price", raw_data.substring(16,26));
-json_data.put("volume", raw_data.substring(26,39));
-// Processing and data transformation happens here. Note, we can access data fields easily with the dot operator
-//   json_data.get(...)
-// Now we publish a new message to a new topic
-producer.send(new ProducerRecord<String, String>(key, json_data.toString()));
+// consume records from kafka as strings
+ConsumerRecords<String, String> records = consumer.poll();
+for (ConsumerRecord<String, String> record : records) {
+    JSONObject json_data = new JSONObject();
+    // parse raw data into a JSON object
+    json_data.put("date", record.substring(0,9));
+    json_data.put("symbol", record.substring(9,16));
+    json_data.put("price", record.substring(16,26));
+    json_data.put("volume", record.substring(26,39));
+    // Processing and data transformation happens here. 
+    // We can access data fields easily with the dot operator
+    //   json_data.get(...)
+    // Then we publish a new message to a new topic, like this:
+    producer.send(new ProducerRecord<String, String>(key, json_data.toString()));
+}
 {% endhighlight %}
 
-This is generally not a good approach because there is no data validation, it creates a lot of JSON objects, and performs too many string operations. Parsing strings like can be prohibitively expensive for fast data streams.
+Although the JSONObject is generic and schemaless, there is no data validation. Furthermore, this approach creates a lot of JSON objects and performs far too many string operations. Parsing strings like this can be prohibitively expensive for fast data streams.
 
-Option #2 makes it easy to access attributes once the POJO has been instantiated, but compound data types are more costly to work with than native types because object attributes can potentially reside in inefficient memory locations.  And again, parsing is expensive and potentially prohibitive for fast data streams.  Furthermore, this approach offers no flexibility for ingesting data containing unexpected fields. And finally, this approach requires that you implement a custom serializer.
+## Option #2
 
-Option #3 is probably the fastest. Keeping our data in one large array has the best possible locality and since all the data is on one area of memory cache-thrashing will be kept to a minimum. It also allows us to stream byte arrays with Kafka's native ByteArray serializer. We can still facilitate access to data fields with getter methods that return a substring of byte array, however this approach does not accomodate flexible schemas. If incoming data contains unexpected fields or field lengths, ingesting the data may fail, or worse, silently ingest in a corrupt format.
+In option #2 we'll represent our data with a POJO or Java bean that would look something like this:
 
+{% highlight java %}
+public class Tick implements Serializable {
+    private String date;
+    private String symbol;
+    private String price;
+    private String volume;
+
+    public String getDate() {
+        return date;
+    }
+    public void setDate(String date) {
+        this.date = date;
+    }
+    public String getSymbol() {
+        return date;
+    }
+    public void setSymbol(String date) {
+        this.date = date;
+    }
+    // getters and setters go here
+}
+{% endhighlight %}
+
+Using that data structure, data processing in Kafka could look like this:
+
+{% highlight java %}
+// consume records from Kafka as byte arrays
+ConsumerRecords<String, byte[]> records = consumer.poll();
+for (ConsumerRecord<String, byte[]> record : records) {
+    // convert each record value to POJO
+    ByteArrayInputStream input_bytes = new ByteArrayInputStream(record.value());
+    Object obj = new ObjectInputStream(input_bytes).readObject();
+    // Parsing data fields happens automatically when we cast to the POJO type, here:
+    Tick tick = (Tick)obj;
+    // Processing and data transformation happens here. 
+    // We can access data fields easily with the dot operator
+    //   tick.getPrice()...
+    // Convert output message to bytes
+    ByteArrayOutputStream bos = new ByteArrayOutputStream();
+    ObjectOutput out = new ObjectOutputStream(bos);
+    out.writeObject(tick);
+    byte[] value = bos.toByteArray();
+    // Now we can publish a new message back to Kafka, like this:
+    producer.send(new ProducerRecord<String, byte[]>(key, value));
+{% endhighlight %}
+
+Option #2 makes it easy to access attributes once the POJO has been instantiated, but compound data types are more costly to work with than native types because object attributes can potentially reside in inefficient memory locations.  And just as in option #1, parsing with string operations is expensive and potentially prohibitive for fast data streams.  Although the attributes of our POJO provide some level of data validation, it offers no flexibility for ingesting data that might contain unexpected or incomplete fields. Finally, this approach requires that you convert the POJO to/from bytes when consumeing or publishing to Kafka, otherwise you’ll get a SerializationException when Kafka tries to convert it to bytes using whatever serializer you specified (unless you wrote a custom serializer).
+
+## Option #3
+The data type for option #3 might look like this:
+
+{% highlight java %}
+public class Tick implements Serializable {
+    private byte[] data;
+    public Tick(byte[] data) {
+        this.data = data;
+    }
+    public Tick(String data) {
+        this.data = data.getBytes(Charsets.ISO_8859_1);
+    }
+    public byte[] getData() {
+        return this.data;
+    }
+    @JsonProperty("date")
+    public String getDate() {
+        return new String(data, 0, 9);
+    }
+    @JsonProperty("symbol")
+    public String getDate() {
+        return new String(data, 10, 16);
+    }
+    @JsonProperty("price")
+    public String getDate() {
+        return new String(data, 16, 10);
+    }
+    @JsonProperty("volume")
+    public String getDate() {
+        return new String(data, 26, 13);
+    }
+{% endhighlight %}
+
+Option #3 is probably the fastest. Keeping our data in one large array has the best possible locality and since all the data is on one area of memory cache-thrashing will be kept to a minimum. It also allows us to stream byte arrays with Kafka's native ByteArray serializer. We can still facilitate access to data fields with getter methods that return a substring of byte array, however this approach does not accomodate flexible schemas. One disadvantage of this approach is if incoming data contains unexpected fields or field lengths, ingesting the data may fail, or worse, silently ingest in a corrupt format. 
+
+## Conclusion 
 As far as speed goes, the closer you work with byte arrays, the better. But for the purposes of flexible schemas, sometimes it's necessary to use data formats such as stringified JSON or Avro encoding (see below).
 
 
