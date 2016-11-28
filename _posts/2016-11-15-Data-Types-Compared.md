@@ -1,21 +1,57 @@
 ---
 layout: post
-title: What data class types provide the lightest overhead for Kafka pipeline processors?
+title: What data types are most suitable for fast Kafka data streams?
 tags: [java, kafka]
 bigimg: /img/highway.jpg
 ---
 
-The types you choose to use to represent data can have a big impact on how fast you can stream that data through Kafka. A typical Kafka pipeline includes multiple stages that access streaming data to perform some kind of operation. Each intermediate pipeline processor will probably consume messages from one topic, perform some operation on those messages, then publish the result to a new topic. Each processor will deserialize a message from Kafka, access one or more attributes in the message, perform some operation on that data, then serialize the result, and publish it to a new topic. Essentially, the operations that happen over and over again throughout the pipeline are 1) serialization (and deserialization) and 2) accessing streaming record attributes.  Lets look at each of these individually...
+The data types you choose to use to represent data can have a big impact on how fast you can stream that data through Kafka. A typical Kafka pipeline includes multiple stages that access streaming data to perform some kind of operation. Each stage will typically need to consume messages from one topic, perform some operation on those messages, then publish the result to a new topic. The computational complexity for each message will be the cumulative cost to perform the following tasks:
+
+1. Convert the message from byte array to a complex data type (e.g. POJO). This is called "deserialization".
+2. Access one or more attributes in the deserialized object
+3. Perform some operation on that data
+4. Construct a new message based on results from the previous step, convert that message to a byte array, and publish to a new topic. This is called "serialization".
+
+Step 3 will vary depending on what your application does, but there are only a couple different ways developers usually implement steps 1, 2, and 4. These steps correspond to serialization (and deserialization) and accessing message properties (i.e. data fields). In the following two sections we will look at how different data types effect these patterns for serialization and accessing data fields.
 
 # What Serializers provide the most efficient conversion to/from byte arrays?
 
-Kafka transports bytes. When you publish records to a Kafka topic, you must specify a serializer which can convert your data objects to bytes. Kafka provides two serializers out of the box. They are StringSerializer and ByteArraySerializer. To better understand when you would you use these, consider the case where textual data (e.g. JSON) read from a file or socket, is ingested into Kafka. How should you stream this data?
+Kafka transports bytes. When you publish records to a Kafka topic, you must specify a serializer which can convert your data objects to bytes. Kafka provides two serializers out of the box. They are StringSerializer and ByteArraySerializer. To better understand when you would you use these, consider the case where the following textual data is ingested into Kafka. Each row is a seperate message and the information in each message is encoded into fixed-length fields defined by a custom schema. These records describe ticks on the New York Stock Exchange whose schema is defined [here](http://www.nyxdata.com/Data-Products/Daily-TAQ).
 
-1. Create and stream a JSON object with the StringSerializer for each row of text?
-2. Create a POJO with attributes corresponding to all the fields you expect to ingest?
-3. Create a data type with a single byte array attribute, and getter methods that return data fields by indexing into predefined positions in the byte array.
+    080449201DAA T 00000195700000103000N0000000000000004CT1000100710071007 
+    080449201DAA T 00000131000000107000N0000000000000005CT10031007 
+    080449201DAA T 00000066600000089600N0000000000000006CT10041005 
+    080449201DAA T 00000180200000105100N0000000000000007CT100310051009 
+    080449201DAA T 00000132200000089700N0000000000000008CT100410051005 
+    080449201DAA T 00000093500000089400N0000000000000009CT10031007 
+    080449201DAA T 00000075100000105400N0000000000000010CT100410081006 
+    080449201DAA T 00000031300000088700N0000000000000011CT1004100810081007 
 
-Option #1 provides a flexible schema that won't bomb out when unexpected record formats are ingested.  But parsing the incoming text can be prohibitively expensive for fast data streams.
+How should you stream this data?
+
+Option #1: Create and stream a JSON object with the StringSerializer for each row of text?
+Option #2: Create a POJO with attributes corresponding to all the fields you expect to ingest?
+Option #3: Create a data type with a single byte array attribute, and getter methods that return data fields by indexing into predefined positions in the byte array.
+
+Option #1's pseudocode looks like this:
+
+{% highlight java %}
+// raw_data is a string read from a file, socket,
+// or a string dequeued from a Kafka topic
+String raw_data = reader.readLine();
+JSONObject json_data = new JSONObject();
+// parse raw data into a JSON object
+json_data.put("date", raw_data.substring(0,9));
+json_data.put("symbol", raw_data.substring(9,16));
+json_data.put("price", raw_data.substring(16,26));
+json_data.put("volume", raw_data.substring(26,39));
+// Processing and data transformation happens here. Note, we can access data fields easily with the dot operator
+//   json_data.get(...)
+// Now we publish a new message to a new topic
+producer.send(new ProducerRecord<String, String>(key, json_data.toString()));
+{% endhighlight %}
+
+This is generally not a good approach because there is no data validation, it creates a lot of JSON objects, and performs too many string operations. Parsing strings like can be prohibitively expensive for fast data streams.
 
 Option #2 makes it easy to access attributes once the POJO has been instantiated, but compound data types are more costly to work with than native types because object attributes can potentially reside in inefficient memory locations.  And again, parsing is expensive and potentially prohibitive for fast data streams.  Furthermore, this approach offers no flexibility for ingesting data containing unexpected fields. And finally, this approach requires that you implement a custom serializer.
 
