@@ -1,6 +1,6 @@
 ---
 layout: post
-title: What data types are most suitable for fast Kafka data streams?
+title: What data types are most suitable for fast Kafka data streams? [Part One]
 tags: [java, kafka]
 bigimg: /img/highway.jpg
 ---
