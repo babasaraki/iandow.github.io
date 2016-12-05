@@ -3,29 +3,13 @@ layout: page
 title: About me
 ---
 
-My name is Ian Downard. I am a technical evangelist for [MapR Technologies](http://www.mapr.com). My career has focused on developing tools for optimizing the performance of applications. Currently, I'm focused on finding and promoting ways businesses can be successful with big data applications. 
+I am a technical evangelist for [MapR Technologies](http://www.mapr.com). My career has focused on developing tools for optimizing the performance of applications. Currently, I'm focused on finding and promoting ways businesses can be successful with big data applications. 
 
-I work from home, so I make an extra effort to engage with people in person. For example, I regularly attend my local Java and big data user groups, and I occasionally meet with a [career coach](http://www.portlandcoachingcollective.com/faqs/) who helps me gain a deeper understanding of myself and align what I value with what I do in my career.
+<div class="main-explain-area padding-override jumbotron">
+  <p class="margin-override font-override">If you find any of the articles I've written useful, please consider <a href=https://www.paypal.me/iandownard/15>supporting me</a>. I do spend a lot of time developing them and it would be amazing to see my hard work translate into, haha, Money! :)</p>
+  <div id="paypalbtn">
+    <a class="btn btn-primary btn" href="https://www.paypal.me/iandownard/15">Donate via PayPal</a>
+  </div>
+</div>
 
-I currently live in Portland, Oregon, but I grew up in rural Missouri in an old house near a town called Union. My participation with social media is primarily on Twitter [@iandownard](http://twitter.com/iandownard).
-
-### Portfolio
-
-Artists keep a portfolio of their work, and I've often wondered why more software developers don't do the same thing. Here are a few examples of work I enjoy showing off.
-
-* [www.mthoodlookouts.com](http://www.mthoodlookouts.com) - A hobby project. This is a web app and Twitter bot that helps me be the first to know when sites on recreation.gov become available to reserve. It also tweets notifications to [@mthoodlookouts](https://twitter.com/mthoodlookouts). Code for this app is at [https://github.com/iandow/bookfast](https://github.com/iandow/bookfast)
-
-* [appinternals.trafficmanager.net](http://appinternals.trafficmanager.net) - An interactive demo for performance monitoring software from Riverbed Technology. This is also a good demo of web annotations from www.walkme.com.
-
-* [Professional Blog](https://www.mapr.com/blog/author/ian-downard) - Blog articles I've written for MapR.
-
-* [Video](http://www.voltaicsystems.com/blog/solar-powered-chicken-coop/) - Evidence of my chicken coop madness.
-
-* [Video](https://youtu.be/qeZhVoq8muo) - Monitoring application performance on MapR big data platform.
-
-* [Video](http://bit.ly/1ROnnKE) - A demo of application performance analysis for Riverbed.
-
-* [Slides](http://bit.ly/1MzKWVd) - A presentation on performance monitoring for the Portland Azure user group.
-
-* [Slides](http://bit.ly/appium-pjug-deck) - A presentation on using Selenium for the Portland Java user group.
 
