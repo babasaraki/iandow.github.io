@@ -35,7 +35,7 @@ How should you stream this data?
 
 ## Option #1
 
-For option #1 we would represent each record as a javax.json.JSONObject type. Parsing and processing would look like this:
+For option #1 we would represent each record as a org.json.simple.JSONObject type. Parsing and processing would look like this:
 
 {% highlight java %}
 // consume records from kafka as strings
@@ -144,8 +144,31 @@ public class Tick implements Serializable {
 
 Option #3 is probably the fastest. Keeping our data in one large array has the best possible locality and since all the data is on one area of memory cache-thrashing will be kept to a minimum. It also allows us to stream byte arrays with Kafka's native ByteArray serializer. We can still facilitate access to data fields with getter methods that return a substring of byte array, however this approach does not accomodate flexible schemas. One disadvantage of this approach is if incoming data contains unexpected fields or field lengths, ingesting the data may fail, or worse, silently ingest in a corrupt format. 
 
-## Conclusion 
-As far as speed goes, the closer you work with byte arrays, the better. But for the purposes of flexible schemas, sometimes it's necessary to use data formats such as stringified JSON or Avro encoding (see below).
+## Measuring Performance with JUnit 
+
+Kafka fundmentally transports data as bytes arrays. So the method of convertting your data types to/from byte arrays plays a big part in how fast your Kafka pipeline can run. In this section we looked at how fast the following three data types can be converted to/from byte arrays:
+
+    1. POJOs
+    2. JSON objects
+    3. JSON annotated byte array objects
+
+We theorized that the overhead of byte serialization to/from Kafka can be minimized by utilizing byte arrays as your principle data type format. It's obvious right? Because there's no faster way to convert a data object to Kafka's byte array format than by making the data object a byte array to begin with. We can preseve the ease-of-access to data attributes by using JSON annotations in the data type, as shown in [Tick.java](https://github.com/iandow/kafka_junit_tests/blob/master/src/main/java/com/mapr/sample/Tick.java).
+
+To see how these three data types compare, we can compare how fast data in those respective types can be read from a stream, parsed, and written to a stream. I implemented this as a JUnit test which you can see in TypeFormatSpeedTest.java. When I ran it on a DS11 server in Azure, I saw the following results:
+
+    [testByteSpeed] 523537 records streamed per second
+    [testPojoSpeed] 70735 records streamed per second
+    [testJsonSpeed] 28479 records streamed per second
+
+This means it's more than 7x faster to stream data formatted as a byte array than as a POJO, and it's 18x faster to stream data formatted as byte arrays than as an org.json.simple.JSONObject.
+
+## Conclusion
+
+When you need built-in data validation it may be desireable to use other POJOs, JSON, or Avro encoded data types, but as far as serialization speed goes, it will always be faster to format your data types as byte arrays than anything else. 
+
+To download the code used for this study, clone the following repository:
+
+    [https://github.com/iandow/kafka_junit_tests](https://github.com/iandow/kafka_junit_tests)
 
 
 # What Data Types provide the most efficient access to attributes?
