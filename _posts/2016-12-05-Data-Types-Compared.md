@@ -5,7 +5,7 @@ tags: [java, kafka]
 bigimg: /img/highway.jpg
 ---
 
-The data types you choose to use to represent data can have a big impact on how fast you can stream that data through Kafka. A typical Kafka pipeline includes multiple stages that access streaming data to perform some kind of operation. Each stage will typically need to consume messages from one topic, perform some operation on those messages, then publish the result to a new topic. In my last post, we saw how important it is to format data types as byte arrays rather than other types, such as POJOs or json objects, in order to achieve minimal overhead when serializing data records to Kafka's native byte array format.
+In my [last post](http://www.bigendiandata.com/2016-11-15-Data-Types-Compared/) I explained how important it is to format data types as byte arrays rather than other types, such as POJOs or json objects, in order to achieve minimal overhead when serializing data records to Kafka's native byte array format.
 
 However, although serialization may be faster byte arrays, what about reading data fields in stream records?  And what about data validation?  Byte arrays contain no information about what array offsets delmite various data fields and they contain no features for validating data, effectively placing the responsibility of data validation on downstream consumers - which could be redundant and inefficient. I'm going to attempt to address these questions in this post.
 
