@@ -152,7 +152,7 @@ Kafka fundmentally transports data as bytes arrays. So the method of convertting
 2. JSON objects
 3. JSON annotated byte array objects
 
-We theorized that the overhead of byte serialization to/from Kafka can be minimized by utilizing byte arrays as your principle data type format. It's obvious right? Because there's no faster way to convert a data object to Kafka's byte array format than by making the data object a byte array to begin with. We can preseve the ease-of-access to data attributes by using JSON annotations in the data type, as shown in [Tick.java](https://github.com/iandow/kafka_junit_tests/blob/master/src/main/java/com/mapr/sample/Tick.java).
+We theorized that the overhead of byte serialization to/from Kafka can be minimized by utilizing byte arrays as your principle data type format. It's obvious right? Because there's no faster way to convert a data object to Kafka's byte array format than by formatting the data object a byte array to begin with.
 
 To measure how well those data types perform in Kafka I implemented a JUnit test (see [TypeFormatSpeedTest.java](https://github.com/iandow/kafka_junit_tests/blob/master/src/test/java/com/mapr/sample/TypeFormatSpeedTest.java)) which measures how fast data can be read from a stream, parsed, and written back to another stream. When I ran it on a DS11 server in Azure, I saw the following results:
 
