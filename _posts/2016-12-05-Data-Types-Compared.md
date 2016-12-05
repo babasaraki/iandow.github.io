@@ -2,7 +2,7 @@
 layout: post
 title: What data types are most suitable for fast Kafka data streams? [Part Two]
 tags: [java, kafka]
-bigimg: /img/highway.jpg
+bigimg: /img/autos-technology-vw-multi-storey-car-park-63294.jpg
 ---
 
 In my [last post](http://www.bigendiandata.com/2016-11-15-Data-Types-Compared/) I explained how important it is to format data types as byte arrays rather than other types, such as POJOs or json objects, in order to achieve minimal overhead when serializing data records to Kafka's native byte array format.
