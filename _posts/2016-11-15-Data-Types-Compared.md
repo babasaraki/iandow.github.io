@@ -148,9 +148,9 @@ Option #3 is probably the fastest. Keeping our data in one large array has the b
 
 Kafka fundmentally transports data as bytes arrays. So the method of convertting your data types to/from byte arrays plays a big part in how fast your Kafka pipeline can run. In this section we looked at how fast the following three data types can be converted to/from byte arrays:
 
-    1. POJOs
-    2. JSON objects
-    3. JSON annotated byte array objects
+1. POJOs
+2. JSON objects
+3. JSON annotated byte array objects
 
 We theorized that the overhead of byte serialization to/from Kafka can be minimized by utilizing byte arrays as your principle data type format. It's obvious right? Because there's no faster way to convert a data object to Kafka's byte array format than by making the data object a byte array to begin with. We can preseve the ease-of-access to data attributes by using JSON annotations in the data type, as shown in [Tick.java](https://github.com/iandow/kafka_junit_tests/blob/master/src/main/java/com/mapr/sample/Tick.java).
 
