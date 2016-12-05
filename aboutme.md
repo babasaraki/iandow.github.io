@@ -7,11 +7,7 @@ I am a technical evangelist for [MapR Technologies](http://www.mapr.com). My car
 
 <div class="main-explain-area padding-override jumbotron">
   <p class="margin-override font-override">
-  	If you find any of the articles I've written useful, please consider 
-  	
-  	<a href=https://www.paypal.me/iandownard/15>supporting me</a>
-
-  	. I do spend a lot of time developing them and it would be amazing to see my hard work translate into, haha, Money! :)</p>
+  	If you find any of the articles I've written useful, please considers supporting me. I spend a lot of time developing them and it would be amazing to see my hard work translate into Money! :)</p>
   <div id="paypalbtn">
     <a class="btn btn-primary btn" href="https://www.paypal.me/iandownard/15">Donate via PayPal</a>
   </div>
