@@ -166,9 +166,7 @@ This means it's more than 7x faster to stream data formatted as a byte array tha
 
 When you need built-in data validation it may be desireable to use other POJOs, JSON, or Avro encoded data types, but as far as serialization speed goes, it will always be faster to format your data types as byte arrays than anything else. 
 
-To download the code used for this study, clone the following repository:
-
-    [https://github.com/iandow/kafka_junit_tests](https://github.com/iandow/kafka_junit_tests)
+To download the code used for this study, clone the [https://github.com/iandow/kafka_junit_tests](https://github.com/iandow/kafka_junit_tests) repository.
 
 
 # What Data Types provide the most efficient access to attributes?
