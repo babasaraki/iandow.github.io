@@ -31,19 +31,19 @@ For my tests, I used a three node cluster of Ubuntu servers running on Azure wit
 
 Okay, now lets get to the results.
 
-## MapR Streams achieves significantly higher throughput than Kafka
+## MapR Streams achieves significantly higher throughput than Kafka.
 
-In this study I measured how fast a single threaded producer could publish 1 million messages to single topic with 1 parition and 3x synchronous replication (i.e. the producer used the `acks=all` property). I ran that test for a variety of message sizes to see how message size affected throughput both in terms of MB/sec and messages/sec. The results show MapR Streams consistently achieving 4x higher throughput than vanilla Kafka.
+In this study I measured how fast a single threaded producer could publish 1 million messages to single topic with 1 parition and 3x synchronous replication (i.e. the producer used the `acks=all` property). I ran that test for a variety of message sizes to see how message size affected throughput both in terms of MB/sec and messages/sec. The results show MapR Streams consistently achieving more than double the throughput of Kafka.
 
 ![throughput_MBytes_per_sec](http://iandow.github.io/img/tput-bytes.png)
 
-## MapR Streams can handle significantly larger messages than Kafka
+## MapR Streams can handle significantly larger messages than Kafka.
 
 MapR Streams demonstrates a much higher capacity for handling large message sizes, as shown below. 
 
 ![throughput_records_per_sec](http://iandow.github.io/img/tput-bytes.png)
 
-## MapR Streams can handle significantly more topics than Kafka
+## MapR Streams can handle significantly more topics than Kafka.
 
 Another major benefit that MapR Streams holds over Kafka relates how well it can handle large quantities of stream topics. I quantified this by measuring how fast a single threaded producer could publish 1 million messages to an increasingly large quantity of topics, configured with 1 partition and 3x synchronous replication. 
 
@@ -53,7 +53,7 @@ Another major benefit that MapR Streams holds over Kafka relates how well it can
 
 These performance comparisons show such an advantage for MapR Streams that I really needed to understand why MapR Streams performed so well in order to trust them. So I spoke with a MapR Streams engineer and here's what I learned:
 
-## Why does MapR Streams get 4x more throughput than Kafka?
+## Why does MapR Streams achieve more than 2x throughput than Kafka?
 
 The Mapr Stream client has 64 flusher threads that concurrently flush data to the MapR server. This is different from  Kafka which uses the client application threads directly to flush to a Kafka broker. In the Kafka client there is only one thread that's actually working so your throughput is limited by that thread's CPU. In MapR, multiple RPCs can be sent out because we have 64 flushers working in parallel. In MapR, producer.send() does nothing but put messages onto a queue. MapR's internal flushers will process that queue in parallel. With Kafka, this is limited by the number of threads that have been created within the producer. 
 
