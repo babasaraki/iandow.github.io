@@ -57,17 +57,17 @@ These performance comparisons show such an advantage for MapR Streams that I rea
 
 The Mapr Stream client has 64 flusher threads that concurrently flush data to the MapR server. This is different from  Kafka which uses the client application threads directly to flush to a Kafka broker. In the Kafka client there is only one thread that's actually working so your throughput is limited by that thread's CPU. In MapR, multiple RPCs can be sent out because we have 64 flushers working in parallel. In MapR, producer.send() does nothing but put messages onto a queue. MapR's internal flushers will process that queue in parallel. With Kafka, this is limited by the number of threads that have been created within the producer. 
 
-Furthermore, replication in MapR is more efficient since the underlying storage (MapR-FS) is distributed. Callbacks for synchronous sends will be invoked the moment a message is written to the filesystem on one MapR node. With Kafka, those callbacks only execute after Zookeeper finishes copying messages to through the corresponding Zookeeper insteances on each of the in-sync replicas. 
+Furthermore, replication in MapR is more efficient since the underlying storage (MapR-FS) is distributed. Callbacks for synchronous sends will be invoked the moment a message is written to the filesystem on one MapR node. With Kafka, those callbacks only execute after Zookeeper finishes copying messages through Zookeeper on each of the in-sync replicas. 
 
 ## Why does MapR Streams handle so many more topics than Kafka?
 	
-The computational complexity of a stream topic relates largely to how efficiently you can find the files belonging to a topic then read or write to those files. Finding the file is easy in MapR Stream because it uses only one file for a stream no matter how many topics it has. Furthermore MapR Streams inherits the property of efficient I/O patterns from the core platform. MapR-FS keeps files coherent and clean so that I/O operations can be efficiently buffered and address sequential locations.
+The computational complexity of a stream topic relates largely to how efficiently you can find the files belonging to a topic then read or write to those files. Finding the file is easy in MapR Stream because it uses only one file for a stream no matter how many topics it has. Furthermore MapR Streams inherits the property of efficient I/O patterns from the core platform. MapR-FS keeps files coherent and clean so that I/O operations can be efficiently buffered and address sequential locations on disk.
 
-Kafka on the other hand, suffers from two limitations. The first limitation is that each topic partition is represented by at least one directory and several files per partition. The more topics Kafka has, the more files it creates. This makes it difficult to buffer disk operations, perform sequential I/O, and it increases the complexity of what Zookeeper must manage.
+Kafka on the other hand, represents each topic partition by at least one directory and several files per partition. The more topics Kafka has, the more files it creates. This makes it difficult to buffer disk operations, perform sequential I/O, and it increases the complexity of what Zookeeper must manage.
 
 # Other Advantages for MapR Streams 
 
-Aside from performance, MapR Streams addresses a lot of other shortcomings with Kafka. I'll make note of three, relating to replication, scaling, and mirroring.
+Aside from performance, MapR Streams addresses a lot of other shortcomings with Kafka. I'll mention three, relating to replication, scaling, and mirroring:
 	
 - Kafka reaquires a lot of manual effort to replicate across clusters.
 
@@ -77,9 +77,9 @@ Aside from performance, MapR Streams addresses a lot of other shortcomings with 
 
 # Conclusion
 
-MapR Stream outperforms Kafka in big ways. Although performance isn't the only thing that makes MapR Streams desireable over Kafka for enterprise-grade streaming, it's a big one.
+MapR Streams outperforms Kafka in big ways. Although performance isn't the only thing that makes MapR Streams desireable over Kafka for enterprise-grade streaming, it's a big one.
 
-I measured throughput in a variety of cases that focused on the effects of message size and topic quantity, and I saw MapR Streams transport a much faster stream of data, with much larger message sizes, and to far more topics than what we could be achieved with vanilla Kafka on a single cluster.
+I measured throughput in a variety of cases that focused on the effects of message size and topic quantity and I saw MapR Streams transport a much faster stream of data, with much larger message sizes, and to far more topics than what we could be achieved with vanilla Kafka on a single cluster.
 
 
 
