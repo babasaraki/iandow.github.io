@@ -8,21 +8,21 @@ Performance is one of the most common reasons why enterprises choose MapR as the
 
 MapR Streams is a cluster-based messaging system for streaming data at scale and it's integrated into the MapR Converged Data Platform. MapR Streams is similar to Kafka. Both systems use the same API for publish and subscribe, so applications written for Kafka can also run on MapR Streams. What differentiates MapR Streams are features such as global replication, security, multi-tenancy, high availability, and disaster recovery - all of which it inherits from the MapR Converged Data Platform. MapR Streams is also easier to manage than Kafka. For example, MapR Streams logically groups topics together so that policies such as time-to-live and access control can be easily configured for groups of topics.
 
-There are speed advantages too. I've been looking at this a lot lately, trying to understand where and why MapR Streams out-performs vanilla Kafka. It has become abundantly clear that *MapR Streams can transport a much faster stream of data, with much larger message sizes, and to far more topics than what can be achieved with vanilla Kafka*. Let me show you what I mean.
-
-First, a dislaimer. While I've been careful to ensure that I'm doing an apples-to-apples comparison, I wanted to comapre Kafka an MapR-Streams as how they perform "off the shelf", without the burdon of tuning my test environment to perfectly optimize performance in each test scenario. So, I have pretty much stuck with the default settings except for two the following two things, I set Kafka's replication factor to 3 and acks to "all" (i.e. synchronous send mode) because MapR Streams replicates topics across a cluster by default because its underlying filesystem (MapR-FS) is distributed, and because MapR Streams defaults to synchronous send mode.
+There are speed advantages too. I've been looking at this a lot lately, trying to understand where and why MapR Streams out-performs vanilla Kafka. It has become abundantly clear that *MapR Streams can transport a much faster stream of data, with much larger message sizes, and to far more topics than what can be achieved with vanilla Kafka*. 
 
 My comparisons focused on the following two questions:
 
-1. How fast can I publish data into the stream?
-2. How many topics can I publish data to?
-3. How large can messages be before throughput diminishes?
+1. How fast can I publish data into a stream?
+2. How large can messages be before throughput diminishes?
+3. How many topics can I publish data to?
 
-I ran these comparisons as parameterized tests in JUnit which stress the throughput of a producer. No consumers were run during these tests I have posted [source code and documentation](https://github.com/iandow/kafka_junit_tests) for my tests, so it should be possible to replicate results on your own gear if you are interested.
+I ran these comparisons as parameterized tests in JUnit which measure the throughput of a producer. No consumers were run during these tests. I have posted [source code and documentation](https://github.com/iandow/kafka_junit_tests) for my tests, so it should be possible to replicate results on your own gear if you are interested.
 
 # My Setup
 
-For these tests, I used a three node cluster of Ubuntu servers running on Azure with DS14 specs:
+While I've been careful to ensure that I'm doing an apples-to-apples comparison, I wanted to compare Kafka an MapR-Streams as how they perform "off the shelf", without the burdon of tuning my test environment to perfectly optimize performance in each test scenario. So, I have pretty much stuck with the default settings except for Kafka's replication factor and synchronous send mode. I set Kafka's replication factor to 3 and acks to "all" (i.e. synchronous send mode) because MapR Streams replicates topics across a cluster by default because its underlying filesystem (MapR-FS) is distributed, and because MapR Streams defaults to synchronous send mode.
+
+For my tests, I used a three node cluster of Ubuntu servers running on Azure with DS14 specs:
 
 - Intel Xeon CPU E5-2660 2.2 GHz processor with 16 cores
 - SSD disk storage with 64,000 MBps cached / 51,200 uncached max disk throughput
