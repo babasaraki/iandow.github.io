@@ -60,10 +60,10 @@ The Mapr Stream client has 64 flusher threads that concurrently flush data to th
 Furthermore, replication in MapR is more efficient since the underlying storage (MapR-FS) is distributed. Callbacks for synchronous sends will be invoked the moment a message is written to the filesystem on one MapR node. With Kafka, those callbacks only execute after Zookeeper finishes copying messages through Zookeeper on each of the in-sync replicas. 
 
 ## Why does MapR Streams handle so many more topics than Kafka?
-	
-The computational complexity of a stream topic relates largely to how efficiently you can find the files belonging to a topic then read or write to those files. Finding the file is easy in MapR Stream because it uses only one file for a stream no matter how many topics it has. Furthermore MapR Streams inherits the property of efficient I/O patterns from the core platform. MapR-FS keeps files coherent and clean so that I/O operations can be efficiently buffered and address sequential locations on disk.
 
-Kafka on the other hand, represents each topic partition by at least one directory and several files per partition. The more topics Kafka has, the more files it creates. This makes it difficult to buffer disk operations, perform sequential I/O, and it increases the complexity of what Zookeeper must manage.
+A topic is just metadata of a Mapr Stream, it does not introduce overhead to normal operations. The MapR Stream uses only one file for a stream no matter how many topics it has and it  inherits efficient I/O patterns from the core MapR filesystem (MapR-FS) which keeps files coherent and clean so that I/O operations can be efficiently buffered and addressed to sequential locations on disk.
+
+On the other hand, Kafka represents each topic by at least one directory and several files per partition. The more topics/partitions Kafka has, the more files it creates. This makes it harder to buffer disk operations, perform sequential I/O, and it increases the complexity of what Zookeeper must manage.
 
 # Other Advantages for MapR Streams 
 
