@@ -39,7 +39,7 @@ In this study I measured how fast a single threaded producer could publish 1 mil
 
 ## MapR Streams can handle significantly larger messages than Kafka.
 
-MapR Streams demonstrates a much higher capacity for handling large message sizes, as shown below. 
+MapR Streams demonstrates a much higher capacity for handling large message sizes, as shown below:
 
 ![throughput_records_per_sec](http://iandow.github.io/img/tput-bytes.png)
 
