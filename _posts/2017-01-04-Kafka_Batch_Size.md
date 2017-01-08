@@ -2,7 +2,7 @@
 layout: post
 title: What's wrong with using small batch sizes in Kafka?
 tags: [java, kafka]
-bigimg: /img/autos-technology-vw-multi-storey-car-park-63294.jpg
+bigimg: /img/nature-sky-clouds-field.jpg
 ---
 
 # What is Kafka's batch size?
