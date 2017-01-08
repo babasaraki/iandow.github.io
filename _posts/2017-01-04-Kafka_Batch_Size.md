@@ -7,7 +7,7 @@ bigimg: /img/nature-sky-clouds-field.jpg
 
 # What is Kafka's batch size?
 
-Kafka producer clients will buffer unsent records for each partition. These buffers are of a size specified by the batch.size config. You can achieve higher throughput by increasing the batch size, but there is a tradeoff between more batching and increased end-to-end latency. The larger your batch size, the more cumulative time messages will spend waiting in the send buffer. So, you want to batch to increase throughput, but you don't want to batch too much lest you cause unwanted latency.
+Kafka producers will buffer unsent records for each partition. These buffers are of a size specified by the `batch.size` config. You can achieve higher throughput by increasing the batch size, but there is a tradeoff between more batching and increased end-to-end latency. The larger your batch size, the more cumulative time messages will spend waiting in the send buffer. So, you want to batch to increase throughput, but you don't want to batch too much lest you cause unwanted latency.
 
 The effects of batching on throughput and latency are really well illustrated by this blog: [http://blog.l1x.me/post/2015/03/02/high-performance-kafka-for-analytics.html](http://blog.l1x.me/post/2015/03/02/high-performance-kafka-for-analytics.html), but that blog only looks at message sizes up to 1KB. 
 
