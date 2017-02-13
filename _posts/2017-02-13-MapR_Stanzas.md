@@ -2,7 +2,7 @@
 layout: post
 title: Automating MapR with MapR Stanzas
 tags: [mapr, automation]
-bigimg: /img/sheet_music.jpg
+bigimg: /img/keyboard.jpg
 ---
 
 In my life as a technical marketeer for MapR I have configured more clusters than you can shake a stick at. So, imagine my excitement when I heard that MapR installations can be automated with a new capability called, "MapR Stanzas".
