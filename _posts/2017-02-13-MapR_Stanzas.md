@@ -5,8 +5,6 @@ tags: [mapr, automation]
 bigimg: /img/sheet_music.jpg
 ---
 
-# MapR Stanzas
-
 In my life as a technical marketeer for MapR I have configured more clusters than you can shake a stick at. So, imagine my excitement when I heard that MapR installations can be automated with a new capability called, "MapR Stanzas".
 
 MapR Stanzas allow you to automate the MapR installation process by specifying in a YAML config file all the options that you would have otherwise specified in the MapR installation web UI.  You can read more about MapR stanzas at http://maprdocs.mapr.com/home/AdvancedInstallation/Stanzas/RunningSilentInstaller.html. 
