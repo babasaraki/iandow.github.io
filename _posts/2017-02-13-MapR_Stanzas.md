@@ -27,15 +27,18 @@ I've attached my YAML to the end of this post for your reference.
 
 What if you don't want to write the stanza YAML file by hand?  Then just install via the webui (e.g. `https://<hostname>:9443`), then export a stanza file with the export command (shown below). Then next time you install you should be able to use that YAML file. For example, here's how I captured the configurations I specified for our Tech Marketing MapR cluster:
 
-    /opt/mapr/installer/bin/mapr-installer-cli export -u mapr:MaprRocks\!@localhost -n --file /opt/mapr/installer/examples/ian01.yaml
+  ```/opt/mapr/installer/bin/mapr-installer-cli export -u mapr:MaprRocks\!@localhost -n --file /opt/mapr/installer/examples/ian01.yaml```
 
 That file will not contain your ssh password, so you'll want to add "ssh_password" under the config section, like this:
 
+    ssh_id: mapr
     ssh_password: MaprRocks!
+    ssh_method: PASSWORD
+    ssh_port: 22
 
 Then validate the config file like this:
 
-    /opt/mapr/installer/bin/mapr-installer-cli check -u mapr:MaprRocks\!@localhost -n -t /opt/mapr/installer/examples/ian01.yaml
+  ```/opt/mapr/installer/bin/mapr-installer-cli check -u mapr:MaprRocks\!@localhost -n -t /opt/mapr/installer/examples/ian01.yaml```
 
 If the check succeeds, you will see no output and a return status of 0.
 
