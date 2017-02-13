@@ -13,15 +13,15 @@ Here's how I installed MapR in a test environment using MapR stanzas:
 
 1. Download the MapR installer
 
-    wget http://package.mapr.com/releases/installer/mapr-setup.sh -P /tmp
+    ```wget http://package.mapr.com/releases/installer/mapr-setup.sh -P /tmp```
 
 2. Run the MapR installer
 
-    sudo bash /tmp/mapr-setup.sh
+    ```sudo bash /tmp/mapr-setup.sh```
 
 3. When it completes, it will advise you to complete the installation through a webui (e.g. `https://<hostname>:9443`), but don't do that. Instead, complete the installation with stanzas, like this:
 
-    /opt/mapr/installer/bin/mapr-installer-cli install -u mapr:MaprRocks\!@localhost -nv -t /opt/mapr/installer/examples/ian01.yaml
+    ```/opt/mapr/installer/bin/mapr-installer-cli install -u mapr:MaprRocks\!@localhost -nv -t /opt/mapr/installer/examples/ian01.yaml```
 
 I've attached my YAML to the end of this post for your reference.
 
