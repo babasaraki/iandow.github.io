@@ -34,4 +34,4 @@ Start the debugger by clicking Debug under IntelliJ's Run menu. Once it connects
 
 ![IntelliJ Debugger](http://iandow.github.io/img/IntelliJ_debugger.png)
 
-So, that's how you attach IntelliJ's debugger to a spark application running on a remote cluster. Isn't that nice!
+So, that's how you attach IntelliJ's debugger to a Spark application running on a remote cluster. Isn't that nice!
