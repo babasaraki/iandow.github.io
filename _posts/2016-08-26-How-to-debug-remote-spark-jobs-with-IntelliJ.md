@@ -29,6 +29,8 @@ Now you can configure the IntelliJ debugger like this, where 10.200.1.101 is the
 
 ![IntelliJ Debugger](http://iandow.github.io/img/IntelliJ%20debug%20config.png)
 
-Start the debugger by clicking Debug under IntelliJ's Run menu. Once it connects to your remote Spark process you'll be off and running. Now you can set breakpoints, pause the Spark runtime, and do everything else you can normally do in a debugger.
+Start the debugger by clicking Debug under IntelliJ's Run menu. Once it connects to your remote Spark process you'll be off and running. Now you can set breakpoints, pause the Spark runtime, and do everything else you can normally do in a debugger.  Here's an example of what IntelliJ shows when pausing a Spark with a breakpoint:
+
+![IntelliJ Debugger](http://iandow.github.io/img/IntelliJ_debugger.png)
 
 So, that's how you attach IntelliJ's debugger to a spark application running on a remote cluster. Isn't that nice!
