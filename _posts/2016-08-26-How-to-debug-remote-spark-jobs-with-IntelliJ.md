@@ -21,9 +21,10 @@ $ /opt/mapr/spark/spark-1.6.1/bin/spark-submit --class com.mapr.test.BasicSparkS
 
 After running that command, it will wait until you connect your debugger, as shown below:
 
-	`/opt/mapr/spark/spark-2.0.1/bin/spark-submit --class com.mapr.demo.finserv.SparkStreamingToHive nyse-taq-streaming-1.0-jar-with-dependencies.jar /user/mapr/taq:sender_0310`
-	*Listening for transport dt_socket at address: 4000*
-
+{% highlight bash %}
+$ /opt/mapr/spark/spark-2.0.1/bin/spark-submit --class com.mapr.demo.finserv.SparkStreamingToHive nyse-taq-streaming-1.0-jar-with-dependencies.jar /user/mapr/taq:sender_0310
+Listening for transport dt_socket at address: 4000
+{% endhighlight %}
 
 Now you can configure the IntelliJ debugger like this, where 10.200.1.101 is the IP address of the remote machine where I'm running my Spark job:
 
