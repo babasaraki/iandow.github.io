@@ -2,6 +2,7 @@
 layout: post
 title: Kafka vs MapR Streams Benchmark
 tags: [performance, kafka, mapr streams]
+bigimg: /img/pexels-photo-90639.jpg
 ---
 
 A lot of people choose MapR as their core platform for processing and storing big data because of its advantages for speed and performance. MapR consistently performs faster than any other big data platform for all kinds of applications, including Hadoop, distributed file I/O, NoSQL data storage, and data streaming. In this post, I’m focusing on the latter to provide some perspective on how much better/faster/cheaper MapR Streams can be compared to Apache Kafka as a data streaming technology.
