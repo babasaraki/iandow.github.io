@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Benchmark Kafka vs MapR Streams. Which is faster?
+title: Kafka vs MapR Streams Benchmark
 tags: [performance, kafka, mapr streams]
 ---
 
