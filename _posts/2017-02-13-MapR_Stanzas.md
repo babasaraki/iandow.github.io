@@ -50,12 +50,12 @@ environment:
 config:
   admin_id: mapr
   cluster_admin_create: false
-  cluster_admin_gid: 5000
+  cluster_admin_gid: 1000
   cluster_admin_group: mapr
   cluster_admin_id: mapr
-  cluster_admin_uid: 5000
-  cluster_id: '0000078629867426246'
-  cluster_name: my.cluster.com
+  cluster_admin_uid: 1000
+  cluster_id: '3703723865331276875'
+  cluster_name: demo.cluster.com
   data:
     diskStripeDefault: 3
     licenseType: M3
@@ -66,21 +66,17 @@ config:
     showLicenseValidation: true
     showLogs: false
     template: template-05-converged
-  dial_home_id: '130502442'
+  dial_home_id: '720540929'
   disk_format: true
   disk_stripe: 3
   disks:
-  - /dev/sdb
   - /dev/sdc
-  - /dev/sdd
-  - /dev/sde
-  - /dev/sdf
   elasticsearch_path: /opt/mapr/es_db
-  environment: ''
+  environment: azure
   hosts:
-  - tm5
-  - tm4
-  - tm2
+  - nodea.seqgoshpp54uhcdmhan2f1m5ie.bx.internal.cloudapp.net
+  - nodeb.seqgoshpp54uhcdmhan2f1m5ie.bx.internal.cloudapp.net
+  - nodec.seqgoshpp54uhcdmhan2f1m5ie.bx.internal.cloudapp.net
   install_dir: /opt/mapr/installer
   installer_version: 1.4.201612081140
   license_install: false
@@ -92,7 +88,7 @@ config:
   links:
     self: https://localhost:9443/api/config
     services: https://localhost:9443/api/config/services
-  mapr_id: '00000'
+  mapr_id: '64468'
   mapr_name: jklfdsalkj@yahoo.com
   mep_version: '2.0'
   no_internet: false
@@ -153,7 +149,7 @@ config:
         create: true
         label: Use existing MySQL server
         name: hive
-        password: MaprRocks!
+        password: q7wp4XaAQpvdn
         type: MYSQL
         user: hive
       enabled: true
@@ -172,7 +168,7 @@ config:
         create: true
         label: Use existing MySQL server
         name: hue
-        password: MaprRocks!
+        password: q7wp4XaAQpvdn
         type: MYSQL
         user: hue
       enabled: true
@@ -194,10 +190,9 @@ config:
     mapr-oozie:
       database:
         create: true
-        host: MaprRocks!
         label: Use existing MySQL server
         name: oozie
-        password: MaprRocks!
+        password: q7wp4XaAQpvdn
         type: MYSQL
         user: oozie
       enabled: true
@@ -228,124 +223,94 @@ config:
       version: 5.2.0
   services_version: 1.4.201612081140
   ssh_id: mapr
-  ssh_password: MaprRocks!
+  ssh_password: q7wp4XaAQpvdn
   ssh_method: PASSWORD
   ssh_port: 22
-  state: INSTALLED
+  state: COMPLETED
 hosts:
 - disks:
+    /dev/fd0:
+      selected: false
+      size: 0 Bytes
     /dev/sda1:
       selected: false
-      size: 803 GB
+      size: 29 GB
       unavailable: Disk mounted at /
-    /dev/sda2:
+    /dev/sdb1:
       selected: false
-      size: 1 KB
-    /dev/sda5:
-      selected: false
-      size: 127 GB
-    /dev/sdb:
-      selected: true
-      size: 931 GB
+      size: 28 GB
+      unavailable: Disk mounted at /mnt
     /dev/sdc:
       selected: true
-      size: 931 GB
+      size: 7 TB
     /dev/sdd:
-      selected: true
-      size: 931 GB
-    /dev/sde:
-      selected: true
-      size: 931 GB
-    /dev/sdf:
-      selected: true
-      size: 931 GB
+      selected: false
+      size: 7 TB
     /dev/sr0:
       selected: false
-      size: 1024 MB
-  id: tm2
+      size: 4 MB
+  id: nodec.seqgoshpp54uhcdmhan2f1m5ie.bx.internal.cloudapp.net
 - disks:
+    /dev/fd0:
+      selected: false
+      size: 0 Bytes
     /dev/sda1:
       selected: false
-      size: 803 GB
+      size: 29 GB
       unavailable: Disk mounted at /
-    /dev/sda2:
+    /dev/sdb1:
       selected: false
-      size: 1 KB
-    /dev/sda5:
-      selected: false
-      size: 127 GB
-    /dev/sdb:
-      selected: true
-      size: 931 GB
+      size: 28 GB
+      unavailable: Disk mounted at /mnt
     /dev/sdc:
       selected: true
-      size: 931 GB
-    /dev/sdd:
-      selected: true
-      size: 931 GB
-    /dev/sde:
-      selected: true
-      size: 931 GB
-    /dev/sdf:
-      selected: true
-      size: 931 GB
+      size: 7 TB
     /dev/sr0:
       selected: false
-      size: 1024 MB
-  id: tm5
+      size: 4 MB
+  id: nodeb.seqgoshpp54uhcdmhan2f1m5ie.bx.internal.cloudapp.net
 - disks:
+    /dev/fd0:
+      selected: false
+      size: 0 Bytes
     /dev/sda1:
       selected: false
-      size: 803 GB
+      size: 29 GB
       unavailable: Disk mounted at /
-    /dev/sda2:
+    /dev/sdb1:
       selected: false
-      size: 1 KB
-    /dev/sda5:
-      selected: false
-      size: 127 GB
-    /dev/sdb:
-      selected: true
-      size: 931 GB
+      size: 28 GB
+      unavailable: Disk mounted at /mnt
     /dev/sdc:
       selected: true
-      size: 931 GB
-    /dev/sdd:
-      selected: true
-      size: 931 GB
-    /dev/sde:
-      selected: true
-      size: 931 GB
-    /dev/sdf:
-      selected: true
-      size: 931 GB
+      size: 7 TB
     /dev/sr0:
       selected: false
-      size: 1024 MB
-  id: tm4
+      size: 4 MB
+  id: nodea.seqgoshpp54uhcdmhan2f1m5ie.bx.internal.cloudapp.net
 groups:
 - hosts:
-  - tm5
-  - tm2
-  - tm4
+  - nodec.seqgoshpp54uhcdmhan2f1m5ie.bx.internal.cloudapp.net
+  - nodea.seqgoshpp54uhcdmhan2f1m5ie.bx.internal.cloudapp.net
+  - nodeb.seqgoshpp54uhcdmhan2f1m5ie.bx.internal.cloudapp.net
   label: CONTROL
   services:
   - mapr-zookeeper-5.2.0
 - hosts:
-  - tm2
-  - tm4
+  - nodea.seqgoshpp54uhcdmhan2f1m5ie.bx.internal.cloudapp.net
+  - nodeb.seqgoshpp54uhcdmhan2f1m5ie.bx.internal.cloudapp.net
   label: MULTI_MASTER
   services:
   - mapr-webserver-5.2.0
   - mapr-resourcemanager-5.2.0
 - hosts:
-  - tm5
+  - nodec.seqgoshpp54uhcdmhan2f1m5ie.bx.internal.cloudapp.net
   label: MASTER
   services:
-  - mapr-hivewebhcat-1.2
   - mapr-hiveserver2-1.2
-  - mapr-hue-3.10.0
+  - mapr-hivewebhcat-1.2
   - mapr-hivemetastore-1.2
+  - mapr-hue-3.10.0
   - mapr-historyserver-5.2.0
   - mapr-kibana-4.5.1
   - mapr-grafana-3.1.1
@@ -355,26 +320,26 @@ groups:
   - mapr-oozie-4.2.0
   - mapr-httpfs-1.0
 - hosts:
-  - tm5
-  - tm2
-  - tm4
+  - nodec.seqgoshpp54uhcdmhan2f1m5ie.bx.internal.cloudapp.net
+  - nodea.seqgoshpp54uhcdmhan2f1m5ie.bx.internal.cloudapp.net
+  - nodeb.seqgoshpp54uhcdmhan2f1m5ie.bx.internal.cloudapp.net
   label: MONITORING_MASTER
   services:
   - mapr-opentsdb-2.2.1
   - mapr-elasticsearch-2.3.3
 - hosts:
-  - tm5
-  - tm2
-  - tm4
+  - nodec.seqgoshpp54uhcdmhan2f1m5ie.bx.internal.cloudapp.net
+  - nodea.seqgoshpp54uhcdmhan2f1m5ie.bx.internal.cloudapp.net
+  - nodeb.seqgoshpp54uhcdmhan2f1m5ie.bx.internal.cloudapp.net
   label: DATA
   services:
   - mapr-hbase-rest-1.1
   - mapr-nodemanager-5.2.0
   - mapr-drill-1.9
 - hosts:
-  - tm5
-  - tm2
-  - tm4
+  - nodec.seqgoshpp54uhcdmhan2f1m5ie.bx.internal.cloudapp.net
+  - nodea.seqgoshpp54uhcdmhan2f1m5ie.bx.internal.cloudapp.net
+  - nodeb.seqgoshpp54uhcdmhan2f1m5ie.bx.internal.cloudapp.net
   label: CLIENT
   services:
   - mapr-spark-client-2.0.1
@@ -383,9 +348,9 @@ groups:
   - mapr-asynchbase-1.7.0
   - mapr-kafka-0.9.0
 - hosts:
-  - tm5
-  - tm2
-  - tm4
+  - nodec.seqgoshpp54uhcdmhan2f1m5ie.bx.internal.cloudapp.net
+  - nodea.seqgoshpp54uhcdmhan2f1m5ie.bx.internal.cloudapp.net
+  - nodeb.seqgoshpp54uhcdmhan2f1m5ie.bx.internal.cloudapp.net
   label: DEFAULT
   services:
   - mapr-core-5.2.0
@@ -393,7 +358,7 @@ groups:
   - mapr-fileserver-5.2.0
   - mapr-fluentd-0.14.00
 - hosts:
-  - tm2
+  - nodea.seqgoshpp54uhcdmhan2f1m5ie.bx.internal.cloudapp.net
   label: COMMUNITY_EDITION
   services:
   - mapr-cldb-5.2.0
