@@ -43,7 +43,7 @@ azure storage blob copy start --account-name $STORAGE1 --account-key $STORAGEKEY
 azure storage blob copy show --account-name $STORAGE1 --account-key $STORAGEKEY1 $CONTAINER1 Microsoft.Compute/Images/vhds/nodea-dataDisk-0.49735bce-3c31-46ed-b5fa-8be620fb23fd.vhd
 {% endhighlight %}
 
-Even if the status in that last step will say "success" and indicate that all the bytes have been copied, the image may not be ready for another several minutes. You'll know you tried to provision too soon if provisioning creates the VM, but when you navigate to the VM in the azure portal webui it says provisioning failed because the disk images were still in "Pending" status.  This is clearly a bug in the Azure CLI, so I did some digging and describe what I found out in the next section.
+Even if the status in that last step will say "success" and indicate that all the bytes have been copied, the image may not be ready for another several minutes. You'll know you tried to provision too soon if provisioning creates the VM, but when you navigate to the VM in the azure portal it says provisioning failed because the disk images were still in "Pending" status.  This is clearly a bug in the Azure CLI, so I did some digging and describe what I found out in the next section.
 
 # Troubleshooting
 
@@ -79,11 +79,11 @@ That copy operation is asynchronous. You can check its status with a command lik
 
 The progress there is clearly wrong. It did not copy 1073741824512 out of 1073741824512 bytes in only a few seconds. This is a bug with version 1 of the Azure CLI. Fortunately, the bug has been fixed with version 2, as I describe below.
 
-### How else can you see blob copy status?
+## How else can you see blob copy status?
 
 How else can you see blob copy status? I'll show you two ways.  
 
-## Use the latest version of the Azure CLI.
+### Use the latest version of the Azure CLI.
 
 I highly recommend moving to CLI version 2 which was re-written in Python. The problem I mentioned has been fixed in that version.
 [https://docs.microsoft.com/en-us/cli/azure/install-azure-cli](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli)
@@ -107,7 +107,7 @@ Gives this output:
     },
 {% endhighlight %}
 
-## Use the Azure REST API
+### Use the Azure REST API
 
 The other option is to use the Azure REST API. Use the 
 [Get-Blob-Properties](https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/Get-Blob-Properties) REST call and checking the x-ms-copy-status field.  If you've never used the Azure REST API, I recommend installing Postman and setting up a GET request like this:
@@ -121,11 +121,13 @@ Content-Type header:
 {% endhighlight %}
 
 
-# Conclusion
+## Conclusion
 
-So, in summary, here are the "power moves" that advanced Azure users will do which most people overlook:
+Here are the *power moves* that advanced Azure users will do which most people overlook:
 
 1. Use Resource Explorer http://resources.azure.com
 2. Use the Azure REST API
 3. Use Azure CLI V2 (not V1)
+4. Use Azure JSON templates to provision VMs
 
+In this post I described how to use the Azure CLI to clone VMs by generalizing and copying their disk images to new resource groups.
