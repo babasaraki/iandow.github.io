@@ -107,6 +107,8 @@ Gives this output:
     },
 {% endhighlight %}
 
+See that progress status?  It says 55729283072 out of 1073741824512?  That's what you should see. And you should continue to see that first number increasing.  So, don't use version 1 of the Azure CLI. Use version 2.
+
 ### Use the Azure REST API
 
 The other option is to use the Azure REST API. Use the 
