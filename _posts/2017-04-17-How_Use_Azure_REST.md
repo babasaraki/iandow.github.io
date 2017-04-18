@@ -47,7 +47,7 @@ Even if the status in that last step will say "success" and indicate that all th
 
 # Troubleshooting
 
-One of the most common problems I have when cloning a VM happens when I try to provision a VM before the disk images have been copied to my destination storage account.  I typically save a master copy of disk images for my VMs in a storage account that contains nothing but those disk images. That way, when I need a new demo rig, I just create a new storage account (usually in a new resource group) and copy those baseline disk images to that new group with a command like this:
+One of the most common problems I have when cloning a VM happens when I try to provision a VM before the disk images have been copied to my destination storage account.  I typically save a master copy of disk images for my VMs in a storage account that contains nothing but those disk images. That way, when I need a new demo rig I just create a new storage account (usually in a new resource group) and copy those baseline disk images to that new group with a command like this:
 
 {% highlight bash %}
 azure storage blob copy start [options] [sourceUri] [destContainer]
@@ -59,15 +59,15 @@ Obviously, you can't use those disk images until the copy operations have comple
 azure storage blob copy show [options] ...
 {% endhighlight %}
 
-you should see whether the copy is Pending or Successful (i.e. done). In my experience, that command always just says “Successful”. I know this is erroneous because if I try to create a VM from my new vhd images it fails with a DiskImageNotReady error (because the copy is, in fact, still Pending).  If I continue to wait (from minutes to hours, depending on how far the distance between my source and destination storage account) then the copy will finally finish and VM provisioning will succeed. Let me show you what this looks like:
+you should see whether the copy is "Pending" or "Successful". In my experience, that command always just says “Successful”. I know this is erroneous because if I try to create a VM from my new vhd images it fails with a DiskImageNotReady error because the copy is in fact, still "Pending".  If I continue to wait from minutes to hours, depending on how far the distance between my source and destination storage account, then the copy will finally finish and VM provisioning will succeed. Let me show you what this looks like:
 
-After I start copying a disk image with this command:
+You can start copying a disk image with a command like this:
 
 {% highlight bash %}
 azure storage blob copy start --account-name $STORAGE1 --account-key $STORAGEKEY1 --source-container $CONTAINER1 --source-blob Microsoft.Compute/Images/vhds/nodec-dataDisk-0.9588f46c-9198-47f4-ac9d-8c6d71e31470.vhd --dest-account-name $STORAGE2 --dest-account-key $STORAGEKEY2 --dest-container $CONTAINER2
 {% endhighlight %}
 
-Then I see that it's complete, like this:
+That copy operation is asynchronous. You can check its status with a command like this:
 
     azure storage blob copy show --account-name $STORAGE1 --account-key $STORAGEKEY1 $CONTAINER1 Microsoft.Compute/Images/vhds/nodec-dataDisk-0.9588f46c-9198-47f4-ac9d-8c6d71e31470.vhd
     info:    Executing command storage blob copy show
@@ -77,7 +77,7 @@ Then I see that it's complete, like this:
     data:    67193eed-02fd-45b2-8693-efc8ad140526  1073741824512/1073741824512  success
     info:    storage blob copy show command OK
 
-The progress there is clearly wrong. It did not copy 1073741824512 out of 1073741824512 bytes in only a few seconds. This is a bug with version 1 of the Azure CLI, however the bug has been fixed with version 2, which I'll describe below.
+The progress there is clearly wrong. It did not copy 1073741824512 out of 1073741824512 bytes in only a few seconds. This is a bug with version 1 of the Azure CLI. Fortunately, the bug has been fixed with version 2, as I describe below.
 
 ### How else can you see blob copy status?
 
