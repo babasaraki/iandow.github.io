@@ -49,11 +49,15 @@ Even if the status in that last step will say "success" and indicate that all th
 
 One of the most common problems I have when cloning a VM happens when I try to provision a VM before the disk images have been copied to my destination storage account.  I typically save a master copy of disk images for my VMs in a storage account that contains nothing but those disk images. That way, when I need a new demo rig, I just create a new storage account (usually in a new resource group) and copy those baseline disk images to that new group with a command like this:
 
-`azure storage blob copy start [options] [sourceUri] [destContainer]`
+{% highlight bash %}
+azure storage blob copy start [options] [sourceUri] [destContainer]
+{% endhighlight %}
 
 Obviously, you can't use those disk images until the copy operations have completed. However, if you check the status of a blob copy like this:
 
-`azure storage blob copy show [options] ...`
+{% highlight bash %}
+azure storage blob copy show [options] ...
+{% endhighlight %}
 
 you should see whether the copy is Pending or Successful (i.e. done). In my experience, that command always just says “Successful”. I know this is erroneous because if I try to create a VM from my new vhd images it fails with a DiskImageNotReady error (because the copy is, in fact, still Pending).  If I continue to wait (from minutes to hours, depending on how far the distance between my source and destination storage account) then the copy will finally finish and VM provisioning will succeed. Let me show you what this looks like:
 
