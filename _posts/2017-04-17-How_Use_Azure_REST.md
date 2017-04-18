@@ -6,7 +6,9 @@ tags: [azure]
 
 I use Azure a lot to create virtual machines for demos and application prototypes. It often takes me a long time to setup these rigs, so once I finally get things the way I like them I really don't want to duplicate that effort. Fortunately, Azure lets us clone VMs. Unfortunately, it's not that easy to figure out if you've never done it before. In my case, it's even harder because the applications I build are designed to run on Hadoop clusters. At a minimum I need to provision 3 VMs (that's a 3-node cluster) with tens of GBs of data in secondary disk storage, and more hostname based service configurations than you can shake a stick at. To set this up every time I need to present a demo would be completely unsustainable. It's FAR easier to setup a single demo rig then clone it as needed. So, that's what I'm going to describe how to do here. 
 
-# Here's how I clone a 3-node cluster:
+## Here's how I clone a 3-node cluster:
+
+Once you have a rig that you want to clone, your first step is to deallocate those VMs, then generalize and capture their disk images. Here's how I typically do that for a three node cluster:
 
 {% highlight bash %}
 RG1=iansandbox3
@@ -15,9 +17,7 @@ for NODENAME in nodea nodeb nodec; do azure vm generalize --resource-group $RG1 
 for NODENAME in nodea nodeb nodec; do azure vm capture --resource-group $RG1 --name $NODENAME --vhd-name-prefix $NODENAME --template-file-name $NODENAME.json & done
 {% endhighlight %}
 
-# Here's how I copy those disk images to a new storage account:
-
-This is how I copy both the data and OS disk images from one storage account to another using the azure cli:
+If you're going to clone your VMs to a new resource group, then you'll need to copy said disk images to a new storage account in that new resource group. Here is how I copy both the data and OS disk images from one storage account to another using the Azure CLI:
 
 {% highlight bash %}
 RG1=iansandbox3
