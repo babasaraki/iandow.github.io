@@ -44,7 +44,7 @@ azure storage blob copy start --account-name $STORAGE1 --account-key $STORAGEKEY
 azure storage blob copy show --account-name $STORAGE1 --account-key $STORAGEKEY1 $CONTAINER1 Microsoft.Compute/Images/vhds/nodea-dataDisk-0.49735bce-3c31-46ed-b5fa-8be620fb23fd.vhd
 {% endhighlight %}
 
-Even if the status in that last step says "success", indicating that all the bytes have been copied, the image may not be ready for another several minutes. You'll know you tried to provision too soon if provisioning creates the VM, but when you navigate to the VM in the azure portal it says provisioning failed because the disk images were still in "Pending" status.  This is clearly a bug in the Azure CLI, so I did some digging and describe what I found out in the next section.
+Even if the status in that last step says "success", indicating that all the bytes have been copied, the image may not be ready for another several minutes. You'll know you tried to provision too soon if provisioning creates the VM, but when you navigate to the VM in the azure portal it says provisioning failed because the disk images were still in "Pending" status.  This is clearly a bug in the Azure CLI which I'll talk more about in the next section.
 
 # Troubleshooting
 
