@@ -86,8 +86,7 @@ How else can you see blob copy status? I'll show you two ways.
 
 ### Use the latest version of the Azure CLI.
 
-I highly recommend moving to CLI version 2 which was re-written in Python. The problem I mentioned has been fixed in that version.
-[https://docs.microsoft.com/en-us/cli/azure/install-azure-cli](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli)
+I highly recommend moving to CLI version 2 which was re-written in Python. The problem I mentioned has been fixed in that version. You can download it from [https://docs.microsoft.com/en-us/cli/azure/install-azure-cli](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli).
 
 Here's how to check the status of a blob copy with Azure CLI version 2
 
@@ -113,7 +112,7 @@ See that progress status?  It says 55729283072 out of 1073741824512?  That's wha
 ### Use the Azure REST API
 
 The other option is to use the Azure REST API. Use the 
-[Get-Blob-Properties](https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/Get-Blob-Properties) REST call and checking the x-ms-copy-status field.  If you've never used the Azure REST API, I recommend installing Postman and setting up a GET request like this:
+[Get-Blob-Properties](https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/Get-Blob-Properties) REST call and checking the `x-ms-copy-status` field.  If you've never used the Azure REST API, I recommend installing Postman and setting up a GET request like this:
 
 {% highlight json %}
 GET - https://iansandbox3.blob.core.windows.net/baseimages?comp=list&restype=container
