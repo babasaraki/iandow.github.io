@@ -1,6 +1,6 @@
 ---
 layout: post
-title: How Power Users Clone Virtual Machines in Azure
+title: How To Clone Virtual Machines in Azure
 tags: [azure]
 bigimg: /img/dna-1811955_1280.jpg
 ---
