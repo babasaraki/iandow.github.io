@@ -45,7 +45,7 @@ azure storage blob copy show --account-name $STORAGE1 --account-key $STORAGEKEY1
 
 Even if the status in that last step will say "success" and indicate that all the bytes have been copied, the image may not be ready for another several minutes. You'll know you tried to provision too soon if provisioning creates the VM, but when you navigate to the VM in the azure portal webui it says provisioning failed because the disk images were still in "Pending" status.  This is clearly a bug in the Azure CLI, so I did some digging and describe what I found out in the next section.
 
-# How To Troubleshoot cloning process when it does not work
+# Troubleshooting
 
 One of the most common problems I have when cloning a VM happens when I try to provision a VM before the disk images have been copied to my destination storage account.  I typically save a master copy of disk images for my VMs in a storage account that contains nothing but those disk images. That way, when I need a new demo rig, I just create a new storage account (usually in a new resource group) and copy those baseline disk images to that new group with a command like this:
 
