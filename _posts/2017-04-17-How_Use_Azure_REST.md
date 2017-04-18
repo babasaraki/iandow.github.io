@@ -2,6 +2,7 @@
 layout: post
 title: How Power Users Clone Virtual Machines in Azure
 tags: [azure]
+bigimg: /img/dna-1811955_1280.jpg
 ---
 
 I use Azure a lot to create virtual machines for demos and application prototypes. It often takes me a long time to setup these rigs, so once I finally get things the way I like them I really don't want to duplicate that effort. Fortunately, Azure lets us clone VMs. Unfortunately, it's not that easy to figure out if you've never done it before. In my case, it's even harder because the applications I build are designed to run on Hadoop clusters. At a minimum I need to provision 3 VMs (that's a 3-node cluster) with tens of GBs of data in secondary disk storage, and more hostname based service configurations than you can shake a stick at. To set this up every time I need to present a demo would be completely unsustainable. It's FAR easier to setup a single demo rig then clone it as needed. So, that's what I'm going to describe how to do here. 
