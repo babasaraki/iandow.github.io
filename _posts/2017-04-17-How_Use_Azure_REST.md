@@ -125,7 +125,7 @@ Content-Type header:
 
 ## Conclusion
 
-In this post I described how to use the Azure CLI to clone VMs by generalizing and copying their disk images to new resource groups. Here are the *power moves* that advanced Azure users will do which most people overlook when trying to create and troubleshoot VM provisioning errors based on generalized disk images.
+In this post I described how to use the Azure CLI to clone VMs by generalizing and copying their disk images to new resource groups. Here are the *power moves* that advanced Azure users will do which most people overlook when trying to create and troubleshoot provisioning errors based on generalized disk images.
 
 1. Use Resource Explorer http://resources.azure.com
 2. Use the Azure REST API
