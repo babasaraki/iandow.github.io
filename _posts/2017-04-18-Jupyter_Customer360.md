@@ -30,6 +30,8 @@ The above plots were created by clustering two feature columns.  There could hav
 
 You can interact with that 3D graph with click-drag or mouse wheel to zoom.
 
+## Visualizing K-Means Clusters in N Dimensions 
+
 What if you're clustering over more than 3 columns? How do you visualize that? One common approach is to split the 4th dimension data into groups and plot a 3D graph for each of those groups.  Another approach is to split all the data into groups based on the k-means cluster value, then apply an aggregation function such as sum or average to all the dimensions in that group, then plot those aggregate values in a heatmap. This is approach is illustrated in the following Jupyter notebook, which deals with a customer 360 scenario, as described below.
 
 ### Visualizing clusters for a Customer 360 scenario
