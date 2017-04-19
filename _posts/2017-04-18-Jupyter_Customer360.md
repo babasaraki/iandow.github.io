@@ -26,7 +26,7 @@ Charting feature columns like that can help you make intuitive sense of how k-me
 
 The above plots were created by clustering two feature columns.  There could have been other columns in our data set, but we just used two columns. If we want to use an additional column as a clustering feature we would want to visualize the cluster over three dimensions. Here's an example that shows how to visualize cluster shapes with a 3D scatter/mesh plot in a Jupyter notebook using Python 3:
 
-{% include 3dkmeans.html }
+{% include 3dkmeans.html %}
 
 You can interact with that 3D graph with click-drag or mouse wheel to zoom.
 
@@ -38,4 +38,4 @@ What if you're clustering over more than 3 columns? How do you visualize that? O
 
 In the following notebook, I've produced an artificial dataset with 12 feature columns. I'm using this dataset to simulate a customer 360 dataset in which customers for a large bank have been characterized by a variety of attributes, such as the balances in various accounts. By plotting the k-means cluster groups and feature columns in a heatmap we can illustrate how a large bank could use machine learning to categorize their customer base into groups so that they could conceivably develop things like marketing campaigns or recommendation engines that more accurately target the concerns of the customers in those groups. 
 
-{% include heatmap.html }
+{% include heatmap.html %}
