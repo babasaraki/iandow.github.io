@@ -8,7 +8,9 @@ The information technology industry is in the middle of a powerful trend towards
 
 ## What is K-Means?
 
-[k-means](https://en.wikipedia.org/wiki/Cluster_analysis) clustering aims to group a set of objects in such a way that objects in the same group (or cluster) are more similar to each other than to those in other groups (clusters). It operates on a table of values where every cell is a number. K-Means only supports numeric columns. In Spark those tables are usually expressed as a dataframe. A table with two columns could be easily visualized on a graph where the x-axis is the first column and the y-axis is the second column. For example, here's a 2 dimensional graph for a table with two columns.
+[k-means](https://en.wikipedia.org/wiki/Cluster_analysis) clustering aims to group a set of objects in such a way that objects in the same group (or cluster) are more similar to each other than to those in other groups (clusters). It operates on a table of values where every cell is a number. K-Means only supports numeric columns. In Spark those tables are usually expressed as a dataframe. 
+
+A dataframe with two columns can be easily visualized on a graph where the x-axis is the first column and the y-axis is the second column. For example, here's a 2 dimensional graph for a table with two columns.
 
 ![2-D Scatter Plot](http://iandow.github.io/img/scatter-2d.png)
 
