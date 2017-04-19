@@ -40,6 +40,6 @@ In the following notebook, I've produced an artificial dataset with 12 feature c
 
 <iframe src="http://bl.ocks.org/mbostock/raw/4061502/0a200ddf998aa75dfdb1ff32e16b680a15e5cb01/" marginwidth="0" marginheight="0" scrolling="no"></iframe>
 
-<iframe width="560" height="315" src="https://raw.githubusercontent.com/iandow/iandow.github.io/master/_includes/heatmap.html" frameborder="0" allowfullscreen="allowfullscreen"></iframe>
+<iframe src="https://raw.githubusercontent.com/iandow/iandow.github.io/master/_includes/heatmap.html" marginwidth="0" marginheight="0" scrolling="no"></iframe>
 
 <iframe src="http://bl.ocks.org/mbostock/raw/4061502/0a200ddf998aa75dfdb1ff32e16b680a15e5cb01/" marginwidth="0" marginheight="0" scrolling="no"></iframe>
