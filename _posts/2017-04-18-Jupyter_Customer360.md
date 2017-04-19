@@ -20,7 +20,11 @@ And in this case that is pretty close to what you get through k-means. The follo
 
 ![2-D Scatter Plot Segmented](http://iandow.github.io/img/scatter-2d-segments.png)
 
-In this way, you can make intuitive sense of how k-means segments the data. In the above plots we created clusters based on two columns.  There could have been other columns in our data set, but we just used two columns. If we added an additional column to be used as a clustering feature, we would be able to visualize the cluster over three dimensions. In that case you could plot a mesh 3D scatter plot, as shown below. This was exported from a Jupyter notebook for Python 3:
+Charting feature columns like that can help you make intuitive sense of how k-means is segmenting your data. 
+
+## Visualizing K-Means Clusters in 3D 
+
+The above plots we created clusters based on two columns.  There could have been other columns in our data set, but we just used two columns. If we added an additional column to be used as a clustering feature, we would be able to visualize the cluster over three dimensions. In that case you could plot a mesh 3D scatter plot, as shown below. This was exported from a Jupyter notebook for Python 3:
 
 {% include 3dkmeans.html %}
 
