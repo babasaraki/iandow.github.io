@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Visualizing K-Means clusters in Jupyter Notebooks
+title: Visualizing K-Means Clusters in Jupyter Notebooks
 tags: [machine learning, python, jupyter, kmeans, customer 360]
 ---
 
