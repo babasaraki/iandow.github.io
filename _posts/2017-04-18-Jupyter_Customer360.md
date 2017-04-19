@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Jupyter Test2
+title: Visualizing K-Means clusters in Jupyter Notebooks
 tags: [machine learning, python, jupyter, kmeans, customer 360]
 ---
 
@@ -23,6 +23,8 @@ And in this case that is pretty close to what you get through k-means. The follo
 In this way, you can make intuitive sense of how k-means segments the data. In the above plots we created clusters based on two columns.  There could have been other columns in our data set, but we just used two columns. If we added an additional column to be used as a clustering feature, we would be able to visualize the cluster over three dimensions. In that case you could plot a mesh 3D scatter plot, as shown below. This was exported from a Jupyter notebook for Python 3:
 
 {% include 3dkmeans.html %}
+
+You can interact with that 3d graph with click-drag or mouse wheel to zoom.
 
 What if you're clustering over more than 3 columns? How do you visualize that? One common approach is to split the 4th dimension data into groups and plot a 3d graph for each of those groups.  Another approach is to split all the data into groups based on the k-means cluster value, then apply an aggregation function such as sum or average to all the dimensions in that group, then plot those aggregate values in a heatmap. This is approach is illustrated in the following Jupyter notebook, which deals with a customer 360 scenario, as described below.
 
