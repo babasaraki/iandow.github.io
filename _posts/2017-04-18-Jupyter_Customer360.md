@@ -28,12 +28,12 @@ The above plots we created clusters based on two columns.  There could have been
 
 {% include 3dkmeans.html %}
 
-You can interact with that 3d graph with click-drag or mouse wheel to zoom.
+You can interact with that 3D graph with click-drag or mouse wheel to zoom.
 
-What if you're clustering over more than 3 columns? How do you visualize that? One common approach is to split the 4th dimension data into groups and plot a 3d graph for each of those groups.  Another approach is to split all the data into groups based on the k-means cluster value, then apply an aggregation function such as sum or average to all the dimensions in that group, then plot those aggregate values in a heatmap. This is approach is illustrated in the following Jupyter notebook, which deals with a customer 360 scenario, as described below.
+What if you're clustering over more than 3 columns? How do you visualize that? One common approach is to split the 4th dimension data into groups and plot a 3D graph for each of those groups.  Another approach is to split all the data into groups based on the k-means cluster value, then apply an aggregation function such as sum or average to all the dimensions in that group, then plot those aggregate values in a heatmap. This is approach is illustrated in the following Jupyter notebook, which deals with a customer 360 scenario, as described below.
 
 ### Visualizing clusters for a Customer 360 scenario
 
-In the following notebook, I've produced an artifical dataset with 12 feature columns. I'm using this dataset to simulate a customer 360 dataset in which customers for a large bank have been characterized by a variety of attributes, such as the balances in various accounts. By using k-means on this dataset the bank can categorize their massive customer base into groups so that they can develop things like marketing campaigns or recommendation engines that more accurately target the concerns of people in those groups. 
+In the following notebook, I've produced an artificial dataset with 12 feature columns. I'm using this dataset to simulate a customer 360 dataset in which customers for a large bank have been characterized by a variety of attributes, such as the balances in various accounts. By using k-means on this dataset the bank can categorize their massive customer base into groups so that they can develop things like marketing campaigns or recommendation engines that more accurately target the concerns of people in those groups. 
 
 {% include heatmap.html %}
