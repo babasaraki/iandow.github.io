@@ -24,7 +24,7 @@ Charting feature columns like that can help you make intuitive sense of how k-me
 
 ## Visualizing K-Means Clusters in 3D 
 
-The above plots we created clusters based on two columns.  There could have been other columns in our data set, but we just used two columns. If we added an additional column to be used as a clustering feature, we would be able to visualize the cluster over three dimensions. In that case you could plot a mesh 3D scatter plot, as shown below. This was exported from a Jupyter notebook for Python 3:
+The above plots were created by clustering two feature columns.  There could have been other columns in our data set, but we just used two columns. If we want to use an additional column as a clustering feature we would want to visualize the cluster over three dimensions. Here's an example that shows how to visualize cluster shapes with a 3D scatter/mesh plot in a Jupyter notebook using Python 3:
 
 {% include 3dkmeans.html %}
 
