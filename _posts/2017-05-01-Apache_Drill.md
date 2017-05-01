@@ -8,8 +8,7 @@ It is rarely the case that enterprise data science applications can operate on d
 
 ## What is Apache Drill?
 
-Apache Drill is a Unix service that unifies access to data across a variety of data formats and sources. It can run on a single node or on multiple nodes in a clustered environment. It supports a variety of NoSQL databases and file systems, including HBase, MongoDB, HDFS, Amazon S3, Azure Blob Storage, and local text files like json or csv files. Drill provides the following extremely user friendly features:
-
+Apache Drill is a Unix service that unifies access to data across a variety of data formats and sources. It can run on a single node or on multiple nodes in a clustered environment. It supports a variety of NoSQL databases and file systems, including HBase, MongoDB, HDFS, Amazon S3, Azure Blob Storage, and local text files like json or csv files. Drill provides the following user friendly features:
 * Drill supports industry standard APIs such as ANSI SQL and JDBC
 * Drill enables you to perform queries without predefining schemas
 * Drill enables you to JOIN data in different formats from multiple datastores.
