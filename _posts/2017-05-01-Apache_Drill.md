@@ -1,10 +1,10 @@
 ---
 layout: post
-title: How to write SQL JOIN queries to combine relational and NoSQL datasets with Apache Drill
+title: How to combine relational and NoSQL datasets with Apache Drill
 tags: [data discovery, data integration, apache drill]
 ---
 
-It is rarely the case that real-world data science applications can operate on data which is entirely contained within a single database system. Take for instance a company which wants to use data sources across its enterprise to develop marketing campaigns or recommendation engines that more accurately target the concerns of key customer groups. To develop this kind of application you would be faced with a set of heterogeneous datasets such as CRM data, customer support data, and payment records that would need to be migrated and transformed into a common format simply to perform analysis. This can be challenging when your datasets are large and the schemas change. The solution to this challenge is to use a database technology, such as Apache Drill, that can quickly provide results to queries without data movement or transformation. In this article I'm going to illustrate how Apache Drill can be used to query heterogeneous datasets easily and quickly. 
+It is rarely the case that enterprise data science applications can operate on data which is entirely contained within a single database system. Take for instance a company which wants to use data sources across its enterprise to develop marketing campaigns or recommendation engines that more accurately target the concerns of key customer groups. To develop this kind of application you would be faced with a set of heterogeneous datasets such as CRM data, customer support data, and payment records that would need to be migrated and transformed into a common format simply to perform analysis. This can be challenging when your datasets are large and the schemas change. The solution to this challenge is to use a database technology, such as Apache Drill, that can quickly provide results to queries without data movement or transformation. In this article I'm going to illustrate how Apache Drill can be used to query heterogeneous datasets easily and quickly. 
 
 ## What is Apache Drill?
 
