@@ -8,7 +8,7 @@ It is rarely the case that enterprise data science applications can operate on d
 
 ## What is Apache Drill?
 
-Apache Drill is a unix service that unifies access to data across a variety of data formats and sources. It can run on a single node or on multiple nodes in a clustered environment. It supports a variety of NoSQL databases and file systems, including HBase, MongoDB, HDFS, Amazon S3, Azure Blob Storage, and local text files like json or csv files. Drill provides the following extremely user friendly features:
+Apache Drill is a Unix service that unifies access to data across a variety of data formats and sources. It can run on a single node or on multiple nodes in a clustered environment. It supports a variety of NoSQL databases and file systems, including HBase, MongoDB, HDFS, Amazon S3, Azure Blob Storage, and local text files like json or csv files. Drill provides the following extremely user friendly features:
 
 * Drill supports industry standard APIs such as ANSI SQL and JDBC
 * Drill enables you to perform queries without predefining schemas
@@ -30,7 +30,7 @@ I defined the MySQL storage configuration from the Drill web ui, as show below:
 
 ![mysql storage plugin](http://iandow.github.io/img/mysql-storage-plugin.png)
 
-If you see the error "Please retry: error (unable to create/ update storage)" when you try to save the Storage Plugin then you've probably specified an invalid URL for the MySQL service or the credentials are invalid, or something else is preventing the Drill unix service from connecting to your MySQL service.
+If you see the error "Please retry: error (unable to create/ update storage)" when you try to save the Storage Plugin then you've probably specified an invalid URL for the MySQL service or the credentials are invalid, or something else is preventing the Drill Unix service from connecting to your MySQL service.
 
 After you click the button to enable that plugin, then you should see your MySQL tables by running `show schemas` in Drill, as shown below:
 
