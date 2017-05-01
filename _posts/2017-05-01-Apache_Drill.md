@@ -13,9 +13,9 @@ Apache Drill is a Unix service that unifies access to data across a variety of d
 * Drill enables you to perform queries without predefining schemas
 * Drill enables you to JOIN data in different formats from multiple datastores.
 
-## Using the RDBMS Storage Plugin to access MySQL
+## Connecting Drill to MySQL
 
-Drill is designed to work with any relational datastore that provides a JDBC driver. Drill is actively tested with Postgres, MySQL, Oracle, MSSQL and Apache Derby. To setup a JDBC connector follow these three steps:
+Drill is designed to work with any relational datastore that provides a JDBC driver. To setup a JDBC connector follow these three steps:
 
 1. Install Drill, if you do not already have it installed.
 2. Copy your database's JDBC driver into the jars/3rdparty directory. (You'll need to do this on every node.)
