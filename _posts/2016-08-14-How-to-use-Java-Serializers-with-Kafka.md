@@ -42,5 +42,5 @@ In my use-cases, maximizing throughput has been far more important than preservi
 
 ## Further Reading
 
-I've blogged extensively about performance optimization for Kafka stream pipelines and how serialization of various data types can significantly slow things down if you don't do it right. To read more, check out my blog on [What data types are most suitable for fast Kafka data streams](http://www.bigendiandata.com/2016-12-05-Data-Types-Compared/)
+I've blogged extensively about performance optimization for Kafka stream pipelines and how serialization of various data types can significantly slow things down if you don't do it right. To read more, check out my blog on [What data types are most suitable for fast Kafka data streams](http://www.bigendiandata.com/2016-12-05-Data-Types-Compared/).
 
