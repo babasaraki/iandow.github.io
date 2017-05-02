@@ -17,7 +17,7 @@ The solution to this challenge is to use a database technology such as Apache Dr
 
 ## Connecting Drill to MySQL
 
-Drill is designed to work with any relational datastore that provides a JDBC driver. To setup a JDBC connector follow these three steps:
+Drill is primarily designed to work with nonrelational datasets, but it can also work with any relational datastore through a JDBC driver. To setup a JDBC connection follow these three steps:
 
 1. Install Drill, if you do not already have it installed.
 2. Copy your database's JDBC driver into the jars/3rdparty directory. (You'll need to do this on every node.)
