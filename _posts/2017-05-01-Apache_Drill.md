@@ -84,5 +84,6 @@ You can also use the ODBC connection you configured above to programmatically qu
 
 # Conclusion
 
-I hope it's now apparent that it doesn't matter how your data is formatted or where its stored, Apache Drill enables you to explore datasets easily and quickly in standard SQL. 
+What I've tried to show above is that it doesn't matter how your data is formatted or where its stored, Apache Drill enables you to easily query and combine datasets from a wide variety of databases and file systems. This makes Apache Drill an extremely valuable tool for applications such as Customer 360 applications that require access to disparate datasets and the ability to combine those datasets with low latency SQL JOINs.
+
 
