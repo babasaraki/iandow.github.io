@@ -69,13 +69,12 @@ SELECT tbl1.name, tbl2.address, tbl3.name FROM `dfs.tmp`.`./names.json` as tbl1 
 
 Before you can connect Drill Explorer to Drill, first create a new connection from the iODBC Data Source Administrator.  Instructions for configuring ODBC connections are at [https://drill.apache.org/docs/testing-the-odbc-connection](https://drill.apache.org/docs/testing-the-odbc-connection).
 
-![iodbc admin](http://iandow.github.io/img/iodbc_admin.png)
-![iodbc admin setup](http://iandow.github.io/img/iodbc_admin_setup.png)
-
+<img src="http://iandow.github.io/img/iodbc_admin.png" width="33%">
+<img src="http://iandow.github.io/img/iodbc_admin_setup.png" width="33%">
 
 Once you connect Drill Explorer using the iODBC configuration you created, you should see all the available data sources, and preview the results of SQL queries, as shown below:
 
-![drill explorer](http://iandow.github.io/img/drillexplorer.png)
+<img src="http://iandow.github.io/img/drillexplorer.png" width="66%">
 
 ## Connecting to Drill from Jupyter
 
