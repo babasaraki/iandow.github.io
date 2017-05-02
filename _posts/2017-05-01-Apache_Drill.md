@@ -10,7 +10,10 @@ The solution to this challenge is to use a database technology such as Apache Dr
 
 ## What is Apache Drill?
 
+<img src="http://iandow.github.io/img/apache-drill-logo-400_0.png" width="33%" align="right">
+
 [Apache Drill](https://drill.apache.org/) is a Unix service that unifies access to data across a variety of data formats and sources. It can run on a single node or on multiple nodes in a clustered environment. It supports a variety of NoSQL databases and file systems, including HBase, MongoDB, HDFS, Amazon S3, Azure Blob Storage, and local text files like json or csv files. Drill provides the following user friendly features:
+
 * Drill supports industry standard APIs such as ANSI SQL and JDBC
 * Drill enables you to perform queries without predefining schemas
 * Drill enables you to JOIN data in different formats from multiple datastores.
