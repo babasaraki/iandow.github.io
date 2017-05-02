@@ -72,7 +72,12 @@ SELECT tbl1.name, tbl2.address, tbl3.name FROM `dfs.tmp`.`./names.json` as tbl1 
 
 [Drill Explorer](https://drill.apache.org/docs/drill-explorer-introduction/) is desktop GUI for Linux, Mac OS, and Windows that's useful for browsing data sources and previewing the results of SQL queries. People commonly use it to familiarize themselves with data sources and prototype SQL queries, then use another tool for actually analyzing that data in production. 
 
-Before you can connect Drill Explorer to Drill, first create a new connection from the iODBC Data Source Administrator.  Instructions for configuring ODBC connections are at [https://drill.apache.org/docs/testing-the-odbc-connection](https://drill.apache.org/docs/testing-the-odbc-connection).
+Download and install Drill Explorer and the iODBC driver for Mac OS from [here](https://drill.apache.org/docs/installing-the-driver-on-mac-os-x). Follow these instructions to setup the ODBC driver:
+
+* [https://drill.apache.org/docs/installing-the-driver-on-mac-os-x/]https://drill.apache.org/docs/installing-the-driver-on-mac-os-x/
+* [https://drill.apache.org/docs/configuring-odbc-on-mac-os-x/](https://drill.apache.org/docs/configuring-odbc-on-mac-os-x/)
+
+Now you should have applications available in /Applications/iODBC/ and /Applications/DrillExplorer.app/. Before you can connect Drill Explorer to Drill, first create a new connection from the iODBC Data Source Administrator.  Instructions for configuring ODBC connections are at [https://drill.apache.org/docs/testing-the-odbc-connection](https://drill.apache.org/docs/testing-the-odbc-connection). Here's what my configuration looks like:
 
 <img src="http://iandow.github.io/img/iodbc_admin.png" width="33%">
 <img src="http://iandow.github.io/img/iodbc_admin_setup.png" width="33%">
@@ -86,6 +91,43 @@ Once you connect Drill Explorer using the iODBC configuration you created, you s
 You can also use the ODBC connection you configured above to programmatically query Drill data sources. MapR blogged about [how to use Drill from Python, R, and Perl](https://mapr.com/blog/using-drill-programmatically-python-r-and-perl/). I used those instructions to setup an ODBC connection in a Jupyter notebook for data exploration with Python, as shown below:
 
 {% include drill_demo.html %}
+
+## Connecting to Drill from R Studio
+
+You can also connect to Drill from R Studio using the ODBC connection you configured above. Here's how I set that up:
+
+1. Download and install the RODBC driver:
+
+{% highlight sql %}
+brew update
+brew install unixODBC
+wget "https://cran.r-project.org/src/contrib/RODBC_1.3-13.tar.gz"
+R CMD INSTALL RODBC_1.3-13.tar.gz
+{% endhighlight %}
+
+Reference: [http://stackoverflow.com/questions/28081640/installation-of-rodbc-on-os-x-yosemite](http://stackoverflow.com/questions/28081640/installation-of-rodbc-on-os-x-yosemite)
+
+2. Set your LD_LIBRARY_PATH:
+
+{% highlight sql %}
+export LD_LIBRARY_PATH=/usr/local/iODBC/lib/
+{% endhighlight %}
+
+3. Open R Studio and submit a SQL query
+
+{% highlight r %}
+library(RODBC)
+ch<-odbcConnect("Sample MapR Drill DSN")
+sqlQuery(ch, 'use dfs.tmp')
+sqlQuery(ch, 'show files')
+{% endhighlight %}
+
+![R Studio](http://iandow.github.io/img/rstudio_drill.png)
+
+For more information on using Drill with R, check out the following references:
+
+* [http://stackoverflow.com/questions/28081640/installation-of-rodbc-on-os-x-yosemite](http://stackoverflow.com/questions/28081640/installation-of-rodbc-on-os-x-yosemite)
+* [https://community.mapr.com/thread/9942](https://community.mapr.com/thread/9942)
 
 # Conclusion
 
