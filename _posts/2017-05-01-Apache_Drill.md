@@ -63,6 +63,26 @@ SELECT tbl1.name, tbl2.address FROM `dfs.tmp`.`./names.json` as tbl1 JOIN `dfs.t
 SELECT tbl1.name, tbl2.address, tbl3.name FROM `dfs.tmp`.`./names.json` as tbl1 JOIN `dfs.tmp`.`./addressunitedstates.json` as tbl2 ON tbl1.id=tbl2.id JOIN ianmysql.cars.`car` as tbl3 ON tbl1.id=tbl3.customerid
 {% endhighlight %}
 
+## Connecting to Drill from Mac OS
+
+[Drill Explorer](https://drill.apache.org/docs/drill-explorer-introduction/) is desktop GUI for Linux, Mac OS, and Windows that's useful for browsing data sources and previewing the results of SQL queries. People commonly use it to familiarize themselves with data sources and prototype SQL queries, then use another tool for actually analyzing that data in production. 
+
+Before you can connect Drill Explorer to Drill, first create a new connection from the iODBC Data Source Administrator.  Instructions for configuring ODBC connections are at [https://drill.apache.org/docs/testing-the-odbc-connection](https://drill.apache.org/docs/testing-the-odbc-connection).
+
+![iodbc admin](http://iandow.github.io/img/iodbc_admin.png)
+![iodbc admin setup](http://iandow.github.io/img/iodbc_admin_setup.png)
+
+
+Once you connect Drill Explorer using the iODBC configuration you created, you should see all the available data sources, and preview the results of SQL queries, as shown below:
+
+![drill explorer](http://iandow.github.io/img/drillexplorer.png)
+
+## Connecting to Drill from Jupyter
+
+You can also use the ODBC connection you configured above to programmatically query Drill data sources. MapR blogged about [how to use Drill from Python, R, and Perl](https://mapr.com/blog/using-drill-programmatically-python-r-and-perl/). I used those instructions to setup an ODBC connection in a Jupyter notebook for data exploration with Python, as shown below:
+
+{% include drill_demo.html %}
+
 # Conclusion
 
 I hope it's now apparent that it doesn't matter how your data is formatted or where its stored, Apache Drill enables you to explore datasets easily and quickly in standard SQL. 
