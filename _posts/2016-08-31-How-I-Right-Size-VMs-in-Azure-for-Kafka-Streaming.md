@@ -52,3 +52,13 @@ This unscientific study was a quick and dirty attempt to determine which Azure V
 
 Here's a good survey on the performance differences between the various Azure VM Sizes:
 [http://cloudspectator.com/microsoft-azure-dv2-vs-ds-comparison/](http://cloudspectator.com/microsoft-azure-dv2-vs-ds-comparison/)
+
+<br><br>
+<div class="main-explain-area padding-override jumbotron">
+  <img src="http://iandow.github.io/img/paypal.png" width="120" style="margin-left: 15px" align="right">
+  <p class="margin-override font-override">
+    Did you learn something useful from this blog? Has it saved you time??? If so, perhaps you would like to buy me a beer!</p>
+  <div id="paypalbtn">
+    <a class="btn btn-primary btn" href="https://www.paypal.me/iandownard/3.5">Donate via PayPal</a>
+  </div>
+</div>

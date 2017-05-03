@@ -39,3 +39,13 @@ What if you're clustering over more than 3 columns? How do you visualize that? O
 In the following notebook, I've produced an artificial dataset with 12 feature columns. I'm using this dataset to simulate a customer 360 dataset in which customers for a large bank have been characterized by a variety of attributes, such as the balances in various accounts. By plotting the k-means cluster groups and feature columns in a heatmap we can illustrate how a large bank could use machine learning to categorize their customer base into groups so that they could conceivably develop things like marketing campaigns or recommendation engines that more accurately target the concerns of the customers in those groups. 
 
 {% include heatmap.html %}
+
+<br><br>
+<div class="main-explain-area padding-override jumbotron">
+  <img src="http://iandow.github.io/img/paypal.png" width="120" style="margin-left: 15px" align="right">
+  <p class="margin-override font-override">
+  	Did you learn something useful from this blog? Has it saved you time??? If so, perhaps you would like to buy me a beer!</p>
+  <div id="paypalbtn">
+    <a class="btn btn-primary btn" href="https://www.paypal.me/iandownard/3.5">Donate via PayPal</a>
+  </div>
+</div>

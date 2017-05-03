@@ -44,3 +44,12 @@ In my use-cases, maximizing throughput has been far more important than preservi
 
 I've blogged extensively about performance optimization for Kafka stream pipelines and how serialization of various data types can significantly slow things down if you don't do it right. To read more, check out my blog on [What data types are most suitable for fast Kafka data streams](http://www.bigendiandata.com/2016-12-05-Data-Types-Compared/).
 
+<br><br>
+<div class="main-explain-area padding-override jumbotron">
+  <img src="http://iandow.github.io/img/paypal.png" width="120" style="margin-left: 15px" align="right">
+  <p class="margin-override font-override">
+    Did you learn something useful from this blog? Has it saved you time??? If so, perhaps you would like to buy me a beer!</p>
+  <div id="paypalbtn">
+    <a class="btn btn-primary btn" href="https://www.paypal.me/iandownard/3.5">Donate via PayPal</a>
+  </div>
+</div>
