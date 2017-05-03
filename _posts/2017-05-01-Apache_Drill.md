@@ -137,7 +137,7 @@ What I've tried to show above is that it doesn't matter how your data is formatt
 
 <br><br>
 <div class="main-explain-area padding-override jumbotron">
-  <img src="http://iandow.github.io/img/paypal.png" width="200" align="right">
+  <img src="http://iandow.github.io/img/paypal.png" width="150" align="right">
   <p class="margin-override font-override">
   	Did you learn something useful from this blog? Has it saved you time? If so, perhaps you would like to buy me a beer!</p>
   <div id="paypalbtn">
