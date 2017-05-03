@@ -136,10 +136,11 @@ For more information on using Drill with R, check out the following references:
 What I've tried to show above is that it doesn't matter how your data is formatted or where its stored, Apache Drill enables you to easily query and combine datasets from a wide variety of databases and file systems. This makes Apache Drill an extremely valuable tool for applications such as Customer 360 applications that require access to disparate datasets and the ability to combine those datasets with low latency SQL JOINs.
 
 <br><br>
+<img src="http://iandow.github.io/img/paypal.png" width="33%" align="right">
 <div class="main-explain-area padding-override jumbotron">
   <p class="margin-override font-override">
   	Did you learn something useful from this blog? Has it saved you time? If so, perhaps you would like to buy me a beer!</p>
   <div id="paypalbtn">
-    <a class="btn btn-primary btn" href="https://www.paypal.me/iandownard/15">Donate via PayPal</a>
+    <a class="btn btn-primary btn" href="https://www.paypal.me/iandownard/3.5">Donate via PayPal</a>
   </div>
 </div>
