@@ -143,7 +143,7 @@ What I've tried to show above is that it doesn't matter how your data is formatt
   <div id="paypalbtn">
     <a class="btn btn-primary btn" href="https://www.paypal.me/iandownard/3.5">Donate via PayPal</a>
   </div>
-  </tr>
+  </td><td>
   <img src="http://iandow.github.io/img/paypal.png" width="150" align="right">
-  </td></table>
+  </td></tr></table>
 </div>
