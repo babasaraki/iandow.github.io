@@ -160,7 +160,7 @@ We just built a three node Kafka cluster in Azure.  We created a topic that was 
 <div class="main-explain-area padding-override jumbotron">
   <img src="http://iandow.github.io/img/paypal.png" width="120" style="margin-left: 15px" align="right">
   <p class="margin-override font-override">
-    Did you learn something useful from this blog? Has it saved you time??? If so, perhaps you would like to buy me a beer!</p>
+    Did you learn something useful from this blog? Has it saved you time??? If you would like to say thank you, please consider donating to my beer fund!</p>
   <br>
   <div id="paypalbtn">
     <a class="btn btn-primary btn" href="https://www.paypal.me/iandownard/3.5">Donate via PayPal</a>
