@@ -52,14 +52,14 @@ author:
 
 # Select which links to show in the footer
 footer-links-active:
-  rss: false
+  rss: true
   facebook: false
   email: false
   twitter: true
   github: true
   linkedin: true
   xing: false
-  stackoverflow: true
+  stackoverflow: false
   instagram: false
   youtube: false
 
