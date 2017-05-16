@@ -194,8 +194,8 @@ You can also use the ODBC connection you configured above to programmatically qu
 ## Connecting to Drill from R Studio
 
 You can also connect to Drill from R Studio using the ODBC connection you configured above. Here's how I set that up:
-
-1. Download and install the RODBC driver:
+<br><br>
+Download and install the RODBC driver:
 
 {% highlight sql %}
 brew update
@@ -204,13 +204,13 @@ wget "https://cran.r-project.org/src/contrib/RODBC_1.3-13.tar.gz"
 R CMD INSTALL RODBC_1.3-13.tar.gz
 {% endhighlight %}
 
-2. Set your LD_LIBRARY_PATH:
+Set your LD_LIBRARY_PATH:
 
 {% highlight sql %}
 export LD_LIBRARY_PATH=/usr/local/iODBC/lib/
 {% endhighlight %}
 
-3. Open R Studio and submit a SQL query
+Open R Studio and submit a SQL query
 
 {% highlight r %}
 library(RODBC)
