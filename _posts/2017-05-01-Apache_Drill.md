@@ -70,6 +70,96 @@ SELECT tbl1.name, tbl2.address FROM `dfs.tmp`.`./names.json` as tbl1 JOIN `dfs.t
 SELECT tbl1.name, tbl2.address, tbl3.name FROM `dfs.tmp`.`./names.json` as tbl1 JOIN `dfs.tmp`.`./addressunitedstates.json` as tbl2 ON tbl1.id=tbl2.id JOIN ianmysql.cars.`car` as tbl3 ON tbl1.id=tbl3.customerid
 {% endhighlight %}
 
+## Connecting to Drill from Ubuntu
+
+In order to use Drill from Python, R, or any other programming language you have to install an ODBC driver. The official [Apache Drill docs] describe how to install on CentOS or Red Hat Linux but they do not cover Ubuntu, so I will. Here's how to install the MapR ODBC driver on Ubuntu 14.04:
+
+1. Download and install the latest MapR ODBC rpm, like this:
+	{% highlight bash %}
+	wget http://package.mapr.com/tools/MapR-ODBC/MapR_Drill/MapRDrill_odbc_v1.3.0.1009/maprdrill-1.3.0.1009-1.x86_64.rpm
+	rpm2cpio maprdrill-1.3.0.1009-1.x86_64.rpm | cpio -idmv
+	sudo mv opt/mapr/drill /opt/mapr/drillodbc
+	cd /opt/mapr/drillodbc/Setup
+	cp mapr.drillodbc.ini ~/.mapr.drillodbc.ini
+ 	cp odbc.ini ~/.odbc.ini
+ 	cp odbcinst.ini ~/.odbcinst.ini
+ 	# Edit the properties in those ini files according to your needs
+ 	# Put the following exports also in ~/.bashrc
+ 	export ODBCINI=~/.odbc.ini
+    export MAPRDRILLINI=~/.mapr.drillodbc.ini
+    export LD_LIBRARY_PATH=/usr/local/lib:/opt/mapr/drillodbc/lib/64:/usr/lib64
+	{% endhighlight %}
+
+2. Then update those .ini files, accordingly. Here is how I setup my ini files to connect to Drill:
+
+### odbc.ini:
+
+	[ODBC]
+	Trace=yes
+	Tracefile=/tmp/trace.txt
+
+	[ODBC Data Sources]
+	MapR Drill 64-bit=MapR Drill ODBC Driver 64-bit
+
+	[drill64]
+	# This key is not necessary and is only to give a description of the data source.
+	Description=MapR Drill ODBC Driver (64-bit) DSN
+
+	# Driver: The location where the ODBC driver is installed to.
+	Driver=/opt/mapr/drillodbc/lib/64/libdrillodbc_sb64.so
+
+	# The DriverUnicodeEncoding setting is only used for SimbaDM
+	# When set to 1, SimbaDM runs in UTF-16 mode.
+	# When set to 2, SimbaDM runs in UTF-8 mode.
+	#DriverUnicodeEncoding=2
+
+	# Values for ConnectionType, AdvancedProperties, Catalog, Schema should be set here.
+	# If ConnectionType is Direct, include Host and Port. If ConnectionType is ZooKeeper, include ZKQuorum and ZKClusterID
+	# They can also be specified on the connection string.
+	# AuthenticationType: No authentication; Basic Authentication
+	ConnectionType=Direct
+	HOST=nodea
+	PORT=31010
+	ZKQuorum=[Zookeeper Quorum]
+	ZKClusterID=[Cluster ID]
+	AuthenticationType=No Authentication
+	UID=[USERNAME]
+	PWD=[PASSWORD]
+	DelegationUID=
+	AdvancedProperties=CastAnyToVarchar=true;HandshakeTimeout=5;QueryTimeout=180;TimestampTZDisplayTimezone=utc;ExcludedSchemas=sys,INFORMATION_SCHEMA;NumberOfPrefetchBuffers=5;
+	Catalog=DRILL
+	Schema=
+	
+### odbcinst.ini:
+	
+	[ODBC Drivers]
+	MapR Drill ODBC Driver 32-bit=Installed
+	MapR Drill ODBC Driver 64-bit=Installed
+
+	[MapR Drill ODBC Driver 32-bit]
+	Description=MapR Drill ODBC Driver(32-bit)
+	Driver=/opt/mapr/drillodbc/lib/32/libdrillodbc_sb32.so
+
+	[MapR Drill ODBC Driver 64-bit]
+	Description=MapR Drill ODBC Driver(64-bit)
+	Driver=/opt/mapr/drillodbc/lib/64/libdrillodbc_sb64.so
+
+### mapr.drillodbc.ini
+	
+	[Driver]
+	DisableAsync=0
+	DriverManagerEncoding=UTF-16
+	ErrorMessagesPath=/opt/mapr/drillodbc/ErrorMessages
+	LogLevel=0
+	LogPath=[LogPath]
+	SwapFilePath=/tmp
+	ODBCInstLib=/usr/lib/x86_64-linux-gnu/libodbcinst.so.1.0.0
+
+3. If you've installed and configured the ODBC driver correctly, then the command `python -c 'import pyodbc; print(pyodbc.dataSources()); print(pyodbc.connect("DSN=drill64", autocommit=True))'` should show DSN like this:
+
+	`{'ODBC': '', 'drill64': '/opt/mapr/drillodbc/lib/64/libdrillodbc_sb64.so'}
+	<pyodbc.Connection object at 0x7f5ec4a20200>`
+
 ## Connecting to Drill from Mac OS
 
 [Drill Explorer](https://drill.apache.org/docs/drill-explorer-introduction/) is desktop GUI for Linux, Mac OS, and Windows that's useful for browsing data sources and previewing the results of SQL queries. People commonly use it to familiarize themselves with data sources and prototype SQL queries, then use another tool for actually analyzing that data in production. 
@@ -139,7 +229,7 @@ What I've tried to show above is that it doesn't matter how your data is formatt
 <div class="main-explain-area padding-override jumbotron">
   <img src="http://iandow.github.io/img/paypal.png" width="120" style="margin-left: 15px" align="right">
   <p class="margin-override font-override">
-  	Did you learn something useful from this blog? Has it saved you time??? If you would like to say thank you, please consider donating to my beer fund!</p>
+  	Did you enjoy the blog? Did you learn something useful? If you would like to support this blog please consider making a small donation. Thanks!</p>
   <br>
   <div id="paypalbtn">
     <a class="btn btn-primary btn" href="https://www.paypal.me/iandownard/3.5">Donate via PayPal</a>
