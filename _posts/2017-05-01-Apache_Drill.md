@@ -197,29 +197,27 @@ You can also connect to Drill from R Studio using the ODBC connection you config
 
 1. Download and install the RODBC driver:
 
-	{% highlight sql %}
-	brew update
-	brew install unixODBC
-	wget "https://cran.r-project.org/src/contrib/RODBC_1.3-13.tar.gz"
-	R CMD INSTALL RODBC_1.3-13.tar.gz
-	{% endhighlight %}
-
-	Reference: [http://stackoverflow.com/questions/28081640/installation-of-rodbc-on-os-x-yosemite](http://stackoverflow.com/questions/28081640/installation-of-rodbc-on-os-x-yosemite)
+{% highlight sql %}
+brew update
+brew install unixODBC
+wget "https://cran.r-project.org/src/contrib/RODBC_1.3-13.tar.gz"
+R CMD INSTALL RODBC_1.3-13.tar.gz
+{% endhighlight %}
 
 2. Set your LD_LIBRARY_PATH:
 
-	{% highlight sql %}
-	export LD_LIBRARY_PATH=/usr/local/iODBC/lib/
-	{% endhighlight %}
+{% highlight sql %}
+export LD_LIBRARY_PATH=/usr/local/iODBC/lib/
+{% endhighlight %}
 
 3. Open R Studio and submit a SQL query
 
-	{% highlight r %}
-	library(RODBC)
-	ch<-odbcConnect("Sample MapR Drill DSN")
-	sqlQuery(ch, 'use dfs.tmp')
-	sqlQuery(ch, 'show files')
-	{% endhighlight %}
+{% highlight r %}
+library(RODBC)
+ch<-odbcConnect("Sample MapR Drill DSN")
+sqlQuery(ch, 'use dfs.tmp')
+sqlQuery(ch, 'show files')
+{% endhighlight %}
 
 ![R Studio](http://iandow.github.io/img/rstudio_drill.png)
 
