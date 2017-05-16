@@ -164,8 +164,8 @@ python -c 'import pyodbc; print(pyodbc.dataSources()); print(pyodbc.connect("DSN
 
 should output information like this:
 
-	{'ODBC': '', 'drill64': '/opt/mapr/drillodbc/lib/64/libdrillodbc_sb64.so'}
-	<pyodbc.Connection object at 0x7f5ec4a20200>
+	```{'ODBC': '', 'drill64': '/opt/mapr/drillodbc/lib/64/libdrillodbc_sb64.so'}
+	<pyodbc.Connection object at 0x7f5ec4a20200>```
 
 ## Connecting to Drill from Mac OS
 
