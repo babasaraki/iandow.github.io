@@ -158,14 +158,12 @@ Then update those .ini files, accordingly. Here is how I setup my ini files to c
 
 Finally, if you've installed and configured the ODBC driver correctly, then the command 
 
-`python -c 'import pyodbc; print(pyodbc.dataSources()); print(pyodbc.connect("DSN=drill64", autocommit=True))'` 
+	`python -c 'import pyodbc; print(pyodbc.dataSources()); print(pyodbc.connect("DSN=drill64", autocommit=True))'` 
 
 should output information like this:
 
-`
-{'ODBC': '', 'drill64': '/opt/mapr/drillodbc/lib/64/libdrillodbc_sb64.so'}
-<pyodbc.Connection object at 0x7f5ec4a20200>
-`
+	`{'ODBC': '', 'drill64': '/opt/mapr/drillodbc/lib/64/libdrillodbc_sb64.so'}
+<pyodbc.Connection object at 0x7f5ec4a20200>`
 
 ## Connecting to Drill from Mac OS
 
