@@ -74,23 +74,24 @@ SELECT tbl1.name, tbl2.address, tbl3.name FROM `dfs.tmp`.`./names.json` as tbl1 
 
 In order to use Drill from Python, R, or any other programming language you have to install an ODBC driver. The official [Apache Drill docs] describe how to install on CentOS or Red Hat Linux but they do not cover Ubuntu, so I will. Here's how to install the MapR ODBC driver on Ubuntu 14.04:
 
-1. Download and install the latest MapR ODBC rpm, like this:
-	{% highlight bash %}
-	wget http://package.mapr.com/tools/MapR-ODBC/MapR_Drill/MapRDrill_odbc_v1.3.0.1009/maprdrill-1.3.0.1009-1.x86_64.rpm
-	rpm2cpio maprdrill-1.3.0.1009-1.x86_64.rpm | cpio -idmv
-	sudo mv opt/mapr/drill /opt/mapr/drillodbc
-	cd /opt/mapr/drillodbc/Setup
-	cp mapr.drillodbc.ini ~/.mapr.drillodbc.ini
- 	cp odbc.ini ~/.odbc.ini
- 	cp odbcinst.ini ~/.odbcinst.ini
- 	# Edit the properties in those ini files according to your needs
- 	# Put the following exports also in ~/.bashrc
- 	export ODBCINI=~/.odbc.ini
-    export MAPRDRILLINI=~/.mapr.drillodbc.ini
-    export LD_LIBRARY_PATH=/usr/local/lib:/opt/mapr/drillodbc/lib/64:/usr/lib64
-	{% endhighlight %}
+First download and install the latest MapR ODBC rpm, like this:
 
-2. Then update those .ini files, accordingly. Here is how I setup my ini files to connect to Drill:
+{% highlight bash %}
+wget http://package.mapr.com/tools/MapR-ODBC/MapR_Drill/MapRDrill_odbc_v1.3.0.1009/maprdrill-1.3.0.1009-1.x86_64.rpm
+rpm2cpio maprdrill-1.3.0.1009-1.x86_64.rpm | cpio -idmv
+sudo mv opt/mapr/drill /opt/mapr/drillodbc
+cd /opt/mapr/drillodbc/Setup
+cp mapr.drillodbc.ini ~/.mapr.drillodbc.ini
+cp odbc.ini ~/.odbc.ini
+cp odbcinst.ini ~/.odbcinst.ini
+# Edit the properties in those ini files according to your needs
+# Put the following exports also in ~/.bashrc
+export ODBCINI=~/.odbc.ini
+export MAPRDRILLINI=~/.mapr.drillodbc.ini
+export LD_LIBRARY_PATH=/usr/local/lib:/opt/mapr/drillodbc/lib/64:/usr/lib64
+{% endhighlight %}
+
+Then update those .ini files, accordingly. Here is how I setup my ini files to connect to Drill:
 
 ### odbc.ini:
 
@@ -155,10 +156,16 @@ In order to use Drill from Python, R, or any other programming language you have
 	SwapFilePath=/tmp
 	ODBCInstLib=/usr/lib/x86_64-linux-gnu/libodbcinst.so.1.0.0
 
-3. If you've installed and configured the ODBC driver correctly, then the command `python -c 'import pyodbc; print(pyodbc.dataSources()); print(pyodbc.connect("DSN=drill64", autocommit=True))'` should show DSN like this:
+Finally, if you've installed and configured the ODBC driver correctly, then the command 
 
-	`{'ODBC': '', 'drill64': '/opt/mapr/drillodbc/lib/64/libdrillodbc_sb64.so'}
-	<pyodbc.Connection object at 0x7f5ec4a20200>`
+`python -c 'import pyodbc; print(pyodbc.dataSources()); print(pyodbc.connect("DSN=drill64", autocommit=True))'` 
+
+should output information like this:
+
+`
+{'ODBC': '', 'drill64': '/opt/mapr/drillodbc/lib/64/libdrillodbc_sb64.so'}
+<pyodbc.Connection object at 0x7f5ec4a20200>
+`
 
 ## Connecting to Drill from Mac OS
 
