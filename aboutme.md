@@ -3,7 +3,8 @@ layout: page
 title: About me
 ---
 
-I am a technical evangelist for [MapR Technologies](http://www.mapr.com). My career has focused on developing tools for optimizing the performance of applications. Currently, I'm focused on finding and promoting ways businesses can be successful with big data applications. 
+I am a technical evangelist for [MapR Technologies](http://www.mapr.com) where I focus on finding and promoting ways people can create awesome big data applications.
+
 
 <div class="main-explain-area padding-override jumbotron">
   <p class="margin-override font-override">
