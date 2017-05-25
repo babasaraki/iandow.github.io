@@ -4,7 +4,7 @@ title: How To Debug Remote Spark Jobs With IntelliJ
 tags: [intellij, spark]
 ---
 
-Application developers often use debuggers to assist with application development and fix problems in their code. Typically, developers run and debug their applications locally on their workstation, however one of the challenges with developing big data applications is that they're designed to be run on a multi-node cluster. The presents a challenge for debugging because you have to attach a debugger to a process that's running on a remote machine. Fortunately, it's actually not that hard. 
+Application developers often use debuggers to find and fix defects in their code. Attaching a debugger to running application is straightforward when the runtime is local on a laptop but its a bit trickier when that code runs on a remote server. To make matters worse, Big Data applications are designed to run in a distributed fashion across a multi-node cluster. This represents a challenge for debugging since you have to attach a debugger to a process that's running on multiple remote cluster nodes. Fortunately, for Apache Spark that's actually not that hard.
 
 My favorite IDE is IntelliJ. I use it to develop Spark applications that run on remote multi-node clusters. I configure maven to compile my application and all its dependencies into a single jar, then after I build my jar file I upload it to my remote cluster and run it like this:
 
