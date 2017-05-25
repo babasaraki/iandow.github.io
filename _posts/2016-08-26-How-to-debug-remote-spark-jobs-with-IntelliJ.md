@@ -40,7 +40,7 @@ So, that's how you attach IntelliJ's debugger to a Spark application running on 
 <div class="main-explain-area padding-override jumbotron">
   <img src="http://iandow.github.io/img/paypal.png" width="120" style="margin-left: 15px" align="right">
   <p class="margin-override font-override">
-    Did you learn something useful from this blog? Has it saved you time??? If you would like to say thank you, please consider donating to my beer fund!</p>
+  	Did you enjoy the blog? Did you learn something useful? If you would like to support this blog please consider making a small donation. Thanks!</p>
   <br>
   <div id="paypalbtn">
     <a class="btn btn-primary btn" href="https://www.paypal.me/iandownard/3.5">Donate via PayPal</a>
