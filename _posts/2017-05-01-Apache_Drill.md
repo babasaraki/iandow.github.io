@@ -173,7 +173,7 @@ should output information like this:
 
 Download and install Drill Explorer and the iODBC driver for Mac OS from [here](https://drill.apache.org/docs/installing-the-driver-on-mac-os-x). Follow these instructions to setup the ODBC driver:
 
-* [https://drill.apache.org/docs/installing-the-driver-on-mac-os-x/]https://drill.apache.org/docs/installing-the-driver-on-mac-os-x/
+* [https://drill.apache.org/docs/installing-the-driver-on-mac-os-x/](https://drill.apache.org/docs/installing-the-driver-on-mac-os-x/)
 * [https://drill.apache.org/docs/configuring-odbc-on-mac-os-x/](https://drill.apache.org/docs/configuring-odbc-on-mac-os-x/)
 
 Now you should have applications available in /Applications/iODBC/ and /Applications/DrillExplorer.app/. Before you can connect Drill Explorer to Drill, first create a new connection from the iODBC Data Source Administrator.  Instructions for configuring ODBC connections are at [https://drill.apache.org/docs/testing-the-odbc-connection](https://drill.apache.org/docs/testing-the-odbc-connection). Here's what my configuration looks like:

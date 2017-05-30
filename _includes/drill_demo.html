@@ -11793,7 +11793,8 @@ div#notebook {
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Initialize the connection</span>
 <span class="c1"># The DSN was defined with the iODBC Administrator app for Mac.</span>
 <span class="n">conn</span> <span class="o">=</span> <span class="n">pyodbc</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;DSN=MapR Drill&quot;</span><span class="p">,</span> <span class="n">autocommit</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="n">conn</span><span class="o">.</span><span class="n">setdecoding</span><span class="p">(</span><span class="n">pyodbc</span><span class="o">.</span><span class="n">SQL_WMETADATA</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-32le&#39;</span><span class="p">)</span>
+<span class="n">conn</span><span class="o">.</span><span class="n">setdecoding</span><span class="p">(</span><span class="n">pyodbc</span><span class="o">.</span><span class="n">SQL_CHAR</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-32le&#39;</span><span class="p">,</span> <span class="n">to</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span>
+<span class="n">conn</span><span class="o">.</span><span class="n">setdecoding</span><span class="p">(</span><span class="n">pyodbc</span><span class="o">.</span><span class="n">SQL_WMETADATA</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-32le&#39;</span><span class="p">,</span> <span class="n">to</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span>
 <span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
 </pre></div>
 
