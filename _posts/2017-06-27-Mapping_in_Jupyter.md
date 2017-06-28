@@ -16,12 +16,12 @@ The three plotting libraries I'm going to cover are Matplotlib, Plotly, and Boke
 
 In these examples, I'm plotting data from the California Housing Prices dataset, which I discovered while reading [Hands-On Machine Learning with Scikit-Learn & TensorFlow](http://shop.oreilly.com/product/0636920052289.do), by Aurélien Géron. If you're interested in learning about how real world machine learning applications get developed and operationalized, I highly recommend this book!
 
+
 {% include GeoMappingwithBokehAndGoogleMaps.html %}
 
 {% include GeoMappingwithMatplotlib.html %}
 
 {% include GeoMappingwithPlotly.html %}
-
 
 
 # Conclusion
