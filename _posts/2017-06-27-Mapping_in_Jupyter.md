@@ -16,9 +16,13 @@ The three plotting libraries I'm going to cover are Matplotlib, Plotly, and Goog
 
 We'll be plotting data from the California Housing Prices dataset, which I discovered while reading [Hands-On Machine Learning with Scikit-Learn & TensorFlow](http://shop.oreilly.com/product/0636920052289.do), by Aurélien Géron.
 
+{% include GeoMappingwithBokehAndGoogleMaps.html %}
+
 {% include GeoMappingwithMatplotlib.html %}
+
 {% include GeoMappingwithPlotly.html %}
-{% include GeoMappingwithBokehandGoogleMaps.html %}
+
+
 
 # Conclusion
 
