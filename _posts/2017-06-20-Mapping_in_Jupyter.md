@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Matplotlib vs Plotly vs Google Maps for Mapping Geo Data 
+title: How to plot data on maps in Jupyter using Matplotlib, Plotly, Bokeh and Google Maps
 tags: [data discovery, data integration, apache drill]
 ---
 
