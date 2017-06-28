@@ -13,10 +13,10 @@ Jupyter is a web application that allows you to create notebooks that contain li
 # Matplotlib vs Plotly vs Bokeh and Google Maps
 
 The three plotting libraries I'm going to cover are Matplotlib, Plotly, and Bokeh with Google Maps. Google Maps is familiar to most people. It does one thing and it does it well. Matplotlib and Plotly can do so much more than just plot data on maps but as far as geo mapping goes, they look different (sometimes better) from the canonical Google map view. I've given all three of these libraries a pretty fair shake, and of the three I prefer using Google Maps because it's so familiar and so dead simple to plot anything with latitude and longitude data. But you can check them out in the notebooks below and can decide for yourself!
-
+<br>
 <p>In these examples, I'm plotting data from the California Housing Prices dataset, which I discovered while reading [Hands-On Machine Learning with Scikit-Learn & TensorFlow](http://shop.oreilly.com/product/0636920052289.do), by Aurélien Géron. If you're interested in learning about how real world machine learning applications get developed and operationalized, I highly recommend this book!</p>
 
-## Feedback 
+# Feedback 
 
 Please provide your feedback to this article by adding a comment to [https://github.com/iandow/iandow.github.io/issues/2](https://github.com/iandow/iandow.github.io/issues/2).
 
