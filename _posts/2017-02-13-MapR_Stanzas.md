@@ -46,7 +46,7 @@ For your reference I've included the YAML file that I exported from my test clus
 
 {% highlight yaml %}
 environment:
-  mapr_core_version: 5.2.0
+  mapr_core_version: 5.2.1
 config:
   admin_id: mapr
   cluster_admin_create: false
@@ -54,19 +54,18 @@ config:
   cluster_admin_group: mapr
   cluster_admin_id: mapr
   cluster_admin_uid: 1000
-  cluster_id: '3703723865331276875'
-  cluster_name: demo.cluster.com
+  cluster_name: my.cluster.com
   data:
     diskStripeDefault: 3
     licenseType: M3
     licenseValidation: INSTALL
-    'null': true
+    process_type: install
     showAdvancedServiceConfig: false
     showAdvancedServiceSelection: false
     showLicenseValidation: true
     showLogs: false
     template: template-05-converged
-  dial_home_id: '720540929'
+  dial_home_id: '843699986'
   disk_format: true
   disk_stripe: 3
   disks:
@@ -74,12 +73,12 @@ config:
   elasticsearch_path: /opt/mapr/es_db
   environment: azure
   hosts:
-  - nodea.seqgoshpp54uhcdmhan2f1m5ie.bx.internal.cloudapp.net
-  - nodeb.seqgoshpp54uhcdmhan2f1m5ie.bx.internal.cloudapp.net
-  - nodec.seqgoshpp54uhcdmhan2f1m5ie.bx.internal.cloudapp.net
+  - 10.1.1.4
+  - 10.1.1.5
+  - 10.1.1.6
   install_dir: /opt/mapr/installer
-  installer_version: 1.4.201612081140
-  license_install: false
+  installer_version: 1.5.201705021610
+  license_accepted: true
   license_modules:
   - DATABASE
   - HADOOP
@@ -90,7 +89,7 @@ config:
     services: https://localhost:9443/api/config/services
   mapr_id: '64468'
   mapr_name: jklfdsalkj@yahoo.com
-  mep_version: '2.0'
+  mep_version: '3.0'
   no_internet: false
   os_version: ubuntu_14.04
   repo_core_url: http://package.mapr.com/releases
@@ -101,28 +100,28 @@ config:
       version: 1.7.0
     mapr-cldb:
       enabled: true
-      version: 5.2.0
+      version: 5.2.1
     mapr-collectd:
       enabled: true
-      version: 5.5.1
+      version: 5.7.1
     mapr-core:
       enabled: true
-      version: 5.2.0
+      version: 5.2.1
     mapr-drill:
       enabled: true
-      version: '1.9'
+      version: '1.10'
     mapr-elasticsearch:
       enabled: true
       version: 2.3.3
     mapr-fileserver:
       enabled: true
-      version: 5.2.0
+      version: 5.2.1
     mapr-fluentd:
       enabled: true
       version: 0.14.00
     mapr-grafana:
       enabled: true
-      version: 3.1.1
+      version: 4.1.2
     mapr-hbase:
       enabled: true
       version: '1.1'
@@ -137,98 +136,90 @@ config:
       version: '1.1'
     mapr-historyserver:
       enabled: true
-      version: 5.2.0
+      version: 5.2.1
     mapr-hive:
       enabled: true
-      version: '1.2'
+      version: '2.1'
     mapr-hive-client:
       enabled: true
-      version: '1.2'
+      version: '2.1'
     mapr-hivemetastore:
       database:
-        create: true
-        label: Use existing MySQL server
-        name: hive
-        password: q7wp4XaAQpvdn
-        type: MYSQL
-        user: hive
+        create: false
+        type: DEFAULT
       enabled: true
-      version: '1.2'
+      version: '2.1'
     mapr-hiveserver2:
       enabled: true
-      version: '1.2'
+      version: '2.1'
     mapr-hivewebhcat:
       enabled: true
-      version: '1.2'
+      version: '2.1'
     mapr-httpfs:
       enabled: true
       version: '1.0'
     mapr-hue:
       database:
-        create: true
-        label: Use existing MySQL server
-        name: hue
-        password: q7wp4XaAQpvdn
-        type: MYSQL
-        user: hue
+        create: false
+        type: DEFAULT
       enabled: true
-      version: 3.10.0
+      version: 3.12.0
     mapr-kafka:
       enabled: true
       version: 0.9.0
     mapr-kibana:
       enabled: true
-      version: 4.5.1
-    mapr-mysql:
+      version: 4.5.4
+    mapr-librdkafka:
       enabled: true
+      version: 0.9.0
     mapr-nfs:
       enabled: true
-      version: 5.2.0
+      version: 5.2.1
     mapr-nodemanager:
       enabled: true
-      version: 5.2.0
+      version: 5.2.1
     mapr-oozie:
       database:
-        create: true
-        label: Use existing MySQL server
-        name: oozie
-        password: q7wp4XaAQpvdn
-        type: MYSQL
-        user: oozie
+        create: false
+        type: DEFAULT
       enabled: true
-      version: 4.2.0
+      version: 4.3.0
     mapr-opentsdb:
       enabled: true
-      version: 2.2.1
+      version: 2.3.0
     mapr-resourcemanager:
       enabled: true
-      version: 5.2.0
+      version: 5.2.1
     mapr-spark:
       enabled: true
-      version: 2.0.1
+      version: 2.1.0
     mapr-spark-client:
       enabled: true
-      version: 2.0.1
+      version: 2.1.0
     mapr-spark-historyserver:
       enabled: true
-      version: 2.0.1
+      version: 2.1.0
+    mapr-streams-clients:
+      enabled: true
+      version: 0.9.0
     mapr-webserver:
       enabled: true
-      version: 5.2.0
+      version: 5.2.1
     mapr-yarn:
       enabled: true
-      version: 5.2.0
+      version: 5.2.1
     mapr-zookeeper:
       enabled: true
-      version: 5.2.0
-  services_version: 1.4.201612081140
+      version: 5.2.1
+  services_version: 1.5.201705021610
   ssh_id: mapr
-  ssh_password: q7wp4XaAQpvdn
   ssh_method: PASSWORD
   ssh_port: 22
-  state: COMPLETED
+  state: INIT
 hosts:
-- disks:
+- completion: 100
+  disks:
     /dev/fd0:
       selected: false
       size: 0 Bytes
@@ -242,15 +233,98 @@ hosts:
       unavailable: Disk mounted at /mnt
     /dev/sdc:
       selected: true
-      size: 7 TB
-    /dev/sdd:
-      selected: false
-      size: 7 TB
+      size: 1000 GB
     /dev/sr0:
       selected: false
       size: 4 MB
-  id: nodec.seqgoshpp54uhcdmhan2f1m5ie.bx.internal.cloudapp.net
-- disks:
+  id: 10.1.1.5
+  prereqs:
+    CPU:
+      required: x86_64
+      state: VALID
+      value: x86_64
+    Cluster Admin:
+      required: present
+      state: VALID
+      value: mapr
+    Disks:
+      required: /dev/fd0, /dev/sr0, /dev/sdc
+      state: VALID
+      value: /dev/sdc
+    Distribution:
+      required: SLES,Suse,CentOS,RedHat,Ubuntu
+      state: VALID
+      value: Ubuntu 14.04
+    Free /:
+      required: 10 GB
+      state: VALID
+      value: 27.5 GB
+    Free /opt:
+      required: 128 GB
+      state: WARN
+      value: 27.5 GB
+    Free /tmp:
+      required: 10 GB
+      state: VALID
+      value: 27.5 GB
+    GID:
+      required: '1000'
+      state: VALID
+      value: '1000'
+    Hadoop:
+      required: absent
+      state: VALID
+      value: absent
+    Home Dir:
+      required: present
+      state: VALID
+      value: /home/mapr
+    Hostname:
+      required: nodeb
+      state: VALID
+      value: nodeb
+    Internet:
+      required: present
+      state: VALID
+      value: present
+    Owner /dev/shm:
+      required: uid 0
+      state: VALID
+      value: uid 0
+    Owner /tmp:
+      required: uid 0
+      state: VALID
+      value: uid 0
+    Perm /dev/shm:
+      required: '1023'
+      state: VALID
+      value: '01777'
+    Perm /tmp:
+      required: '1023'
+      state: VALID
+      value: '01777'
+    RAM:
+      required: 8 GB
+      state: VALID
+      value: 14.0 GB
+    SWAP:
+      required: 1.4 GB
+      state: VALID
+      value: 2.0 GB
+    UID:
+      required: '1000'
+      state: VALID
+      value: '1000'
+    Yarn:
+      required: absent
+      state: VALID
+      value: absent
+  services: []
+  state: CHECK_WARN
+  status: Verified with warnings
+  valid: false
+- completion: 100
+  disks:
     /dev/fd0:
       selected: false
       size: 0 Bytes
@@ -264,12 +338,98 @@ hosts:
       unavailable: Disk mounted at /mnt
     /dev/sdc:
       selected: true
-      size: 7 TB
+      size: 1000 GB
     /dev/sr0:
       selected: false
       size: 4 MB
-  id: nodeb.seqgoshpp54uhcdmhan2f1m5ie.bx.internal.cloudapp.net
-- disks:
+  id: 10.1.1.4
+  prereqs:
+    CPU:
+      required: x86_64
+      state: VALID
+      value: x86_64
+    Cluster Admin:
+      required: present
+      state: VALID
+      value: mapr
+    Disks:
+      required: /dev/fd0, /dev/sr0, /dev/sdc
+      state: VALID
+      value: /dev/sdc
+    Distribution:
+      required: SLES,Suse,CentOS,RedHat,Ubuntu
+      state: VALID
+      value: Ubuntu 14.04
+    Free /:
+      required: 10 GB
+      state: VALID
+      value: 26.8 GB
+    Free /opt/mapr:
+      required: 128 GB
+      state: WARN
+      value: 26.8 GB
+    Free /tmp:
+      required: 10 GB
+      state: VALID
+      value: 26.8 GB
+    GID:
+      required: '1000'
+      state: VALID
+      value: '1000'
+    Hadoop:
+      required: absent
+      state: VALID
+      value: absent
+    Home Dir:
+      required: present
+      state: VALID
+      value: /home/mapr
+    Hostname:
+      required: nodea
+      state: VALID
+      value: nodea
+    Internet:
+      required: present
+      state: VALID
+      value: present
+    Owner /dev/shm:
+      required: uid 0
+      state: VALID
+      value: uid 0
+    Owner /tmp:
+      required: uid 0
+      state: VALID
+      value: uid 0
+    Perm /dev/shm:
+      required: '1023'
+      state: VALID
+      value: '01777'
+    Perm /tmp:
+      required: '1023'
+      state: VALID
+      value: '01777'
+    RAM:
+      required: 8 GB
+      state: VALID
+      value: 14.0 GB
+    SWAP:
+      required: 1.4 GB
+      state: VALID
+      value: 2.0 GB
+    UID:
+      required: '1000'
+      state: VALID
+      value: '1000'
+    Yarn:
+      required: absent
+      state: VALID
+      value: absent
+  services: []
+  state: CHECK_WARN
+  status: Verified with warnings
+  valid: false
+- completion: 100
+  disks:
     /dev/fd0:
       selected: false
       size: 0 Bytes
@@ -283,86 +443,97 @@ hosts:
       unavailable: Disk mounted at /mnt
     /dev/sdc:
       selected: true
-      size: 7 TB
+      size: 1000 GB
     /dev/sr0:
       selected: false
       size: 4 MB
-  id: nodea.seqgoshpp54uhcdmhan2f1m5ie.bx.internal.cloudapp.net
-groups:
-- hosts:
-  - nodec.seqgoshpp54uhcdmhan2f1m5ie.bx.internal.cloudapp.net
-  - nodea.seqgoshpp54uhcdmhan2f1m5ie.bx.internal.cloudapp.net
-  - nodeb.seqgoshpp54uhcdmhan2f1m5ie.bx.internal.cloudapp.net
-  label: CONTROL
-  services:
-  - mapr-zookeeper-5.2.0
-- hosts:
-  - nodea.seqgoshpp54uhcdmhan2f1m5ie.bx.internal.cloudapp.net
-  - nodeb.seqgoshpp54uhcdmhan2f1m5ie.bx.internal.cloudapp.net
-  label: MULTI_MASTER
-  services:
-  - mapr-webserver-5.2.0
-  - mapr-resourcemanager-5.2.0
-- hosts:
-  - nodec.seqgoshpp54uhcdmhan2f1m5ie.bx.internal.cloudapp.net
-  label: MASTER
-  services:
-  - mapr-hiveserver2-1.2
-  - mapr-hivewebhcat-1.2
-  - mapr-hivemetastore-1.2
-  - mapr-hue-3.10.0
-  - mapr-historyserver-5.2.0
-  - mapr-kibana-4.5.1
-  - mapr-grafana-3.1.1
-  - mapr-hbasethrift-1.1
-  - mapr-mysql
-  - mapr-spark-historyserver-2.0.1
-  - mapr-oozie-4.2.0
-  - mapr-httpfs-1.0
-- hosts:
-  - nodec.seqgoshpp54uhcdmhan2f1m5ie.bx.internal.cloudapp.net
-  - nodea.seqgoshpp54uhcdmhan2f1m5ie.bx.internal.cloudapp.net
-  - nodeb.seqgoshpp54uhcdmhan2f1m5ie.bx.internal.cloudapp.net
-  label: MONITORING_MASTER
-  services:
-  - mapr-opentsdb-2.2.1
-  - mapr-elasticsearch-2.3.3
-- hosts:
-  - nodec.seqgoshpp54uhcdmhan2f1m5ie.bx.internal.cloudapp.net
-  - nodea.seqgoshpp54uhcdmhan2f1m5ie.bx.internal.cloudapp.net
-  - nodeb.seqgoshpp54uhcdmhan2f1m5ie.bx.internal.cloudapp.net
-  label: DATA
-  services:
-  - mapr-hbase-rest-1.1
-  - mapr-nodemanager-5.2.0
-  - mapr-drill-1.9
-- hosts:
-  - nodec.seqgoshpp54uhcdmhan2f1m5ie.bx.internal.cloudapp.net
-  - nodea.seqgoshpp54uhcdmhan2f1m5ie.bx.internal.cloudapp.net
-  - nodeb.seqgoshpp54uhcdmhan2f1m5ie.bx.internal.cloudapp.net
-  label: CLIENT
-  services:
-  - mapr-spark-client-2.0.1
-  - mapr-hive-client-1.2
-  - mapr-hbase-1.1
-  - mapr-asynchbase-1.7.0
-  - mapr-kafka-0.9.0
-- hosts:
-  - nodec.seqgoshpp54uhcdmhan2f1m5ie.bx.internal.cloudapp.net
-  - nodea.seqgoshpp54uhcdmhan2f1m5ie.bx.internal.cloudapp.net
-  - nodeb.seqgoshpp54uhcdmhan2f1m5ie.bx.internal.cloudapp.net
-  label: DEFAULT
-  services:
-  - mapr-core-5.2.0
-  - mapr-collectd-5.5.1
-  - mapr-fileserver-5.2.0
-  - mapr-fluentd-0.14.00
-- hosts:
-  - nodea.seqgoshpp54uhcdmhan2f1m5ie.bx.internal.cloudapp.net
-  label: COMMUNITY_EDITION
-  services:
-  - mapr-cldb-5.2.0
-  - mapr-nfs-5.2.0
+  id: 10.1.1.6
+  prereqs:
+    CPU:
+      required: x86_64
+      state: VALID
+      value: x86_64
+    Cluster Admin:
+      required: present
+      state: VALID
+      value: mapr
+    Disks:
+      required: /dev/fd0, /dev/sr0, /dev/sdc
+      state: VALID
+      value: /dev/sdc
+    Distribution:
+      required: SLES,Suse,CentOS,RedHat,Ubuntu
+      state: VALID
+      value: Ubuntu 14.04
+    Free /:
+      required: 10 GB
+      state: VALID
+      value: 27.4 GB
+    Free /opt:
+      required: 128 GB
+      state: WARN
+      value: 27.4 GB
+    Free /tmp:
+      required: 10 GB
+      state: VALID
+      value: 27.4 GB
+    GID:
+      required: '1000'
+      state: VALID
+      value: '1000'
+    Hadoop:
+      required: absent
+      state: VALID
+      value: absent
+    Home Dir:
+      required: present
+      state: VALID
+      value: /home/mapr
+    Hostname:
+      required: nodec
+      state: VALID
+      value: nodec
+    Internet:
+      required: present
+      state: VALID
+      value: present
+    Owner /dev/shm:
+      required: uid 0
+      state: VALID
+      value: uid 0
+    Owner /tmp:
+      required: uid 0
+      state: VALID
+      value: uid 0
+    Perm /dev/shm:
+      required: '1023'
+      state: VALID
+      value: '01777'
+    Perm /tmp:
+      required: '1023'
+      state: VALID
+      value: '01777'
+    RAM:
+      required: 8 GB
+      state: VALID
+      value: 14.0 GB
+    SWAP:
+      required: 1.4 GB
+      state: VALID
+      value: 2.0 GB
+    UID:
+      required: '1000'
+      state: VALID
+      value: '1000'
+    Yarn:
+      required: absent
+      state: VALID
+      value: absent
+  services: []
+  state: CHECK_WARN
+  status: Verified with warnings
+  valid: false
+groups: []
 {% endhighlight %}
 
 <br><br>
