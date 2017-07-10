@@ -32,7 +32,7 @@ What if you don't want to write the stanza YAML file by hand?  Then just install
 That file will not contain your ssh password, so you'll want to add "ssh_password" under the config section, like this:
 
     ssh_id: mapr
-    ssh_password: MaprRocks!
+    ssh_password: nabfsjdfjkasbnlk
     ssh_method: PASSWORD
     ssh_port: 22
 
