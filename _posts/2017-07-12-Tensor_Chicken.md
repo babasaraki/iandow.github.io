@@ -140,7 +140,7 @@ At [MapR](http://www.mapr.com), we sell a [Converged Data Platform](https://mapr
 
 MapR integrates key technologies, including a vast Big Data filesystem, a NoSQL database, and a distributed streaming engine into its patented Converged Data Platform. MapR uses open APIs such as HDFS, HBase, Kafka, POSIX, and NFS because it makes it easy for users to harness the power of MapR's underlying platform.
 
-So next time you're planning to deploy infrastructure or code for Big Data, [contact me](https://twitter.com/iandownard) and lets talk shop! 
+So next time you're planning to deploy Big Data infrastructure or intelligent applications, [contact me](https://twitter.com/iandownard) and lets talk shop! 
 
 ![MapR Converged Data Platform](http://iandow.github.io/img/the-mapr-converged-data-platform-stack.png)
 
@@ -152,7 +152,6 @@ The science and math behind the Deep Learning is mindbogglingly sophisticated bu
 It's well known that we advance technology by standing on the shoulders of giants and as I watch tweets flow into [@TensorChicken](https://twitter.com/TensorChicken) I can't help but reflect on the centuries of work which has lead some of the smartest people of our time to evolve Deep Learning to where it is today. 
 
 Tensorflow was open-sourced by Google in 2015. In less than 2 years it has become one of the most popular projects on GitHub. It's API is simple, it's capabilities are vast, and it's supported by a passionate and growing community of developers trying to improve it. I think Tensorflow is really going to benefit humanity - and my chickens - in a big way.
-
 
 <br><br>
 <div class="main-explain-area padding-override jumbotron">
