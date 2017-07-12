@@ -128,7 +128,7 @@ Imagine a high-tech chicken farm where potentially hundreds of chickens are cont
 - Where do you run computationally difficult Machine Learning workloads?
 - As you retrain and improve Tensorflow models, how do you do version control and A/B testing?
 
-These challenges are frequently encountered by people trying to operationalize applications that use machine learning and Big Data in production. Like any self respecting wizard you can try to figure these things out yourself, but they'll come a point  you'll find yourself wanting things that are outside the scope of any machine learning API. That's when you become my favorite person to talk to!  
+These challenges are frequently encountered by people trying to operationalize applications that use machine learning and Big Data in production. Like any self respecting wizard you can try to figure these things out yourself, but there will come a point where you'll find yourself wanting things that are outside the scope of any machine learning API. That's when you become my favorite person to talk to!  
 
 <img src="http://iandow.github.io/img/mapr-red-background-logo.png" width="33%" align="right">
 
