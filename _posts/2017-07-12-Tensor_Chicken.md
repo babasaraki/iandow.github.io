@@ -35,8 +35,6 @@ For more information about installing Tensorflow on the Pi, check these out:
 
 # How do you detect motion and capture images from a Raspberry Pi webcam?
 
-Motion is a nice lightweight, yet capable application for operating surveillance cameras on Linux. It works with any Linux-supported video camera, including all V4L Webcams, many IP cameras, Axis cameras, and it controls pan and tilt functions. Motion records movies and snapshots in JPEG, PPM, and MPEG formats, and you can view these remotely in a Web browser thanks to Motion's built-in HTTP server. It stores image files in a directory of your choosing, and it does not require a database, though it supports MySQL and PostgreSQL if you do want to use one.
-
 I setup a webcam on my Pi with a nice lightweight application called [Motion](https://github.com/Motion-Project/motion). It works with any Linux-supported video camera and provides cool features to capture images and movies and trigger scripts when motion is detected. The camera I'm using is the [Raspberry Pi Camera Module V2 - 8 Megapixel, 1080p](https://www.amazon.com/dp/B01ER2SKFS/ref=cm_sw_r_tw_dp_x_NGAzzbTRQ64WJ).
 
 Here are the commands I ran on the Pi to setup the webcam:
@@ -130,6 +128,8 @@ This application was not very hard to build. Tensorflow, motion detection, and a
 
 These challenges are frequently encountered by people trying to operationalize applications that use machine learning and Big Data in production. Like any self respecting wizard you can try to figure these things out yourself, but they'll come a point  you'll find yourself wanting things that are outside the scope of any machine learning API. That's when you become my favorite person to talk to!  
 
+![MapR](http://iandow.github.io/img/mapr-red-background-logo.png)
+
 At MapR, we sell a [Converged Data Platform](https://mapr.com/products/mapr-converged-data-platform/) that is designed to improve how data is managed and how applications access data. People like MapR because we provide better security, easier management, higher resiliance to failure, and faster performance than any other Big Data platform. An application running on MapR has direct access to data stored in files, tables, or streams. That data can include:
 
 - structured and unstructured data,
@@ -140,7 +140,8 @@ MapR integrates key technologies, including a vast Big Data filesystem, a NoSQL 
 
 So next time you're planning to deploy infrastructure Big Data or code for Deep Learning, contact me and lets talk shop! 
 
-![MapR](http://iandow.github.io/img/mapr-red-background-logo.png)
+![MapR Converged Data Platform](http://iandow.github.io/img/the-mapr-converged-data-platform-stack.png)
+
 
 # Conclusion
 
