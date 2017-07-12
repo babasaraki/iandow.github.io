@@ -121,7 +121,7 @@ Here's how everything fits together:
 
 This application was not very hard to build. Tensorflow, motion detection, and automatic tweeting are all things you can sort out pretty easily, but things change if you try to deploy on a larger scale. 
 
-Imagine a high-tech chicken farm where potentially hundreds of chickens are continuously monitored by smart cameras looking predators, animal sicknesses, and other environmental threats. In scenarios like this, you'll quickly run into challenges dealing with the enormity of raw data. You don't want to disgard old data because you might need it in order to retrain future models. Not only can it be hard to reliably archive image data but it's also challenging to apply metadata to each image and save that information in a searchable database. There are other challenges as well:
+Imagine a high-tech chicken farm where potentially hundreds of chickens are continuously monitored by smart cameras looking for predators, animal sicknesses, and other environmental threats. In scenarios like this, you'll quickly run into challenges dealing with the enormity of raw data. You don't want to disgard old data because you might need it in order to retrain future models. Not only can it be hard to reliably archive image data but it's also challenging to apply metadata to each image and save that information in a searchable database. There are other challenges as well:
  
 - How do you deal with the enormity of raw data streams? 
 - How do you reliably archive raw data and make it searchable?
