@@ -13,7 +13,7 @@ Tensorflow is a powerful and easy to use library for machine learning. It was op
 
 Fast forward 6 months and I've just deployed a Tensorflow application to my chicken coop. It's sort of an over-engineered attempt to detect blue jays in my nesting box and chase them away before they break my eggs. The app detects movement in the nesting box with a camera attached to a Raspberry Pi, then identifies the moving creature using an image classification model implemented in Tensorflow and posts that result to [@TensorChicken's](https://twitter.com/TensorChicken) on Twitter. 
 
-<img src="http://iandow.github.io/img/rhode_island_red.jpg" width="33%" align="right" hspace="20">
+<img src="http://iandow.github.io/img/rhode_island_red.jpg" width="33%" align="left" hspace="20">
 
 The fact that I'm using Tensorflow on a Raspberry Pi is laughable because it's so often associated with applications that perform collosally large computations across hundreds of servers. But Tensorflow is flexible and it can be used at scale, or not. 
 
