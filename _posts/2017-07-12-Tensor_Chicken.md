@@ -110,13 +110,12 @@ twurl "/1.1/statuses/update.json?tweet_mode=extended" -d "media_ids=$MEDIA_ID&st
 done
 {% endhighlight %}
 
-<img src="http://iandow.github.io/img/tensorchicken_tweet.png" width="33%" align="right">
-
 The above script sends tweets with a utility called `twurl`. To install it I just ran `sudo gem install twurl`. It also requires that you create an app on [https://apps.twitter.com/](https://apps.twitter.com/) and authorize access via keys defined in `~/.twurlrc`. See [twurl docs](https://github.com/twitter/twurl) for more information. 
 
 Here's how everything fits together:
 
 <img src="http://iandow.github.io/img/tensorchicken_flow_diagram.png" width="66%" align="center">
+<img src="http://iandow.github.io/img/tensorchicken_tweet.png" width="33%" align="center">
 
 # Thinking beyond APIs, what are the challenges with Deep Learning for business?
 
