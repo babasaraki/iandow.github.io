@@ -7,13 +7,15 @@ bigimg: /img/tensorflow_banner.png
 
 Ever since I first heard about Tensorflow and the promises of Deep Learning I've been anxious to give it a whirl.
 
-<img src="http://iandow.github.io/img/tensorflow_logo.png" align="right">
+<img src="http://iandow.github.io/img/tensorflow_logo.png" width="33%" align="right">
 
 Tensorflow is a powerful and easy to use library for machine learning. It was open-sourced by Google in November 2015. In less than 2 years it has become one of the most popular projects on GitHub. I was introduced to Tensorflow at the [O'Reilly Strata Data conference](https://conferences.oreilly.com/strata) in San Jose last year. During a [presentation](https://amy-jo.storage.googleapis.com/talks/tf-strata.pdf) by developer evangelists from Google I saw several really fun image processing examples that used Tensorflow to transform or identify subjects in images. That presentation was to this particular machine learning novice, nothing less than jaw dropping.
 
+<img src="http://iandow.github.io/img/rhode_island_red.jpg" width="33%" align="left">
+
 Fast forward 6 months and I've just deployed a Tensorflow application to my chicken coop. It's sort of an over-engineered attempt to detect blue jays in my nesting box and chase them away before they break my eggs. The app detects movement in the nesting box with a camera attached to a Raspberry Pi, then identifies the moving creature using an image classification model implemented in Tensorflow and posts that result to [@TensorChicken's](https://twitter.com/TensorChicken) on Twitter. The fact that I'm using Tensorflow on a Raspberry Pi is laughable because it's so often associated with applications that perform collosally large computations across hundreds of servers. But Tensorflow is flexible and it can be used at scale, or not. 
 
-<img src="http://iandow.github.io/img/rhode_island_red.jpg" width="66%" align="center">
+
 
 
 # How do you install Tensorflow on a Raspberry Pi?
@@ -85,8 +87,8 @@ Here is my [label_image-chickens.py](https://gist.github.com/iandow/a3745b95d2b8
 
 The `retrain.py` script outputs model performance data that can be analyzed in Tensorboard, which can be really useful to help understand how your model works (from a neurel network perspective) and how accurately your model makes predictions. But really I like Tensorboard most because it makes charts which help me beautify blog articles:
 
-<img src="http://iandow.github.io/img/tensorboard_histogram.png" width="33%">
-<img src="http://iandow.github.io/img/tensorboard_chart.png" width="33%">
+<img src="http://iandow.github.io/img/tensorboard_histogram.png" width="33%" align="center">
+<img src="http://iandow.github.io/img/tensorboard_chart.png" width="33%" align="center">
 
 
 # Running the app
@@ -108,9 +110,9 @@ twurl "/1.1/statuses/update.json?tweet_mode=extended" -d "media_ids=$MEDIA_ID&st
 done
 {% endhighlight %}
 
-The above script sends tweets with a utility called `twurl`. To install it I just ran `sudo gem install twurl`. It also requires that you create an app on [https://apps.twitter.com/](https://apps.twitter.com/) and authorize access via keys defined in `~/.twurlrc`. See [twurl docs](https://github.com/twitter/twurl) for more information. 
-
 <img src="http://iandow.github.io/img/tensorchicken_tweet.png" width="33%" align="right">
+
+The above script sends tweets with a utility called `twurl`. To install it I just ran `sudo gem install twurl`. It also requires that you create an app on [https://apps.twitter.com/](https://apps.twitter.com/) and authorize access via keys defined in `~/.twurlrc`. See [twurl docs](https://github.com/twitter/twurl) for more information. 
 
 Here's how everything fits together:
 
@@ -127,7 +129,7 @@ This application was not very hard to build. Tensorflow, motion detection, and a
 
 These challenges are frequently encountered by people trying to operationalize applications that use machine learning and Big Data in production. Like any self respecting wizard you can try to figure these things out yourself, but they'll come a point  you'll find yourself wanting things that are outside the scope of any machine learning API. That's when you become my favorite person to talk to!  
 
-<img src="http://iandow.github.io/img/mapr-red-background-logo.png" width="66%" align="right">
+<img src="http://iandow.github.io/img/mapr-red-background-logo.png" width="33%" align="right">
 
 At [MapR](http://www.mapr.com), we sell a [Converged Data Platform](https://mapr.com/products/mapr-converged-data-platform/) that is designed to improve how data is managed and how applications access data. People like MapR because we provide better security, easier management, higher resiliance to failure, and faster performance than any other Big Data platform. An application running on MapR has direct access to data stored in files, tables, or streams. That data can include:
 
