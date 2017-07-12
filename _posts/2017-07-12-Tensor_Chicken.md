@@ -7,7 +7,7 @@ bigimg: /img/tensorflow_banner.png
 
 Ever since I first heard about Tensorflow and the promises of Deep Learning I've been anxious to give it a whirl.
 
-![tensorflow_logo.png](http://iandow.github.io/img/tensorflow_logo.png)
+<img src="http://iandow.github.io/img/tensorflow_logo.png" align="right">
 
 Tensorflow is a powerful and easy to use library for machine learning. It was open-sourced by Google in November 2015. In less than 2 years it has become one of the most popular projects on GitHub. I was introduced to Tensorflow at the [O'Reilly Strata Data conference](https://conferences.oreilly.com/strata) in San Jose last year. During a [presentation](https://amy-jo.storage.googleapis.com/talks/tf-strata.pdf) by developer evangelists from Google I saw several really fun image processing examples that used Tensorflow to transform or identify subjects in images. That presentation was to this particular machine learning novice, nothing less than jaw dropping.
 
