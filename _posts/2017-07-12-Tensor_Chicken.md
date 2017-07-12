@@ -138,9 +138,9 @@ At [MapR](http://www.mapr.com), we sell a [Converged Data Platform](https://mapr
 - data in cold storage and real-time data in streams,
 - and data on-premise, data in the cloud, or data at the IoT edge.
 
-MapR integrates key technologies, including a vast Big Data filesystem, a NoSQL database, and a distributed streaming engine into its patented Converged Data Platform. MapR uses open APIs such as HDFS, HBase, Kafka, POSIX, and NFS because it makes it easy for users to easily harness the power of MapR's underlying platform.
+MapR integrates key technologies, including a vast Big Data filesystem, a NoSQL database, and a distributed streaming engine into its patented Converged Data Platform. MapR uses open APIs such as HDFS, HBase, Kafka, POSIX, and NFS because it makes it easy for users to harness the power of MapR's underlying platform.
 
-So next time you're planning to deploy infrastructure Big Data or code for Deep Learning, [contact me](https://twitter.com/iandownard) and lets talk shop! 
+So next time you're planning to deploy infrastructure or code for Big Data, [contact me](https://twitter.com/iandownard) and lets talk shop! 
 
 ![MapR Converged Data Platform](http://iandow.github.io/img/the-mapr-converged-data-platform-stack.png)
 
