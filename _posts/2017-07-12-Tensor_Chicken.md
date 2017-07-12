@@ -15,9 +15,7 @@ Fast forward 6 months and I've just deployed a Tensorflow application to my chic
 
 <img src="http://iandow.github.io/img/rhode_island_red.jpg" width="33%" align="left" hspace="20">
 
-The fact that I'm using Tensorflow on a Raspberry Pi is laughable because it's so often associated with applications that perform collosally large computations across hundreds of servers. But Tensorflow is flexible and it can be used at scale, or not. 
-
-
+The fact that I'm using Tensorflow on a Raspberry Pi is laughable because it's so often associated with applications that perform collosally large computations across hundreds of servers. But Tensorflow is flexible and it can be used at scale, or not.
 
 
 # How do you install Tensorflow on a Raspberry Pi?
@@ -89,9 +87,9 @@ Here is my [label_image-chickens.py](https://gist.github.com/iandow/a3745b95d2b8
 
 The `retrain.py` script outputs model performance data that can be analyzed in Tensorboard, which can be really useful to help understand how your model works (from a neurel network perspective) and how accurately your model makes predictions. But really I like Tensorboard most because it makes charts which help me beautify blog articles:
 
-<img src="http://iandow.github.io/img/tensorboard_histogram.png" width="33%" align="center">
-<img src="http://iandow.github.io/img/tensorboard_chart.png" width="33%" align="center">
-
+<img src="http://iandow.github.io/img/tensorboard_histogram.png" width="30%" align="center">
+<img src="http://iandow.github.io/img/tensorboard_chart.png" width="30%" align="center">
+<img src="http://iandow.github.io/img/tensorboard_histogram2.png" width="30%" align="center">
 
 # Running the app
 
