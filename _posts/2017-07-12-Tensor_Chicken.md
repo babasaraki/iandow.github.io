@@ -13,6 +13,9 @@ Tensorflow is a powerful and easy to use library for machine learning. It was op
 
 Fast forward 6 months and I've just deployed a Tensorflow application to my chicken coop. It's sort of an over-engineered attempt to detect blue jays in my nesting box and chase them away before they break my eggs. The app detects movement in the nesting box with a camera attached to a Raspberry Pi, then identifies the moving creature using an image classification model implemented in Tensorflow and posts that result to [@TensorChicken's](https://twitter.com/TensorChicken) on Twitter. The fact that I'm using Tensorflow on a Raspberry Pi is laughable because it's so often associated with applications that perform collosally large computations across hundreds of servers. But Tensorflow is flexible and it can be used at scale, or not. 
 
+<img src="http://iandow.github.io/img/rhode_island_red.jpg" width="66%" align="center">
+
+
 # How do you install Tensorflow on a Raspberry Pi?
 
 Long gone are the days where embedded computers were difficult to use. Single-board computers like the Raspberry Pi are suprisingly powerful and usable in ways that are familiar to any Linux head. Turns out, it's really easy to install Tensorflow on the Raspberry Pi. Here are the commands I used to install Tensorflow on my Pi:
@@ -27,7 +30,6 @@ sudo pip3 install mock
 {% endhighlight %}
 
 For more information about installing Tensorflow on the Pi, check these out:
-
 - [https://github.com/samjabrahams/tensorflow-on-raspberry-pi](https://github.com/samjabrahams/tensorflow-on-raspberry-pi)
 - [https://codelabs.developers.google.com/codelabs/tensorflow-for-poets/#0](https://codelabs.developers.google.com/codelabs/tensorflow-for-poets/#0)
 - [https://svds.com/tensorflow-image-recognition-raspberry-pi/](https://svds.com/tensorflow-image-recognition-raspberry-pi/)
@@ -51,15 +53,11 @@ sudo dpkg -i pi_jessie_motion_4.0.1-1_armhf.deb
 sudo vi /etc/motion/motion.conf
 {% endhighlight %}
 
-There are a lot of options in the motion.conf file. For your reference here is my `motion.conf` file: 
+There are a lot of options in the motion.conf file. For your reference here is my [motion.conf](https://gist.github.com/iandow/1abc620626af601bf73f529e49b3a7b4) file.
 
-[motion.conf](https://gist.github.com/iandow/1abc620626af601bf73f529e49b3a7b4)
+I also had to add "bcm2835-v4l2" to `/etc/modules`. Then after a reboot the webcam appeared on Motion's built-in HTTP server on port 8081 (for example: `http://10.1.1.2:8081`).
 
-After updating `motion.conf` I added "bcm2835-v4l2" to `/etc/modules`. Then after a reboot the webcam appeared on Motion's built-in HTTP server on port 8081 (for example: `http://10.1.1.2:8081`).
-
-For more information about setting up a Raspberry Pi webcam server, check this out: 
-
-[https://pimylifeup.com/raspberry-pi-webcam-server/](https://pimylifeup.com/raspberry-pi-webcam-server/).
+For more information about setting up a Raspberry Pi webcam server, check out [https://pimylifeup.com/raspberry-pi-webcam-server/](https://pimylifeup.com/raspberry-pi-webcam-server/).
 
 
 # Building the Tensorflow model
@@ -78,19 +76,18 @@ python retrain.py  --bottleneck_dir=bottlenecks-chickens   --how_many_training_s
 To test the model, I ran commands like the following one to verift that it produced sensible labels for images of my nesting box:
 
 {% highlight bash %}
-python3 /home/pi/tf_files/label_image-chickens.py $line
+python3 /home/pi/tf_files/label_image-chickens.py test_image.png
 {% endhighlight %}
 
-Here is the label_image-chickens.py script:
+Here is my [label_image-chickens.py](https://gist.github.com/iandow/a3745b95d2b80689f6fb12b1b8f9fc9e) script.
 
-[label_image-chickens.py](https://gist.github.com/iandow/a3745b95d2b80689f6fb12b1b8f9fc9e)
+# Analyzing the model with Tensorboard
 
-The `retrain.py` script I used above outputs model performance data that can be analyzed in Tensorboard, which can be really useful to help understand how your model works (from a neurel network perspective) and how accurately your model makes predictions. But really I like Tensorboard most because it makes charts which help me beautify blog articles:
+The `retrain.py` script outputs model performance data that can be analyzed in Tensorboard, which can be really useful to help understand how your model works (from a neurel network perspective) and how accurately your model makes predictions. But really I like Tensorboard most because it makes charts which help me beautify blog articles:
 
-![tensorboard_histogram.png](http://iandow.github.io/img/tensorboard_histogram.png)
-![tensorboard_chart.png](http://iandow.github.io/img/tensorboard_chart.png)
+<img src="http://iandow.github.io/img/tensorboard_histogram.png" width="33%">
+<img src="http://iandow.github.io/img/tensorboard_chart.png" width="33%">
 
-So in summary Here's how all these pieces fit together.
 
 # Running the app
 
@@ -111,13 +108,15 @@ twurl "/1.1/statuses/update.json?tweet_mode=extended" -d "media_ids=$MEDIA_ID&st
 done
 {% endhighlight %}
 
-The above script sends tweets with a utility called `twurl`. To install it I just ran `sudo gem install twurl`. It also requires that you create an app on [https://apps.twitter.com/](https://apps.twitter.com/) and authorize access via keys defined in `~/.twurlrc`. See [twurl docs](https://github.com/twitter/twurl) for more information.
+The above script sends tweets with a utility called `twurl`. To install it I just ran `sudo gem install twurl`. It also requires that you create an app on [https://apps.twitter.com/](https://apps.twitter.com/) and authorize access via keys defined in `~/.twurlrc`. See [twurl docs](https://github.com/twitter/twurl) for more information. 
 
-Here's what [@TensorChicken's](https://twitter.com/TensorChicken) tweets look like:
+<img src="http://iandow.github.io/img/tensorchicken_tweet.png" width="33%" align="right">
 
-![tensorchicken_tweet.png](http://iandow.github.io/img/tensorchicken_tweet.png)
+Here's how everything fits together:
 
-# The Difficultites with Going Big
+<img src="http://iandow.github.io/img/tensorchicken_flow_diagram.png" width="66%" align="center">
+
+# Thinking beyond APIs, what are the challenges with Deep Learning for business?
 
 This application was not very hard to build. Tensorflow, motion detection, and automatic tweeting are all things you can sort out pretty easily, but things change if take it try to deploy on a bigger scale. Imagine a high-tech chicken farm where potentially hundreds of chickens are continuously monitored by smart cameras looking predators, animal sicknesses, and other environmental threats. In scenarios like this, you'll quickly run into challenges dealing with the enormity of raw data. You don't want to disgard old data because you might need it in order to retrain future models. Not only can it be hard to reliably archive image data but it's also challenging to apply metadata to each image and save that information in a searchable database. There are other challenges as well:
  
@@ -128,9 +127,9 @@ This application was not very hard to build. Tensorflow, motion detection, and a
 
 These challenges are frequently encountered by people trying to operationalize applications that use machine learning and Big Data in production. Like any self respecting wizard you can try to figure these things out yourself, but they'll come a point  you'll find yourself wanting things that are outside the scope of any machine learning API. That's when you become my favorite person to talk to!  
 
-![MapR](http://iandow.github.io/img/mapr-red-background-logo.png)
+<img src="http://iandow.github.io/img/mapr-red-background-logo.png" width="66%" align="right">
 
-At MapR, we sell a [Converged Data Platform](https://mapr.com/products/mapr-converged-data-platform/) that is designed to improve how data is managed and how applications access data. People like MapR because we provide better security, easier management, higher resiliance to failure, and faster performance than any other Big Data platform. An application running on MapR has direct access to data stored in files, tables, or streams. That data can include:
+At [MapR](http://www.mapr.com), we sell a [Converged Data Platform](https://mapr.com/products/mapr-converged-data-platform/) that is designed to improve how data is managed and how applications access data. People like MapR because we provide better security, easier management, higher resiliance to failure, and faster performance than any other Big Data platform. An application running on MapR has direct access to data stored in files, tables, or streams. That data can include:
 
 - structured and unstructured data,
 - data in cold storage and real-time data in streams,
