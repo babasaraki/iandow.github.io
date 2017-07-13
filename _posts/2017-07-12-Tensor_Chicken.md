@@ -11,9 +11,7 @@ Ever since I first heard about Tensorflow and the promises of Deep Learning I've
 
 Tensorflow is a powerful and easy to use library for machine learning. It was open-sourced by Google in November 2015. In less than 2 years it has become one of the most popular projects on GitHub. I was introduced to Tensorflow at the [O'Reilly Strata Data conference](https://conferences.oreilly.com/strata) in San Jose last year. During a [presentation](https://amy-jo.storage.googleapis.com/talks/tf-strata.pdf) by developer evangelists from Google I saw several really fun image processing examples that used Tensorflow to transform or identify subjects in images. That presentation was to this particular machine learning novice, nothing less than jaw dropping.
 
-<div align="center">
-	*"[Any sufficiently advanced technology is indistinguishable from magic.](https://en.wikipedia.org/wiki/Clarke%27s_three_laws)"*, Arthur C. Clarke
-</div>
+*"[Any sufficiently advanced technology is indistinguishable from magic](https://en.wikipedia.org/wiki/Clarke%27s_three_laws)"*, Arthur C. Clarke
 
 Fast forward 6 months and I've just deployed a Tensorflow application to my chicken coop. It's sort of an over-engineered attempt to detect blue jays in my nesting box and chase them away before they break my eggs. The app detects movement in the nesting box with a camera attached to a Raspberry Pi, then identifies the moving creature using an image classification model implemented in Tensorflow and posts that result to [@TensorChicken's](https://twitter.com/TensorChicken) on Twitter. 
 
