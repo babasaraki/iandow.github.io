@@ -75,7 +75,7 @@ python retrain.py  --bottleneck_dir=bottlenecks-chickens   --how_many_training_s
 
 # Testing the model
 
-To test the model, I ran commands like the following one to verift that it produced sensible labels for images of my nesting box:
+To test the model, I ran commands like the following one to verify that it produced sensible labels for images of my nesting box:
 
 {% highlight bash %}
 python3 /home/pi/tf_files/label_image-chickens.py test_image.png
@@ -152,6 +152,9 @@ The science and math behind the Deep Learning is mindbogglingly sophisticated bu
 It's well known that we advance technology by standing on the shoulders of giants and as I watch tweets flow into [@TensorChicken](https://twitter.com/TensorChicken) I can't help but reflect on the centuries of work which has lead some of the smartest people of our time to evolve Deep Learning to where it is today. 
 
 Tensorflow was open-sourced by Google in 2015. In less than 2 years it has become one of the most popular projects on GitHub. It's API is simple, it's capabilities are vast, and it's supported by a passionate and growing community of developers trying to improve it. I think Tensorflow is really going to benefit humanity - and my chickens - in a big way.
+
+<br>
+<p>Please provide your feedback to this article by adding a comment to <a href="https://github.com/iandow/iandow.github.io/issues/4">https://github.com/iandow/iandow.github.io/issues/4</a>.</p>
 
 <br><br>
 <div class="main-explain-area padding-override jumbotron">
