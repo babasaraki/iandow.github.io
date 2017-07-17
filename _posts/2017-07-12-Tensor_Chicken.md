@@ -101,7 +101,7 @@ The model I generated in the previous step was contained in a file about 84 MBs 
 #!/bin/bash
 sntp -s time.google.com
 sleep 5
-ls -1tr /home/pi/motion/*.jpg | tail -n 1 | while read line; do
+find /home/pi/motion/ -type f -name "*`date +'%Y%m%d'`*.jpg" | sort | tail -n 1 | while read line; do
 date
 echo "Tweeting file '$line'";
 CLASSIFICATION=`python3 /home/pi/tf_files/label_image-chickens.py $line | head -n 3`;
