@@ -74,6 +74,9 @@ To incorporate my custom labels into the Inception-v3 model I ran the following 
 python retrain.py  --bottleneck_dir=bottlenecks-chickens   --how_many_training_steps=500   --model_dir=inception   --summaries_dir=training_summaries-chickens/basic   --output_graph=retrained_graph-chickens.pb   --output_labels=retrained_labels-chickens.txt   --image_dir=chicken_photos
 {% endhighlight %}
 
+Here's a good reference for learning more about what that command does and its options mean:
+
+[https://www.tensorflow.org/tutorials/image_retraining](https://www.tensorflow.org/tutorials/image_retraining)
 
 # Testing the model
 
