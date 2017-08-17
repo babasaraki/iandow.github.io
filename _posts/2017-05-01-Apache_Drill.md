@@ -70,7 +70,8 @@ SELECT tbl1.name, tbl2.address FROM `dfs.tmp`.`./names.json` as tbl1 JOIN `dfs.t
 SELECT tbl1.name, tbl2.address, tbl3.name FROM `dfs.tmp`.`./names.json` as tbl1 JOIN `dfs.tmp`.`./addressunitedstates.json` as tbl2 ON tbl1.id=tbl2.id JOIN ianmysql.cars.`car` as tbl3 ON tbl1.id=tbl3.customerid
 {% endhighlight %}
 
-## Connecting to Drill from Ubuntu
+## [Connecting to Drill from Ubuntu(#connecting-to-drill-from-ubuntu)
+
 
 In order to use Drill from Python, R, or any other programming language you have to install an ODBC driver. The official [Apache Drill docs](https://drill.apache.org/docs/installing-the-driver-on-linux/) describe how to install on CentOS or Red Hat Linux but they do not cover Ubuntu, so I will. Here's how to install the MapR ODBC driver on Ubuntu 14.04:
 
