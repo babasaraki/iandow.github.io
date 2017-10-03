@@ -15,22 +15,21 @@ Product demos as booth provocations need to be flashy. My efforts to build flash
 # Demo Objectives
 
 The three key points I'm trying to convey with this demo were:
-
 1. Flexible schemas makes it easier to persist Customer 360 data.
 2. Operating streams and database services on one cluster makes it easier to analyze that data in Spark.
 3. Operating database services and machine learning on one cluster makes it easier for production applications to access machine learning results.
 
 ## Customer 360 databases must support flexible schemas.
 
-MapR-DB as the perfect database for Customer 360 because it allows you to store data for customers with different properties in the same table (and because it's scalable, reliable, resiliant, etc ...but I want to focus on it's ability to handle flexible schemas for customer data).  Why does that matter? Well, for customer 360 you're trying to integrate as many datasets as possible. For example you might be trying to ingest all the data your customers expose publicly on social media, or you might be trying to ingest data they expose through your mobile app, but not all customers may use social media, and not all customer may use your mobile app. Nevertheless, in a NoSQL database you can store data for all customers in one table even if different columns are used for each customer.  The sparsity in columnar data is not a problem at all for MapR-DB. 
+MapR-DB is the perfect database for Customer 360 because it allows you to store data for customers with different properties in the same table (and because it's scalable, reliable, resiliant, etc ...but I want to focus on it's ability to handle flexible schemas for customer data).  Why does that matter? Well, for customer 360 you're trying to integrate as many datasets as possible. For example you might be trying to ingest all the data your customers expose publicly on social media, or you might be trying to ingest data they expose through your mobile app, but not all customers may use social media and not all customer may use your mobile app. Nevertheless, a NoSQL database like MapR-DB can store data for all customers in one table even if different columns are used for each customer. The sparsity in columnar data is not a problem at all for MapR-DB. 
 
 ## Converging streams and database eliminates data movement.
 
-Furthermore, MapR platform provides both distributed streaming and distributed database so we can load real-time data (like clickstreams) and table data (like CRM data) into Spark without moving data. That's really important because anytime you move data, especially Big Data, the analysis of that data becomes much slower.  In the world of Big Data, data movement is BAD!
+MapR's platform provides both distributed streaming and distributed database so we can load real-time data (like click streams) and table data (like CRM data) into Spark without moving data. That's really important because anytime you move data, especially Big Data, the analysis of that data becomes much slower.  In the world of Big Data, data movement is BAD!
 
-## Production applications get smarter when they share a common database with Spark
+## Production applications get smarter when they share a common database with Spark.
 
-The third major talking point relates to how we can take an output, like churn prediction, from ML processes and load it back into the master CRM data tables in MapR-DB so those insights become instantly accessible by production applications. (In MapR, I hear a lot of people call these "operational applications", but I like to just call them production apps).
+The third major talking point relates to how we can take an output, like churn prediction, from machine learning processes and load it back into master CRM tables so those insights become instantly accessible by production applications. A lot of companies do analytics on integrated datasets, which you can call Customer 360, but they fail to operationalize those insights by saving them back into their master customer data tables. When ML processes and production apps share a common master database, its much easier to operationalize ML insights.
 
 # Using Zeppelin for Customer 360
 
