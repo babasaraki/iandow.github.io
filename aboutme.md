@@ -3,7 +3,7 @@ layout: page
 title: About me
 ---
 
-My craft involves a lot of different skill sets. I am a full stack engineer with expertise in machine learning, data engineering, and Hadoop. I am really good at making things work and making them pretty but what really sets me apart from other people are my auxiliary skills, like communication, creating repeatable processes, and problem solving.
+My craft involves a lot of different skill sets. I am a full stack engineer with expertise in machine learning, data engineering, and computer vision. I am really good at making things work and making them pretty but what really sets me apart from other people are my auxiliary skills, like communication, creating repeatable processes, and problem solving.
 
 I am currently a product engineer for [MapR Technologies](http://www.mapr.com) where I focus on streaming, machine learning, and creating awesome demos!
 
