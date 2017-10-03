@@ -3,7 +3,9 @@ layout: page
 title: About me
 ---
 
-I am a technical evangelist for [MapR Technologies](http://www.mapr.com) where I focus on finding and promoting ways people can create awesome big data applications.
+My craft involves a lot of different skill sets. I am a full stack engineer with expertise in machine learning, data engineering, and Hadoop. I am really good at making things work and making them pretty but what really sets me apart from other people are my auxiliary skills, like communication, creating repeatable processes, and problem solving.
+
+I am currently a product engineer for [MapR Technologies](http://www.mapr.com) where I focus on streaming, machine learning, and creating awesome demos!
 
 
 <div class="main-explain-area padding-override jumbotron">
