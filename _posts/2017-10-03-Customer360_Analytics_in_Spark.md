@@ -41,9 +41,9 @@ To illustrate those value propositions, I wrote Zeppelin notebook which accompli
 3. Combine clickstream data with master CRM data using the Spark connector to MapR-DB
 4. Predict churn risk users in the clickstream with Spark ML.
 
-You can see all this in full living color here:
+I've posted my Zeppelin notebook [here](https://www.zepl.com/viewer/notebooks/bm90ZTovL2lhbmRvdy8zZDQyOTgyN2Y3NWQ0ODFmYTVlZDRmYzgxZGE1M2M1NC9ub3RlLmpzb24).
 
-https://www.zepl.com/viewer/notebooks/bm90ZTovL2lhbmRvdy8zZDQyOTgyN2Y3NWQ0ODFmYTVlZDRmYzgxZGE1M2M1NC9ub3RlLmpzb24
+[![Customer 360 Zeppelin Notebook](http://iandow.github.io/img/zeppelin_customer360.gif)](https://www.zepl.com/viewer/notebooks/bm90ZTovL2lhbmRvdy8zZDQyOTgyN2Y3NWQ0ODFmYTVlZDRmYzgxZGE1M2M1NC9ub3RlLmpzb24)
 
 The code excerpts below show how those Spark tasks were implemented:
 
