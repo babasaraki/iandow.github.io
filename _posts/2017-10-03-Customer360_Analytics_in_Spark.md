@@ -1,25 +1,36 @@
 ---
 layout: post
-title: Joining clickstream and CRM data for Customer 360 analytics in Spark.
-tags: [customer360, nosql, spark, streaming,  machine learning]
+title: Joining streams and NoSQL tables for Customer 360 analytics in Spark.
+tags: [spark, streaming, sql, machine learning, customer 360, master data management]
 ---
 
-*"MapR-DB is the perfect database for Customer 360 applications"*. That's the tag line I used to describe a demo I created for MapR for the Strata Data Conference in New York, Sepetermebt 2017. I worked hard to satisfy both the marketing need for eye candy and the product management need for developer enablement. Often, the needs of marketing and product management are at odds because marketeers want to capture leads with flashy demos but product managers want to show off technical features appeal to discriminating tastes of developers in the know. It was hard to reconcile these opposing viewpoints while building my Customer 360 demo for MapR at Strata, but with the help of the bokeh data visualization framework and the MapR's database connector for Spark, I was able to achieve demonstrable elegance in both the front-end and back-end. 
+*"MapR-DB is the perfect database for Customer 360 applications"*. That's the tag line I used to describe a demo I created for MapR for the Strata Data Conference in New York, September 2017. I worked hard to satisfy both the marketing need for eye candy and the product management need for developer enablement. Often, the needs of marketing and product management are at odds because marketeers want to capture leads with flashy demos but product managers want to show off technical features appeal to discriminating tastes of developers in the know. It was hard to reconcile these opposing viewpoints while building my Customer 360 demo for MapR at Strata, but with the help of the (bokeh)[http://bokeh.pydata.org] data visualization framework and the MapR's database connector for Spark, I was able to achieve demonstrable elegance in both the front-end and back-end. 
 
 ![Call Center Analytical Portal](http://iandow.github.io/img/customer360_bokeh.gif)
 
-I'd like to make a special shout-out to Bryan Van Da Vin from Anaconda. He helped me a lot with bokeh. If you need to create a user interface for visualizing data, I couldn't recomend bokeh more!! If you ever need help with bokeh, you'll be able to find it on their Gitter channel.
-
-My efforts to build flashyness in the front-end flash were vindicated more than once when a conference attendee asked if they could take a photo of my app. (Insert a mental fist pump here). Demo's as booth provacations need to be flashy, but in this case my back-end code was equally elegant. In essence, I showed a webapp that loaded RDDs in Spark from both Kafka and MapR-DB, then I joined those RDDs to perform churn predictions using a machine learning model and again saved that result to MapR-DB (so it could be immediately accessible by my production apps, which in this case was a notional customer service portal). Here's what that data flow looked like:
+My efforts to build flashiness in the front-end flash were vindicated more than once when a conference attendee asked if they could take a photo of my app. (Insert a mental fist pump here). Demo's as booth provocations need to be flashy, but in this case my back-end code was equally elegant. In essence, I showed a webapp that loaded RDDs in Spark from both Kafka and MapR-DB, then I joined those RDDs to perform churn predictions using a machine learning model and again saved that result to MapR-DB (so it could be immediately accessible by my production apps, which in this case was a notional customer service portal). The clickstream contains user clicks flowing through a Kafka topic. The CRM tables in MapR-DB contain properties for customers.  Here's what that data flow looked like:
 
 ![Clickstream Animation](http://iandow.github.io/img/clickstream_animation.gif)
 
-The clickstream contains user clicks flowing through a Kafka topic. The CRM tables in MApR-DB contain properties for customers. At this point in the demo we usually introduct MapR-Db as the perfect database for Customer 360 because it's a NoSQL data store, meaning you can store data for customers with different properties in the same table.  Why does that matter? Well, for customer 360 you're trying to integrate as many datasets as possible. For example you might be trying to ingest all the data your customers expose publically on social media, or you might be trying to ingest data they expose through your mobile app, but not all customers may use social media, and not all customer may use your mobile app. Nevertheless, in a NoSQL database you can store data for all customers in one table even if different columns are used for each customer.  The sparsity in columnar data is not a problem at all for MapR-DB. 
+The three advantages I'm trying to convey with this demo were
 
-Furthermore, MapR platform provides both distributed streaming and distributed database. So we can load  clickstream and CRM tables into Spark without moving data. That's really important because anytime you move data, especially big data, the analysis of that data becomes slower.  In the world of big data, data movement is BAD!
+1. Flexible schema makes it easier to persist customer data
+2. Operating streams and database services on one cluster makes it possible to integrate and analyze that data faster in Spark.
+3. Operating database services and machine learning on one cluster makes it possible for production applications to instantly access analytical insights.
 
-The third major talking point relates to how we can take an output, like churn prediction, from ML processes and load it back into the master CRM data tables in MApR-DB so those insights become instantly accessible by production applications. (In MApR, I hear a lot of people call these "operational applications", but I like to just call them production apps).
+## Customer 360 databases must support flexible schemas.
 
+MapR-DB as the perfect database for Customer 360 because it allows you to store data for customers with different properties in the same table.  Why does that matter? Well, for customer 360 you're trying to integrate as many datasets as possible. For example you might be trying to ingest all the data your customers expose publicly on social media, or you might be trying to ingest data they expose through your mobile app, but not all customers may use social media, and not all customer may use your mobile app. Nevertheless, in a NoSQL database you can store data for all customers in one table even if different columns are used for each customer.  The sparsity in columnar data is not a problem at all for MapR-DB. 
+
+## Converging streams and database eliminates data movement.
+
+Furthermore, MapR platform provides both distributed streaming and distributed database so we can load real-time data (like clickstreams) and table data (like CRM data) into Spark without moving data. That's really important because anytime you move data, especially Big Data, the analysis of that data becomes much slower.  In the world of Big Data, data movement is BAD!
+
+## Production applications get smarter when they share a common database with Spark
+
+The third major talking point relates to how we can take an output, like churn prediction, from ML processes and load it back into the master CRM data tables in MapR-DB so those insights become instantly accessible by production applications. (In MapR, I hear a lot of people call these "operational applications", but I like to just call them production apps).
+
+# Using Zeppelin for Customer 360
 
 To illustrate those value propositions, I wrote Zeppelin notebook which accomplishes the following tasks in Spark:
 
@@ -44,7 +55,7 @@ val stringrdd = rdd.map(x => x.getDoc.asJsonString())
 val crm_df = sqlContext.read.json(stringrdd)
 {% endhighlight %}
 
-### Here's how to load an RDD from a topic in Mapr Streams using the Kafka API:
+### Here's how to load an RDD from a topic in MapR Streams using the Kafka API:
 
 {% highlight scala %}
 case class Click(user_id: Integer, datetime: String, os: String, browser: String, response_time_ms: String, product: String, url: String) extends Serializable
@@ -129,7 +140,7 @@ maprd.saveToMapRDB("/tmp/realtime_churn_predictions", createTable = false, bulkI
 <div class="main-explain-area padding-override jumbotron">
   <img src="http://iandow.github.io/img/paypal.png" width="120" style="margin-left: 15px" align="right">
   <p class="margin-override font-override">
-  	Did you enjoy the blog? Did you learn something useful? If you would like to support this blog please consider making a small donation. Thanks!</p>
+    Did you enjoy the blog? Did you learn something useful? If you would like to support this blog please consider making a small donation. Thanks!</p>
   <br>
   <div id="paypalbtn">
     <a class="btn btn-primary btn" href="https://www.paypal.me/iandownard/3.5">Donate via PayPal</a>
