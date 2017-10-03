@@ -33,7 +33,7 @@ The third major talking point relates to how we can take an output, like churn p
 
 # Using Zeppelin for Customer 360
 
-To illustrate those value propositions, I wrote Zeppelin notebook which accomplishes the following tasks in Spark:
+To illustrate my demo objectives in code, I wrote a [Zeppelin notebook](https://www.zepl.com/viewer/notebooks/bm90ZTovL2lhbmRvdy8zZDQyOTgyN2Y3NWQ0ODFmYTVlZDRmYzgxZGE1M2M1NC9ub3RlLmpzb24) which runs the following tasks in Spark:
 
 1. Read clickstream data from MapR Streams using Spark Streaming and the Kafka API
 2. Output performance data for web traffic using Spark SQL
