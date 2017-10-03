@@ -46,7 +46,7 @@ I've posted my Zeppelin notebook [here](https://www.zepl.com/viewer/notebooks/bm
 
 The code excerpts below show how those Spark tasks were implemented:
 
-### How to load an RDD from Mapr-DB:
+### Loading an RDD from Mapr-DB:
 
 {% highlight scala %}
 // MapR-DB table returned as an RDD where each row is a JSON document
@@ -56,7 +56,7 @@ val stringrdd = rdd.map(x => x.getDoc.asJsonString())
 val crm_df = sqlContext.read.json(stringrdd)
 {% endhighlight %}
 
-### Here's how to load an RDD from a topic in MapR Streams using the Kafka API:
+### Loading an RDD from a topic in MapR Streams using the Kafka API:
 
 {% highlight scala %}
 case class Click(user_id: Integer, datetime: String, os: String, browser: String, response_time_ms: String, product: String, url: String) extends Serializable
@@ -113,13 +113,13 @@ ssc.awaitTerminationOrTimeout(10 * 1000)
 ssc.stop(stopSparkContext = false, stopGracefully = false)
 {% endhighlight %}
 
-### Here's how to join the RDDs we previously loaded from MapR Streams and MapR-DB:
+### Joining RDDs loaded from MapR Streams and MapR-DB:
 
 {% highlight scala %}
 val joinedDF = spark.sql("SELECT weblog_snapshot.datetime, weblog_snapshot.os, weblog_snapshot.browser, weblog_snapshot.response_time_ms,weblog_snapshot.product,weblog_snapshot.url, crm_table.*, case when crm_table.churn_risk >= 20 then 1 else 0 end as churn_label from weblog_snapshot JOIN crm_table ON weblog_snapshot.user_id == crm_table.user_id")
 {% endhighlight %}
 
-### Here's how to save an RDD to a file or to MapR-DB:
+### Bulk Saving an RDD to MapR-DB:
 
 {% highlight scala %}
 // Save an RDD as a JSON file on MapR-FS
