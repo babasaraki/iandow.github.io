@@ -4,7 +4,9 @@ title: Joining streams and NoSQL tables for Customer 360 analytics in Spark.
 tags: [spark, streaming, sql, machine learning, customer 360, master data management]
 ---
 
-*"MapR-DB is the perfect database for Customer 360 applications"*. That's the tag line I used to describe a demo I created for MapR for the Strata Data Conference in New York in September of 2017. Frequently the needs of marketing and product management are at odds because marketeers want to capture leads with flashy demos but product managers want to show off technical features that may not show well but appeal to the discriminating tastes of brainiac developers. It was hard to reconcile these opposing viewpoints while building my Customer 360 demo for MapR but with the help of the [bokeh](http://bokeh.pydata.org) data visualization framework and the MapR's database connector for Spark I was able to achieve demonstrable elegance in both the front-end and the  back-end. 
+*"MapR-DB is the perfect database for Customer 360 applications"*. That's the tag line I used to describe a demo I created for MapR for the Strata Data Conference in New York in September of 2017. Describing Customer 360 as a use case for MapR-DB was the focus of this demo because we wanted to draw attention to the [new features being unveiled for MapR-DB](https://mapr.com/blog/mapr-db-database-for-global-data-intensive-applications/). I really like the Customer 360 use case because it talks to so many of MapR's strengths (not just DB) and it can be told in a story that is both visually appealing and technically deep.
+
+Frequently the needs of marketing and product management are at odds because marketeers want to capture leads with flashy demos but product managers want to show off technical features that may not show well but appeal to the discriminating tastes of brainiac developers. At times it was hard to reconcile these opposing viewpoints while building the Customer 360 demo but with the help of the [bokeh](http://bokeh.pydata.org) data visualization framework and the MapR's database connector for Spark I was able to achieve demonstrable elegance in both the front-end and the  back-end. 
 
 ![Call Center Analytical Portal](http://iandow.github.io/img/customer360_bokeh.gif)
 
@@ -14,7 +16,8 @@ Product demos as booth provocations need to be flashy. My efforts to build flash
 
 # Demo Objectives
 
-The three key points I'm trying to convey with this demo were:
+The three key points I'm trying to convey with this demo are:
+
 1. Flexible schemas makes it easier to persist Customer 360 data.
 2. Operating streams and database services on one cluster makes it easier to analyze that data in Spark.
 3. Operating database services and machine learning on one cluster makes it easier for production applications to access machine learning results.
