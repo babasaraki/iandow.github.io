@@ -132,9 +132,9 @@ val maprd = rdd.map(str => MapRDBSpark.newDocument(str))
 maprd.saveToMapRDB("/tmp/realtime_churn_predictions", createTable = false, bulkInsert = true, idFieldPath = "id")
 {% endhighlight %}
 
+<br>
 <p>Please provide your feedback to this article by adding a comment to <a href="https://github.com/iandow/iandow.github.io/issues/5">https://github.com/iandow/iandow.github.io/issues/5</a>.</p>
 
-<br>
 <div class="main-explain-area padding-override jumbotron">
   <img src="http://iandow.github.io/img/paypal.png" width="120" style="margin-left: 15px" align="right">
   <p class="margin-override font-override">
