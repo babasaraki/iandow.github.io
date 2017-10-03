@@ -38,7 +38,7 @@ To illustrate my demo objectives in code, I wrote a [Zeppelin notebook](https://
 1. Read clickstream data from MapR Streams using Spark Streaming and the Kafka API
 2. Output performance data for web traffic using Spark SQL
 3. Combine clickstream data with master CRM data using the Spark connector to MapR-DB
-4. Predict churn risk users in the clickstream with Spark ML.
+4. Predict churn from feature columns in the combined clickstream / CRM data and save churn predictions back into MapR-DB tables.  
 
 I've posted my Zeppelin notebook [here](https://www.zepl.com/viewer/notebooks/bm90ZTovL2lhbmRvdy8zZDQyOTgyN2Y3NWQ0ODFmYTVlZDRmYzgxZGE1M2M1NC9ub3RlLmpzb24).
 
