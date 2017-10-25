@@ -158,7 +158,7 @@ Installing and using data science notebooks is relatively straightforward. Howev
 
 MapR solves this problem by distributing Zeppelin in a dockerized data science container preconfigured with secure read/write access to all data on a MapR cluster. MapR's support for Zeppelin makes it the fastest and most scalable notebook for data science because it has direct access to all data on your cluster, so you can analyze that data without moving that data, regardless of whether that data is in streams, files, or tables.
 
-To illustrate the value of this, checkout the [Zeppelin notebook]() I developed for the firefighting problem I described above. In it you will see how data can be ingested and processed through a variety of data engineering and machine learning libraries with seamless access to the MapR Converged Data Platform.
+To illustrate the value of this, checkout the [Zeppelin notebook](https://gist.github.com/iandow/39cd1ea9f16364188ec4a34fc7cb8c67) I developed for the firefighting problem I described above. In it you will see how data can be ingested and processed through a variety of data engineering and machine learning libraries with seamless access to the MapR Converged Data Platform.
 
 # The MapR Convergence Conference is coming to Portland!
 
