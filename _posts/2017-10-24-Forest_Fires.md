@@ -5,9 +5,9 @@ tags: [spark, kmeans, machine learning, data science, data engineering, data wra
 bigimg: /img/gorge_fire.jpg
 ---
 
-Every summer, fires become front-of-mind for thousands of people who live in the west, Pacific Northwest, and Northern Rockies regions of the United States. Odds are, if you don't see the flames first hand, you will probably see smoke influenced weather, road closures, and calls for caution by local authorities. 
+Every summer fires become front-of-mind for thousands of people who live in the west, Pacific Northwest, and Northern Rockies regions of the United States. Odds are, if you don't see the flames first hand, you will probably see smoke influenced weather, road closures, and calls for caution by local authorities. 
 
-<img src="http://iandow.github.io/img/941px-ForestServiceLogoOfficial.png" width="33%" align="left">
+<img src="http://iandow.github.io/img/941px-ForestServiceLogoOfficial.png" width="33%" align="right" hspace="20">
 
 I've lived in Oregon for about 10 years. In that time I've had more than one close encounter with a forest fire. This past summer was especially bad. A fire in the Columbia River Gorge blew smoke and ash through my neighboorhood. Earlier in the year I crossed paths with firefighters attempting to control a fire near the White Salmon River - my go-to spot for whitewater kayaking. As is often the case, that burn occured on steep rugged terrain. I was stunned to see the size of their equipment. A few months later I simliar vehicles traveling down Interstate 5 towards fires in Southern Oregon and California. 
 
@@ -15,7 +15,7 @@ Fire fighting is big business. [Wildland fire suppression costs exceeded $2 bill
 
 # The Problem
 
-<img src="http://iandow.github.io/img/fireengine.jpg" width="33%" align="right">
+<img src="http://iandow.github.io/img/fireengine.jpg" width="33%" align="right" hspace="20">
 
 The cost of moving heavy firefighting equipment is probably a *drop in the bucket*, but it's the type of problem that can be optimized with a little data wrangling and applied math. By staging heavy firefighting equipment as close as possible to areas where fires are likely to occur then we can minimize the long-term cost of moving that equipment to where it will be needed.
 
@@ -31,7 +31,7 @@ This process of cleaning and unifying messy data sets is called "data wrangling"
 
 # Data Wrangling in Apache Zeppelin
 
-<img src="http://iandow.github.io/img/zeppelin_logo.png" align="right">
+<img src="http://iandow.github.io/img/zeppelin_logo.png" width="33%" align="right">
 
 The data engineering that preceeds machine learning typically involves writting expressions in R, SQL, Scala, and/or Python which join and transform sampled datasets. Often, getting these expressions right involves a lot of trial and error. Ideally you want to test those expressions without the burden of compiling and running a full program. Data scientists have embraced web based notebooks, such as Apache Zeppelin, for this purpose because they allow you to interactively transform datasets and know right away if what you're trying to do will work properly. 
 
