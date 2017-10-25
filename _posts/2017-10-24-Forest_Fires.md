@@ -10,7 +10,9 @@ Every summer fires become front-of-mind for thousands of people who live in the 
 
 <img src="http://iandow.github.io/img/bulldog_truck.jpg" width="30%" align="right" hspace="20">
 
-I've lived in Oregon for about 10 years. In that time I've had more than one close encounter with a forest fire. This past summer was especially bad. A fire in the Columbia River Gorge blew smoke and ash through my neighborhood. Earlier in the year I crossed paths with firefighters attempting to control a fire in steep rugged terrain in southern Washington. <img src="http://iandow.github.io/img/mad-max.jpg" width="30%" align="right" hspace="20"> I was stunned to see the size of their equipment and trucks so badass they could be in the Mad Max movie.
+I've lived in Oregon for about 10 years. In that time I've had more than one close encounter with a forest fire. This past summer was especially bad. A fire in the Columbia River Gorge blew smoke and ash through my neighborhood. Earlier in the year I crossed paths with firefighters attempting to control a fire in steep rugged terrain in southern Washington. I was stunned to see the size of their equipment and trucks so badass they could be in the Mad Max movie.
+
+<img src="http://iandow.github.io/img/mad-max.jpg" width="30%" align="right" hspace="20">
 
 Fire fighting is big business. [Wildland fire suppression costs exceeded $2 billion in 2017](https://www.usda.gov/media/press-releases/2017/09/14/forest-service-wildland-fire-suppression-costs-exceed-2-billion), making it the most expensive year on record for the Forest Service. Lets look at one small way in which data science could be applied within the context of streamlining fire fighting operations in order to reduce costs.
 
