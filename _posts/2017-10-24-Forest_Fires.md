@@ -150,6 +150,8 @@ tbd
 
 # Using Zepplin in Docker with the MapR Data Science Refinery
 
+<img src="http://iandow.github.io/img/firenotebook.png" width="20%" align="right" hspace="10">
+
 Installing and using data science notebooks is relatively straightforward. However, integrating notebooks with seperate clusters so that you could for example, read large datasets from Hadoop and process them in Spark is difficult to setup and often slow due to data movement.
 
 MapR solves this problem by distributing Zeppelin in a dockerized data science container preconfigured with secure read/write access to all data on a MapR cluster. MapR's support for Zeppelin makes it the fastest and most scalable notebook for data science because it has direct access to all data on your cluster, so you can analyze that data without moving that data, regardless of whether that data is in streams, files, or tables.
