@@ -19,7 +19,7 @@ Fire fighting is big business. [Wildland fire suppression costs exceeded $2 bill
 
 The cost of moving heavy firefighting equipment is probably a "drop in the bucket" but it's the type of problem that can be optimized with a little data wrangling and applied math. By staging heavy firefighting equipment as close as possible to areas where fires are likely to occur then we can minimize the long-term cost of moving that equipment to where it will be needed.
 
-The problem of minimizing the distance between fires and staging areas involves partitioning the locations of recorded wildfires into a small number of clusters and finding the center of each cluster. The center of each cluster, called a centroid, would be the location near which we would want to stage firefighting equipment. This is a classic description of a clustering problem. I will solve it using the k-means clustering technique.
+The problem of minimizing the distance between fires and staging areas involves partitioning the locations of recorded wildfires into a small number of clusters and finding the center of each cluster. The center of each cluster, called a centroid, would be the location near which we would want to stage firefighting equipment. This type of problem can be solved using the K-Means clustering technique.
 
 # The Solution:
 
