@@ -11,7 +11,7 @@ Every summer fires become front-of-mind for thousands of people who live in the 
 
 I've lived in Oregon for about 10 years. In that time I've had more than one close encounter with a forest fire. This past summer was especially bad. A fire in the Columbia River Gorge blew smoke and ash through my neighborhood. Earlier in the year I crossed paths with firefighters attempting to control a fire near the White Salmon River - my go-to spot for whitewater kayaking. As is often the case, that burn occurred on steep rugged terrain. I was stunned to see the size of their equipment. A few months later I similar vehicles traveling down Interstate 5 towards fires in Southern Oregon and California. 
 
-Fire fighting is big business. [Wildland fire suppression costs exceeded $2 billion in 2017](https://www.usda.gov/media/press-releases/2017/09/14/forest-service-wildland-fire-suppression-costs-exceed-2-billion), making it the most expensive year on record for the Forest Service. Lets look at one small way in which data science could be applied within the context of this problem.
+Fire fighting is big business. [Wildland fire suppression costs exceeded $2 billion in 2017](https://www.usda.gov/media/press-releases/2017/09/14/forest-service-wildland-fire-suppression-costs-exceed-2-billion), making it the most expensive year on record for the Forest Service. Lets look at one small way in which data science could be applied within the context of streamlining fire fighting operations in order to reduce costs.
 
 # The Problem
 
@@ -143,7 +143,7 @@ model.write.overwrite().save("/user/mapr/data/save_fire_model")
 
 The resulting cluster centers are shown below. Where would you stage firefighting equipment?
 
-<img src="http://iandow.github.io/img/fire_centroids.png" width="66%" align="center">
+<img src="http://iandow.github.io/img/fire_centroids.png" width="80%">
 
 These centroids were calculated by analyzing the locations for fires that have occurred in the past. These points can be used to help stage firefighting equipment as near as possible to regions prone to burn, but how do we know which staging area should respond when a new forest fire starts? We can use our previously saved model to answer that question. The Scala code for that would look like this:
 
