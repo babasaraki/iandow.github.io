@@ -5,7 +5,7 @@ tags: [spark, kmeans, machine learning, data science, data engineering, data wra
 bigimg: /img/gorge_fire.jpg
 ---
 
-Anytime you have lat / long coordinates, you have an opportunity to do data science with kmeans clustering and visualization on a map.  This is a story about how I used geo data with kmeans clustering that relates to a topic which has effected me, and everyone else in the city of Portland Oregon, personally - wildfires!
+Anytime you have lat / long coordinates, you have an opportunity to do data science with kmeans clustering and visualization on a map.  This is a story about how I used geo data with kmeans clustering that relates to a topic which has effected me personally - wildfires!
 
 Every summer fires become front-of-mind for thousands of people who live in the west, Pacific Northwest, and Northern Rockies regions of the United States. Odds are, if you don't see the flames first hand, you will probably see smoke influenced weather, road closures, and calls for caution by local authorities. 
 
