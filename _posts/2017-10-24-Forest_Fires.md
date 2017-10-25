@@ -7,7 +7,7 @@ bigimg: /img/gorge_fire.jpg
 
 Anytime you have lat / long coordinates, you have an opportunity to do data science with kmeans clustering and visualization on a map.  This is a story about how I used geo data with kmeans clustering that relates to a topic which has effected me personally - wildfires!
 
-Every summer fires become front-of-mind for thousands of people who live in the west, Pacific Northwest, and Northern Rockies regions of the United States. Odds are, if you don't see the flames first hand, you will probably see smoke influenced weather, road closures, and calls for caution by local authorities. 
+Every summer wildfire become front-of-mind for thousands of people who live in the west, Pacific Northwest, and Northern Rockies regions of the United States. Odds are, if you don't see the flames first hand, you will probably see smoke influenced weather, road closures, and calls for caution by local authorities. 
 
 I've lived in Oregon for about 10 years. In that time I've had more than one close encounter with a forest fire. This past summer was especially bad. <img src="http://iandow.github.io/img/mad-max.jpg" width="33%" align="right" hspace="10"> A fire in the Columbia River Gorge blew smoke and ash through my neighborhood. Earlier in the year I crossed paths with firefighters attempting to control a fire in steep rugged terrain in southern Washington. I was stunned to see the size of their equipment - trucks so badass they could be in a Mad Max movie.
 
