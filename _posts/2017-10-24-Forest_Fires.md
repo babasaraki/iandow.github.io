@@ -17,11 +17,13 @@ Fire fighting is big business. [Wildland fire suppression costs exceeded $2 bill
 
 <img src="http://iandow.github.io/img/fireengine.jpg" width="33%" align="right" hspace="20">
 
-The cost of moving heavy firefighting equipment is probably a *drop in the bucket*, but it's the type of problem that can be optimized with a little data wrangling and applied math. By staging heavy firefighting equipment as close as possible to areas where fires are likely to occur then we can minimize the long-term cost of moving that equipment to where it will be needed.
+The cost of moving heavy firefighting equipment is probably a "drop in the bucket" but it's the type of problem that can be optimized with a little data wrangling and applied math. By staging heavy firefighting equipment as close as possible to areas where fires are likely to occur then we can minimize the long-term cost of moving that equipment to where it will be needed.
 
 The problem of minimizing the distance between fires and staging areas involves partitioning the locations of recorded wildfires into a small number of clusters and finding the center of each cluster. The center of each cluster, called a centroid, would be the location near which we would want to stage firefighting equipment. This is a classic description of a clustering problem. I will solve it using the k-means clustering technique.
 
 # The Solution: Data Wrangling and K-Means Clustering
+
+<img src="http://iandow.github.io/img/KMeans.png" width="33%" align="right" hspace="20">
 
 My goal is to predict where forest fires are prone to occur by partitioning the locations of past burns into clusters whose centroids can be used to optimally place heavy fire fighting equipment as near as possible to where fires are likely to occur.
 
