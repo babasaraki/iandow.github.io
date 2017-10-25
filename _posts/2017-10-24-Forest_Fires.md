@@ -148,7 +148,7 @@ tbd
 {% endhighlight %}
 
 
-# Machine Learning Logistics
+# Using Zepplin in Docker with the MapR Data Science Refinery
 
 Installing and using data science notebooks is relatively straightforward. However, integrating notebooks with seperate clusters so that you could for example, read large datasets from Hadoop and process them in Spark is difficult to setup and often slow due to data movement.
 
