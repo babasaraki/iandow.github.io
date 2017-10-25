@@ -162,7 +162,7 @@ To illustrate the value of this, checkout the [Zeppelin notebook]() I developed 
 
 # The MapR Convergence Conference is coming to Portland!
 
-If you trying to build data science applications for your business, I would like to personally invite you to join me at MapR's one-day Big Data conference on Thursday November 16th at the Nines Hotel in downtown Portland, Oregon.
+If you are trying to build data science applications for your business, I would like to personally invite you to join me at MapR's one-day Big Data conference on Thursday November 16th at the Nines Hotel in downtown Portland, Oregon.
 
 We will be discussing the following:
  
