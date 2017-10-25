@@ -7,7 +7,7 @@ bigimg: /img/gorge_fire.jpg
 
 Every summer fires become front-of-mind for thousands of people who live in the west, Pacific Northwest, and Northern Rockies regions of the United States. Odds are, if you don't see the flames first hand, you will probably see smoke influenced weather, road closures, and calls for caution by local authorities. 
 
-<img src="http://iandow.github.io/img/941px-ForestServiceLogoOfficial.png" width="33%" align="right" hspace="20">
+<img src="http://iandow.github.io/img/941px-ForestServiceLogoOfficial.png" width="20%" align="right" hspace="20">
 
 I've lived in Oregon for about 10 years. In that time I've had more than one close encounter with a forest fire. This past summer was especially bad. A fire in the Columbia River Gorge blew smoke and ash through my neighborhood. Earlier in the year I crossed paths with firefighters attempting to control a fire near the White Salmon River - my go-to spot for whitewater kayaking. As is often the case, that burn occurred on steep rugged terrain. I was stunned to see the size of their equipment. A few months later I similar vehicles traveling down Interstate 5 towards fires in Southern Oregon and California. 
 
