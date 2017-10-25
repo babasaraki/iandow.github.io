@@ -21,11 +21,11 @@ The cost of moving heavy firefighting equipment is probably a "drop in the bucke
 
 The problem of minimizing the distance between fires and staging areas involves partitioning the locations of recorded wildfires into a small number of clusters and finding the center of each cluster. The center of each cluster, called a centroid, would be the location near which we would want to stage firefighting equipment. This is a classic description of a clustering problem. I will solve it using the k-means clustering technique.
 
-# The Solution: Data Wrangling and K-Means Clustering
+# The Solution:
 
 <img src="http://iandow.github.io/img/KMeans.png" width="33%" align="right" hspace="20">
 
-My goal is to predict where forest fires are prone to occur by partitioning the locations of past burns into clusters whose centroids can be used to optimally place heavy fire fighting equipment as near as possible to where fires are likely to occur.
+My goal is to predict where forest fires are prone to occur by partitioning the locations of past burns into clusters whose centroids can be used to optimally place heavy fire fighting equipment as near as possible to where fires are likely to occur. The K-Means clustering algorithm is perfectly suited for this purpose.
 
 The United States Forest Service provides datasets that describe forest fires that have occurred in Canada and the United States since year 2000. I will download this dataset from [https://fsapps.nwcg.gov/gisdata.php](https://fsapps.nwcg.gov/gisdata.php). This dataset is provided in an inconvenient [shapefile](http://doc.arcgis.com/en/arcgis-online/reference/shapefiles.htm) format. I'll need to transform it to CSV in order to read the data into Spark. Also, the records after 2008 have a different schema than prior years, so after I convert the shapefiles into CSV files I'll need to ingest them into Spark using seperate user-defined schemas. This is typical, by the way. Raw data is hardly ever clean and ready for machine learning.  
 
