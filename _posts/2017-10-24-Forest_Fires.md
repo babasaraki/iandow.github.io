@@ -9,7 +9,7 @@ Every summer fires become front-of-mind for thousands of people who live in the 
 
 <img src="http://iandow.github.io/img/941px-ForestServiceLogoOfficial.png" width="33%" align="right" hspace="20">
 
-I've lived in Oregon for about 10 years. In that time I've had more than one close encounter with a forest fire. This past summer was especially bad. A fire in the Columbia River Gorge blew smoke and ash through my neighboorhood. Earlier in the year I crossed paths with firefighters attempting to control a fire near the White Salmon River - my go-to spot for whitewater kayaking. As is often the case, that burn occured on steep rugged terrain. I was stunned to see the size of their equipment. A few months later I simliar vehicles traveling down Interstate 5 towards fires in Southern Oregon and California. 
+I've lived in Oregon for about 10 years. In that time I've had more than one close encounter with a forest fire. This past summer was especially bad. A fire in the Columbia River Gorge blew smoke and ash through my neighborhood. Earlier in the year I crossed paths with firefighters attempting to control a fire near the White Salmon River - my go-to spot for whitewater kayaking. As is often the case, that burn occurred on steep rugged terrain. I was stunned to see the size of their equipment. A few months later I similar vehicles traveling down Interstate 5 towards fires in Southern Oregon and California. 
 
 Fire fighting is big business. [Wildland fire suppression costs exceeded $2 billion in 2017](https://www.usda.gov/media/press-releases/2017/09/14/forest-service-wildland-fire-suppression-costs-exceed-2-billion), making it the most expensive year on record for the Forest Service. Lets look at one small way in which data science could be applied within the context of this problem.
 
@@ -27,15 +27,15 @@ The problem of minimizing the distance between fires and staging areas involves 
 
 My goal is to predict where forest fires are prone to occur by partitioning the locations of past burns into clusters whose centroids can be used to optimally place heavy fire fighting equipment as near as possible to where fires are likely to occur. The K-Means clustering algorithm is perfectly suited for this purpose.
 
-The United States Forest Service provides datasets that describe forest fires that have occurred in Canada and the United States since year 2000. That data can be downloaded from [https://fsapps.nwcg.gov/gisdata.php](https://fsapps.nwcg.gov/gisdata.php). For my purposes, this dataset is provided in an inconvenient [shapefile](http://doc.arcgis.com/en/arcgis-online/reference/shapefiles.htm) format. It needs to be transformed to CSV in order to be easily usable by Spark. Also, the records after 2008 have a different schema than prior years, so after converting the shapefiles to CSV they'll need to ingested into Spark using seperate user-defined schemas. By the way, this complexity is typical. Raw data is hardly ever suitable for machine learning without cleansing. The process of cleaning and unifying messy data sets is called "data wrangling" and it frequently comprises the bulk of the effort involved in real world machine learning.
+The United States Forest Service provides datasets that describe forest fires that have occurred in Canada and the United States since year 2000. That data can be downloaded from [https://fsapps.nwcg.gov/gisdata.php](https://fsapps.nwcg.gov/gisdata.php). For my purposes, this dataset is provided in an inconvenient [shapefile](http://doc.arcgis.com/en/arcgis-online/reference/shapefiles.htm) format. It needs to be transformed to CSV in order to be easily usable by Spark. Also, the records after 2008 have a different schema than prior years, so after converting the shapefiles to CSV they'll need to ingested into Spark using separate user-defined schemas. By the way, this complexity is typical. Raw data is hardly ever suitable for machine learning without cleansing. The process of cleaning and unifying messy data sets is called "data wrangling" and it frequently comprises the bulk of the effort involved in real world machine learning.
 
-# Data Wrangling in Apache Zeppelin
+# Apache Zeppelin
 
 <img src="http://iandow.github.io/img/zeppelin_logo.png" width="33%" align="right">
 
-The data engineering that preceeds machine learning typically involves writting expressions in R, SQL, Scala, and/or Python which join and transform sampled datasets. Often, getting these expressions right involves a lot of trial and error. Ideally you want to test those expressions without the burden of compiling and running a full program. Data scientists have embraced web based notebooks, such as Apache Zeppelin, for this purpose because they allow you to interactively transform datasets and know right away if what you're trying to do will work properly. 
+The data wrangling that precedes machine learning typically involves writing expressions in R, SQL, Scala, and/or Python which join and transform sampled datasets. Often, getting these expressions right involves a lot of trial and error. Ideally you want to test those expressions without the burden of compiling and running a full program. Data scientists have embraced web based notebooks, such as Apache Zeppelin, for this purpose because they allow you to interactively transform datasets and know right away if what you're trying to do will work properly. 
 
-My Zeppelin notebook contains a combination of bash, python, scala, and angular code. 
+The Zeppelin notebook I wrote for this study contains a combination of Bash, Python, Scala, and Angular code. 
 
 Here's the bash code I use to download the dataset:
 
@@ -91,7 +91,7 @@ for filename in os.listdir(DATADIR):
             print "Done..."
 {% endhighlight %}
 
-Here's the scala code I use to ingest the CSV files and train a kmeans model with Spark libraries:
+Here's the Scala code I use to ingest the CSV files and train a K-Means model with Spark libraries:
 
 {% highlight scala %}
 import org.apache.spark._
@@ -143,10 +143,13 @@ model.write.overwrite().save("/user/mapr/data/save_fire_model")
 
 The resulting cluster centers are shown below. Where would you stage firefighting equipment?
 
+<img src="http://iandow.github.io/img/fire_centroids.png" width="66%" align="center">
 
+These centroids were calculated by analyzing the locations for fires that have occurred in the past. These points can be used to help stage firefighting equipment as near as possible to regions prone to burn, but how do we know which staging area should respond when a new forest fire starts? We can use our previously saved model to answer that question. The Scala code for that would look like this:
 
-Finally, here's the scala code I use to load the kmeans model in order to identify what staging area a newly detected fire should draw firefighting resources from (i.e. what centroid the fire is closest to):
-
+{% highlight scala %}
+tbd
+{% endhighlight %}
 
 
 # Machine Learning Logistics
@@ -157,7 +160,7 @@ MapR solves this problem by distributing Zeppelin in a dockerized data science c
 
 To illustrate the value of this, checkout the [Zeppelin notebook]() I developed for the firefighting problem I described above. In it you will see how data can be ingested and processed through a variety of data engineering and machine learning libraries with seamless access to the MapR Converged Data Platform.
 
-The MapR Convergence Conference is coming to Portland!
+# The MapR Convergence Conference is coming to Portland!
 
 If you trying to build data science applications for your business, I would like to personally invite you to join me at MapR's one-day Big Data conference on Thursday November 16th at the Nines Hotel in downtown Portland, Oregon.
 
@@ -172,6 +175,8 @@ When you attend this event, you’ll have the opportunity to engage with other a
 
 Register with the following link to receive a free pass:
 [https://www.eventbrite.com/e/convergence-portland-tickets-38809618614](https://www.eventbrite.com/e/convergence-portland-tickets-38809618614?discount=Ian)
+
+<img src="http://iandow.github.io/img/ConvergePortland.png" width="66%" align="center">
 
 <br>
 <p>Please provide your feedback to this article by adding a comment to <a href="https://github.com/iandow/iandow.github.io/issues/6">https://github.com/iandow/iandow.github.io/issues/6</a>.</p>
