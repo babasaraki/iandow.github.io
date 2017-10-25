@@ -7,9 +7,10 @@ bigimg: /img/gorge_fire.jpg
 
 Every summer fires become front-of-mind for thousands of people who live in the west, Pacific Northwest, and Northern Rockies regions of the United States. Odds are, if you don't see the flames first hand, you will probably see smoke influenced weather, road closures, and calls for caution by local authorities. 
 
-<img src="http://iandow.github.io/img/941px-ForestServiceLogoOfficial.png" width="20%" align="right" hspace="20">
+<img src="http://iandow.github.io/img/bulldog_truck.jpg" width="30%" align="right" hspace="20">
+<img src="http://iandow.github.io/img/mad-max.jpg" width="30%" align="right" hspace="20">
 
-I've lived in Oregon for about 10 years. In that time I've had more than one close encounter with a forest fire. This past summer was especially bad. A fire in the Columbia River Gorge blew smoke and ash through my neighborhood. Earlier in the year I crossed paths with firefighters attempting to control a fire near the White Salmon River - my go-to spot for whitewater kayaking. As is often the case, that burn occurred on steep rugged terrain. I was stunned to see the size of their equipment. A few months later I similar vehicles traveling down Interstate 5 towards fires in Southern Oregon and California. 
+I've lived in Oregon for about 10 years. In that time I've had more than one close encounter with a forest fire. This past summer was especially bad. A fire in the Columbia River Gorge blew smoke and ash through my neighborhood. Earlier in the year I crossed paths with firefighters attempting to control a fire in steep rugged terrain in southern Washington. I was stunned to see the size of their equipment and trucks so badass they could be in the Mad Max movie.
 
 Fire fighting is big business. [Wildland fire suppression costs exceeded $2 billion in 2017](https://www.usda.gov/media/press-releases/2017/09/14/forest-service-wildland-fire-suppression-costs-exceed-2-billion), making it the most expensive year on record for the Forest Service. Lets look at one small way in which data science could be applied within the context of streamlining fire fighting operations in order to reduce costs.
 
@@ -17,9 +18,7 @@ Fire fighting is big business. [Wildland fire suppression costs exceeded $2 bill
 
 <img src="http://iandow.github.io/img/fireengine.jpg" width="33%" align="right" hspace="20">
 
-The cost of moving heavy firefighting equipment is probably a "drop in the bucket" but it's the type of problem that can be optimized with a little data wrangling and applied math. By staging heavy firefighting equipment as close as possible to areas where fires are likely to occur then we can minimize the long-term cost of moving that equipment to where it will be needed.
-
-The problem of minimizing the distance between fires and staging areas involves partitioning the locations of recorded wildfires into a small number of clusters and finding the center of each cluster. The center of each cluster, called a centroid, would be the location near which we would want to stage firefighting equipment. This type of problem can be solved using the K-Means clustering technique.
+The cost of moving heavy firefighting equipment is probably a "drop in the bucket" but it's the type of problem that can be optimized with a little data wrangling and applied math. By staging heavy firefighting equipment as close as possible to where fires are likely to occur then the cost of moving that equipment to where it will be needed can be minimized.
 
 # The Solution:
 
@@ -27,7 +26,9 @@ The problem of minimizing the distance between fires and staging areas involves 
 
 My goal is to predict where forest fires are prone to occur by partitioning the locations of past burns into clusters whose centroids can be used to optimally place heavy fire fighting equipment as near as possible to where fires are likely to occur. The K-Means clustering algorithm is perfectly suited for this purpose.
 
-The United States Forest Service provides datasets that describe forest fires that have occurred in Canada and the United States since year 2000. That data can be downloaded from [https://fsapps.nwcg.gov/gisdata.php](https://fsapps.nwcg.gov/gisdata.php). For my purposes, this dataset is provided in an inconvenient [shapefile](http://doc.arcgis.com/en/arcgis-online/reference/shapefiles.htm) format. It needs to be transformed to CSV in order to be easily usable by Spark. Also, the records after 2008 have a different schema than prior years, so after converting the shapefiles to CSV they'll need to ingested into Spark using separate user-defined schemas. By the way, this complexity is typical. Raw data is hardly ever suitable for machine learning without cleansing. The process of cleaning and unifying messy data sets is called "data wrangling" and it frequently comprises the bulk of the effort involved in real world machine learning.
+<img src="http://iandow.github.io/img/941px-ForestServiceLogoOfficial.png" width="20%" align="right" hspace="20">
+
+The United States Forest Service provides datasets that describe forest fires that have occurred in Canada and the United States since year 2000. That data can be downloaded from [https://fsapps.nwcg.gov/gisdata.php](https://fsapps.nwcg.gov/gisdata.php). For my purposes, this dataset is provided in an inconvenient [shapefile](http://doc.arcgis.com/en/arcgis-online/reference/shapefiles.htm) format. It needs to be transformed to CSV in order to be easily usable by Spark. Also, the records after 2008 have a different schema than prior years, so after converting the shapefiles to CSV they'll need to be ingested into Spark using separate user-defined schemas. By the way, this complexity is typical. Raw data is hardly ever suitable for machine learning without cleansing. The process of cleaning and unifying messy data sets is called "data wrangling" and it frequently comprises the bulk of the effort involved in real world machine learning.
 
 # Apache Zeppelin
 
