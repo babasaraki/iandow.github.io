@@ -146,7 +146,11 @@ The resulting cluster centers are shown below. Where would you stage firefightin
 These centroids were calculated by analyzing the locations for fires that have occurred in the past. These points can be used to help stage firefighting equipment as near as possible to regions prone to burn, but how do we know which staging area should respond when a new forest fire starts? We can use our previously saved model to answer that question. The Scala code for that would look like this:
 
 {% highlight scala %}
-tbd
+val test_coordinate = Seq((42.3,-112.2 )).toDF("latitude", "longitude")
+val df3 = assembler.transform(test_coordinate)
+val categories = model.transform(df3)
+val centroid_id = categories.select("prediction").rdd.map(r => r(0)).collect()(0).asInstanceOf[Int]
+println(model.clusterCenters(centroid_id))
 {% endhighlight %}
 
 
