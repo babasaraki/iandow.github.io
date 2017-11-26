@@ -7,17 +7,17 @@ bigimg: /img/gorge_fire.jpg
 
 Anytime you have lat / long coordinates, you have an opportunity to do data science with kmeans clustering and visualization on a map.  This is a story about how I used geo data with kmeans clustering that relates to a topic which has effected me personally - wildfires!
 
-Every summer wildfire become front-of-mind for thousands of people who live in the west, Pacific Northwest, and Northern Rockies regions of the United States. Odds are, if you don't see the flames first hand, you will probably see smoke influenced weather, road closures, and calls for caution by local authorities. 
+Every summer wildfires become front-of-mind for thousands of people who live in the west, Pacific Northwest, and Northern Rockies regions of the United States. Odds are, if you don't see the flames first hand, you will probably see smoke influenced weather, road closures, and calls for caution by local authorities. 
 
 I've lived in Oregon for about 10 years. In that time I've had more than one close encounter with a forest fire. This past summer was especially bad. <img src="http://iandow.github.io/img/mad-max.jpg" width="33%" align="right" hspace="10"> A fire in the Columbia River Gorge blew smoke and ash through my neighborhood. Earlier in the year I crossed paths with firefighters attempting to control a fire in steep rugged terrain in southern Washington. I was stunned to see the size of their equipment and trucks so badass they could be in a Mad Max movie.
 
-Fire fighting is big business. [Wildland fire suppression costs exceeded $2 billion in 2017](https://www.usda.gov/media/press-releases/2017/09/14/forest-service-wildland-fire-suppression-costs-exceed-2-billion), making it the most expensive year on record for the Forest Service. Lets look at one small way in which data science could be applied within the context of streamlining fire fighting operations in order to reduce costs.
+Fire fighting is big business. [Wildland fire suppression costs exceeded $2 billion in 2017](https://www.usda.gov/media/press-releases/2017/09/14/forest-service-wildland-fire-suppression-costs-exceed-2-billion), making it the most expensive year on record for the Forest Service. Fires also have a tendancy to explode in size. Its not unusual for fires to grow by 40,000 acres in one day when winds are high and the terrain is steep. Lets look at one small way in which data science could be applied within the context of streamlining fire fighting operations in order to reduce costs and response time.
 
 # The Problem
 
 <img src="http://iandow.github.io/img/fireengine.jpg" width="33%" align="right" hspace="10">
 
-The cost of moving heavy firefighting equipment is probably a "drop in the bucket" but it's the type of problem that can be optimized with a little data wrangling and applied math. By staging heavy firefighting equipment as close as possible to where fires are likely to occur then the cost of moving that equipment to where it will be needed can be minimized.
+I'm attempting to minimize the cost and time required to respond to fires by identifying where  firefighting assets should be staged such that they are as close as possible to where fires are likely to occur.
 
 # The Solution:
 
