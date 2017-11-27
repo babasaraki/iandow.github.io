@@ -167,7 +167,7 @@ Most machine learning applications are initially architected with a synchronous 
 
 In order to do these things the model must be a modular component in the pipeline and model results should rendezvous at a point where their results can be compared, monitored, and selected based upon user-defined critieria. This design pattern can be achieved with an architecture called the _Rendezvous Architecture_.
 
-* The Rendezvous Architecture
+# The Rendezvous Architecture
 
 The rendezvous architecure is a machine learning pipeline that allows multiple models to process inference requests and “rendezvous” at a point where user-defined logic can be applied to choose which ML result to return to the requester. Such logic could say, "Give me the fastest result" or "give me the highest confidence score after waiting 10 seconds". The rendezvous point also gives us a point where models can be monitored and requests can be captured where models results significantly disagree with each other.
 
