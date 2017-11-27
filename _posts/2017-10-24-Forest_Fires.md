@@ -153,6 +153,31 @@ val centroid_id = categories.select("prediction").rdd.map(r => r(0)).collect()(0
 println(model.clusterCenters(centroid_id))
 {% endhighlight %}
 
+# Operationalizing this model as a real-time "Fire Response" App
+
+The previous code excerpt shows how the model we developed could be used to identify which fire station (i.e. centroid) should be assigned to a given wildfire. We could operationlize this as a real-time fire response application with the following ML pipeline:
+
+<img src="http://iandow.github.io/img/synchronous_ML_pipeline.png" width="80%">
+
+Most machine learning applications are initially architected with a synchronous pipeline like the one shown above, but there are limitations to this simplistic approach. Since it is only architected for a single model your options are limited when it comes to the following:
+
+* How do you A/B test different versions of your model?
+* How do you load balance inference requests?
+* How do you process inference requests with multiple models optimized for different objectives (e.g. speed vs accuracy)?
+
+In order to do these things the model must be a modular component in the pipeline and model results should rendezvous at a point where their results can be compared, monitored, and selected based upon user-defined critieria. This design pattern can be achieved with an architecture called the _Rendezvous Architecture_.
+
+* The Rendezvous Architecture
+
+The rendezvous architecure is a machine learning pipeline that allows multiple models to process inference requests and “rendezvous” at a point where user-defined logic can be applied to choose which ML result to return to the requester. Such logic could say, "Give me the fastest result" or "give me the highest confidence score after waiting 10 seconds". The rendezvous point also gives us a point where models can be monitored and requests can be captured where models results significantly disagree with each other.
+
+<img src="http://iandow.github.io/img/rendezvous_architecture.png" width="80%">
+
+Note the emphasis on streams. Streams buffer requests in an infinite, resilient, and replayable queue. This makes it easy to hotswap models, scale ML executors in a microservices fashion, and guarantees traceability for every inference request and response.
+
+If you'd like to learn more about the Rendezvous Architecture then read the highly recommended _Machine Learning Logistics_ book from Ted Dunning and Ellen Friedman. It was published in 2017 and [is available as a free downloadable ebook from Orielly](http://bit.ly/ml-logistics).
+
+[<img src="http://iandow.github.io/img/ML_Logistics_book" width="30%" align="right" hspace="10">](http://bit.ly/ml-logistics)
 
 # Using Zepplin in Docker with the MapR Data Science Refinery
 
