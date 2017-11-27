@@ -173,11 +173,9 @@ The rendezvous architecure is a machine learning pipeline that allows multiple m
 
 <img src="http://iandow.github.io/img/rendezvous_architecture.png" width="80%">
 
-[<img src="http://iandow.github.io/img/ML_Logistics_book.png" width="30%" align="right" hspace="10">](http://bit.ly/ml-logistics)
-
 Note the emphasis on streams. Streams buffer requests in an infinite, resilient, and replayable queue. This makes it easy to hotswap models, scale ML executors in a microservices fashion, and guarantees traceability for every inference request and response.
 
-If you'd like to learn more about the Rendezvous Architecture then read the highly recommended _Machine Learning Logistics_ book from Ted Dunning and Ellen Friedman. It was published in 2017 and [is available as a free downloadable ebook from Orielly](http://bit.ly/ml-logistics).
+[<img src="http://iandow.github.io/img/ML_Logistics_book.png" width="25%" align="right" hspace="10">](http://bit.ly/ml-logistics) If you'd like to learn more about the Rendezvous Architecture then read the highly recommended _Machine Learning Logistics_ book from Ted Dunning and Ellen Friedman. It was published in 2017 and [is available as a free downloadable ebook from Orielly](http://bit.ly/ml-logistics).
 
 <br>
 <p>Please provide your feedback to this article by adding a comment to <a href="https://github.com/iandow/iandow.github.io/issues/6">https://github.com/iandow/iandow.github.io/issues/6</a>.</p>
