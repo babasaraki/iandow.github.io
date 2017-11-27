@@ -173,39 +173,11 @@ The rendezvous architecure is a machine learning pipeline that allows multiple m
 
 <img src="http://iandow.github.io/img/rendezvous_architecture.png" width="80%">
 
+[<img src="http://iandow.github.io/img/ML_Logistics_book.png" width="30%" align="right" hspace="10">](http://bit.ly/ml-logistics)
+
 Note the emphasis on streams. Streams buffer requests in an infinite, resilient, and replayable queue. This makes it easy to hotswap models, scale ML executors in a microservices fashion, and guarantees traceability for every inference request and response.
 
 If you'd like to learn more about the Rendezvous Architecture then read the highly recommended _Machine Learning Logistics_ book from Ted Dunning and Ellen Friedman. It was published in 2017 and [is available as a free downloadable ebook from Orielly](http://bit.ly/ml-logistics).
-
-[<img src="http://iandow.github.io/img/ML_Logistics_book" width="30%" align="right" hspace="10">](http://bit.ly/ml-logistics)
-
-# Using Zepplin in Docker with the MapR Data Science Refinery
-
-<img src="http://iandow.github.io/img/firenotebook.png" width="20%" align="right" hspace="10">
-
-Installing and using data science notebooks is relatively straightforward. However, integrating notebooks with seperate clusters so that you could for example, read large datasets from Hadoop and process them in Spark is difficult to setup and often slow due to data movement.
-
-MapR solves this problem by distributing Zeppelin in a dockerized data science container preconfigured with secure read/write access to all data on a MapR cluster. MapR's support for Zeppelin makes it the fastest and most scalable notebook for data science because it has direct access to all data on your cluster, so you can analyze that data without moving that data, regardless of whether that data is in streams, files, or tables.
-
-To illustrate the value of this, checkout the [Zeppelin notebook](https://gist.github.com/iandow/39cd1ea9f16364188ec4a34fc7cb8c67) I developed for the firefighting problem I described above. In it you will see how data can be ingested and processed through a variety of data engineering and machine learning libraries with seamless access to the MapR Converged Data Platform.
-
-# The MapR Convergence Conference is coming to Portland!
-
-If you are trying to build data science applications for your business, I would like to personally invite you to join me at MapR's one-day Big Data conference on Thursday November 16th at the Nines Hotel in downtown Portland, Oregon.
-
-We will be discussing the following:
- 
-- Multi-Cloud and Data Integration
-- IoT and Edge Computing
-- Data Ops and Global Data Fabric
-- Machine Learning Logistics 
-
-When you attend this event, you’ll have the opportunity to engage with other attendees and industry experts to explore new ideas and find practical solutions to your own Big Data challenges.
-
-Register with the following link to receive a free pass:
-[https://www.eventbrite.com/e/convergence-portland-tickets-38809618614](https://www.eventbrite.com/e/convergence-portland-tickets-38809618614?discount=Ian)
-
-<img src="http://iandow.github.io/img/ConvergePortland.png" width="66%" align="center">
 
 <br>
 <p>Please provide your feedback to this article by adding a comment to <a href="https://github.com/iandow/iandow.github.io/issues/6">https://github.com/iandow/iandow.github.io/issues/6</a>.</p>
