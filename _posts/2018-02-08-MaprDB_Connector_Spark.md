@@ -18,13 +18,14 @@ There are also those intangible nice-to-haves, like language support (python/jav
 
 Here is a video demo that I recorded which talks about the MapR-DB connector for Spark:
 
+<a href="https://youtu.be/9RHm1YJNaIc"><img src="http://iandow.github.io/img/rnn_screenshot.png"></a>
 
 
 I also wrote a Jupyter notebook to demonstrate the MapR-DB connector for Spark, which is shown below:
 
 ### Jupyter Notebook
 
-{% include maprdb_ojai_connector_demo.html %}
+{% include maprdb_ojai_connector_notebook.html %}
 
 
 <br>
