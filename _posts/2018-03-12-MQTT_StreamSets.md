@@ -4,7 +4,7 @@ title: Creating Data Pipelines for IoT with StreamSets
 tags: [streamsets, mqtt, iot, opentsdb, grafana, data visualization, data pipelines]
 ---
 
-If you think building data pipelines requires advanced software development skills, think again. A company called [StreamSets](http://streamsets.com) has created software which enables you to build data pipelines using a drag-and-drop GUI that requires very little coding. It's a real time saver because it saves you from having to learn the application programming interfaces (APIs) needed to ingest data, transform streaming records, and send to data destinations like databases. I've recently been using StreamSets to build a data pipline for Factory IoT.
+If you think building data pipelines requires advanced software development skills, think again. A company called [StreamSets](http://streamsets.com) has created software which enables you to build data pipelines using a drag-and-drop GUI that requires very little coding. It's a real time saver because it saves you from having to learn the application programming interfaces (APIs) needed to ingest data, transform streaming records, and send to destinations like databases. I've recently been using StreamSets to build a data pipline for Factory IoT.
 
 <img src="http://iandow.github.io/img/StreamSets-logo-small.png" width="100%" align="right">
 
