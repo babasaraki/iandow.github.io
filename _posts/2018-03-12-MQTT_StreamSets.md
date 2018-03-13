@@ -72,25 +72,25 @@ log.info(str(record.value['OutsideAirTemp']))
 
 Handling the timestamp was definitly a pain. I had to create four seperate stages to handle it.
 
-_Set the timestamp_
+***Set the timestamp***
 
 We need to set the timestamp for each record so Grafana knows where it belongs in time-series plots. This is easy enough. Just use `${time:now()}` in the Expression Evaluator.
 
 <img src="http://iandow.github.io/img/streamsets2.png" width="80%">
 
-_Convert the timestamp from Date to Long_
+***Convert the timestamp from Date to Long***
 
 Grafana expects a shorter timestamps than what StreamSets gave us in the `${time:now()}` expression, so we'll need to divide it by 1000, but `${time:now()}` returns a Date object. In order to truncate the milliseconds, we need to convert it to Long. Otherwise we'll get an error when we do (Date object) / 1000.
 
 <img src="http://iandow.github.io/img/streamsets3.png" width="80%">
 
-_Truncate milliseconds_
+***Truncate milliseconds***
 
 Grafana expects a shorter timestamps than what StreamSets gave us in the `${time:now()}` expression, here we divide the timestamp by 1000 in order to remove the millisecond precision.
 
 <img src="http://iandow.github.io/img/streamsets4.png" width="80%">
 
-_Convert timestamp from Long to Int_
+***Convert timestamp from Long to Int***
 
 Finally, to get the timestamp in the format expected by OpenTSDB, we need to convert it to Int.
 
@@ -110,9 +110,7 @@ The HTTP Client stage lets you get HTTP response codes, but I don't care about t
 
 # Visualization in Grafana
 
-Grafana automatically picks up the metrics my StreamSets pipeline sends to OpenTSDB.  Here's what my Grafana data source looks like for OpenTSDB:
-
-Here's what my Grafana dashboard looks like:
+Grafana automatically picks up the metrics my StreamSets pipeline sends to OpenTSDB. Here's what my Grafana dashboard looks like:
 
 <img src="http://iandow.github.io/img/streamsets-grafana.png" width="80%">
 
