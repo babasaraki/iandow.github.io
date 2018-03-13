@@ -29,7 +29,7 @@ I also wrote a Jupyter notebook to demonstrate the MapR-DB connector for Spark, 
 
 
 <br>
-<p>Please provide your feedback to this article by adding a comment to <a href="https://github.com/iandow/iandow.github.io/issues/8">https://github.com/iandow/iandow.github.io/issues/6</a>.</p>
+<p>Please provide your feedback to this article by adding a comment to <a href="https://github.com/iandow/iandow.github.io/issues/8">https://github.com/iandow/iandow.github.io/issues/8</a>.</p>
 
 <br><br>
 <div class="main-explain-area padding-override jumbotron">
@@ -38,6 +38,6 @@ I also wrote a Jupyter notebook to demonstrate the MapR-DB connector for Spark, 
   	Did you enjoy the blog? Did you learn something useful? If you would like to support this blog please consider making a small donation. Thanks!</p>
   <br>
   <div id="paypalbtn">
-    <a class="btn btn-primary btn" href="https://www.paypal.me/iandownard/3.5">Donate via PayPal</a>
+    <a class="btn btn-primary btn" href="https://www.paypal.me/iandownard/5">Donate via PayPal</a>
   </div>
 </div>
