@@ -71,8 +71,6 @@ log.info("jython sees this record: " + str(record.value))
 log.info(str(record.value['OutsideAirTemp']))
 {% endhighlight %}
 
-<img src="http://iandow.github.io/img/streamsets1.png" width="80%">
-
 ### POST to OpenTSDB
 
 Now, I used the StreamSets HTTP Client stage to post each metric to my OpenTSDB instance running at `http://localhost:4242/api/put`:
