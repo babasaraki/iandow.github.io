@@ -48,13 +48,14 @@ So, how do you split each value out of the MQTT record, add a timestamp to it, a
 I extracted values from the incoming MQTT stream using a Jython Evaluator, defined with the following code. This script sends a new record down the StreamSets pipeline for every metric. So, for each MQTT read (which in my case happens once per minute), it generates 150 new messages in the streamsets pipeline.
 
 {% highlight jython %}
+import time
 log.info("jython processing a message")
 try: 
   for record in records:
     for key in record.value:
       newRecord = sdcFunctions.createRecord(record.sourceId+':newRecordId')
       log.info("jython newrecord created")
-      newRecord.value = {'timestamp': '', 'metric': key, 'value': record.value[key]}
+      newRecord.value = {'timestamp': int(time.time()), 'metric': key, 'value': record.value[key]}
       log.info("jython writing newrecord.value " + str(newRecord.value))
       output.write(newRecord)
   log.info("jython done")
@@ -71,34 +72,6 @@ log.info(str(record.value['OutsideAirTemp']))
 {% endhighlight %}
 
 <img src="http://iandow.github.io/img/streamsets1.png" width="80%">
-
-### Creating timestamps
-
-Handling the timestamp was definitly a pain. I had to create four seperate stages to handle it.
-
-***Set the timestamp***
-
-We need to set the timestamp for each record so Grafana knows where it belongs in time-series plots. This is easy enough. Just use `${time:now()}` in the Expression Evaluator.
-
-<img src="http://iandow.github.io/img/streamsets2.png" width="80%">
-
-***Convert the timestamp from Date to Long***
-
-Grafana expects a shorter timestamps than what StreamSets gave us in the `${time:now()}` expression, so we'll need to divide it by 1000, but `${time:now()}` returns a Date object. In order to truncate the milliseconds, we need to convert it to Long. Otherwise we'll get an error when we do (Date object) / 1000.
-
-<img src="http://iandow.github.io/img/streamsets3.png" width="80%">
-
-***Truncate milliseconds***
-
-Grafana expects a shorter timestamps than what StreamSets gave us in the `${time:now()}` expression, here we divide the timestamp by 1000 in order to remove the millisecond precision.
-
-<img src="http://iandow.github.io/img/streamsets4.png" width="80%">
-
-***Convert timestamp from Long to Int***
-
-Finally, to get the timestamp in the format expected by OpenTSDB, we need to convert it to Int.
-
-<img src="http://iandow.github.io/img/streamsets5.png" width="80%">
 
 ### POST to OpenTSDB
 
