@@ -7,8 +7,8 @@ Remember lab manuals? Those nicely bound notebooks you used in college to docume
 
 I blog for a variety of reasons:
 
-- ***I like to teach.*** My work feels more worthwhile if in the end I am sharing new-found knowledge with others. 
-- ***I think it's pretty.*** I've always enjoyed creating well formatted web pages with technical content.
+- ***I like to teach.*** My work feels more worthwhile if I am ultimately sharing newfound knowledge with others. 
+- ***I think it's pretty.*** From Latex to Jekyll, I've always enjoyed creating well formatted web pages with beautiful fonts, images, and technical content.
 - ***Because of job insecurity.*** The nature of at-will employment has ingrained within me a sense of replaceability. So, for the same reasons that artists carry a portfolio to interviews, I keep this blog as evidence I can use to show potential employers what I know and how I communicate.
 
 I am currently a product engineer for [MapR Technologies](http://www.mapr.com) where I focus on streaming, machine learning, and creating awesome demos!
