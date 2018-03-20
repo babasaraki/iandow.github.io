@@ -13,5 +13,6 @@ I blog for a variety of reasons:
 
 I am currently a product engineer for [MapR Technologies](http://www.mapr.com) where I focus on streaming, machine learning, and creating awesome demos!
 
+![national_brand_computation_notebook.jpg](http://iandow.github.io/img/national_brand_computation_notebook.jpg)
 
 
