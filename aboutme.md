@@ -11,7 +11,6 @@ I blog for a variety of reasons:
 - ***I think it's pretty.*** From Latex to Jekyll, I've always enjoyed creating well formatted web pages with beautiful fonts, images, and technical content.
 - ***Because of job insecurity.*** The nature of at-will employment has ingrained within me a sense of replaceability. So, for the same reasons that artists carry a portfolio to interviews, I keep this blog as evidence I can use to show potential employers what I know and how I communicate.
 
-I am currently a product engineer for [MapR Technologies](http://www.mapr.com) where I focus on streaming, machine learning, and creating awesome demos!
 
 ![national_brand_computation_notebook.jpg](http://iandow.github.io/img/national_brand_computation_notebook.jpg)
 (Image from [https://www.notebookstories.com/2013/09/05/tom-liptons-industrial-notebook/](https://www.notebookstories.com/2013/09/05/tom-liptons-industrial-notebook/))
