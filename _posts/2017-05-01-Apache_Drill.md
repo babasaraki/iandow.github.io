@@ -73,7 +73,7 @@ SELECT tbl1.name, tbl2.address, tbl3.name FROM `dfs.tmp`.`./names.json` as tbl1 
 ## [Connecting to Drill from Ubuntu](#connecting-to-drill-from-ubuntu)
 
 
-In order to use Drill from Python, R, or any other programming language you have to install an ODBC driver. The official [Apache Drill docs](https://drill.apache.org/docs/installing-the-driver-on-linux/) describe how to install on CentOS or Red Hat Linux but they do not cover Ubuntu, so I will. Here's how to install the MapR ODBC driver on Ubuntu 14.04:
+In order to use Drill from Python, R, or any other programming language you have to install an ODBC driver. The official [Apache Drill docs](https://drill.apache.org/docs/installing-the-driver-on-linux/) describe how to install the Dron CentOS or Red Hat Linux but they do not cover Ubuntu, so I will. Here's how to install the MapR ODBC driver on Ubuntu 14.04:
 
 First download and install the latest MapR ODBC rpm, like this:
 
@@ -156,6 +156,27 @@ Then update those .ini files, accordingly. Here is how I setup my ini files to c
 	LogPath=[LogPath]
 	SwapFilePath=/tmp
 	ODBCInstLib=/usr/lib/x86_64-linux-gnu/libodbcinst.so.1.0.0
+
+Now, you need to install the Python ODBC library. See [https://github.com/mkleehammer/pyodbc/wiki/Install](https://github.com/mkleehammer/pyodbc/wiki/Install) for thorough instructions. Here's the gist of how you install pyodbc on Ubuntu and CentOS:
+
+***Ubuntu 16.04***
+
+```
+sudo apt install python3-pip  # or `sudo apt install python-pip` for Python 2.x
+sudo apt install unixodbc-dev
+sudo pip3 install pyodbc  # or `sudo pip install pyodbc` for Python 2.x
+```
+
+***CentOS 7***
+
+```
+sudo yum install epel-release
+sudo yum install python-pip
+sudo yum install gcc-c++
+sudo yum install python-devel
+sudo yum install unixODBC-devel
+sudo pip install pyodbc
+```
 
 Finally, if you've installed and configured the ODBC driver correctly, then the command 
 
