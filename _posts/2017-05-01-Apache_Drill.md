@@ -248,6 +248,86 @@ For more information on using Drill with R, check out the following references:
 * [http://stackoverflow.com/questions/28081640/installation-of-rodbc-on-os-x-yosemite](http://stackoverflow.com/questions/28081640/installation-of-rodbc-on-os-x-yosemite)
 * [https://community.mapr.com/thread/9942](https://community.mapr.com/thread/9942)
 
+# Common problems
+
+## F**'ing Unicode!
+
+Dealing with unicode in the python ODBC driver has caused me a lot of frustration. Fortunately, specifying unicode decoding options as shown below seems to help (although, not for anaconda, which seems to not like the "to=str" option. So I just don't use anaconda.):
+
+```
+conn = pyodbc.connect("DSN=drill64", autocommit=True)
+# Set unicode options so the ODBC driver returns column names and table contents as ASCII strings
+conn.setdecoding(pyodbc.SQL_CHAR, encoding='utf-32le', to=str)
+conn.setdecoding(pyodbc.SQL_WMETADATA, encoding='utf-32le', to=str)
+cursor = conn.cursor()
+s = "show schemas`"
+df = pandas.read_sql(s, conn)
+list(df)
+```
+
+That should output 
+
+```
+['SCHEMA_NAME']
+```
+
+If you don't set the unicode options, as shown above, then you'll see this instead:
+
+```
+[u'S\x00C\x00H\x00E\x00M\x00A']
+```
+
+You can convert that to ascii with something like, `print(list(data)[0].decode("utf-8"))`, but I find that really confusing. Setting the following unicode options for the ODBC connection will ensure ODBC returns ASCII column names and dataframe values instead of unicode:
+
+```
+conn.setdecoding(pyodbc.SQL_CHAR, encoding='utf-32le', to=str)
+conn.setdecoding(pyodbc.SQL_WMETADATA, encoding='utf-32le', to=str)
+```
+
+## "Can't open lib '/opt/mapr/drillodbc/lib/64/libdrillodbc_sb64.so'"
+
+I like to test python's access to Drill via the ODBC driver with a command like this:
+
+```
+python -c 'import pandas; import pyodbc; print(pyodbc.dataSources()); conn=pyodbc.connect("DSN=drill64", autocommit=True); cursor = conn.cursor(); print(cursor);'
+```
+
+If it works, you should see something like this:
+
+```
+{'ODBC': '', 'drill64': '/opt/mapr/drillodbc/lib/64/libdrillodbc_sb64.so'}
+```
+
+Often I'll get this error:
+
+```
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+pyodbc.Error: ('01000', u"[01000] [unixODBC][Driver Manager]Can't open lib '/opt/mapr/drillodbc/lib/64/libdrillodbc_sb64.so' : file not found (0) (SQLDriverConnect)")
+```
+
+If you get that error, run this command to figure out what file is not found:
+
+```
+ldd /opt/mapr/drillodbc/lib/64/libdrillodbc_sb64.so
+```
+
+If you see this:
+
+```
+libdrillClient.so => not found
+```
+
+then that means you need to add /opt/mapr/drillodbc/lib/64 to your LD_LIBRARY_PATH, like this:
+
+```
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/mapr/drillodbc/lib/64
+```
+
+```
+
+The ODBC driver seems to return column names and table contents as unicode. 
+
 # Conclusion
 
 What I've tried to show above is that it doesn't matter how your data is formatted or where its stored, Apache Drill enables you to easily query and combine datasets from a wide variety of databases and file systems. This makes Apache Drill an extremely valuable tool for applications such as Customer 360 applications that require access to disparate datasets and the ability to combine those datasets with low latency SQL JOINs.
