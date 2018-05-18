@@ -18,7 +18,7 @@ Here is the procedure I used to create and configure the PACC and StreamSets in 
 
 Here's a short video showing how to create, configure, and run the PACC:
 
-[![asciicast](https://asciinema.org/a/jD6NnO7UDBCxbdARMYQ8mf0Wr.png)](https://asciinema.org/a/jD6NnO7UDBCxbdARMYQ8mf0Wr)
+<a href=https://asciinema.org/a/jD6NnO7UDBCxbdARMYQ8mf0Wr><img src="http://iandow.github.io/img/streamsets_mapr_install.png" width="40%"></a>
 
 For more information about creating the PACC image, see [https://maprdocs.mapr.com/home/AdvancedInstallation/CreatingPACCImage.html](https://maprdocs.mapr.com/home/AdvancedInstallation/CreatingPACCImage.html).
 
@@ -62,6 +62,7 @@ echo "export CLASSPATH=\`/opt/mapr/bin/mapr classpath\`" >> /opt/streamsets-data
 {% endhighlight %}
 
 Restart StreamSets again from the gear menu. 
+
 <img src="http://iandow.github.io/img/streamsets_restart.png" width="40%">
 
 When it comes up you will be able to use MapR in StreamSets data pipelines. Here's a basic pipeline example that saves the output of tailing a file to a file on MapR-FS:
@@ -72,7 +73,7 @@ When it comes up you will be able to use MapR in StreamSets data pipelines. Here
 
 
 <br>
-<p>Please provide your feedback to this article by adding a comment to <a href="https://github.com/iandow/iandow.github.io/issues/10">https://github.com/iandow/iandow.github.io/issues/10</a>.</p>
+<p>Please provide your feedback to this article by adding a comment to <a href="https://github.com/iandow/iandow.github.io/issues/11">https://github.com/iandow/iandow.github.io/issues/11</a>.</p>
 
 <br><br>
 <div class="main-explain-area padding-override jumbotron">
