@@ -4,7 +4,7 @@ title: Using StreamSets and MapR together in Docker
 tags: [streamsets, mapr, docker, data pipelines]
 ---
 
-In this post I demonstrate how to use the PACC to enable StreamSets to use MapR. The MapR installer can be used to create a "persistent application client container" (PACC). By mapping /opt/mapr through Docker volumes, *any* container can use MapR!!! Installing the PACC is a piece of cake, too. 
+In this post I demonstrate how to use the MapR PACC to enable StreamSets to use MapR. The MapR PACC stands for "persistent application client container" (PACC). By mapping `/opt/mapr` from the PACC through Docker volumes, *any* container can use MapR!!! Installing the PACC is a piece of cake, too. 
 
 # Introduction
 
