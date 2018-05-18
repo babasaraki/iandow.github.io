@@ -18,7 +18,7 @@ Here is the procedure I used to create and configure the PACC and StreamSets in 
 
 Here's a short video showing how to create, configure, and run the PACC:
 
-<a href=https://asciinema.org/a/jD6NnO7UDBCxbdARMYQ8mf0Wr><img src="http://iandow.github.io/img/streamsets_mapr_install.png" width="40%"></a>
+<a href="https://asciinema.org/a/jD6NnO7UDBCxbdARMYQ8mf0Wr"><img src="http://iandow.github.io/img/streamsets_mapr_install.png" width="40%"></a>
 
 For more information about creating the PACC image, see [https://maprdocs.mapr.com/home/AdvancedInstallation/CreatingPACCImage.html](https://maprdocs.mapr.com/home/AdvancedInstallation/CreatingPACCImage.html).
 
