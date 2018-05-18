@@ -63,7 +63,7 @@ echo "export CLASSPATH=\`/opt/mapr/bin/mapr classpath\`" >> /opt/streamsets-data
 
 Restart StreamSets again from the gear menu. 
 
-<img src="http://iandow.github.io/img/streamsets_restart.png" width="40%">
+<img src="http://iandow.github.io/img/streamsets_restart.png" width="60%">
 
 When it comes up you will be able to use MapR in StreamSets data pipelines. Here's a basic pipeline example that saves the output of tailing a file to a file on MapR-FS:
 
