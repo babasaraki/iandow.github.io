@@ -2,6 +2,7 @@
 layout: post
 title: Using StreamSets and MapR together in Docker
 tags: [streamsets, mapr, docker, data pipelines]
+bigimg: /img/cool-background-3.png
 ---
 
 In this post I demonstrate how to integrate StreamSets with MapR in Docker. This is made possible by the MapR persistent application client container (PACC). The fact that ***any*** application can use MapR simply by mapping `/opt/mapr` through Docker volumes is really powerful! Installing the PACC is a piece of cake, too. 
