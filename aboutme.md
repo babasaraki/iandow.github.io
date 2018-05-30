@@ -8,7 +8,7 @@ Remember lab manuals? Those nicely bound notebooks you used in college to docume
 I blog for a variety of reasons:
 
 - ***I like to teach.*** My work feels more worthwhile if I am ultimately sharing newfound knowledge with others. 
-- ***I enjoy typesetting.*** From Latex to Jekyll, I've always enjoyed creating well formatted web pages with beautiful fonts, images, and technical content.
+- ***I enjoy typesetting.*** I've always enjoyed laying out technical content on well formatted web pages with beautiful fonts, images, and source code.
 - ***It helps me showcase my work.*** For the same reasons that artists use portfolios to showcase their style and best work, my blog helps me show potential employers what I know and how I communicate.
 
 ![national_brand_computation_notebook.jpg](http://iandow.github.io/img/national_brand_computation_notebook.jpg)
