@@ -51,6 +51,17 @@ Now you need to go to StreamSet's package manager and install the MapR libraries
 
 <img src="http://iandow.github.io/img/streamsets_mapr_install.png" width="70%">
 
+You'll see several MapR packages in StreamSets.
+
+- MapR 6.0.0
+- MapR 6.0.0 MEP 4
+- MapR Spark 2.1.0 MEP 3
+
+You'll want to install the first one, "MapR 6.0.0". That package lets you use MapR filesystem, MapR-DB, and MapR Streams.  If you want Hive and cluster mode execution, then install "MapR 6.0.0 MEP 4" as well as "MapR 6.0.0". If you want Spark, then also install "MapR Spark 2.1.0 MEP 3".
+
+For more details on why the MapR package was split up like this, see this particular commit [https://github.com/streamsets/datacollector/commit/9452a03489ddf8ae2af81be9afaa904c7e766a55#diff-fd75725ca8cdddff01e7533e9b740e44](https://github.com/streamsets/datacollector/commit/9452a03489ddf8ae2af81be9afaa904c7e766a55#diff-fd75725ca8cdddff01e7533e9b740e44)
+
+After you install the package, don't forget to run the setup-MapR script and all that jazz as described in the setup guide.
 
 You'll be prompted to restart StreamSets. After it's restarted, run these commands finish the MapR setup:
 
