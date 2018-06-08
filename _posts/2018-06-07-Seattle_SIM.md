@@ -5,7 +5,7 @@ tags: [mapr, business strategy]
 bigimg: /img/cool-background-4.png
 ---
 
-Yesterday I presented at the [Seattle Technology Leadership Summit](https://www.seattletechleader.com), which was a gathering of CxO's and upper management from a variety of companies. I made the case that companies can become more competitive by innovating with data intensive applications and (secondarily) that MapR provides the best data platform to make that happen.
+Today I presented at the [Seattle Technology Leadership Summit](https://www.seattletechleader.com), which was a gathering of CxO's and upper management from a variety of companies. I made the case that companies can become more competitive by innovating with data intensive applications and (secondarily) that MapR provides the best data platform to make that happen.
 
 # Overview
 
