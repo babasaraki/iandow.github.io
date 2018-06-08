@@ -2,7 +2,7 @@
 layout: post
 title: Business Innovation through Data Transformation
 tags: [mapr, business strategy]
-bigimg: /img/cool-background-4.png
+bigimg: /img/seattle-870282_1920.jpg
 ---
 
 Today I presented at the [Seattle Technology Leadership Summit](https://www.seattletechleader.com), which was a gathering of CxO's and upper management from a variety of companies. I made the case that companies can become more competitive by innovating with data intensive applications and (secondarily) that MapR provides the best data platform to make that happen.
