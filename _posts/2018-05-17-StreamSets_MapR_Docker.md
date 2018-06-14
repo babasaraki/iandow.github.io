@@ -27,19 +27,19 @@ Here are the steps I used for creating the PACC:
 
 {% highlight bash %}
 wget http://package.mapr.com/releases/installer/mapr-setup.sh -P /tmp
-/tmp/mapr-setup.sh docker client
+bash /tmp/mapr-setup.sh docker client
 vi /tmp/docker_images/client/mapr-docker-client.sh
   # Set these properties:
   # MAPR_CLUSTER=nuc.cluster.com
   # MAPR_CLDB_HOSTS=10.0.0.10
   # MAPR_MOUNT_PATH=/mapr
   # MAPR_DOCKER_ARGS="-v /opt/mapr --name mapr-client"
-/tmp/docker_images/client/mapr-docker-client.sh
+bash /tmp/docker_images/client/mapr-docker-client.sh
 {% endhighlight %}
 
 # Start StreamSets in Docker
 
-Start the StreamSets docker container with the following command. 
+In another terminal session, start the StreamSets docker container with the following command. 
 
 ```
 docker run --restart on-failure -it  -p 18630:18630 -d --volumes-from mapr-client --name sdc streamsets/datacollector
@@ -67,10 +67,10 @@ You'll be prompted to restart StreamSets. After it's restarted, run these comman
 
 {% highlight bash %}
 docker exec -u 0 -it sdc /bin/bash
-export SDC_HOME=/opt/streamsets-datacollector-3.2.0.0/
+export SDC_HOME=/opt/streamsets-datacollector-3.3.0/
 export SDC_CONF=/etc/sdc
-echo "export CLASSPATH=\`/opt/mapr/bin/mapr classpath\`" >> /opt/streamsets-datacollector-3.2.0.0/libexec/sdc-env.sh
-/opt/streamsets-datacollector-3.2.0.0/bin/streamsets setup-mapr
+echo "export CLASSPATH=\`/opt/mapr/bin/mapr classpath\`" >> /opt/streamsets-datacollector-3.3.0/libexec/sdc-env.sh
+/opt/streamsets-datacollector-3.3.0/bin/streamsets setup-mapr
 {% endhighlight %}
 
 Restart StreamSets again from the gear menu. 
