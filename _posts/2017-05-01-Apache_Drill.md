@@ -252,7 +252,7 @@ For more information on using Drill with R, check out the following references:
 
 ## F**'ing Unicode!
 
-Dealing with unicode in the python ODBC driver has caused me a lot of frustration. Fortunately, specifying unicode decoding options as shown below seems to help (although, not for anaconda, which seems to not like the "to=str" option. So I just don't use anaconda.):
+Dealing with unicode in the python ODBC driver has caused me a lot of frustration. Fortunately, specifying unicode decoding options as shown below seems to help.
 
 ```
 conn = pyodbc.connect("DSN=drill64", autocommit=True)
@@ -283,6 +283,21 @@ You can convert that to ascii with something like, `print(list(data)[0].decode("
 conn.setdecoding(pyodbc.SQL_CHAR, encoding='utf-32le', to=str)
 conn.setdecoding(pyodbc.SQL_WMETADATA, encoding='utf-32le', to=str)
 ```
+
+
+### Anaconda
+
+The unicode options I just mentioned don't seem to work with Anaconda. You'll know this if the statements you run under pyodbc in Anaconda look like this under the Drillbit GUI:
+
+<img src="http://iandow.github.io/img/drill_unicode_error.png" width="66%">
+
+Running `conn.setencoding("utf-8");` seems to fix this problem. For example:
+
+```
+python -c 'import pandas; import pyodbc; print(pyodbc.dataSources()); conn=pyodbc.connect("DSN=drill64", autocommit=True); conn.setencoding("utf-8"); cursor = conn.cursor(); print(cursor); print(pandas.read_sql("show schemas", conn))'
+```
+
+If you're using Anaconda, you can 
 
 ## "Can't open lib '/opt/mapr/drillodbc/lib/64/libdrillodbc_sb64.so'"
 
