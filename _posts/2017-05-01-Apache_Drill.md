@@ -289,12 +289,10 @@ conn.setdecoding(pyodbc.SQL_WMETADATA, encoding='utf-32le', to=str)
 
 The unicode options I just mentioned don't seem to work with Anaconda. You'll know this if the statements you run under pyodbc in Anaconda look like this under the Drillbit GUI:
 
-<p>
-<img src="http://iandow.github.io/img/drill_unicode_error.png" width="66%">
-</p>
+![example of a unicode error](http://iandow.github.io/img/drill_unicode_error.png)
 
 Fortunately, running `conn.setencoding("utf-8");` seems to fix this problem. For example:
-<br>
+
 ```
 python -c 'import pandas; import pyodbc; print(pyodbc.dataSources()); conn=pyodbc.connect("DSN=drill64", autocommit=True); conn.setencoding("utf-8"); cursor = conn.cursor(); print(cursor); print(pandas.read_sql("show schemas", conn))'
 ```
