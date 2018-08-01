@@ -285,7 +285,7 @@ conn.setdecoding(pyodbc.SQL_WMETADATA, encoding='utf-32le', to=str)
 ```
 
 
-### Anaconda
+## Unicode errors with Anaconda
 
 The unicode options I just mentioned don't seem to work with Anaconda. You'll know this if the statements you run under pyodbc in Anaconda look like this under the Drillbit GUI:
 
@@ -297,9 +297,8 @@ Fortunately, running `conn.setencoding("utf-8");` seems to fix this problem. For
 python -c 'import pandas; import pyodbc; print(pyodbc.dataSources()); conn=pyodbc.connect("DSN=drill64", autocommit=True); conn.setencoding("utf-8"); cursor = conn.cursor(); print(cursor); print(pandas.read_sql("show schemas", conn))'
 ```
 
-If you're using Anaconda, you can 
 
-## "Can't open lib '/opt/mapr/drillodbc/lib/64/libdrillodbc_sb64.so'"
+## Errors about '/opt/mapr/drillodbc/lib/64/libdrillodbc_sb64.so'
 
 I like to test python's access to Drill via the ODBC driver with a command like this:
 
