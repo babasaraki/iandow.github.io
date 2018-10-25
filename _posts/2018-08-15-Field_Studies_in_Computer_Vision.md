@@ -232,18 +232,7 @@ docker run -it --runtime=nvidia \
 {% endhighlight %}
 
 
-
-When considering how we'll dockerize the image processors, more concerns come to mind:
-
-* How can we notify containerized image processors to do work?
-* Where will containerized image processors find images within their namespace?
-
-
-
-
-
-Image credit:
-https://www.bhphotovideo.com/c/product/1058709-REG/axis_communications_0555_004_m1025_fixed_network.html
+The result is shown in this [video](https://youtu.be/Pn1-fTrwtnk).
 
 
 
