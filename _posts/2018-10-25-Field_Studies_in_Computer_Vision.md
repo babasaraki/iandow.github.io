@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Transporting Video thru Kafka for Real-Time Face Detection
-tags: [mapr, computer vision, tensorflow]
+tags: [mapr, computer vision]
 bigimg: /img/eyes-2019364_1920.jpg
 ---
 
