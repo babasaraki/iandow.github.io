@@ -27,7 +27,7 @@ Before I get into the weeds of data management, let me give you an appreciation 
 
 Object detection is one of the most common tasks that can be automated by computer vision software. One kind of object is face detection, and it’s really useful for analyzing human behavior. You can use face detection on strategically placed cameras to determine what people are looking at. Say you’ve placed an advertisement in a subway or artwork in a museum, and you want to measure its effectiveness. One way to quantify that is to perform face detection on images capture by a camera looking outwards from the wall.
 
-<a href="https://en.wikipedia.org/wiki/Pepper_(robot)"><img src="http://iandow.github.io/img/pepper.jpg" width="33%" align="right"></a>
+<a href="https://en.wikipedia.org/wiki/Pepper_(robot)"><img src="http://iandow.github.io/img/pepper.jpg" width="33%" align="left"></a>
 
 Take for instance, Pepper, a humanoid robot manufactured by the Japanese company, SoftBank Robotics. Pepper is often used to display advertisements or promotions in retail settings. You can easily quantify Pepper’s effectiveness by detecting faces in the images captured by a camera looking outwards from it’s face. The same concept could be applied to cameras placed next to advertisements in a subway or artwork in a museum.
 
@@ -36,7 +36,7 @@ Other types of human behavior can be quantified by detecting whole bodies. For e
 
 # Don't use Twitter as your only data platform!
 
-<img src="http://iandow.github.io/img/tensorchicken_tweet.jpg" width="33%" align="right">
+<img src="http://iandow.github.io/img/tensorchicken_tweet.png" width="33%" align="right">
 
 My first foray into computer vision was somewhat comical. I came up with the idea of a twitter bot [@Tensorchicken](https://twitter.com/tensorchicken) when I placed a Raspberry Pi in my chicken coop so I could determine which chickens were laying eggs. The PI captured images on motion, and since chickens don’t stand still, at the end of each day I had hundreds of images. As I reviewed these images I was surprised to see a blue jay had been flying into the coop and breaking eggs – something which I had previously blamed on the chickens. 
 
