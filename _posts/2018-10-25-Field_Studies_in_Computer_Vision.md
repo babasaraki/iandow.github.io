@@ -17,7 +17,7 @@ I'm kind of all over the place with this blog. Maybe you'll learn something else
 <div class="main-explain-area padding-override jumbotron">
   <img src="http://iandow.github.io/img/mustache-udnie.cropped.jpg" width="120" style="margin-left: 15px" align="right">
   <p class="margin-override font-override" style="margin-left: 15px">
-  	I’m fundraising for <a href="https://us.movember.com">Movember</a> in November! Please consider donating your next beer to help me support Men's health: <a href="https://mobro.co/iandownard">https://mobro.co/iandownard</a>
+  	I’m fundraising for <a href="https://us.movember.com">Movember</a> in November! Please consider donating your favorite number to help me support Men's health: <a href="https://mobro.co/iandownard">https://mobro.co/iandownard</a>
   </p>
   <img src="http://iandow.github.io/img/movember.jpg" width="60" style="margin-left: 30px" align="right">
   <br>
@@ -246,7 +246,7 @@ To see the face detection application in action, check out the following [video]
 <div class="main-explain-area padding-override jumbotron">
   <img src="http://iandow.github.io/img/mustache-udnie.cropped.jpg" width="120" style="margin-left: 15px" align="right">
   <p class="margin-override font-override" style="margin-left: 15px">
-  	I’m fundraising for <a href="https://us.movember.com">Movember</a> in November! Please consider donating your next beer to help me support Men's health: <a href="https://mobro.co/iandownard">https://mobro.co/iandownard</a>
+  	I’m fundraising for <a href="https://us.movember.com">Movember</a> in November! Please consider donating your favorite number to help me support Men's health: <a href="https://mobro.co/iandownard">https://mobro.co/iandownard</a>
   </p>
   <img src="http://iandow.github.io/img/movember.jpg" width="60" style="margin-left: 30px" align="right">
   <br>
