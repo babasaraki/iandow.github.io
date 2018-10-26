@@ -202,7 +202,9 @@ Not only does this approach give us the speed we need to process video, but also
 
 <img src="http://iandow.github.io/img/docker_gpus.png" width="90%" align="center">
 
-### Dockerfile:
+# Field Study #3: Real-time face detection for video using MapR-ES and Docker
+
+I built an application to demonstrate face detection on video feeds with an efficient use of GPU hardware using MapR-ES and Docker. The code and documentation for this application is at [https://github.com/mapr-demos/mapr-streams-mxnet-face](https://github.com/mapr-demos/mapr-streams-mxnet-face).
 
 Here is the container definition I used for CV workers designed to detect faces in images transported through MapR-ES. The container is prepackaged with CUDA stuff for face recognition.
 It bootstraps with mapr-setup.sh that connects the container to a MapR cluster.
@@ -216,19 +218,7 @@ RUN wget http://package.mapr.com/releases/installer/mapr-setup.sh -P /tmp
 ENTRYPOINT ["/opt/mapr/installer/docker/mapr-setup.sh", "container"]
 {% endhighlight %}
 
-Here's how I compile that docker image:
-{% highlight shell %}
-# compile the image defined by the Dockerfile
-docker build .
-# save the image to a file
-docker save –o pacc_nvidia
-# copy the image to Docker hosts
-scp pacc_nvidia ian@docker_host:~/
-# load the image on the docker host
-docker load –i pacc_nvidia 
-{% endhighlight %}
-
-After I copy that docker image to a GPU enabled VM in the cloud, I run it like this:
+After I copied that docker image to a GPU enabled VM in the cloud, I run it like this:
 {% highlight shell %}
 docker run -it --runtime=nvidia \
 -e NVIDIA_VISIBLE_DEVICES=all \
@@ -238,7 +228,7 @@ docker run -it --runtime=nvidia \
 --name worker1 pacc_nvidia
 {% endhighlight %}
 
-To see the face detection application in action, check out the following [video](https://youtu.be/Pn1-fTrwtnk):
+To see this application in action, check out the following [video](https://youtu.be/Pn1-fTrwtnk):
 <a href="https://mapr.com/resources/videos/real-time-face-detection-on-video-using-mapr-streams"><img src="http://iandow.github.io/img/face_detection_youtube.png" width="90%" align="center"></a>
 <p>Please provide your feedback to this article by adding a comment to <a href="https://github.com/iandow/iandow.github.io/issues/13">https://github.com/iandow/iandow.github.io/issues/13</a>.</p>
 <br><br>
