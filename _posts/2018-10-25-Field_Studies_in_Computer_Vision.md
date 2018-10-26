@@ -162,8 +162,7 @@ image_array = cv2.imencode(‘.jpg', image)
 p.produce('topic1', image_array)
 {% endhighlight %}
 
-Full producer code here:
-[https://github.com/mapr-demos/mapr-streams-mxnet-face/blob/master/producer/mapr-producer-camera-ian.py](https://github.com/mapr-demos/mapr-streams-mxnet-face/blob/master/producer/mapr-producer-camera-ian.py)
+Full producer code [here](https://github.com/mapr-demos/mapr-streams-mxnet-face/blob/master/producer/mapr-producer-camera-ian.py).
 
 ***Consumer:***
 {% highlight python %}
@@ -176,8 +175,7 @@ image_array = np.frombuffer(msg.value(), IMAGE_DEPTH)
 image = cv2.imdecode(image_array, cv2.IMREAD_COLOR)
 {% endhighlight %}
 
-Full consumer code here:
-[https://github.com/mapr-demos/mapr-streams-mxnet-face/blob/master/consumer/deploy/mapr_consumer.py](https://github.com/mapr-demos/mapr-streams-mxnet-face/blob/master/consumer/deploy/mapr_consumer.py)
+Full consumer code [here](https://github.com/mapr-demos/mapr-streams-mxnet-face/blob/master/consumer/deploy/mapr_consumer.py).
 
 
 ## Conclusion on using Kafka / MapR-ES for video transport:
