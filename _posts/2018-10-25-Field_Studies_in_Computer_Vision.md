@@ -79,7 +79,7 @@ To prove this concept, I did another field study with a face recognition applica
 The second computer vision application I built was designed to help count the number of people who engaged with MapR demos at conference kiosks. It achieved the following important capabilities:
 
 * Inference was fast because images were processed by a GPU on an Nvidia Jetson TX2
-* Raw images were archived and searchable via metadata. Instead of using standard Linux shell utilities to navigate folders with thousands of images, we could SQL to find paths to specific images matching search criteria.
+* Raw images were archived in MapR-FS and searchable via metadata in MapR-DB tables. Instead of using bash to navigate folders with thousands of images, we could use SQL to find paths to specific images matching search criteria.
 * Streams were replayable. So, when we decided to fix problems with our face detection model, we could apply that new model to our entire history of raw images and achieve a more accurate count of booth attendance.
 * Analytics with SQL and Zeppelin. Counting booth attendance was easier since face detection data could be analyzed with SQL - something I'm familiar with, and visualized in Zeppelin.
 
