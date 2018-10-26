@@ -89,9 +89,9 @@ Platform independent APIs were at the core of this application. This was nice be
 
 However, there were three challenges with this application design:
 
-* Harsh network conditions affect NFS
-* NFS is not suitable for saving images at high speeds (e.g. videos)
-* Inelastic edge hardware makes it hard to use multiple cameras
+* Harsh network conditions slow down and sometimes break NFS connections
+* NFS lacks built-in failover capabilities
+* Inelastic edge hardware limits our use of multiple cameras.
 
 I began to wonder, can images be more robustly distributed via MapR-ES instead of NFS? Can containers and cloud VMs allow us to process more image feeds and right-size hardware according to load? 
 
