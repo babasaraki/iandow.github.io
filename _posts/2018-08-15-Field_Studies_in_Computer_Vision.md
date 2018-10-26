@@ -5,7 +5,7 @@ tags: [mapr, computer vision, tensorflow]
 bigimg: /img/eyes-2019364_1920.jpg
 ---
 
-In this blog I'll shed light on the role that a data platform plays for Computer Vision by describing three seperate data management strategies which relate data pipelines for images and video.
+In this blog I'll shed light on various roles that data platforms can play for Computer Vision by describing three seperate data management strategies I've used with applications that process images and video. The main event here is a discussion about how video can be transported through Kafka / MapR-ES and how Docker can be used to elastically scale video processors for face detection.
 
 # TL;DR
 
