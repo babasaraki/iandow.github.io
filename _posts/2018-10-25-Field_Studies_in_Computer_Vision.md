@@ -68,7 +68,7 @@ The business value in computer vision is often realized by the insights you lear
 * Analytics with Business Intelligence and Data Science tools
 * NoSQL database, where you can store image metadata and derived features and recall them using standard SQL APIs
 * Pub/sub streams for image ingest and notifications
-* File storage for storing massive quantities of raw and annotated images 
+* Scalable file storage for storing massive quantities of raw and annotated images 
 
 With a bonafide data platform, like [MapR](http://www.mapr.com), we can do analytics, we can find images by searching metadata tables, we can keep all raw and processed images, we can correct image classification errors by updating models and replaying inference request streams, we can derive features on-the-fly with Spark Streaming, and more!
 
