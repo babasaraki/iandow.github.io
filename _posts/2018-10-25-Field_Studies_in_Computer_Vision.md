@@ -111,11 +111,11 @@ One way to stream an image is to convert the binary image into a string. With a 
 
 ### How big is too big for stream messages?
 
-A message-oriented API writes an entire message on a single call. A file-oriented API opens a connection and does multiple writes over a possibly long period of time, and finally the connection is closed. Not surprisingly, Kafka, and by simple extension, MapR streams use a message-oriented API. Message-oriented API s are not really good for writing large objects. Languages often have memory limits, objects that are very last may not even entirely exist in memory in one time and so on. This generally means that sending very large messages is A mistake. Better is to write a file and include the name in a message. Now we actually can support really big messages if you change the config.  That does mean that you should do that.  Long before you have a gb sized message, you will have left the design sweet spot of messages. 
+A message-oriented API writes an entire message on a single call. A file-oriented API opens a connection and does multiple writes over a possibly long period of time, and finally the connection is closed. Not surprisingly, Kafka, and by simple extension, MapR-ES use a message-oriented API. Message-oriented APIs are not really good for writing large objects. Languages often have memory limits, objects that are very large may not even entirely exist in memory at one time, and so on. This generally means that sending very large messages is a mistake. 
 
-The default maximum message size for MapR-ES is 10MB. Although you can increase this threshold, so you could stream high resolution images for example, I would not recommend doing so. I expect things to work best/well at 1MB or less. This isn't a tech limit as much as an API issue combined with pragmatics such as the cost of ignoring some messages.
+The default maximum message size for MapR-ES is 10MB. You can increase this threshold but I would not recommend doing so. The design sweet spot is for message sizes of 1MB or less. This isn't a technical limit as much as an API issue combined with pragmatics such as the cost of ignoring some messages.
 
-If you really feel compelled to put things larger than 10-20 MB, consider the alternative of writing objects to files with references from messages. In fact, this raises one of the virtues of having a data platform, like MapR, that enables files and streams to coexist within a single filesystem namespace.
+If you really feel compelled to put things larger than 10-20 MB, consider the alternative of writing objects to a file then publishing their full path to a stream. In fact, this raises one of the virtues of having a converged data platform, like MapR, that enables files and streams to coexist within a single filesystem namespace.
 
 ## Challenge #2: Are videos too fast for streams?
 
