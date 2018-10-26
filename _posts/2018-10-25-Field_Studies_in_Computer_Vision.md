@@ -11,9 +11,21 @@ In this blog I'll shed light on various roles that data platforms can play for C
 
 I'm kind of all over the place with this blog. Maybe you'll learn something else more useful, but I think the main takeaways are:
 
-1. Videos can be thought of as just another kind of fast event stream which you can transport through distributed messaging systems like Kafka and [MapR-ES](https://mapr.com/products/mapr-streams/).
+1. Videos can be thought of as just another kind of fast event stream which you can transport through distributed messaging systems like Kafka and (even better) [MapR-ES](https://mapr.com/products/mapr-streams/).
 2. Kafka / MapR-ES simplify the buffering and distribution of fast data to a dynamic set of concurrent stream processors.
 3. [MapR's PACC Docker container](https://mapr.com/products/persistent-application-client-container/) makes it possible to scale workers and maintain access to data services even when those workers are ephemeral.
+
+<div class="main-explain-area padding-override jumbotron">
+  <img src="http://iandow.github.io/img/mustache-udnie.cropped.jpg" width="120" style="margin-left: 15px" align="right">
+  <p class="margin-override font-override" style="margin-left: 15px">
+  	I’m fundraising for <a href="https://us.movember.com">Movember</a> in November! Please consider donating your next beer to help me support Men's health: <a href="https://mobro.co/iandownard">https://mobro.co/iandownard</a>
+  </p>
+  <img src="http://iandow.github.io/img/movember.jpg" width="60" style="margin-left: 30px" align="right">
+  <br>
+  <div id="paypalbtn">
+    <a class="btn btn-primary btn" href="https://mobro.co/iandownard">Donate to Movember</a>
+  </div>
+</div>
 
 # Computer Vision is Amazing!
 
@@ -235,7 +247,7 @@ To see the face detection application in action, check out the following [video]
 <div class="main-explain-area padding-override jumbotron">
   <img src="http://iandow.github.io/img/mustache-udnie.cropped.jpg" width="120" style="margin-left: 15px" align="right">
   <p class="margin-override font-override" style="margin-left: 15px">
-  	This year I’m fundraising for <a href="https://us.movember.com">Movember</a>. Please consider donating your next beer to help me support Men's health: <a href="https://mobro.co/iandownard">https://mobro.co/iandownard</a>
+  	I’m fundraising for <a href="https://us.movember.com">Movember</a> in November! Please consider donating your next beer to help me support Men's health: <a href="https://mobro.co/iandownard">https://mobro.co/iandownard</a>
   </p>
   <img src="http://iandow.github.io/img/movember.jpg" width="60" style="margin-left: 30px" align="right">
   <br>
