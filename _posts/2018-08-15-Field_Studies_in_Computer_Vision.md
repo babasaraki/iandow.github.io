@@ -15,9 +15,9 @@ I'm kind of all over the place with this blog. Maybe you'll learn something else
 2. Kafka/MapR-ES simplify the buffering and distribution of fast data to a dynamic set of concurrent stream processors.
 3. [MapR's PACC Docker container](https://mapr.com/products/persistent-application-client-container/) makes it possible to scale workers and maintain access to data services even when those workers are ephemeral.
 
-# Computer Vision is Amazing!!!
+# Computer Vision is Amazing!
 
-The capabilities of Computer Vision have exploded in the last four years since models such as [Inception](https://www.cs.unc.edu/~wliu/papers/GoogLeNet.pdf), [ResNet](https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/He_Deep_Residual_Learning_CVPR_2016_paper.pdf), and [AlexNet](https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf) were published. These models established foundational neural networks that through the processes of transfer learning enable tasks like image classification and object detection to be automated. Thanks to these advancements, the hardest part in developing effective computer vision applications relates more to data management than to the nitty gritty details of neural networks and vector math.
+The capabilities of Computer Vision (CV) have exploded in the last four years since models such as [Inception](https://www.cs.unc.edu/~wliu/papers/GoogLeNet.pdf), [ResNet](https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/He_Deep_Residual_Learning_CVPR_2016_paper.pdf), and [AlexNet](https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf) were published. These models established foundational neural networks that through the processes of transfer learning enable tasks like image classification and object detection to be automated. Thanks to these advancements, the hardest part in developing effective computer vision applications relates more to data management than to the nitty gritty details of neural networks and vector math.
 
 # Use Cases for Computer Vision
 
@@ -244,9 +244,10 @@ To see the face detection application in action, check out the following [video]
 <div class="main-explain-area padding-override jumbotron">
   <img src="http://iandow.github.io/img/mustache-udnie.cropped.jpg" width="120" style="margin-left: 15px" align="right">
   <p class="margin-override font-override" style="margin-left: 15px">
-  	This year I’m fundraising for <a href="https://us.movember.com">Movember</a>. Please consider donating your next beer to this chartiable organization supporting Mental Health: <a href="https://mobro.co/iandownard">https://mobro.co/iandownard</a></p>
-  <br>
+  	This year I’m fundraising for <a href="https://us.movember.com">Movember</a>. Please consider donating your next beer to this chartiable organization supporting Mental Health: <a href="https://mobro.co/iandownard">https://mobro.co/iandownard</a>
+  </p>
   <img src="http://iandow.github.io/img/movember.jpg" width="120" style="margin-left: 15px" align="right">
+  <br>
   <div id="paypalbtn">
     <a class="btn btn-primary btn" href="https://mobro.co/iandownard">Donate via PayPal</a>
   </div>
