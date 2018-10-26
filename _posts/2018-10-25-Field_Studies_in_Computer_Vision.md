@@ -11,9 +11,8 @@ In this blog I'll shed light on various roles that data platforms can play for C
 
 I'm kind of all over the place with this blog. Maybe you'll learn something else more useful, but I think the main takeaways are:
 
-1. Videos can be thought of as just another kind of fast event stream which you can transport through distributed messaging systems like Kafka and (even better) [MapR-ES](https://mapr.com/products/mapr-streams/).
-2. Kafka / MapR-ES simplify the buffering and distribution of fast data to a dynamic set of concurrent stream processors.
-3. [MapR's PACC Docker container](https://mapr.com/products/persistent-application-client-container/) makes it possible to scale workers and maintain access to data services even when those workers are ephemeral.
+1. Videos can be thought of as just another kind of fast event stream which you can transport through distributed messaging systems like Kafka and (even better) [MapR-ES](https://mapr.com/products/mapr-streams/). Why do this?  Because Kafka and MapR-ES simplify the buffering and distribution of fast data to a dynamic set of concurrent stream processors, meaning you can elastically scale workers on-demand and "right-size" hardware allocations.
+2. [MapR's PACC Docker container](https://mapr.com/products/persistent-application-client-container/) makes it possible to scale workers and maintain access to data services even when those workers are ephemeral. Why use this? Because it allows your containers to benefit from the highly scalable and resilient data storage that MapR provides. 
 
 <div class="main-explain-area padding-override jumbotron">
   <img src="http://iandow.github.io/img/mustache-udnie.cropped.jpg" width="120" style="margin-left: 15px" align="right">
