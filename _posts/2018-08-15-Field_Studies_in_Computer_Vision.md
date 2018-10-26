@@ -65,8 +65,6 @@ To prove this concept, I did another field study with a face recognition applica
 
 # Field Study #2: Taking attendance at conference kiosks
 
-<img src="http://iandow.github.io/img/zeppelin_smartspace.png" width="33%" align="right">
-
 The second computer vision application I built was designed to help count the number of people who engaged with MapR demos at conference kiosks. It achieved the following important capabilities:
 
 * Inference was fast because images were processed by a GPU on an Nvidia Jetson TX2
