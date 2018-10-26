@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Transporting Video thru Kafka for Real-Time Face Detection
+title: Transporting Video with Kafka for Real-Time Face Detection
 tags: [mapr, computer vision]
 bigimg: /img/eyes-2019364_1920.jpg
 ---
@@ -109,7 +109,7 @@ When asking whether images and videos can be ingested via streams, several conce
 
 One way to stream an image is to convert the binary image into a string. With a little experimentation I observed that the size of a compressed 8-bit 320x240 jpeg will be about 17KB. Message-oriented APIs like Kafka and MapR Streams are not designed to transport extremely large messages (like high resolution images), but 17KB is well within the range of a reasonable message size.
 
-### How big is too big for stream messages?
+### Sidenote: How big is too big for stream messages?
 
 A message-oriented API writes an entire message on a single call. A file-oriented API opens a connection and does multiple writes over a possibly long period of time, and finally the connection is closed. Not surprisingly, Kafka, and by simple extension, MapR-ES use a message-oriented API. Message-oriented APIs are not really good for writing large objects. Languages often have memory limits, objects that are very large may not even entirely exist in memory at one time, and so on. This generally means that sending very large messages is a mistake. 
 
@@ -178,7 +178,7 @@ image = cv2.imdecode(image_array, cv2.IMREAD_COLOR)
 Full consumer code [here](https://github.com/mapr-demos/mapr-streams-mxnet-face/blob/master/consumer/deploy/mapr_consumer.py).
 
 
-## Conclusion on using Kafka / MapR-ES for video transport:
+## Benefits of using Kafka / MapR-ES for video transport
 
 As I mentioned before, my previous CV field study used NFS to copy images from cameras to the MapR filesystem and I notified CV workers to download and process them by publishing their file path into a Kafka topic (I used MapR's implementation of Kafka, called MapR-ES). However, using pub/sub streams to broadcast the image bytes is better than copying the image files via NFS. Here's why:
 
@@ -189,7 +189,7 @@ As I mentioned before, my previous CV field study used NFS to copy images from c
 3. ***Kafka / MapR-ES consumer groups help prevent CV workers from doing duplicate work.*** Pub/sub streaming services such as MapR-ES and Kafka also enable us to organize CV workers into “consumer groups” to help ensure that only one CV worker receives an image. This is good, because it means we don't need to otherwise synchronize workers in order to avoid duplicate work.
 
 
-## Challenge #4: How can right-size GPU allocations in order to minimize cost? 
+## Challenge #4: Right-sizing GPUs in order to minimize cost
 
 How do you architect for applications that spontaneously turn cameras on/off in response to motion or threat level?  My previous CV study involved an actual on-prem GPU device. That clearly wouldn't scale. Without the ability to create and remove compute resources elasticity, we must over-provision for peak load.
 
@@ -226,9 +226,11 @@ docker run -it --runtime=nvidia \
 {% endhighlight %}
 
 To see this application in action, check out the following [video](https://youtu.be/Pn1-fTrwtnk):
+
 <a href="https://mapr.com/resources/videos/real-time-face-detection-on-video-using-mapr-streams"><img src="http://iandow.github.io/img/face_detection_youtube.png" width="90%" align="center"></a>
+
 <p>Please provide your feedback to this article by adding a comment to <a href="https://github.com/iandow/iandow.github.io/issues/13">https://github.com/iandow/iandow.github.io/issues/13</a>.</p>
-<br><br>
+
 <div class="main-explain-area padding-override jumbotron">
   <img src="http://iandow.github.io/img/mustache-udnie.cropped.jpg" width="120" style="margin-left: 15px" align="right">
   <p class="margin-override font-override" style="margin-left: 15px">
