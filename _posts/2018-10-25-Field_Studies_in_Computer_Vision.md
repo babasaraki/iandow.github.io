@@ -195,7 +195,7 @@ How do you architect for applications that spontaneously turn cameras on/off in 
 
 The solution to this challenge is to package CV workers with Docker and deploy them in a cloud infrastructure where GPUs can be provisioned on-the-fly when new video feeds demand faster processing. By using MapR PACC (Persistent Application Client Container) containers can access MapR-ES topics, which takes care of image distribution and notifications like, "Hey! Worker! Wake-up! Here's a new image for you to process."
 
-Not only does this approach give us the speed we need to process video, but also gives us elasticity we can use to efficiently utilize hardware and right-size scale. This architecture is generally applicable to any application that involves transporting and processing fast data to specialized hardware (GPUs, TPUs, FPGAs, etc) with linear scalability.
+Not only does this approach give us the speed we need to process video, but also gives us elasticity we can use to efficiently utilize hardware and right-size scale. ***This architecture is generally applicable to any application that involves transporting and processing fast data to specialized hardware (GPUs, TPUs, FPGAs, etc) with linear scalability.***
 
 <img src="http://iandow.github.io/img/docker_gpus.png" width="90%" align="center">
 
