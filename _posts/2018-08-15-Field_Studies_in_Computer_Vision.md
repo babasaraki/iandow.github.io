@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Transporting Video thru Kafka for Face Detection on Elastic GPUs
+title: Transporting Video thru Kafka for Real-Time Face Detection
 tags: [mapr, computer vision, tensorflow]
 bigimg: /img/eyes-2019364_1920.jpg
 ---
@@ -235,7 +235,7 @@ To see the face detection application in action, check out the following [video]
 <div class="main-explain-area padding-override jumbotron">
   <img src="http://iandow.github.io/img/mustache-udnie.cropped.jpg" width="120" style="margin-left: 15px" align="right">
   <p class="margin-override font-override" style="margin-left: 15px">
-  	This year I’m fundraising for <a href="https://us.movember.com">Movember</a>. Please consider donating your next beer to this chartiable organization supporting Mental Health: <a href="https://mobro.co/iandownard">https://mobro.co/iandownard</a>
+  	This year I’m fundraising for <a href="https://us.movember.com">Movember</a>. Please consider donating your next beer to help me support Men's health: <a href="https://mobro.co/iandownard">https://mobro.co/iandownard</a>
   </p>
   <img src="http://iandow.github.io/img/movember.jpg" width="60" style="margin-left: 30px" align="right">
   <br>
