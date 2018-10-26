@@ -87,7 +87,7 @@ I began to wonder, can images be more robustly distributed via MapR-ES instead o
 
 The answers to these questions, which I’ll describe below, were a resounding YES! 
 
-# The challenges of streaming images and video
+# Video streaming challenges
 
 When asking whether images and videos can be ingested via streams, several concerns come to mind:
 
@@ -109,21 +109,26 @@ If you really feel compelled to put things larger than 10-20 MB, consider the al
 
 ## Challenge #2: Are videos too fast for streams?
 
-<img src="http://iandow.github.io/img/videospeed.png" width="40%" align="right">
+<img src="http://iandow.github.io/img/videospeed.png" width="50%" align="right">
 
 Cameras can generate large, high resolution images, at speeds that can push the limits of pub/sub messaging. Those demands can be even more challenging for applications that require several video sources in order to accomplish their mission. For example, a surveillance system in an art gallery might require a single pub/sub messaging service to transport video feeds from 10-100 cameras. Distributed messaging systems like Kafka and MapR-ES are designed to be scalable, but how fast is too fast?
 
 ### Performance testing stream throughput
 
-<img src="http://iandow.github.io/img/video_perf_test.png" width="30%" align="right">
+<img src="http://iandow.github.io/img/video_perf_test.png" width="50%" align="right">
 
 To get a rough idea whether we can use pub/sub messaging to transport videos, I ran a performance test on a 3-node MapR cluster in the Google Cloud running on n1-highmem-4 (4 vCPUs, 26 GB memory) machines. 
 
-The `mapr perfproducer` (https://mapr.com/docs/home/ReferenceGuide/mapr_perfproducer.html) and `mapr perfconsumer` (https://mapr.com/docs/52/ReferenceGuide/mapr_perfconsumer.html) utilities can be used to estimate the performance of producers and consumers for MapR-ES applications under a given cluster configuration. For my webcam application, video frames were compressed to about 50KB. The perfproducer and perfconsumer utilities showed that ***MapR-ES will have no problem handing video streams*** consisting of 50KB stream records published are typical video frame rates (e.g. 15fps) by several hundred cameras simultaneously.
+The [mapr perfproducer](https://mapr.com/docs/home/ReferenceGuide/mapr_perfproducer.html) and [mapr perfconsumer](https://mapr.com/docs/52/ReferenceGuide/mapr_perfconsumer.html) utilities can be used to estimate the performance of producers and consumers for MapR-ES applications under a given cluster configuration. For my webcam application, video frames were compressed to about 50KB. The perfproducer and perfconsumer utilities showed that ***MapR-ES will have no problem handing video streams*** consisting of 50KB stream records published are typical video frame rates (e.g. 15fps) by several hundred cameras simultaneously.
 
 ## Challenge #3: How can binary objects, like images, be published as stream records? 
 
-Here’s how I stream videos. I use the OpenCV library to read frames from a video source, then I convert each frame to a byte array and then publish that as a record to the stream. If you print these objects with a stream consumer, you would see binary data, like this:
+You can transport videos through Kafka/MapR-ES topics like this: 
+1. Use the OpenCV library to read frames from a video source
+2. Convert each frame to a byte array 
+3. Publish that byte array as a record to the stream. 
+
+If you print these objects with a stream consumer, you would see binary data, like this:
 
 <img src="http://iandow.github.io/img/video_binary_stream.png" width="80%" align="center">
 
