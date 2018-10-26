@@ -115,7 +115,7 @@ Cameras can generate large, high resolution images, at speeds that can push the 
 
 ### Performance testing stream throughput
 
-<img src="http://iandow.github.io/img/video_perf_test.png" width="50%" align="right">
+<img src="http://iandow.github.io/img/video_perf_test.png" width="40%" align="right">
 
 To get a rough idea whether we can use pub/sub messaging to transport videos, I ran a performance test on a 3-node MapR cluster in the Google Cloud running on n1-highmem-4 (4 vCPUs, 26 GB memory) machines. 
 
