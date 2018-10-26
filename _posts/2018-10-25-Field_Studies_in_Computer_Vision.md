@@ -81,14 +81,13 @@ The second computer vision application I built was designed to help count the nu
 * Inference was fast because images were processed by a GPU on an Nvidia Jetson TX2
 * Raw images were archived in MapR-FS and searchable via metadata in MapR-DB tables. Instead of using bash to navigate folders with thousands of images, we could use SQL to find paths to specific images matching search criteria.
 * Streams were replayable. So, when we decided to fix problems with our face detection model, we could apply that new model to our entire history of raw images and achieve a more accurate count of booth attendance.
-* Analytics with SQL and Zeppelin. Counting booth attendance was easier since face detection data could be analyzed with SQL - something I'm familiar with, and visualized in Zeppelin.
-
-Platform independent APIs were at the core of this architecture. This was nice because those APIs tend to be easy to work with. For example, the NFS is used just by copying a file to an NFS mount point. Kafka REST can be used with curl, java, python, or any other HTTP client.
-However, there were problems with this approach.
+* Analytics with SQL and Zeppelin. Counting booth attendance was easier since face detection data could be analyzed with SQL and visualized in Zeppelin.
 
 <img src="http://iandow.github.io/img/booth_attendance_arch.png" width="90%" align="center">
 
-There were three challenges with this application:
+Platform independent APIs were at the core of this application. This was nice because those APIs tend to be easy to work with. For example, the NFS is used just by copying a file to an NFS mount point. Kafka REST can be used with curl, Java, Python, or any other HTTP client.
+
+However, there were three challenges with this application design:
 
 * Harsh network conditions affect NFS
 * NFS is not suitable for saving images at high speeds (e.g. videos)
