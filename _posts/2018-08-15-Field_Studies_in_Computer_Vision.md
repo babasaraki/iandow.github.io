@@ -232,8 +232,9 @@ docker run -it --runtime=nvidia \
 {% endhighlight %}
 
 
-The result is shown in this [video](https://youtu.be/Pn1-fTrwtnk).
+To see the face detection application in action, check out the following [video](https://youtu.be/Pn1-fTrwtnk):
 
+<a href="https://mapr.com/resources/videos/real-time-face-detection-on-video-using-mapr-streams"><img src="http://iandow.github.io/img/face_detection_youtube.png" width="90%" align="center"></a>
 
 
 <br>
