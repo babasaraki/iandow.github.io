@@ -36,7 +36,7 @@ Before I get into the weeds of data management, let me give you an appreciation 
 
 <a href="https://www.sdmart.org/visitors-with-disabilities/"><img src="http://iandow.github.io/img/art_gallery.jpg" width="33%" align="right" style="margin-left: 15px"></a>
 
-Object detection is one of the most common tasks that can be automated by computer vision software. You may not have considered this, but your body is an object. So is your face. [Even your nose](http://twitter.com/stashorizer))! And recognizing them can be really useful for analyzing human behavior. You can use face detection on strategically placed cameras to determine what people are looking at. Say you’ve placed an advertisement in a subway or artwork in a museum, and you want to measure its effectiveness. One way to quantify that is to perform face detection on images capture by a camera looking outwards from the wall.
+Object detection is one of the most common tasks that can be automated by computer vision software. You may not have considered this, but your body is an object. So is your face. [Even your nose](http://twitter.com/stashorizer)! And recognizing them can be really useful for analyzing human behavior. You can use face detection on strategically placed cameras to determine what people are looking at. Say you’ve placed an advertisement in a subway or artwork in a museum, and you want to measure its effectiveness. One way to quantify that is to perform face detection on images capture by a camera looking outwards from the wall.
 
 <a href="https://en.wikipedia.org/wiki/Pepper_(robot)"><img src="http://iandow.github.io/img/pepper.jpg" width="33%" align="left" style="margin-right: 15px"></a>
 
