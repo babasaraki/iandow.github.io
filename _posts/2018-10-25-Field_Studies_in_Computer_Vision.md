@@ -188,7 +188,6 @@ As I mentioned before, my previous CV field study used NFS to copy images from c
 
 3. ***Kafka / MapR-ES consumer groups help prevent CV workers from doing duplicate work.*** Pub/sub streaming services such as MapR-ES and Kafka also enable us to organize CV workers into “consumer groups” to help ensure that only one CV worker receives an image. This is good, because it means we don't need to otherwise synchronize workers in order to avoid duplicate work.
 
-In conclusion, can images be more robustly distributed via streams instead of NFS? Yes!
 
 ## Challenge #4: How can right-size GPU allocations in order to minimize cost? 
 
