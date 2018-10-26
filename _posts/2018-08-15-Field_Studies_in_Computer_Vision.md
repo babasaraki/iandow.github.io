@@ -132,11 +132,11 @@ If you print these objects with a stream consumer, you would see binary data, li
 
 <img src="http://iandow.github.io/img/video_binary_stream.png" width="80%" align="center">
 
-On the consumer end I reconstruct the image by converting the stream record (which is a byte array) with the data type of the original frame (uint8). This puts the object into an image array which can then be converted to a jpeg using the OpenCV imdecode function.
+On the consumer end you can reconstruct the image by converting the stream record (which is a byte array) with the data type of the original frame (uint8). This puts the object into an image array which can then be converted to a jpeg using the OpenCV imdecode function.
 
-This may seem complex, but it’s actually pretty boilerplate code. If you Google for “how to read and write images with OpenCV” you will find a bunch of examples that do the same thing shown above.
+This may seem complex but it’s actually pretty boilerplate code. If you Google for “how to read and write images with OpenCV” you will find several examples that do this same thing.
 
-Here's what this looks like in pseudo Python code:
+Here's what this all looks like in pseudo Python code:
 
 ***Producer:***
 
