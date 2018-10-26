@@ -242,11 +242,11 @@ To see the face detection application in action, check out the following [video]
 
 <br><br>
 <div class="main-explain-area padding-override jumbotron">
-  <img src="http://iandow.github.io/img/paypal.png" width="120" style="margin-left: 15px" align="right">
+  <img src="http://iandow.github.io/img/mustache-udnie.cropped.png" width="120" style="margin-left: 15px" align="right">
   <p class="margin-override font-override">
-  	Did you enjoy the blog? Did you learn something useful? If you would like to support this blog please consider making a small donation. Thanks!</p>
+  	This year I’m fundraising for <a href="https://us.movember.com">Movember</a>. Please consider donating your next beer to this chartiable organization supporting Mental Health: <a href="https://mobro.co/iandownard">https://mobro.co/iandownard</a></p>
   <br>
   <div id="paypalbtn">
-    <a class="btn btn-primary btn" href="https://www.paypal.me/iandownard/5">Donate via PayPal</a>
+    <a class="btn btn-primary btn" href="https://mobro.co/iandownard">Donate via PayPal</a>
   </div>
 </div>
