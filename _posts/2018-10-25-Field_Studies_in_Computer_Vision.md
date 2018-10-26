@@ -42,7 +42,7 @@ Object detection is one of the most common tasks that can be automated by comput
 
 Consider Pepper, a humanoid robot manufactured by the Japanese company, SoftBank Robotics. Pepper is often used to display advertisements or promotions in retail settings. You can easily quantify Pepper’s effectiveness by detecting faces in the images captured by a camera looking outwards from it’s face.
 
-Other types of human behavior can be quantified by detecting human bodies. For example, by using a pedestrian detection model on images capturing motion in a room, you can gauge how people are moving through that room. This helps retailers know where to place furniture and showcases. The same data could be used for surveillance. Believe it or not, all these things are low hanging fruit as far as software development goes. Publically available models exist detecting faces, pedestrians, and many other kinds of objects.
+Other types of human behavior can be quantified by detecting human bodies. For example, by using a pedestrian detection model on images capturing motion in a room, you can gauge how people are moving through that room. This can help retailers know where to place furniture and showcases. The same data could be used for surveillance. Believe it or not, all these things are low hanging fruit as far as software development goes. Publically available models exist for detecting faces, pedestrians, and many other kinds of objects.
 
 
 # Don't use Twitter as your only data platform!
