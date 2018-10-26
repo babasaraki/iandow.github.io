@@ -129,7 +129,7 @@ Cameras can generate large, high resolution images, at speeds that can push the 
 
 To get a rough idea whether we can use pub/sub messaging to transport videos, I ran a performance test on a 3-node MapR cluster in the Google Cloud running on n1-highmem-4 (4 vCPUs, 26 GB memory) machines. 
 
-MapR's [perfproducer](https://mapr.com/docs/home/ReferenceGuide/mapr_perfproducer.html) and [perfconsumer](https://mapr.com/docs/52/ReferenceGuide/mapr_perfconsumer.html) utilities can be used to estimate the performance of producers and consumers for MapR-ES applications under a given cluster configuration. For my webcam application, video frames were compressed to about 50KB. The perfproducer and perfconsumer utilities showed that ***MapR-ES will have no problem handing video streams*** consisting of 50KB stream records published are typical video frame rates (e.g. 15fps) by several hundred cameras simultaneously.
+MapR's [perfproducer](https://mapr.com/docs/home/ReferenceGuide/mapr_perfproducer.html) and [perfconsumer](https://mapr.com/docs/52/ReferenceGuide/mapr_perfconsumer.html) utilities can be used to estimate the performance of producers and consumers for MapR-ES applications under a given cluster configuration. For my webcam application, video frames were compressed to about 50KB. The perfproducer and perfconsumer utilities showed that ***MapR-ES will have no problem handing video streams*** consisting of 50KB stream records published at typical video frame rates (e.g. 15fps) by several hundred cameras simultaneously.
 
 ## Challenge #3: How can binary objects, like images, be published as stream records? 
 
