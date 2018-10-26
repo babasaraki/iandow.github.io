@@ -57,13 +57,13 @@ This experience taught me useful CV lessons. For example, having consistent back
 
 1. Don't put data in a place where it cannot be accessed by analytical tools. Twitter lets you save and recall data, but it’s really not built for analytics.
 
-2. When you’re saving hundreds of images per day, it’s hard to find images with file managers or even bash. You really need bonafide search capabilities, for example, to find images based on what’s recorded in image metadata. 
+2. When you’re saving hundreds of images per day, it’s hard to find images with file managers or even bash. You really need bonafide search capabilities to find images based on what’s recorded in image metadata. 
 
-Both of these pain points related to data management. I didn't set out thinking of Twitter as a data platform, but as soon as I started asking questions of my data, like "which image classifications category is most common", I realized that I was in fact relying on Twitter as a data persistence layer. Which gets me to my main point: ***To achieve success with computer vision, data management is just as important as the technical aspects of image processing.***
+Both of these pain points related to data management. I didn't set out thinking of Twitter as a data platform, but as soon as I started asking questions like, "which image classification is most common", I realized that I was in fact relying on Twitter as a data persistence layer. Which gets me to my main point: ***To achieve success with computer vision, data management is just as important as the technical aspects of image processing.***
 
 # The benefits of a bonafide data platform:
 
-The business value of computer vision applications is often realized by the insights you learn from analytical and business intelligence tools. Those tools depend on having data in a bonafide data platform with capabilities such as:
+The business value in computer vision is often realized by the insights you learn from analytical and business intelligence tools. Those tools depend on having data in a bonafide data platform with capabilities such as:
 
 * Analytics with Business Intelligence and Data Science tools
 * NoSQL database, where you can store image metadata and derived features and recall them using standard SQL APIs
@@ -183,7 +183,7 @@ Full consumer code here:
 
 ## Conclusion on using Kafka / MapR-ES for video transport:
 
-In my previous CV field study I used NFS to copy images from cameras to the MapR filesystem and I notified CV workers to download and process them by publishing their file path into a Kafka topic (I used MapR's implementation of Kafka, called MapR-ES). However, using pub/sub streams to broadcast the image bytes is better than copying the image files via NFS. Here's why:
+In my previous computer vision (CV) field study I used NFS to copy images from cameras to the MapR filesystem and I notified CV workers to download and process them by publishing their file path into a Kafka topic (I used MapR's implementation of Kafka, called MapR-ES). However, using pub/sub streams to broadcast the image bytes is better than copying the image files via NFS. Here's why:
 
 1. ***Kafka / MapR-ES can be reliable, scalable, fault tolerant image storage.*** Instead of saving images to a file then notifying a CV worker once that file has been written, we can put the image itself in a pub/sub stream and accomplish both tasks. When a CV worker polls the stream, it will receive the image. If there are no new images, the poll function will return nothing. So, the image itself acts as a notification to the CV worker that an image is ready to be processed. If the pub/sub messaging service is provided by MapR-ES or Kafka, then using the stream for image storage also benefits from the reliability and scalability of the underlying streaming infrastructure.
 
