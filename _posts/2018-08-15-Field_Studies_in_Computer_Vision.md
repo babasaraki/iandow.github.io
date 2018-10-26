@@ -246,7 +246,7 @@ To see the face detection application in action, check out the following [video]
   <p class="margin-override font-override" style="margin-left: 15px">
   	This year I’m fundraising for <a href="https://us.movember.com">Movember</a>. Please consider donating your next beer to this chartiable organization supporting Mental Health: <a href="https://mobro.co/iandownard">https://mobro.co/iandownard</a>
   </p>
-  <img src="http://iandow.github.io/img/movember.jpg" width="120" style="margin-left: 30px" align="right">
+  <img src="http://iandow.github.io/img/movember.jpg" width="60" style="margin-left: 30px" align="right">
   <br>
   <div id="paypalbtn">
     <a class="btn btn-primary btn" href="https://mobro.co/iandownard">Donate to Movember</a>
