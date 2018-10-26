@@ -53,7 +53,7 @@ My first foray into computer vision was somewhat comical. I came up with the ide
 
 With the realization that I needed to detect this blue jay intruder in order to scare her away, I decided to build an image classification model using the hundreds of images that had already been captured. Now, upon detecting motion, the Pi would capture an image, apply the model, and (in a twist of irony that only occurred to me several months later) tweet the bird classification result to @Tensorchicken, so I could receive notifications through the Twitter app on my phone and run out to my coop to scare away the blue jay.
 
-This experience taught me useful CV lessons. For example, having the consistent backgrounds in images really improves classification accuracy. It also taught me lessons about data management:
+This experience taught me useful CV lessons. For example, having consistent backgrounds in images really improves classification accuracy. It also taught me lessons about data management:
 
 1. Don't put data in a place where it cannot be accessed by analytical tools. Twitter lets you save and recall data, but it’s really not built for analytics.
 
