@@ -12,14 +12,14 @@ In this blog I'll shed light on the role that a data platform plays for Computer
 I'm kind of all over the place with this blog. Maybe you'll learn something else more useful, but I think the main takeaways are:
 
 1. Videos can be thought of as just another kind of fast event stream which you can transport through distributed messaging systems like Kafka and [MapR-ES](https://mapr.com/products/mapr-streams/).
-2. Kafka/MapR-ES simplify the buffering and distribution of fast data to a dynamic set of concurrent stream processors.
+2. Kafka / MapR-ES simplify the buffering and distribution of fast data to a dynamic set of concurrent stream processors.
 3. [MapR's PACC Docker container](https://mapr.com/products/persistent-application-client-container/) makes it possible to scale workers and maintain access to data services even when those workers are ephemeral.
 
 # Computer Vision is Amazing!
 
 The capabilities of Computer Vision (CV) have exploded in the last four years since models such as [Inception](https://www.cs.unc.edu/~wliu/papers/GoogLeNet.pdf), [ResNet](https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/He_Deep_Residual_Learning_CVPR_2016_paper.pdf), and [AlexNet](https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf) were published. These models established foundational neural networks that through the processes of transfer learning enable tasks like image classification and object detection to be automated. Thanks to these advancements, the hardest part in developing effective computer vision applications relates more to data management than to the nitty gritty details of neural networks and vector math.
 
-# Use Cases for Computer Vision
+# Use Cases for Computer Vision:
 
 Before I get into the weeds of data management, let me give you an appreciation for the crazy-wide breadth that computer vision is being applied nowadays.
 
@@ -50,7 +50,7 @@ This experience taught me useful CV lessons. For example, having the consistent 
 
 Both of these pain points related to data management. I didn't set out thinking of Twitter as a data platform, but as soon as I started asking questions of my data, like "which image classifications category is most common", I realized that I was in fact relying on Twitter as a data persistence layer. Which gets me to my main point: ***To achieve success with computer vision, data management is just as important as the technical aspects of image processing.***
 
-# The benefits of a bonafide data platform
+# The benefits of a bonafide data platform:
 
 The business value of computer vision applications is often realized by the insights you learn from analytical and business intelligence tools. Those tools depend on having data in a bonafide data platform with capabilities such as:
 
@@ -87,7 +87,7 @@ I began to wonder, can images be more robustly distributed via MapR-ES instead o
 
 The answers to these questions, which I’ll describe below, were a resounding YES! 
 
-# Video streaming challenges
+# Video streaming challenges:
 
 When asking whether images and videos can be ingested via streams, several concerns come to mind:
 
@@ -113,17 +113,17 @@ If you really feel compelled to put things larger than 10-20 MB, consider the al
 
 Cameras can generate large, high resolution images, at speeds that can push the limits of pub/sub messaging. Those demands can be even more challenging for applications that require several video sources in order to accomplish their mission. For example, a surveillance system in an art gallery might require a single pub/sub messaging service to transport video feeds from 10-100 cameras. Distributed messaging systems like Kafka and MapR-ES are designed to be scalable, but how fast is too fast?
 
-### Performance testing stream throughput
+### Performance testing stream throughput:
 
 <img src="http://iandow.github.io/img/video_perf_test.png" width="40%" align="right">
 
 To get a rough idea whether we can use pub/sub messaging to transport videos, I ran a performance test on a 3-node MapR cluster in the Google Cloud running on n1-highmem-4 (4 vCPUs, 26 GB memory) machines. 
 
-The [mapr perfproducer](https://mapr.com/docs/home/ReferenceGuide/mapr_perfproducer.html) and [mapr perfconsumer](https://mapr.com/docs/52/ReferenceGuide/mapr_perfconsumer.html) utilities can be used to estimate the performance of producers and consumers for MapR-ES applications under a given cluster configuration. For my webcam application, video frames were compressed to about 50KB. The perfproducer and perfconsumer utilities showed that ***MapR-ES will have no problem handing video streams*** consisting of 50KB stream records published are typical video frame rates (e.g. 15fps) by several hundred cameras simultaneously.
+MapR's [perfproducer](https://mapr.com/docs/home/ReferenceGuide/mapr_perfproducer.html) and [perfconsumer](https://mapr.com/docs/52/ReferenceGuide/mapr_perfconsumer.html) utilities can be used to estimate the performance of producers and consumers for MapR-ES applications under a given cluster configuration. For my webcam application, video frames were compressed to about 50KB. The perfproducer and perfconsumer utilities showed that ***MapR-ES will have no problem handing video streams*** consisting of 50KB stream records published are typical video frame rates (e.g. 15fps) by several hundred cameras simultaneously.
 
 ## Challenge #3: How can binary objects, like images, be published as stream records? 
 
-You can transport videos through Kafka/MapR-ES topics like this: 
+You can transport videos through Kafka / MapR-ES topics like this: 
 1. Use the OpenCV library to read frames from a video source
 2. Convert each frame to a byte array 
 3. Publish that byte array as a record to the stream. 
@@ -139,7 +139,6 @@ This may seem complex but it’s actually pretty boilerplate code. If you Google
 Here's what this all looks like in pseudo Python code:
 
 ***Producer:***
-
 {% highlight python %}
 # Open video
 cap = cv2.VideoCapture(0)
@@ -154,11 +153,9 @@ p.produce('topic1', image_array)
 {% endhighlight %}
 
 Full producer code here:
-
 [https://github.com/mapr-demos/mapr-streams-mxnet-face/blob/master/producer/mapr-producer-camera-ian.py](https://github.com/mapr-demos/mapr-streams-mxnet-face/blob/master/producer/mapr-producer-camera-ian.py)
 
 ***Consumer:***
-
 {% highlight python %}
 IMAGE_DEPTH=np.uint8
 # Read from stream
@@ -170,19 +167,18 @@ image = cv2.imdecode(image_array, cv2.IMREAD_COLOR)
 {% endhighlight %}
 
 Full consumer code here:
-
 [https://github.com/mapr-demos/mapr-streams-mxnet-face/blob/master/consumer/deploy/mapr_consumer.py](https://github.com/mapr-demos/mapr-streams-mxnet-face/blob/master/consumer/deploy/mapr_consumer.py)
 
 
-## Conclusion on using Kafka/MapR-ES for video transport
+## Conclusion on using Kafka / MapR-ES for video transport:
 
 In my previous CV field study I used NFS to copy images from cameras to the MapR filesystem and I notified CV workers to download and process them by publishing their file path into a Kafka topic (I used MapR's implementation of Kafka, called MapR-ES). However, using pub/sub streams to broadcast the image bytes is better than copying the image files via NFS. Here's why:
 
-1. ***Kafka/MapR-ES can be reliable, scalable, fault tolerant image storage.*** Instead of saving images to a file then notifying a CV worker once that file has been written, we can put the image itself in a pub/sub stream and accomplish both tasks. When a CV worker polls the stream, it will receive the image. If there are no new images, the poll function will return nothing. So, the image itself acts as a notification to the CV worker that an image is ready to be processed. If the pub/sub messaging service is provided by MapR-ES or Kafka, then using the stream for image storage also benefits from the reliability and scalability of the underlying streaming infrastructure.
+1. ***Kafka / MapR-ES can be reliable, scalable, fault tolerant image storage.*** Instead of saving images to a file then notifying a CV worker once that file has been written, we can put the image itself in a pub/sub stream and accomplish both tasks. When a CV worker polls the stream, it will receive the image. If there are no new images, the poll function will return nothing. So, the image itself acts as a notification to the CV worker that an image is ready to be processed. If the pub/sub messaging service is provided by MapR-ES or Kafka, then using the stream for image storage also benefits from the reliability and scalability of the underlying streaming infrastructure.
 
-2. ***Kafka/MapR-ES can be the transport-layer for communicating images to CV workers.***. Another advantage with pub/sub messaging is that it eliminates the need to manage socket connections between CV workers and cameras. By running a stream producer on (or close to) each camera and a stream consumer on each CV worker, we ensure images are communicated only to those CV workers who need it. 
+2. ***Kafka / MapR-ES can be the transport-layer for communicating images to CV workers.***. Another advantage with pub/sub messaging is that it eliminates the need to manage socket connections between CV workers and cameras. By running a stream producer on (or close to) each camera and a stream consumer on each CV worker, we ensure images are communicated only to those CV workers who need it. 
 
-3. ***Kafka/MapR-ES consumer groups help prevent CV workers from doing duplicate work.*** Pub/sub streaming services such as MapR-ES and Kafka also enable us to organize CV workers into “consumer groups” to help ensure that only one CV worker receives an image. This is good, because it means we don't need to otherwise synchronize workers in order to avoid duplicate work.
+3. ***Kafka / MapR-ES consumer groups help prevent CV workers from doing duplicate work.*** Pub/sub streaming services such as MapR-ES and Kafka also enable us to organize CV workers into “consumer groups” to help ensure that only one CV worker receives an image. This is good, because it means we don't need to otherwise synchronize workers in order to avoid duplicate work.
 
 In conclusion, can images be more robustly distributed via streams instead of NFS? Yes!
 
@@ -196,7 +192,7 @@ Not only does this approach give us the speed we need to process video, but also
 
 <img src="http://iandow.github.io/img/docker_gpus.png" width="90%" align="center">
 
-### Dockerfile
+### Dockerfile:
 
 Here is the container definition I used for CV workers designed to detect faces in images transported through MapR-ES. The container is prepackaged with CUDA stuff for face recognition.
 It bootstraps with mapr-setup.sh that connects the container to a MapR cluster.
@@ -211,7 +207,6 @@ ENTRYPOINT ["/opt/mapr/installer/docker/mapr-setup.sh", "container"]
 {% endhighlight %}
 
 Here's how I compile that docker image:
-
 {% highlight shell %}
 # compile the image defined by the Dockerfile
 docker build .
@@ -224,7 +219,6 @@ docker load –i pacc_nvidia
 {% endhighlight %}
 
 After I copy that docker image to a GPU enabled VM in the cloud, I run it like this:
-
 {% highlight shell %}
 docker run -it --runtime=nvidia \
 -e NVIDIA_VISIBLE_DEVICES=all \
@@ -234,15 +228,9 @@ docker run -it --runtime=nvidia \
 --name worker1 pacc_nvidia
 {% endhighlight %}
 
-
 To see the face detection application in action, check out the following [video](https://youtu.be/Pn1-fTrwtnk):
-
 <a href="https://mapr.com/resources/videos/real-time-face-detection-on-video-using-mapr-streams"><img src="http://iandow.github.io/img/face_detection_youtube.png" width="90%" align="center"></a>
-
-
-<br>
 <p>Please provide your feedback to this article by adding a comment to <a href="https://github.com/iandow/iandow.github.io/issues/13">https://github.com/iandow/iandow.github.io/issues/13</a>.</p>
-
 <br><br>
 <div class="main-explain-area padding-override jumbotron">
   <img src="http://iandow.github.io/img/mustache-udnie.cropped.jpg" width="120" style="margin-left: 15px" align="right">
