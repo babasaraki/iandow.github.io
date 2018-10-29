@@ -109,15 +109,28 @@ When asking whether images and videos can be ingested via streams, several conce
 
 ## Challenge #1: Are image sizes too large for streams?
 
-One way to stream an image is to convert the binary image into a string. With a little experimentation I observed that the size of a compressed 8-bit 320x240 jpeg will be about 17KB. Message-oriented APIs like Kafka and MapR Streams are not designed to transport extremely large messages (like high resolution images), but 17KB is well within the range of a reasonable message size.
+One way to stream an image is to convert the binary image into a string and publish that string as the record to a stream topic configured to use the [StringSerializer](http://www.bigendiandata.com/2016-08-14-How-to-use-Java-Serializers-with-Kafka/) (which is usually the default serializer). However, message-oriented APIs like Kafka and MapR-ES are not designed to transport extremely large messages like what you would get if you "stringified" a high resolution image. If you attempt to send a message too large, you'll probably get this error:
 
-### Sidenote: How big is too big for stream messages?
+```
+cimpl.KafkaException: KafkaError{code=MSG_SIZE_TOO_LARGE,val=10,str="Unable to produce message: Broker: Message size too large"}.
+```
+
+The image resolutions that fit within this constraint are pretty small. Here are the message sizes which came from images in a face-recognition application I built for my laptop camera. These are the only resolutions supported for my camera, according to `sudo v4l2-ctl --list-formats-ext`:
+
+| Resolution | 320x480 | 640x480 | 1280x720 |
+| --- | --- |
+| Message Size | 0.83 MB | 0.314 MB | 1.64 MB |
+
+
+***How big is too big for stream messages?***
 
 A message-oriented API writes an entire message on a single call. A file-oriented API opens a connection and does multiple writes over a possibly long period of time, and finally the connection is closed. Not surprisingly, Kafka, and by simple extension, MapR-ES use a message-oriented API. Message-oriented APIs are not really good for writing large objects. Languages often have memory limits, objects that are very large may not even entirely exist in memory at one time, and so on. This generally means that sending very large messages is a mistake. 
 
-The default maximum message size for MapR-ES is 10MB. You can increase this threshold but I would not recommend doing so. The design sweet spot is for message sizes of 1MB or less. This isn't a technical limit as much as an API issue combined with pragmatics such as the cost of ignoring some messages.
+The default maximum message size for MapR-ES is 1MB. You can increase this threshold but I would not recommend doing so. The design sweet spot for stream message sizes is 100KB or less. This isn't a technical limit as much as an API issue combined with pragmatics such as the cost of ignoring some messages.
 
-If you really feel compelled to put things larger than 10-20 MB, consider the alternative of writing objects to a file then publishing their full path to a stream. In fact, this raises one of the virtues of having a converged data platform, like MapR, that enables files and streams to coexist within a single filesystem namespace.
+If you really feel compelled to put things larger than 1 MB, consider the alternative of writing objects to a file then publishing their full path to a stream. In fact, this raises one of the virtues of having a converged data platform, like MapR, that enables files and streams to coexist within a single filesystem namespace.
+
+
 
 ## Challenge #2: Are videos too fast for streams?
 
