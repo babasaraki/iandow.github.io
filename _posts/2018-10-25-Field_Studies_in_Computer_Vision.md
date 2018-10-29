@@ -121,6 +121,7 @@ The image resolutions that fit within this constraint are pretty small. Here are
 | --- | --- |
 | Message Size | 0.83 MB | 0.314 MB | 1.64 MB |
 
+Without reconfiguring the max message size thresholds in Kafka or MapR-ES, it should be possible to stream images as long as they're no larger than 640x480.
 
 ***How big is too big for stream messages?***
 
