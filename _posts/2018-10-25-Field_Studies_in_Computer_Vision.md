@@ -1,11 +1,13 @@
 ---
 layout: post
-title: Transporting Video with Kafka for Real-Time Face Detection
+title: What 
 tags: [mapr, computer vision]
 bigimg: /img/eyes-2019364_1920.jpg
 ---
 
-In this blog I'll shed light on various roles that data platforms can play for Computer Vision by describing three seperate data management strategies I've used with applications that process images or video. The main event here is a discussion about how video can be transported through Kafka / MapR-ES and how Docker can be used to elastically scale video processors for face detection.
+Computer Vision (CV) developers often find the biggest barrier to success deals with data management and yet so much of what you'll find about CV is about the algorithms, not the data. In this blog I'll describe three seperate data management strategies I've used with applications that process images. Through the anicdotes of my experiences you'll learn about several functions that data platforms provide for CV.
+
+The main event here is a discussion about how video can be transported through Kafka / MapR-ES and how Docker can be used to elastically scale video processors for face detection.
 
 # TL;DR
 
@@ -45,7 +47,7 @@ Consider Pepper, a humanoid robot manufactured by the Japanese company, SoftBank
 Other types of human behavior can be quantified by detecting human bodies. For example, by using a pedestrian detection model on images capturing motion in a room, you can gauge how people are moving through that room. This can help retailers know where to place furniture and showcases. The same data could be used for surveillance. Believe it or not, all these things are low hanging fruit as far as software development goes. Publically available models exist for detecting faces, pedestrians, and many other kinds of objects.
 
 
-# Don't use Twitter as your only data platform!
+# Twitter as a minimally viable data platform 
 
 <img src="http://iandow.github.io/img/tensorchicken_tweet.png" width="33%" align="right">
 
