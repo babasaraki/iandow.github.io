@@ -7,7 +7,7 @@ bigimg: /img/eyes-2019364_1920.jpg
 
 Computer Vision (CV) developers often find the biggest barrier to success deals with data management and yet so much of what you'll find about CV is about the algorithms, not the data. In this blog I'll describe three seperate data management strategies I've used with applications that process images. Through the anicdotes of my experiences you'll learn about several functions that data platforms provide for CV.
 
-The main event here is a discussion about how video can be transported through Kafka / MapR-ES and how Docker can be used to elastically scale video processors for face detection.
+The main event here is a discussion about how video can be transported through MapR-ES (which is MapR's reimplementation of Apache Kafka) and how Docker can be used to elastically scale video processors for face detection.
 
 # TL;DR
 
