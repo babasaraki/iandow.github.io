@@ -115,7 +115,7 @@ One way to stream an image is to convert the binary image into a string and publ
 cimpl.KafkaException: KafkaError{code=MSG_SIZE_TOO_LARGE,val=10,str="Unable to produce message: Broker: Message size too large"}.
 ```
 
-The image resolutions that fit within this constraint are pretty small. Here are the message sizes which came from images in a face-recognition application I built for my laptop camera. These are the only resolutions supported for my camera, according to `sudo v4l2-ctl --list-formats-ext`:
+The image resolutions that fit within this constraint are pretty small. Here are the message sizes which would result from the resolutions supported by my laptop's camera:
 
 | Resolution | 320x480 | 640x480 | 1280x720 |
 | --- | --- |
@@ -129,7 +129,6 @@ A message-oriented API writes an entire message on a single call. A file-oriente
 The default maximum message size for MapR-ES is 1MB. You can increase this threshold but I would not recommend doing so. The design sweet spot for stream message sizes is 100KB or less. This isn't a technical limit as much as an API issue combined with pragmatics such as the cost of ignoring some messages.
 
 If you really feel compelled to put things larger than 1 MB, consider the alternative of writing objects to a file then publishing their full path to a stream. In fact, this raises one of the virtues of having a converged data platform, like MapR, that enables files and streams to coexist within a single filesystem namespace.
-
 
 
 ## Challenge #2: Are videos too fast for streams?
