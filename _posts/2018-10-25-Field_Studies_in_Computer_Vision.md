@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Data Management Strategies for Computer Vision
-tags: [mapr, computer vision]
+tags: [computer vision, docker, kafka, mapr, twitter]
 bigimg: /img/eyes-2019364_1920.jpg
 ---
 
