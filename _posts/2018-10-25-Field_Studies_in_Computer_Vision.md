@@ -115,7 +115,7 @@ One way to stream an image is to convert the binary image into a string and publ
 cimpl.KafkaException: KafkaError{code=MSG_SIZE_TOO_LARGE,val=10,str="Unable to produce message: Broker: Message size too large"}.
 ```
 
-The image resolutions that fit within this constraint are pretty small. Here are the message sizes which would result from the resolutions supported by my laptop's camera:
+The image resolutions that fit within the max message sizes for streams (e.g. 1MB) are pretty small. Here are the message sizes which would result from the resolutions supported by my laptop's camera:
 
 | Resolution | 320x480 | 640x480 | 1280x720 |
 | --- | --- |
