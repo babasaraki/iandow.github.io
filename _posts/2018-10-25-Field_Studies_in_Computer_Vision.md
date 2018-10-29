@@ -1,6 +1,6 @@
 ---
 layout: post
-title: What 
+title: Data Management Strategies for Computer Vision
 tags: [mapr, computer vision]
 bigimg: /img/eyes-2019364_1920.jpg
 ---
