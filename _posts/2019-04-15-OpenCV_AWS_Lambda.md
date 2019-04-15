@@ -8,7 +8,7 @@ bigimg: /img/black-color-dark-1171480.jpg
 This post describes how to package the OpenCV python library so it can be used in applications that run in AWS Lambda. AWS Lambda is a Function-as-a-Service (FaaS) offering from Amazon that lets you run code without the complexity of building and maintaining the underlying infrastructure. OpenCV is one of the larger python libraries. Packaging it together with application code in a monolithic zip file will work, but deploying it as an AWS Lambda Layer has the following advantages:
 
 * Lambda Layers allow libraries to be shared across many functions without duplicating code.
-* Lambda Layers enable AWS Lambda functions to be smaller. Smaller packages can be packaged and uploaded faster and also enables the web-based code editor in AWS Lambda to work for more applications. 
+* Lambda Layers enable AWS Lambda functions to be smaller. Smaller packages can be packaged and uploaded faster and also enables the web-based code editor in AWS Lambda to work (it only works for applications less than 3MB). 
 
 The relative sizes of an AWS Lambda function packaged with OpenCV vs an AWS Lambda function that uses OpenCV via a Lambda layer, is shown below:
 
