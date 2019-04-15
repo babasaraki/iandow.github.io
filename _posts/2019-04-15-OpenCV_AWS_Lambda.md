@@ -2,7 +2,7 @@
 layout: post
 title: Running OpenCV as an AWS Lambda Function
 tags: [computer vision, docker, kafka, mapr, twitter]
-bigimg: /img/black-color-dark-1171480.jpg
+bigimg: /img/asphalt-balance-blur-268018.jpg
 ---
 
 This post describes how to package the OpenCV python library so it can be used in applications that run in AWS Lambda. AWS Lambda is a Function-as-a-Service (FaaS) offering from Amazon that lets you run code without the complexity of building and maintaining the underlying infrastructure. OpenCV is one of the larger python libraries. Packaging it together with application code in a monolithic zip file will work, but deploying it as an AWS Lambda Layer has the following advantages:
