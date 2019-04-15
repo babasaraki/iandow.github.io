@@ -7,16 +7,18 @@ bigimg: /img/black-color-dark-1171480.jpg
 
 This post describes how to package the OpenCV python library so it can be used in applications that run in AWS Lambda. AWS Lambda is a Function-as-a-Service (FaaS) offering from Amazon that lets you run code without the complexity of building and maintaining the underlying infrastructure. OpenCV is one of the larger python libraries. Packaging it together with application code in a monolithic zip file will work, but deploying it as an AWS Lambda Layer has the following advantages:
 
--Lambda Layers allow libraries to be shared across many functions without duplicating code.
--Lambda Layers enable AWS Lambda functions to be smaller. Smaller packages can be packaged and uploaded faster and also enables the web-based code editor in AWS Lambda to work for more applications. 
+* Lambda Layers allow libraries to be shared across many functions without duplicating code.
+* Lambda Layers enable AWS Lambda functions to be smaller. Smaller packages can be packaged and uploaded faster and also enables the web-based code editor in AWS Lambda to work for more applications. 
 
 The relative sizes of an AWS Lambda function packaged with OpenCV vs an AWS Lambda function that uses OpenCV via a Lambda layer, is shown below:
 
 <img src=https://raw.githubusercontent.com/iandow/opencv_aws_lambda/master/images/lambda_function_sizes.png>
 
+# Procedure
+
 To illustrate this process, I've created a sample application that deploys OpenCV as an AWS Lambda layer which is used by a Lambda function to grayscale an image in AWS S3 and save it back to AWS S3. Sample code and documentation is provided at [https://github.com/iandow/opencv_aws_lambda](https://github.com/iandow/opencv_aws_lambda).
 
-### Preliminary AWS CLI Setup: 
+## Preliminary AWS CLI Setup: 
 1. Install Docker on your workstation.
 2. Setup credentials for AWS CLI (see http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html).
 3. Create IAM Role with Lambda and S3 access:
@@ -28,7 +30,7 @@ aws iam attach-role-policy --policy-arn arn:aws:iam::aws:policy/AmazonS3FullAcce
 aws iam attach-role-policy --policy-arn arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole --role-name $ROLE_NAME
 ```
 
-### Build OpenCV library using Docker
+## Build OpenCV library using Docker
 
 AWS Lambda functions run in an [Amazon Linux environment](https://docs.aws.amazon.com/lambda/latest/dg/current-supported-versions.html), so libraries should be built for Amazon Linux. You can build Python-OpenCV libraries for Amazon Linux using the provided Dockerfile, like this:
 
@@ -39,7 +41,7 @@ docker build --tag=python-opencv-factory:latest .
 docker run --rm -it -v $(pwd):/data python-opencv-factory cp /packages/cv2-python36.zip /data
 ```
 
-### Deploy the AWS Lambda function with OpenCV Lambda layer.
+## Deploy the AWS Lambda function with OpenCV Lambda layer.
 
 1. Edit the Lambda function code to do whatever you want it to do. In this example we're using app.py from https://github.com/iandow/opencv_aws_lambda.
 ```
