@@ -12,7 +12,7 @@ This post describes how to package the OpenCV python library so it can be used i
 
 The relative sizes of an AWS Lambda function packaged with OpenCV vs an AWS Lambda function that uses OpenCV via a Lambda layer, is shown below:
 
-<img src=https://raw.githubusercontent.com/iandow/opencv_aws_lambda/master/images/lambda_function_sizes.png>
+<img src="https://raw.githubusercontent.com/iandow/opencv_aws_lambda/master/images/lambda_function_sizes.png">
 
 # Procedure
 
@@ -99,7 +99,7 @@ aws s3 cp ./my_image.jpg s3://ianwow/my_image-gray.jpg
 open my_image-gray.jpg
 ```
 
-<img src=https://github.com/iandow/opencv_aws_lambda/blob/master/images/my_image.jpg width="200"> <img src=https://raw.githubusercontent.com/iandow/opencv_aws_lambda/master/images/my_image-gray.jpg width="200">
+<img src="https://github.com/iandow/opencv_aws_lambda/blob/master/images/my_image.jpg" width="200"> <img src="https://raw.githubusercontent.com/iandow/opencv_aws_lambda/master/images/my_image-gray.jpg" width="200">
 
 ### Clean up resources
 ```
@@ -114,7 +114,6 @@ aws iam detach-role-policy --policy-arn arn:aws:iam::aws:policy/AmazonS3FullAcce
 aws iam delete-role --role-name $ROLE_NAME
 ```
 
-<a href="https://mapr.com/resources/videos/real-time-face-detection-on-video-using-mapr-streams"><img src="http://iandow.github.io/img/face_detection_youtube.png" width="90%" align="center"></a>
 
 <p>Please provide your feedback to this article by adding a comment to <a href="https://github.com/iandow/iandow.github.io/issues/14">https://github.com/iandow/iandow.github.io/issues/14</a>.</p>
 
