@@ -99,7 +99,7 @@ aws s3 cp ./my_image.jpg s3://ianwow/my_image-gray.jpg
 open my_image-gray.jpg
 ```
 
-<img src="https://github.com/iandow/opencv_aws_lambda/blob/master/images/my_image.jpg" width="200"> <img src="https://raw.githubusercontent.com/iandow/opencv_aws_lambda/master/images/my_image-gray.jpg" width="200">
+<img src="https://raw.githubusercontent.com/iandow/opencv_aws_lambda/master/images/my_image.jpg" width="200"> <img src="https://raw.githubusercontent.com/iandow/opencv_aws_lambda/master/images/my_image-gray.jpg" width="200">
 
 ### Clean up resources
 ```
