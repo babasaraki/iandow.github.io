@@ -2,7 +2,7 @@
 layout: post
 title: Deepdive S3 CORS
 tags: [aws, s3, python]
-bigimg: /img/asphalt-balance-blur-268018.jpg
+bigimg: /img/blue-water-blur-close-up-1231622-2.jpg
 ---
 
 For several weeks I've been trying to diagnose CORS errors in a web component I built for uploading files to AWS S3. This has been one of the hardest software defects I've had to solve in a long time so I thought it would be a good idea to share what I learned along the way.
