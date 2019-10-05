@@ -1,3 +1,4 @@
+---
 layout: post
 title: Deepdive S3 CORS
 tags: [aws, s3, python]
