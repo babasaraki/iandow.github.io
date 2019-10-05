@@ -29,7 +29,7 @@ There are a lot of ways this can go wrong. It doesn't help that browsers will of
 
 <img src="http://iandow.github.io/img/cors_error.png" width="70%">
 
-You'd be in good company if you read "Maybe CORS errors" in that error and thought you had a problem with your CORS policy. But you would be wrong because the cause was an API Gateway resource policy.
+You'd be in good company if you read `Maybe CORS errors` in that error and thought you had a problem with your CORS policy. But you would be wrong because the cause was an API Gateway resource policy.
 
 <img src="http://iandow.github.io/img/api_gateway.png" width="70%">
 
@@ -115,7 +115,7 @@ def upload():
 {% endhighlight %}
 
 
-# Here are your TL;DR take-aways:
+# Conclusions:
 
 * Region specific S3 endpoints are required to upload to buckets in any region other than Virginia (us-east-1)
 * Always use botocore Config options to initialize Python S3 clients with a region, sig 3/4, and virtual path addressing.
