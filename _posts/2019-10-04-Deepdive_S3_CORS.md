@@ -47,7 +47,7 @@ Now, look closely at the preflight redirect. Where is it directing the browser? 
 
 The redirected URL is a region-specific URL. ***This was an important clue.***
 
-<img src="http://iandow.github.io/img/redirected_url.pn" width="70%">
+<img src="http://iandow.github.io/img/redirected_url.png" width="70%">
 
 
 Browsers won't redirect preflight requests because [reasons](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS#Preflighted_requests). However, after doing some research about S3 redirects [here](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingBucket.html), [here](https://aws.amazon.com/premiumsupport/knowledge-center/s3-http-307-response/
