@@ -13,7 +13,7 @@ First some background. The application I've been building is designed to allow p
 
 I chose Vue.js to implement the front-end and [DropzoneJS](http://dropzonejs.com) to provide drag'n'drop file upload functionality that looks like this:
 
-<img src="https://raw.githubusercontent.com/iandow//master/deepdive_s3_cors/images/dropzone.gif">
+<img src="http://iandow.github.io/img/dropzone.gif" width="70%">
 
 ## Uploading with Presigned URLs for S3
 
@@ -27,29 +27,28 @@ Here's what's supposed to happen in the back-end when the upload is started:
 
 There are a lot of ways this can go wrong. It doesn't help that browsers will often report several different types of faults as CORS issues even when your CORS policies are perfectly fine. For example, here's the error you'll get when an API Gateway endpoint rejects a request due to IP restrictions in an API's access policy:
 
-<img src="https://raw.githubusercontent.com/iandow//master/deepdive_s3_cors/images/cors_error.png">
+<img src="http://iandow.github.io/img/cors_error.png" width="70%">
 
 You'd be in good company if you read "Maybe CORS errors" in that error and thought you had a problem with your CORS policy. But you would be wrong because the cause was an API Gateway resource policy.
 
-<img src="https://raw.githubusercontent.com/iandow//master/deepdive_s3_cors/images/api_gateway.png">
-
+<img src="http://iandow.github.io/img/api_gateway.png" width="70%">
 
 Setting up CORS for S3 buckets is not complicated. When you actually have a real CORS problem you can often solve it by reading this [CORS troubleshooting guide](https://docs.aws.amazon.com/AmazonS3/latest/dev/cors-troubleshooting.html). When I saw CORS errors in my browser, I read that guide and then went to make changes to the CORS policy in my S3 bucket. Strangely, by making changes to the policy the problem *sometimes* went away. However, this was totally sporadic and seemingly dependant on how my S3 requests were being handled by the replicated S3 back-end. Pretty soon I realized there was no problem with the CORS policy on my S3 bucket, which by the way looks like this:
 
-
-<img src="https://raw.githubusercontent.com/iandow//master/deepdive_s3_cors/images/s3_cors.png">
+<img src="http://iandow.github.io/img/s3_cors.png" width="70%">
 
 Even with a solid CORS policy on my S3 bucket, I frequently encountered CORS errors accompanied by HTTP 307 Temporary Redirect errors on the CORS preflight request. A CORS preflight request is an HTTP OPTIONS request that checks to see if the server understands the CORS protocol ([reference](https://developer.mozilla.org/en-US/docs/Glossary/Preflight_request)).
 
 Here's what a CORS preflight redirect looks like:
 
-<img src="https://raw.githubusercontent.com/iandow//master/deepdive_s3_cors/images/cors_preflight_redirect.png">
+<img src="http://iandow.github.io/img/cors_preflight_redirect.png" width="70%">
 
 Now, look closely at the preflight redirect. Where is it directing the browser? How is the redirected URL different from the original request?
 
 The redirected URL is a region-specific URL. ***This was an important clue.***
 
-<img src="https://raw.githubusercontent.com/iandow//master/deepdive_s3_cors/images/redirected_url.png">
+<img src="http://iandow.github.io/img/redirected_url.pn" width="70%">
+
 
 Browsers won't redirect preflight requests because [reasons](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS#Preflighted_requests). However, after doing some research about S3 redirects [here](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingBucket.html), [here](https://aws.amazon.com/premiumsupport/knowledge-center/s3-http-307-response/
 ), [here](https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html
