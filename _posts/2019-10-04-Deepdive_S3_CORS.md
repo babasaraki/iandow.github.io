@@ -19,17 +19,11 @@ I chose Vue.js to implement the front-end and [DropzoneJS](http://dropzonejs.com
 
 Here's what's supposed to happen in the back-end when a user uploads a file:
 
-<img src="http://iandow.github.io/img/upload1.png" width="30%" style="margin-left: 15px" align="right">1. The web browser sends two requests to an API Gateway endpoint which acts as the point of entry to a Lambda function that returns a presigned URL which can be used in a subsequent POST to upload a file to S3. 
+1. <img src="http://iandow.github.io/img/upload1.png" width="30%" style="margin-left: 15px" align="right"> The web browser sends two requests to an API Gateway endpoint which acts as the point of entry to a Lambda function that returns a presigned URL which can be used in a subsequent POST to upload a file to S3. 
 2. The first request is an `HTTP OPTIONS` method to my `/upload` endpoint. This is called a presigned CORS requests. The browser uses this to verify that the server will allow a POST with some CORS related headers. The server responds with an empty 200 OK.
-
-<img src="http://iandow.github.io/img/upload2.png" width="30%" style="margin-left: 15px" align="right">
-3. The second request is an HTTP POST to /upload. The Lambda function responds with said presigned URL.
-
-<img src="http://iandow.github.io/img/upload3.png" width="30%" style="margin-left: 15px" align="right">
-4. The browser submits another HTTP OPTIONS method to the S3 endpoint to check that it will allow a POST with some CORS related headers. The server should respond with an empty 200 OK.
-
-<img src="http://iandow.github.io/img/upload4.png" width="30%" style="margin-left: 15px" align="right">
-5. Finally the browser uses the presigned URL response from step #2 to POST to the S3 endpoint with the file data.
+3. <img src="http://iandow.github.io/img/upload2.png" width="30%" style="margin-left: 15px" align="right"> The second request is an HTTP POST to /upload. The Lambda function responds with said presigned URL.
+4. <img src="http://iandow.github.io/img/upload3.png" width="30%" style="margin-left: 15px" align="right"> The browser submits another HTTP OPTIONS method to the S3 endpoint to check that it will allow a POST with some CORS related headers. The server should respond with an empty 200 OK.
+5. <img src="http://iandow.github.io/img/upload4.png" width="30%" style="margin-left: 15px" align="right"> Finally the browser uses the presigned URL response from step #2 to POST to the S3 endpoint with the file data.
 
 
 There are a lot of ways this can go wrong. It doesn't help that browsers will often report several different types of faults as CORS issues even when your CORS policies are perfectly fine. For example, here's the error you'll get when an API Gateway endpoint rejects a request due to IP restrictions in an API's access policy:
