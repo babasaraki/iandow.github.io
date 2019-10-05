@@ -7,7 +7,7 @@ bigimg: /img/blue-water-blur-close-up-1231622-2.jpg
 
 For several weeks I've been trying to diagnose CORS errors in a web component I built for uploading files to AWS S3. This has been one of the hardest software defects I've had to solve in a long time so I thought it would be a good idea to share what I learned along the way.
 
-First some background. The application I've been building is designed to allow people to upload videos with a web browser and run them through a suite of AWS machine learning services that generate data about video, audio, or text media objects, then save that data to Elasticsearch so people can search video archives using any of said ML derived metadata. My application runs on a serverless framework called the Media Insights Engine designed by my team at AWS Elemental and published to [github](https://github.com/awslabs/aws-media-insights-engine).
+First some background. The application I've been building is designed to allow people to upload videos with a web browser and run them through a suite of AWS machine learning services that generate data about video, audio, or text media objects, then save that data to Elasticsearch so people can search video archives using any of said ML derived metadata. My application runs on a serverless framework called the [Media Insights Engine](https://github.com/awslabs/aws-media-insights-engine) designed by my team at AWS Elemental.
 
 ## DropzoneJS Upload
 
