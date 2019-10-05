@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Deepdive S3 CORS
+title: Deep Dive into S3 CORS
 tags: [aws, s3, python]
 bigimg: /img/blue-water-blur-close-up-1231622-2.jpg
 ---
@@ -19,12 +19,13 @@ I chose Vue.js to implement the front-end and [DropzoneJS](http://dropzonejs.com
 
 Here's what's supposed to happen in the back-end when a user uploads a file:
 
-1. <img src="http://iandow.github.io/img/upload1.png" width="30%" style="margin-left: 15px" align="left"> <img src="http://iandow.github.io/img/upload2.png" width="30%" style="margin-left: 15px" align="right"> The web browser sends two requests to an API Gateway endpoint which acts as the point of entry to a Lambda function that returns a presigned URL which can be used in a subsequent POST to upload a file to S3. 
+1. <img src="http://iandow.github.io/img/upload1.png" width="30%" style="margin-left: 15px" align="right"> <img src="http://iandow.github.io/img/upload2.png" width="30%" style="margin-left: 15px" align="right"> The web browser sends two requests to an API Gateway endpoint which acts as the point of entry to a Lambda function that returns a presigned URL which can be used in a subsequent POST to upload a file to S3. 
 2. The first request is an `HTTP OPTIONS` method to my `/upload` endpoint. This is called a presigned CORS requests. The browser uses this to verify that the server will allow a POST with some CORS related headers. The server responds with an empty 200 OK.
 3. The second request is an HTTP POST to /upload. The Lambda function responds with said presigned URL.
-4. <img src="http://iandow.github.io/img/upload3.png" width="30%" style="margin-left: 15px" align="left"> <img src="http://iandow.github.io/img/upload4.png" width="30%" style="margin-left: 15px" align="right"> The browser submits another HTTP OPTIONS method to the S3 endpoint to check that it will allow a POST with some CORS related headers. The server should respond with an empty 200 OK.
+4. <img src="http://iandow.github.io/img/upload3.png" width="30%" style="margin-left: 15px" align="right"> <img src="http://iandow.github.io/img/upload4.png" width="30%" style="margin-left: 15px" align="right"> The browser submits another HTTP OPTIONS method to the S3 endpoint to check that it will allow a POST with some CORS related headers. The server should respond with an empty 200 OK.
 5.  Finally the browser uses the presigned URL response from step #2 to POST to the S3 endpoint with the file data.
 
+## Pitfalls
 
 There are a lot of ways this can go wrong. It doesn't help that browsers will often report several different types of faults as CORS issues even when your CORS policies are perfectly fine. For example, here's the error you'll get when an API Gateway endpoint rejects a request due to IP restrictions in an API's access policy:
 
@@ -50,11 +51,12 @@ The redirected URL is a region-specific URL. ***This was an important clue.***
 
 <img src="http://iandow.github.io/img/redirected_url.png" width="70%">
 
-
 Browsers won't redirect preflight requests because [reasons](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS#Preflighted_requests). However, after doing some research about S3 redirects [here](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingBucket.html), [here](https://aws.amazon.com/premiumsupport/knowledge-center/s3-http-307-response/
 ), [here](https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html
 ), and [here](https://docs.aws.amazon.com/AmazonS3/latest/dev/Redirects.html
 ), I realized that this region-specific URL was important. 
+
+## The Solution
 
 My fix started to come together pretty quickly after realizing DropzoneJS used a statically defined URL that was not region specific for S3 buckets. I also noticed 
 
