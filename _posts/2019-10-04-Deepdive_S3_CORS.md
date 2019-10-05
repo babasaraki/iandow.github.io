@@ -1,21 +1,21 @@
 ---
 layout: post
-title: Deep Dive into S3 CORS
+title: Deep Dive into CORS Configs on AWS S3
 tags: [aws, s3, python]
 bigimg: /img/blue-water-blur-close-up-1231622-2.jpg
 ---
 
-For several weeks I've been trying to diagnose CORS errors in a web component I built for uploading files to AWS S3. This has been one of the hardest software defects I've had to solve in a long time so I thought it would be a good idea to share what I learned along the way.
+For several weeks I've been trying to diagnose Cross-Origin Resource Sharing (CORS) errors in a web component I built for uploading files to AWS S3. This has been one of the hardest software defects I've had to solve in a long time so I thought it would be a good idea to share what I learned along the way.
 
 First some background. The application I've been building is designed to allow people to upload videos with a web browser and run them through a suite of AWS machine learning services that generate data about video, audio, or text media objects, then save that data to Elasticsearch so people can search video archives using any of said ML derived metadata. My application runs on a serverless framework called the [Media Insights Engine](https://github.com/awslabs/aws-media-insights-engine) designed by my team at AWS Elemental.
 
-## DropzoneJS Upload
+## Drag-and-Drop Uploads with DropzoneJS
 
-I chose Vue.js to implement the front-end and [DropzoneJS](http://dropzonejs.com) to provide drag'n'drop file upload functionality that looks like this:
+I chose Vue.js to implement the front-end and [DropzoneJS](http://dropzonejs.com) to provide drag-and-drop file upload functionality, as shown below. My Vue.js component for Dropzone was derived from [vue-dropzone](https://github.com/rowanwins/vue-dropzone).
 
 <img src="http://iandow.github.io/img/dropzone.gif" width="70%">
 
-## Uploading with Presigned URLs for S3
+## Uploading to S3 with Presigned URLs
 
 Here's what's supposed to happen in the back-end when a user uploads a file:
 
@@ -25,7 +25,7 @@ Here's what's supposed to happen in the back-end when a user uploads a file:
 4. <img src="http://iandow.github.io/img/upload3.png" width="30%" style="margin-left: 15px" align="right"> <img src="http://iandow.github.io/img/upload4.png" width="30%" style="margin-left: 15px" align="right"> The browser submits another HTTP OPTIONS method to the S3 endpoint to check that it will allow a POST with some CORS related headers. The server should respond with an empty 200 OK.
 5.  Finally the browser uses the presigned URL response from step #2 to POST to the S3 endpoint with the file data.
 
-## Pitfalls
+## What can go wrong?
 
 There are a lot of ways this can go wrong. It doesn't help that browsers will often report several different types of faults as CORS issues even when your CORS policies are perfectly fine. For example, here's the error you'll get when an API Gateway endpoint rejects a request due to IP restrictions in an API's access policy:
 
@@ -35,7 +35,7 @@ You'd be in good company if you read `Maybe CORS errors` in that error and thoug
 
 <img src="http://iandow.github.io/img/api_gateway.png" width="70%">
 
-Setting up CORS for S3 buckets is not complicated. When you actually have a real CORS problem you can often solve it by reading this [CORS troubleshooting guide](https://docs.aws.amazon.com/AmazonS3/latest/dev/cors-troubleshooting.html). When I saw CORS errors in my browser, I read that guide and then went to make changes to the CORS policy in my S3 bucket. Strangely, by making changes to the policy the problem *sometimes* went away. However, this was totally sporadic and seemingly dependant on how my S3 requests were being handled by the replicated S3 back-end. Pretty soon I realized there was no problem with the CORS policy on my S3 bucket, which by the way looks like this:
+Setting up CORS for S3 buckets is not complicated. When you actually have a real CORS problem you can often solve it with the suggestions in this [CORS troubleshooting guide](https://docs.aws.amazon.com/AmazonS3/latest/dev/cors-troubleshooting.html). When I saw CORS errors in my browser, I read that guide and then went to make changes to the CORS policy in my S3 bucket. Strangely, by making changes to the policy the problem *sometimes* went away. However, this was totally sporadic and seemingly dependant on how my S3 requests were being handled by the replicated S3 back-end. Pretty soon I realized there was no problem with the CORS policy on my S3 bucket, which by the way looks like this:
 
 <img src="http://iandow.github.io/img/s3_cors.png" width="70%">
 
@@ -56,11 +56,9 @@ Browsers won't redirect preflight requests because [reasons](https://developer.m
 ), and [here](https://docs.aws.amazon.com/AmazonS3/latest/dev/Redirects.html
 ), I realized that this region-specific URL was important. 
 
-## The Solution
+## How to Correctly use Presigned URLs
 
-My fix started to come together pretty quickly after realizing DropzoneJS used a statically defined URL that was not region specific for S3 buckets. I also noticed 
-
-After changing DropzoneJS to use URL provided in the response from `get_presigned_url()`, my uploads started working reliably in EVERY region.
+The solutions to my problems started coming together pretty quickly after realizing DropzoneJS used a statically defined URL that was not region specific for S3 buckets. After changing DropzoneJS to use URL provided in the response from `get_presigned_url()`, my uploads started working reliably in EVERY region. 
 
 I also noticed that the get_presigned_url() boto3 function in my Lambda function returned different results depending on the region it was deployed to. I was able to isolate this region dependency once I learned that you can create a region-dependant boto3 client by using botocore from Python like this:
 
@@ -118,7 +116,9 @@ def upload():
 {% endhighlight %}
 
 
-# Conclusions:
+# Takeaways:
+
+Here are my key points to remember about uploading to S3 using presigned URLs:
 
 * Region specific S3 endpoints are required to upload to buckets in any region other than Virginia (us-east-1)
 * Always use botocore Config options to initialize Python S3 clients with a region, sig 3/4, and virtual path addressing.
