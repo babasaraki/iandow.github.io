@@ -17,31 +17,33 @@ I chose Vue.js to implement the front-end and [DropzoneJS](http://dropzonejs.com
 
 ## Uploading to S3 with Presigned URLs
 
-Here's what's supposed to happen in the back-end when a user uploads a file:
+Here's what's supposed to happen in my application when a user uploads a file:
 
 1. <img src="http://iandow.github.io/img/upload1.png" width="30%" style="margin-left: 15px" align="right"> <img src="http://iandow.github.io/img/upload2.png" width="30%" style="margin-left: 15px" align="right"> The web browser sends two requests to an API Gateway endpoint which acts as the point of entry to a Lambda function that returns a presigned URL which can be used in a subsequent POST to upload a file to S3. 
-2. The first request is an `HTTP OPTIONS` method to my `/upload` endpoint. This is called a presigned CORS requests. The browser uses this to verify that the server will allow a POST with some CORS related headers. The server responds with an empty 200 OK.
-3. The second request is an HTTP POST to /upload. The Lambda function responds with said presigned URL.
-4. <img src="http://iandow.github.io/img/upload3.png" width="30%" style="margin-left: 15px" align="right"> <img src="http://iandow.github.io/img/upload4.png" width="30%" style="margin-left: 15px" align="right"> The browser submits another HTTP OPTIONS method to the S3 endpoint to check that it will allow a POST with some CORS related headers. The server should respond with an empty 200 OK.
-5.  Finally the browser uses the presigned URL response from step #2 to POST to the S3 endpoint with the file data.
+2. The first request is an HTTP OPTIONS method to my `/upload` endpoint. This is called a "presigned CORS request". The browser uses this to verify that the server allows a POST with CORS related headers. The server should respond with an empty 200 OK.
+3. The second request is an HTTP POST to `/upload`. The prescribed Lambda function then responds with a presigned URL.
+4. <img src="http://iandow.github.io/img/upload3.png" width="30%" style="margin-left: 15px" align="right"> <img src="http://iandow.github.io/img/upload4.png" width="30%" style="margin-left: 15px" align="right"> The browser submits another HTTP OPTIONS method to verify that the S3 endpoint allows a POST with CORS related headers. The S3 endpoint should respond with an empty 200 OK.
+5.  Finally the browser uses the presigned URL response from step #3 to POST to the S3 endpoint with the file data.
 
-## What can go wrong?
+## Configuring CORS on an S3 Bucket
 
-There are a lot of ways this can go wrong. It doesn't help that browsers will often report several different types of faults as CORS issues even when your CORS policies are perfectly fine. For example, here's the error you'll get when an API Gateway endpoint rejects a request due to IP restrictions in an API's access policy:
-
-<img src="http://iandow.github.io/img/cors_error.png" width="70%">
-
-You'd be in good company if you read `Maybe CORS errors` in that error and thought you had a problem with your CORS policy. But you would be wrong because the cause was an API Gateway resource policy.
-
-<img src="http://iandow.github.io/img/api_gateway.png" width="70%">
-
-Setting up CORS for S3 buckets is not complicated. When you actually have a real CORS problem you can often solve it with the suggestions in this [CORS troubleshooting guide](https://docs.aws.amazon.com/AmazonS3/latest/dev/cors-troubleshooting.html). When I saw CORS errors in my browser, I read that guide and then went to make changes to the CORS policy in my S3 bucket. Strangely, by making changes to the policy the problem *sometimes* went away. However, this was totally sporadic and seemingly dependant on how my S3 requests were being handled by the replicated S3 back-end. Pretty soon I realized there was no problem with the CORS policy on my S3 bucket, which by the way looks like this:
+Before using presigned URLs to upload to S3 you have to define a CORS policy on the S3 bucket so web clients loaded in one domain (e.g. localhost or cloudfront) can interact with resources in the S3 domain. 
+Setting a CORS policy on an S3 bucket is not complicated but if you get it wrong you can often solve it with the suggestions mentioned in this [CORS troubleshooting guide](https://docs.aws.amazon.com/AmazonS3/latest/dev/cors-troubleshooting.html). Here's the CORS policy I used on my S3 bucket:
 
 <img src="http://iandow.github.io/img/s3_cors.png" width="70%">
 
-Even with a solid CORS policy on my S3 bucket, I frequently encountered CORS errors accompanied by HTTP 307 Temporary Redirect errors on the CORS preflight request. A CORS preflight request is an HTTP OPTIONS request that checks to see if the server understands the CORS protocol ([reference](https://developer.mozilla.org/en-US/docs/Glossary/Preflight_request)).
+## What can go wrong?
 
-Here's what a CORS preflight redirect looks like:
+There are a lot of ways this can go wrong. It doesn't help that browsers will often report several different types of faults as CORS issues even when your CORS policies are perfectly fine. For example, here's the error you'll get when an API Gateway endpoint rejects a request due to IP restrictions in an access policy:
+
+<img src="http://iandow.github.io/img/cors_error.png" width="70%">
+
+You'd be in good company if you read `Maybe CORS errors` in that web console output and thought you had an incomplete CORS policy on your S3 bucket but you would be wrong because the root cause was an API Gateway access policy.
+
+<img src="http://iandow.github.io/img/api_gateway.png" width="70%">
+
+
+Even with a solid CORS policy on my S3 bucket I frequently encountered CORS errors accompanied by `HTTP 307 Temporary Redirect` errors on the CORS preflight request. A ***CORS preflight request*** is an HTTP OPTIONS request that checks to see if the server understands the CORS protocol ([reference](https://developer.mozilla.org/en-US/docs/Glossary/Preflight_request)). Here's what it looks like when a server redirects a CORS preflight request to a different endpoint:
 
 <img src="http://iandow.github.io/img/cors_preflight_redirect.png" width="70%">
 
@@ -49,24 +51,22 @@ Now, look closely at the preflight redirect. Where is it directing the browser? 
 
 The redirected URL is a region-specific URL. ***This was an important clue.***
 
-<img src="http://iandow.github.io/img/redirected_url.png" width="70%">
-
 Browsers won't redirect preflight requests because [reasons](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS#Preflighted_requests). However, after doing some research about S3 redirects [here](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingBucket.html), [here](https://aws.amazon.com/premiumsupport/knowledge-center/s3-http-307-response/
 ), [here](https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html
 ), and [here](https://docs.aws.amazon.com/AmazonS3/latest/dev/Redirects.html
-), I realized that this region-specific URL was important. 
+), I realized that my DropzoneJS component needed to use a region-specific S3 endpoint for CORS preflight requests. 
 
 ## How to Correctly use Presigned URLs
 
-The solutions to my problems started coming together pretty quickly after realizing DropzoneJS used a statically defined URL that was not region specific for S3 buckets. After changing DropzoneJS to use URL provided in the response from `get_presigned_url()`, my uploads started working reliably in EVERY region. 
+The solutions to my problems started coming together pretty quickly after realizing DropzoneJS used a statically defined URL that was not region specific for S3 buckets. After changing DropzoneJS to use the URL provided in the response from `get_presigned_url()` my uploads started working reliably in EVERY region. 
 
-I also noticed that the get_presigned_url() boto3 function in my Lambda function returned different results depending on the region it was deployed to. I was able to isolate this region dependency once I learned that you can create a region-dependant boto3 client by using botocore from Python like this:
+I also noticed that the get_presigned_url() boto3 function in my Lambda function returned different results depending on the region it was deployed to. I was able to isolate this region dependency once I learned that you can create a region-dependant s3 client by using [botocore.client.Config](https://botocore.amazonaws.com/v1/documentation/api/latest/reference/config.html) from Python like this:
 
 ```
 s3_client = boto3.client('s3', region_name='us-west-2')
 ```
 
-This was a suprise to me because according to the boto3 docs there is no option to specify a region for your s3 client. Having learned about the botocore approach, I will henceforth always initialize S3 clients with the latest signature_version and addressing style, like this:
+This was a suprise to me because according to the [boto3](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3.html) docs there is no option to specify a region for your s3 client. Having learned about the botocore approach, I will now always initialize S3 clients with the latest signature_version and addressing style, like this:
 
 ```
 s3_client = boto3.client('s3', region_name='us-west-2', config = Config(signature_version = 's3v4', 
