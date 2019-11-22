@@ -8,6 +8,8 @@ bigimg: /img/blue-water-blur-close-up-1231622-2.jpg
 I originally published this article on the AWS blog, here:
 [https://aws.amazon.com/blogs/media/deep-dive-into-cors-configs-on-aws-s3/](https://aws.amazon.com/blogs/media/deep-dive-into-cors-configs-on-aws-s3/)
 
+<meta http-equiv="refresh" content="5;url=https://aws.amazon.com/blogs/media/deep-dive-into-cors-configs-on-aws-s3/" />
+
 <hr>
 
 For several weeks I've been trying to diagnose Cross-Origin Resource Sharing (CORS) errors in a web component I built for uploading files to AWS S3. This has been one of the hardest software defects I've had to solve in a long time so I thought it would be a good idea to share what I learned along the way.
