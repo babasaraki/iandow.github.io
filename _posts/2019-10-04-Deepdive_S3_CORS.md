@@ -5,7 +5,7 @@ tags: [aws, s3, python]
 bigimg: /img/blue-water-blur-close-up-1231622-2.jpg
 ---
 
-***NOTE:*** I originally published this article on the AWS blog, here:
+I originally published this article on the AWS blog, here:
 [https://aws.amazon.com/blogs/media/deep-dive-into-cors-configs-on-aws-s3/](https://aws.amazon.com/blogs/media/deep-dive-into-cors-configs-on-aws-s3/)
 
 <hr>
