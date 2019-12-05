@@ -4,20 +4,26 @@ title: Splitting Text for AWS Translate
 tags: [aws, translate, natural language, python]
 bigimg: /img/abstract-1278060_1920.jpg
 ---
+<!-- image source: https://pixabay.com/illustrations/abstract-geometric-world-map-1278060/ -->
+<!-- Free for commercial use. No attribution required -->
 
-This post describes how to split large text documents into chunks small enough they can be processed by AWS Translate. When splitting text for translate you should avoid splitting words or sentences so you don't break grammatical correctness of the source text. I'll show how to do this with an AWS Lambda function that uses the Python NLTK library for detecting sentence boundaries.
+This post describes how to split large text documents into chunks small enough they can be processed by AWS Translate. When splitting text for AWS Translate you should avoid splitting words or sentences so you don't break grammatical correctness of the source text. I'll show how to do this with an AWS Lambda function that uses the Python NLTK library for detecting sentence boundaries.
+
+# What is AWS Translate
+
+<img src="http://iandow.github.io/img/flags.png" width="30%" style="margin-left: 15px" align="right">
+
+[AWS Translate](https://docs.aws.amazon.com/translate/latest/dg/what-is.html) is a service for translating text on the Amazon Web Services (AWS) platform. It's designed to be used programmatically and supports interfaces in Python, Java, AWS Mobile SDKs, and the AWS CLI. It currently supports 54 different languages. I have been using AWS Translate to translate video transcripts in an application I've built with a few colleagues, called the [Media Insights Engine](https://github.com/awslabs/aws-media-insights-engine). We use these translations as content for which users can query in a search engine designed to index massively large video archives.
+
+<img src="http://iandow.github.io/img/MIE_bienvenido.png.png" width="70%">
 
 # What are AWS service limits?
 
-Service limits are built into every AWS Service. They control things like how much data you can include in service requests, how often you can send requests, how long your requests can run, etc. For example, AWS Lambda, a popular serverless computing platform, limits functions to running no longer than 15 minutes and will shutdown functions that exceed that limit without warning. Other AWS services return errors that explicitly identify which service limit was exceeded. For example, if you send AWS Translate input text that is too long then you'll see an error like this:
+Service limits are built into every AWS Service. They control things like how much data you can include in service requests, how often you can send requests, how long your requests can run, etc. For example, AWS Lambda, a popular serverless computing platform, limits functions to running no longer than 15 minutes and will shutdown functions that exceed that limit without warning. Other AWS services return errors that explicitly identify the service limit that was exceeded. For example, if you send AWS Translate input text that is too long then you'll see an error like this:
 
 ```
 An error occurred (TextSizeLimitExceededException) Input text size exceeds limit. Max length of request text allowed is 5000 bytes while in this request the text size is 5074 bytes'
 ```
-
-# Caveats to using AWS Translate
-
-<img src="http://iandow.github.io/img/flags.png" width="30%" style="margin-left: 15px" align="right">
 
 When you need a service to process more data than you're allowed to include in a single job then you should try to split the workload into multiple smaller parts. We can see in the error shown above that AWS Translate can accept no more than 5000 bytes (which is close to but not exactly 5000 characters; more on that later). If you're working with a text document that is longer than 5000 bytes then you could try to split the source text into chunks smaller than 5000 bytes, call Translate for each chunk, and combine the translated results once complete.
 
