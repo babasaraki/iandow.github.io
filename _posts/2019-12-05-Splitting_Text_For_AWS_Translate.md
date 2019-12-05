@@ -9,7 +9,7 @@ bigimg: /img/abstract-1278060_1920.jpg
 
 This post describes how to split large text documents into chunks small enough they can be processed by AWS Translate. When splitting text for AWS Translate you should avoid splitting words or sentences so you don't break grammatical correctness of the source text. I'll show how to do this with an AWS Lambda function that uses the Python NLTK library for detecting sentence boundaries.
 
-# What is AWS Translate
+# What is AWS Translate?
 
 <img src="http://iandow.github.io/img/flags.png" width="30%" style="margin-left: 15px" align="right">
 
@@ -17,7 +17,7 @@ This post describes how to split large text documents into chunks small enough t
 
 I have been using AWS Translate to translate video transcripts in an application I've built with a few colleagues, called the [Media Insights Engine](https://github.com/awslabs/aws-media-insights-engine). We use these translations as content for which users can query in a search engine designed to index massively large video archives.
 
-<img src="http://iandow.github.io/img/MIE_bienvenido.png" width="80%">
+<img src="http://iandow.github.io/img/MIE_bienvenido.png" width="90%">
 
 
 # What are AWS service limits?
