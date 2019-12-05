@@ -15,7 +15,7 @@ This post describes how to split large text documents into chunks small enough t
 
 [AWS Translate](https://docs.aws.amazon.com/translate/latest/dg/what-is.html) is a service for translating text on the Amazon Web Services (AWS) platform. It's designed to be used programmatically and supports interfaces in Python, Java, AWS Mobile SDKs, and the AWS CLI. It currently supports 54 different languages. 
 
-<img src="http://iandow.github.io/img/MIE_bienvenido.png" width="60%" align="left">
+<img src="http://iandow.github.io/img/MIE_bienvenido.png" width="70%" align="left">
 
 I have been using AWS Translate to translate video transcripts in an application I've built with a few colleagues, called the [Media Insights Engine](https://github.com/awslabs/aws-media-insights-engine). We use these translations as content for which users can query in a search engine designed to index massively large video archives.
 
