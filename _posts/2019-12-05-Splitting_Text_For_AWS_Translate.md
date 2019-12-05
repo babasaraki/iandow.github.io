@@ -2,7 +2,7 @@
 layout: post
 title: Splitting Text for AWS Translate
 tags: [aws, translate, natural language, python]
-bigimg: /img/flags.png
+bigimg: /img/abstract-1278060_1920.jpg
 ---
 
 This post describes how to split large text documents into chunks small enough they can be processed by AWS Translate. When splitting text for translate you should avoid splitting words or sentences so you don't break grammatical correctness of the source text. I'll show how to do this with an AWS Lambda function that uses the Python NLTK library for detecting sentence boundaries.
@@ -15,17 +15,19 @@ Service limits are built into every AWS Service. They control things like how mu
 An error occurred (TextSizeLimitExceededException) Input text size exceeds limit. Max length of request text allowed is 5000 bytes while in this request the text size is 5074 bytes'
 ```
 
+# Caveats to using AWS Translate
+
 <img src="http://iandow.github.io/img/flags.png" width="30%" style="margin-left: 15px" align="right">
 
 When you need a service to process more data than you're allowed to include in a single job then you should try to split the workload into multiple smaller parts. We can see in the error shown above that AWS Translate can accept no more than 5000 bytes (which is close to but not exactly 5000 characters; more on that later). If you're working with a text document that is longer than 5000 bytes then you could try to split the source text into chunks smaller than 5000 bytes, call Translate for each chunk, and combine the translated results once complete.
 
 However, in order to maintain grammatical integrity of the source text it must not be split in the middle of words or sentences. The simplest way to locate sentence boundaries involves looking for a period followed by a capitalized word. A more accurate strategy will also consider language specific abbreviations that include a period but don't necessarily end a sentence, such as the English title "Missus" abbreviated as Mrs. or German title "Frau" abbreviated as Fr. 
 
-# Splitting text with the Natural Language Toolkit (NLTK) for Python 
+# Splitting text with the Natural Language Toolkit for Python 
 
 The Natural Language Toolkit (NLTK) for Python provides a convenient way to split text into sentences with this strategy. The following Python code shows how to download NLTK tokenizers and find sentence boundaries for a block of text. In this example, I create a tokenizer using an English language data file. You can find data files for other languages under the `tokenizers/punkt/` directory. In the following code we download NLTK data files to `/tmp/` so that it can run in AWS Lambda where `/tmp` is the only writable filesystem.
 
-```
+{% highlight python %}
 # Tell the NLTK data loader to look for files in /tmp/
 nltk.data.path.append("/tmp/")
 # Download NLTK tokenizers to /tmp/
@@ -56,11 +58,11 @@ translation_chunk = translate_client.translate_text(Text=source_text_chunk,Sourc
 print("Translation output text length: " + str(len(translation_chunk)))
 translated_text = translated_text + ' ' + translation_chunk["TranslatedText"]
 print("Final translation text length: " + str(len(translated_text)))
-```
+{% endhighlight %}
 
-# Accomodating international characters
+# Accommodating international characters
 
-In the above code example I limited the tranlsation input size to 4000 characters even though Translate's service limit allows 5000 unicode characters because in practice, I found that if you're close to 5000 characters and your text contains non-English characters, like 'ü' or 'ß', then Translate will say your text size is too large. I'm not sure exactly what's going on there, but just to be on the safe side, I limit the input size to 4000 characters.
+In the above code example I limited the translation input size to 4000 characters even though Translate's service limit allows 5000 unicode characters because in practice, I found that if you're close to 5000 characters and your text contains non-English characters, like 'ü' or 'ß', then Translate will say your text size is too large. I'm not sure exactly what's going on there, but just to be on the safe side, I limit the input size to 4000 characters.
 
 # Summary
 
