@@ -70,6 +70,8 @@ translated_text = translated_text + ' ' + translation_chunk["TranslatedText"]
 print("Final translation text length: " + str(len(translated_text)))
 {% endhighlight %}
 
+As a Lambda function I see that code typically process about 4000 characters per second.
+
 # Accommodating international characters
 
 In the above code example I limited the translation input size to 4000 characters even though AWS Translate allows 5000 unicode characters because, in practice, I found that if you're close to 5000 characters and your text contains non-English characters, like 'ü' or 'ß', then AWS Translate will say your text size is too large. I'm not sure exactly what's going on there, but just to be on the safe side, I limit the input size to 4000 characters.
