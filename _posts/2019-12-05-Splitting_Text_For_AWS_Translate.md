@@ -76,7 +76,7 @@ In the above code example I limited the translation input size to 4000 character
 
 # Summary
 
-In this blog post I showed how to respect sentence boundaries when splitting large text documents into chunks  that can be processed by AWS Translate. With this strategy there is virtually *no limit* to the size of documents you can translate! That is, as long as you stay withing the service guidelines for AWS Translate ;-). For more information about AWS Translate see the [developer guide](https://docs.aws.amazon.com/translate/latest/dg/what-is.html).
+In this blog post I showed how to respect sentence boundaries when splitting large text documents into chunks  that can be processed by AWS Translate. With this strategy there is virtually *no limit* to the size of documents you can translate! That is, as long as you stay withing the service guidelines for AWS Translate ;-). For more information about AWS Translate see their [developer guide](https://docs.aws.amazon.com/translate/latest/dg/what-is.html).
 
 <p>Please provide your feedback to this article by adding a comment to <a href="https://github.com/iandow/iandow.github.io/issues/16">https://github.com/iandow/iandow.github.io/issues/16</a>.</p>
 
