@@ -37,7 +37,7 @@ However, in order to maintain grammatical integrity of the source text it must n
 
 The Natural Language Toolkit (NLTK) for Python provides a convenient way to split text into sentences for many different languages. The following Python code shows how to download pretrained models, or tokenizers, for dividing text into a list of sentences. In this example I'm using an English language tokenizer. You can find tokenizers for other languages under the `tokenizers/punkt/` directory. I download tokenizers to `/tmp/` so that this code can run as an AWS Lambda function, where `/tmp` is the only writable filesystem.
 
-{% highlight python linenos %}
+{% highlight python %}
 # Tell the NLTK data loader to look for resource files in /tmp/
 nltk.data.path.append("/tmp/")
 # Download NLTK tokenizers to /tmp/
