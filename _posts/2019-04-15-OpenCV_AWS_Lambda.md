@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Running OpenCV as an AWS Lambda Function
-tags: [aws, lambda, python, docker]
+tags: [aws, lambda, python, opencv, docker]
 bigimg: /img/asphalt-balance-blur-268018.jpg
 ---
 
