@@ -21,7 +21,7 @@ I've created a sample application that deploys MediaInfo as an AWS Lambda layer 
 
 ## Preliminary AWS CLI Setup: 
 1. Install Docker on your workstation.
-2. Setup credentials for AWS CLI (see http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html).
+2. Setup credentials for AWS CLI (see [the user guide](http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html)).
 3. Create IAM Role with Lambda and S3 access:
 ```
 # Create a role with S3 and Lambda exec access
