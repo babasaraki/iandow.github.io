@@ -10,7 +10,7 @@ bigimg: /img/lens-582605_1920.jpg
 
 This post describes how to package [MediaInfo](https://mediaarea.net/en/MediaInfo) so it can be used in applications hosted by AWS Lambda. [AWS Lambda](https://aws.amazon.com/lambda/) is a cloud service from Amazon that lets you run code without the complexity of building and managing servers. MediaInfo is a very popular tool for people who do video editing, streaming, or transcoding. It tells you all about what's in an audio or video file, like how they're encoded, number of channels, bitrate, resolution, etc. Here's a screenshot for some of the data it provides:
 
-<img src="http://iandow.github.io/img/mediainfo_screenshot.png" width="90%" style="margin-left: auto; margin-right: auto"> 
+<img src="http://iandow.github.io/img/mediainfo_screenshot.png" width="90%" align="center"> 
 
 The MediaInfo library can be published to AWS Lambda in two ways:
 
