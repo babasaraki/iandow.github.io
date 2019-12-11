@@ -23,49 +23,54 @@ I've created a sample application that deploys MediaInfo as an AWS Lambda layer 
 1. Install Docker on your workstation.
 2. Setup credentials for AWS CLI (see [the user guide](http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html)).
 3. Create IAM Role with Lambda and S3 access:
-```
+
+{% highlight python %}
 # Create a role with S3 and Lambda exec access
 ROLE_NAME=lambda-MediaInfo_study
 aws iam create-role --role-name $ROLE_NAME --assume-role-policy-document '{"Version":"2012-10-17","Statement":{"Effect":"Allow","Principal":{"Service":"lambda.amazonaws.com"},"Action":"sts:AssumeRole"}}'
 aws iam attach-role-policy --policy-arn arn:aws:iam::aws:policy/AmazonS3FullAccess --role-name $ROLE_NAME
 aws iam attach-role-policy --policy-arn arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole --role-name $ROLE_NAME
-```
+{% endhighlight %}
 
 ## Build MediaInfo library using Docker
 
 AWS Lambda functions run in an [Amazon Linux environment](https://docs.aws.amazon.com/lambda/latest/dg/current-supported-versions.html), so libraries should be built for Amazon Linux. You can build the `pymediainfo` library for Amazon Linux using the provided Dockerfile, like this:
 
-```
+{% highlight bash %}
 git clone https://github.com/iandow/mediainfo_aws_lambda
 cd mediainfo_aws_lambda
 docker build --tag=pymediainfo-layer-factory:latest .
 docker run --rm -it -v $(pwd):/data pymediainfo-layer-factory cp /packages/pymediainfo-python37.zip /data
-```
+{% endhighlight %}
 
 ## Deploy the AWS Lambda function with MediaInfo Lambda layer.
 
-1. Edit the Lambda function code to do whatever you want it to do. In this example we're using app.py from https://github.com/iandow/MediaInfo_aws_lambda.
-```
+1. Edit the Lambda function code to do whatever you want it to do. In this example we're using `app.py` from [https://github.com/iandow/MediaInfo_aws_lambda](https://github.com/iandow/MediaInfo_aws_lambda).
+
+{% highlight bash %}
 vi app.py
-```
+{% endhighlight %}
 
 2. Publish the MediaInfo Python library as a Lambda layer.
-```
+
+{% highlight bash %}
 ACCOUNT_ID=$(aws sts get-caller-identity | jq -r ".Account")
 LAMBDA_LAYERS_BUCKET=lambda-layers-$ACCOUNT_ID
 LAYER_NAME=pymediainfo
 aws s3 mb s3://$LAMBDA_LAYERS_BUCKET
 aws s3 cp pymediainfo-python37.zip s3://$LAMBDA_LAYERS_BUCKET
 aws lambda publish-layer-version --layer-name $LAYER_NAME --description "pymediainfo" --content S3Bucket=$LAMBDA_LAYERS_BUCKET,S3Key=pymediainfo-python37.zip --compatible-runtimes python3.7
-```
+{% endhighlight %}
 
 3. Create the Lambda function:
-```
+
+{% highlight bash %}
 zip app.zip app.py
-```
+{% endhighlight %}
 
 4. Deploy the Lambda function:
-```
+
+{% highlight bash %}
 BUCKET_NAME=pymediainfo-test
 aws s3 mb s3://$BUCKET_NAME
 # Upload a test video
@@ -77,42 +82,46 @@ FUNCTION_NAME=pymediainfo_layered
 ACCOUNT_ID=$(aws sts get-caller-identity | jq -r ".Account")
 aws s3 cp app.zip s3://$BUCKET_NAME
 aws lambda create-function --function-name $FUNCTION_NAME --timeout 20 --role arn:aws:iam::${ACCOUNT_ID}:role/$ROLE_NAME --handler app.lambda_handler --region us-west-2 --runtime python3.7 --environment "Variables={BUCKET_NAME=$BUCKET_NAME,S3_KEY=$S3_KEY}" --code S3Bucket="$BUCKET_NAME",S3Key="app.zip"
-```
+{% endhighlight %}
 
 7. Attach the `pymediainfo` Lambda layer to the Lambda function:
-```
+
+{% highlight bash %}
 LAYER=$(aws lambda list-layer-versions --layer-name $LAYER_NAME | jq -r '.LayerVersions[0].LayerVersionArn')
 aws lambda update-function-configuration --function-name $FUNCTION_NAME --layers $LAYER
-```
+{% endhighlight %}
 
 ### Test the Lambda function:
 Our Lambda function requires a video as input. Copy a video to S3, like this:
-```
+
+{% highlight bash %}
 wget https://vjs.zencdn.net/v/oceans.mp4
 aws s3 cp ./oceans.mp4 s3://$BUCKET_NAME/videos/oceans.mp4
-```
+{% endhighlight %}
+
 Then invoke the Lambda function:
-```
+
+{% highlight bash %}
 aws lambda invoke --function-name $FUNCTION_NAME --log-type Tail outputfile.txt
 cat outputfile.txt
-```
+{% endhighlight %}
 
 You should see output like this (although with a much longer LogResult):
-```
+
+{% highlight bash %}
 {
     "LogResult": "U1RBUlQgU..."
     "ExecutedVersion": "$LATEST",
     "StatusCode": 200
 }
-```
+{% endhighlight %}
 
 ### Sample output
 
-### Sample Output
-
 The outputfile.txt will contain metadata values for the oceans.mp4 video file, like this:
 (I added line breaks in the json below, to make it more readable.)
-```
+
+{% highlight json %}
 {
   "tracks": [
     {
@@ -397,10 +406,11 @@ The outputfile.txt will contain metadata values for the oceans.mp4 video file, l
     }
   ]
 }
-```
+{% endhighlight %}
 
 ### Clean up resources
-```
+
+{% highlight bash %}
 aws s3 rm s3://$BUCKET_NAME/videos/oceans.mp4
 aws s3 rb s3://$BUCKET_NAME/
 aws s3 rm s3://$LAMBDA_LAYERS_BUCKET/pymediainfo-python37.zip
@@ -413,7 +423,7 @@ aws lambda delete-layer-version --layer-name pymediainfo --version-number $LAYER
 aws iam detach-role-policy --policy-arn arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole --role-name $ROLE_NAME
 aws iam detach-role-policy --policy-arn arn:aws:iam::aws:policy/AmazonS3FullAccess --role-name $ROLE_NAME
 aws iam delete-role --role-name $ROLE_NAME
-```
+{% endhighlight %}
 
 <p>Please provide your feedback to this article by adding a comment to <a href="https://github.com/iandow/iandow.github.io/issues/17">https://github.com/iandow/iandow.github.io/issues/17</a>.</p>
 
