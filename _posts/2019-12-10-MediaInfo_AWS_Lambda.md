@@ -2,9 +2,9 @@
 layout: post
 title: Running MediaInfo as an AWS Lambda Function
 tags: [aws, lambda, python, mediainfo, docker]
-bigimg: /img/record-player-1851576_1920.jpg
+bigimg: /img/lens-582605_1920.jpg
 ---
-<!-- bigimg copied with from https://pixabay.com/photos/record-player-vinyl-1851576/-->
+<!-- bigimg copied with from https://pixabay.com/illustrations/lens-colorful-background-digital-582605/-->
 
 <img src="http://iandow.github.io/img/mediainfo_logo.png" width="30%" style="margin-left: 15px" align="right">
 
