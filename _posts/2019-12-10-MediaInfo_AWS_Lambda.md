@@ -6,11 +6,14 @@ bigimg: /img/record-player-1851576_1920.jpg
 ---
 <!-- bigimg copied with from https://pixabay.com/photos/record-player-vinyl-1851576/-->
 
-This post describes how to package the MediaInfo python library so it can be used in applications that run in AWS Lambda. AWS Lambda is a Function-as-a-Service (FaaS) offering from Amazon that lets you run code without the complexity of building and maintaining the underlying infrastructure. [MediaInfo](https://mediaarea.net/en/MediaInfo) is a library designed to get metadata and tag data for a video file. 
+This post describes how to package MediaInfo so it can be used in applications that run in AWS Lambda. [AWS Lambda](https://aws.amazon.com/lambda/) is a cloud service from Amazon that lets you run code without the complexity of building and managing servers. [MediaInfo](https://mediaarea.net/en/MediaInfo) is a very popular tool for people who do video editing, streaming, or transcoding. It tells you all about what's in an audio or video file, like how they're encoded, number of channels, bitrate, resolution, etc. Here's a screenshot for some of the data it provides:
 
-The Python MediaInfo library can be published two ways:
+<img src="http://iandow.github.io/img/mediainfo01.png" width="45%" style="margin-left: 15px" align="left"> 
+<img src="http://iandow.github.io/img/mediainfo02.png" width="45%" style="margin-left: 15px" align="right">
 
-1. together with the application code as a monolithic all-in-one Lambda function,
+The MediaInfo library can be published to AWS Lambda in two ways:
+
+1. together with application code as a monolithic all-in-one Lambda function,
 2. or as a Lambda layer. 
 
 I like the Lambda layer approach because it reduces the size of the Lambda function and enables more of my application code to be displayed in the Lambda code viewer in the AWS console. Both the monolithic and layered deploy options are described [here](https://github.com/iandow/mediainfo_aws_lambda) but in this blog post I'm going to just describe the procedure for deploying MediaInfo as a Lambda layer.
@@ -110,8 +113,8 @@ You should see output like this (although with a much longer LogResult):
 
 The outputfile.txt will contain metadata values for the oceans.mp4 video file, like this:
 (I added line breaks in the json below, to make it more readable.)
+
 {% highlight json %}
-```
 {
   "tracks": [
     {
@@ -400,6 +403,9 @@ The outputfile.txt will contain metadata values for the oceans.mp4 video file, l
 
 
 ### Clean up resources
+
+Here's how to delete everything created above.
+
 ```
 aws s3 rm s3://$BUCKET_NAME/videos/oceans.mp4
 aws s3 rb s3://$BUCKET_NAME/
