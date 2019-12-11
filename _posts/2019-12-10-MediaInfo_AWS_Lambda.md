@@ -13,11 +13,11 @@ The Python MediaInfo library can be published two ways:
 1. together with the application code as a monolithic all-in-one Lambda function,
 2. or as a Lambda layer. 
 
-I like the Lambda layer approach because it reduces the size of the Lambda function and enables more of my application code to be displayed in the Lambda code viewer in the AWS console. Both the monolithic and layered deploy options are described [here](https://github.com/iandow/mediainfo_aws_lambda) but in this blog post I'm going to just describe the procedure for deploying MediaInfo as a Lambda Layer.
+I like the Lambda layer approach because it reduces the size of the Lambda function and enables more of my application code to be displayed in the Lambda code viewer in the AWS console. Both the monolithic and layered deploy options are described [here](https://github.com/iandow/mediainfo_aws_lambda) but in this blog post I'm going to just describe the procedure for deploying MediaInfo as a Lambda layer.
 
 # Procedure
 
-I've created a sample application that deploys MediaInfo as an AWS Lambda layer which is used by a Lambda function to get metadata tags for a video file saved in AWS S3. Sample code and documentation is provided at [https://github.com/iandow/mediainfo_aws_lambda](https://github.com/iandow/mediainfo_aws_lambda).
+I've created a sample application that deploys MediaInfo as an AWS Lambda layer which is used by a Lambda function to get metadata tags for a video file saved in AWS S3. The code and documentation is maintained at [https://github.com/iandow/mediainfo_aws_lambda](https://github.com/iandow/mediainfo_aws_lambda).
 
 ## Preliminary AWS CLI Setup: 
 1. Install Docker on your workstation.
