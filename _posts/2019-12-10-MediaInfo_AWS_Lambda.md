@@ -424,14 +424,13 @@ aws iam delete-role --role-name $ROLE_NAME
 
 <p>Please provide your feedback to this article by adding a comment to <a href="https://github.com/iandow/iandow.github.io/issues/17">https://github.com/iandow/iandow.github.io/issues/17</a>.</p>
 
+<br><br>
 <div class="main-explain-area padding-override jumbotron">
-  <img src="http://iandow.github.io/img/mustache-udnie.cropped.jpg" width="120" style="margin-left: 15px" align="right">
-  <p class="margin-override font-override" style="margin-left: 15px">
-  	I’m fundraising for <a href="https://us.movember.com">Movember</a>! Please consider donating $5 to help me support Men's health: <a href="https://mobro.co/iandownard">https://mobro.co/iandownard</a>
-  </p>
-  <img src="http://iandow.github.io/img/movember.jpg" width="60" style="margin-left: 30px" align="right">
+  <img src="http://iandow.github.io/img/starbucks_coffee_cup.png" width="120" style="margin-left: 15px" align="right">
+  <a href="https://www.paypal.me/iandownard" title="PayPal donation" target="_blank">
+  <h1>Hope that Helped!</h1>
+  <p class="margin-override font-override">
+    If this post helped you out, please consider fueling future posts by buying me a cup of coffee!</p>
+  </a>
   <br>
-  <div id="paypalbtn">
-    <a class="btn btn-primary btn" href="https://mobro.co/iandownard">Donate to Movember</a>
-  </div>
 </div>
