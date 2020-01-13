@@ -60,7 +60,7 @@ LAMBDA_LAYERS_BUCKET=lambda-layers-$ACCOUNT_ID
 LAYER_NAME=pymediainfo
 aws s3 mb s3://$LAMBDA_LAYERS_BUCKET
 aws s3 cp pymediainfo-python37.zip s3://$LAMBDA_LAYERS_BUCKET
-aws lambda publish-layer-version --layer-name $LAYER_NAME --description "pymediainfo" --content S3Bucket=$LAMBDA_LAYERS_BUCKET,S3Key=pymediainfo-python37.zip --compatible-runtimes python3.7
+aws lambda publish-layer-version --layer-name $LAYER_NAME --description "pymediainfo" --content S3Bucket=$LAMBDA_LAYERS_BUCKET,S3Key=pymediainfo-python37.zip --compatible-runtimes python3.7 --license-info "This product uses MediaInfo (https://mediaarea.net/en/MediaInfo) library, Copyright (c) 2002-2020 MediaArea.net SARL."
 ```
 
 3. Create the Lambda function:
