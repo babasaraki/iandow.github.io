@@ -350,9 +350,9 @@ Please provide your feedback to this article by adding a comment to [https://git
 
 <br><br>
 <div class="main-explain-area padding-override jumbotron">
-  <img src="http://iandow.github.io/img/starbucks_coffee_cup.png" width="120" style="margin-left: 15px" align="right">
   <a href="https://www.paypal.me/iandownard" title="PayPal donation" target="_blank">
   <h1>Hope that Helped!</h1>
+  <img src="http://iandow.github.io/img/starbucks_coffee_cup.png" width="120" style="margin-left: 15px" align="right">
   <p class="margin-override font-override">
     If this post helped you out, please consider fueling future posts by buying me a cup of coffee!</p>
   </a>
