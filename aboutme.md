@@ -7,9 +7,10 @@ Remember lab manuals? Those nicely bound notebooks you used in college to docume
 
 I blog for a variety of reasons:
 
-- ***I like to teach.*** My work feels more worthwhile if I am ultimately sharing newfound knowledge with others. 
-- ***I enjoy typesetting.*** I've always enjoyed laying out technical content on well formatted web pages with beautiful fonts, images, and source code.
+- ***To teach and to learn.*** There's no better way to learn something than when your intention is to teach it. For that reason, blogging helps me learn things faster and more thoroughly.
 - ***It helps me showcase my work.*** For the same reasons that artists use portfolios to showcase their style and best work, my blog helps me show potential employers what I know and how I communicate.
+
+[Are you thinking about keeping a research blog?](http://gregorygundersen.com/blog/2020/01/12/why-research-blog/) Do it!
 
 ![national_brand_computation_notebook.jpg](http://iandow.github.io/img/national_brand_computation_notebook.jpg)
 (Image from [https://www.notebookstories.com/2013/09/05/tom-liptons-industrial-notebook/](https://www.notebookstories.com/2013/09/05/tom-liptons-industrial-notebook/))
