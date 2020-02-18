@@ -21,7 +21,7 @@ I like the Lambda layer approach because it reduces the size of the Lambda funct
 
 # Procedure
 
-I've created a sample application that deploys MediaInfo as an AWS Lambda layer which is used by a Lambda function to get metadata tags for a video file saved in AWS S3. The code and documentation is maintained at [https://github.com/iandow/mediainfo_aws_lambda](https://github.com/iandow/mediainfo_aws_lambda).
+I've created a sample application that deploys MediaInfo as an AWS Lambda layer which is used by a Lambda function to get metadata tags for a video file saved in AWS S3. The code and documentation is maintained at [https://github.com/iandow/mediainfo_aws_lambda](https://github.com/iandow/mediainfo_aws_lambda). 
 
 ## Preliminary AWS CLI Setup: 
 1. Install Docker on your workstation.
@@ -37,7 +37,7 @@ aws iam attach-role-policy --policy-arn arn:aws:iam::aws:policy/service-role/AWS
 
 ## Build MediaInfo library using Docker
 
-AWS Lambda functions run in an [Amazon Linux environment](https://docs.aws.amazon.com/lambda/latest/dg/current-supported-versions.html), so libraries should be built for Amazon Linux. You can build the `pymediainfo` library for Amazon Linux using the provided Dockerfile, like this:
+It's kind of a pain in the ass to build MediaInfo for AWS Lambda, but don't worry I've made it easy. Just run the following commands:
 
 ```
 git clone https://github.com/iandow/mediainfo_aws_lambda
@@ -45,6 +45,14 @@ cd mediainfo_aws_lambda
 docker build --tag=pymediainfo-layer-factory:latest .
 docker run --rm -it -v $(pwd):/data pymediainfo-layer-factory cp /packages/pymediainfo-python37.zip /data
 ```
+
+Those commands do the following things:
+
+* Install the `pymediainfo` Python wrapper for MediaInfo. But wait! We need more than a wrapper. We need the actual MediaInfo binaries, too. The next step does that.
+* Download and compile the MediaInfo dynamic linked library (DLL). Make sure to compile that DLL with support for URL inputs so we can process video files from S3 without downloading them to the Lambda runtime, which only provides 512MB of writtable disk space.
+* AWS Lambda functions run in an [Amazon Linux environment](https://docs.aws.amazon.com/lambda/latest/dg/current-supported-versions.html), so we'll use Docker to build the DLL in an Amazon Linux environment.
+* Put the Python wrapper and DLL files in a PATH where Python runtimes for AWS Lambda expect to find them.
+
 
 ## Deploy the AWS Lambda function with MediaInfo Lambda layer.
 
