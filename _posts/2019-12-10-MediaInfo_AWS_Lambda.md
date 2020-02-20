@@ -108,10 +108,13 @@ Then invoke the Lambda function:
 aws lambda invoke --function-name $FUNCTION_NAME /dev/stdout
 ```
 
-You should see output like this (although with a much longer LogResult):
+You should see output like this:
 ```
 {
-    "LogResult": "U1RBUlQgU..."
+  "statusCode": 200,
+  "body": ...
+}
+{
     "ExecutedVersion": "$LATEST",
     "StatusCode": 200
 }
