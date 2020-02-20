@@ -78,7 +78,7 @@ zip app.zip app.py
 
 4. Deploy the Lambda function:
 ```
-BUCKET_NAME=pymediainfo-test
+BUCKET_NAME=pymediainfo-test-$(date +%s)
 aws s3 mb s3://$BUCKET_NAME
 # Upload a test video
 wget https://vjs.zencdn.net/v/oceans.mp4
