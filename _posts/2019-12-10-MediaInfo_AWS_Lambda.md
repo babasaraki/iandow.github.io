@@ -105,8 +105,7 @@ aws s3 cp ./oceans.mp4 s3://$BUCKET_NAME/videos/oceans.mp4
 ```
 Then invoke the Lambda function:
 ```
-aws lambda invoke --function-name $FUNCTION_NAME --log-type Tail outputfile.txt
-cat outputfile.txt
+aws lambda invoke --function-name $FUNCTION_NAME /dev/stdout
 ```
 
 You should see output like this (although with a much longer LogResult):
