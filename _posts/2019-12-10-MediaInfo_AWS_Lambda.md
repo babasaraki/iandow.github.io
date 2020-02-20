@@ -122,7 +122,7 @@ You should see output like this:
 
 ### Sample output
 
-The outputfile.txt will contain metadata values for the oceans.mp4 video file, like this:
+The output body will contain metadata values for the oceans.mp4 video file, like this:
 (I added line breaks in the json below, to make it more readable.)
 
 {% highlight json %}
