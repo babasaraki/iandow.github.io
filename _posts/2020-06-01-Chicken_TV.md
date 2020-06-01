@@ -19,7 +19,7 @@ I hope you enjoy watching this as much as I do. I hope you enjoy ***Chicken TV**
 
 
 <!-- HTML -->
-<video id='chicken-tv' class="video-js vjs-default-skin" poster="http://iandow.github.io/img/chicken_tv_poster.png" controls>
+<video id='chicken-tv' class="video-js vjs-default-skin" width="600" poster="http://iandow.github.io/img/chicken_tv_poster.png" controls>
 <source type="application/x-mpegURL" src="https://hctigsi3ocwd57.data.mediastore.us-east-1.amazonaws.com/Ian_gopro_test_a/main_720p30.m3u8">
 </video>
 
