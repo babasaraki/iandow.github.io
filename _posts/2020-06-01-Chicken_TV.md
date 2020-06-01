@@ -4,7 +4,7 @@ title: Chicken TV
 tags: [video, chickens]
 ---
 
-About 3 weeks ago one of my chickens, a Plymouth Rock, went broody. So, I immediately bought a dozen fertilized eggs from a farmer near Portland Oregon and stuck them under her. The eggs should hatch on Saturday June 6. I can't wait to see how many hatch and what breeds they'll be. It's amazing to watch the hen on her clutch. I love the sounds she makes too. I'll do my best to keep that stream up and running but any number of other things might bring it down, like precarious extension chords, curious kids, etc.
+About 3 weeks ago one of my chickens, a Plymouth Rock, went broody. So, I immediately bought a dozen fertilized eggs from a farmer near Portland Oregon and stuck them under her. The eggs should hatch on Saturday June 6. I can't wait to see how many hatch and what breeds they'll be. It's amazing to watch the hen on her clutch. I love the sounds she makes too. You can watch the action live by playing the following video. I'll do my best to keep this video stream up and running but any number of other things might bring it down, like precarious extension chords, curious kids, etc.
 
 <!-- CSS  -->
 <link href="https://vjs.zencdn.net/7.2.3/video-js.css" rel="stylesheet">
