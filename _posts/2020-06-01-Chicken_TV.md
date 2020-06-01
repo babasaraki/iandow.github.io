@@ -4,13 +4,15 @@ title: Chicken TV
 tags: [video, chickens]
 ---
 
-<img src="http://iandow.github.io/img/chicken_tv_poster.jpg" width="20%" style="margin-right: 15px" align="right" alt="Vue.js Logo">
-
 About 3 weeks ago one of my chickens, a Plymouth Rock hen, went broody, so I bought a dozen fertilized eggs from a farmer near Portland Oregon and stuck them under her. The eggs should hatch on Saturday June 6. I can't wait to see how many hatch and what breeds they'll be. It's amazing to watch the hen on her clutch. I love the sounds she makes too. 
 
 <img src="http://iandow.github.io/img/chicken_incubator.jpg" width="20%" style="margin-left: 15px" align="right" alt="Vue.js Logo">
 
-Coincidentally, my son's kindergarten class also just hatched some chicks. They used an incubator that carefully controls humidity, temperature, and egg movement so conditions are perfect for embryo development. It's amazing how you don't have to do any of that if you use a hen! Mother nature just takes care of it all! All you have to do is keep out predictors like crows, racoons, and such.
+Coincidentally, my son's kindergarten class also just hatched some chicks. They used an incubator that carefully controls humidity, temperature, and egg movement so conditions are perfect for embryo development. 
+
+<img src="http://iandow.github.io/img/chicken_tv_poster.png" width="20%" style="margin-right: 15px" align="right" alt="Vue.js Logo">
+
+It's amazing how you don't have to do any of that if you use a hen! Mother nature just takes care of it all! All you have to do is keep out predictors like crows, racoons, and such.
 
 I hope you enjoy watching this as much as I do. I hope you enjoy ***Chicken TV***!
 
