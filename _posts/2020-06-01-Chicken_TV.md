@@ -10,8 +10,6 @@ About 3 weeks ago one of my chickens, a Plymouth Rock, went broody. So, I immedi
 
 Coincidentally, my son's kindergarten class also just hatched some chicks. They used an incubator that carefully controls humidity, temperature, and egg movement so conditions are perfect for embryo development. 
 
-<img src="http://iandow.github.io/img/chicken_tv_poster.png" width="20%" style="margin-right: 15px" align="right" alt="Vue.js Logo">
-
 It's amazing how you don't have to do any of that if you use a hen! Mother nature just takes care of it all! All you have to do is keep out predictors like crows, raccoons, and such.
 
 I hope you enjoy watching this as much as I do. I hope you enjoy ***Chicken TV***!
@@ -27,7 +25,7 @@ I hope you enjoy watching this as much as I do. I hope you enjoy ***Chicken TV**
 
 ### Specs
 
-To setup this video feed, I have a GoPro Hero8 camera in the chicken coop to send 720p video to an RTMP endpoint that I've configured in AWS MediaLive. MediaLive saves the video stream on AWS MediaStore. MediaStore generates an m3u8 manifest file for the stream, which I've specified in the configuration for the Javascript video player (video-js) that you see above. 
+To setup this video feed, I have a GoPro Hero8 camera in the chicken coop sending 720p video to an RTMP endpoint that I configured using AWS MediaLive. I also configured MediaLive to save my video stream on AWS MediaStore. MediaStore generates an m3u8 manifest file for the stream, which I specified in the configuration for the Javascript video player (video-js) that you see on this web page.
 
 <!-- JS code -->
 <!-- If you'd like to support IE8 (for Video.js versions prior to v7) -->
