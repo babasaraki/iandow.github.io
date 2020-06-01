@@ -4,7 +4,7 @@ title: Video Stream test
 tags: [video, chickens]
 ---
 
-This isn't a blog post. I'm just want to see if github pages can render a video player.
+This isn't a blog post. I just want to see if github pages can render a video player.
 
 <!-- CSS  -->
  <link href="https://vjs.zencdn.net/7.2.3/video-js.css" rel="stylesheet">
@@ -12,7 +12,7 @@ This isn't a blog post. I'm just want to see if github pages can render a video 
 
 <!-- HTML -->
 <video id='hls-example'  class="video-js vjs-default-skin" width="400" height="300" controls>
-<source type="application/x-mpegURL" src="http://www.streambox.fr/playlists/test_001/stream.m3u8">
+<source type="application/x-mpegURL" src="https://hctigsi3ocwd57.data.mediastore.us-east-1.amazonaws.com/Ian_gopro_test_a/main_720p30.m3u8">
 </video>
 
 
