@@ -13,6 +13,17 @@ About 3 weeks ago one of my chickens, a Plymouth Rock, went broody. So, I immedi
 <source type="application/x-mpegURL" src="https://hctigsi3ocwd57.data.mediastore.us-east-1.amazonaws.com/Ian_gopro_test_a/main_720p30.m3u8">
 </video>
 
+<!-- Add a placeholder for the Twitch embed -->
+<div id="twitch-embed"></div>
+<!-- Load the Twitch embed script -->
+<script src="https://embed.twitch.tv/embed/v1.js"></script>
+<!-- Create a Twitch.Embed object. This will render within the placeholder div -->
+<script type="text/javascript">
+  new Twitch.Embed("twitch-embed", {
+    channel: "iandownard"
+  });
+</script>
+
 <img src="http://iandow.github.io/img/chicken_incubator.jpg" width="20%" style="margin-left: 15px" align="right" alt="Egg incubator">
 
 Coincidentally, my son's kindergarten class also just hatched some chicks. They used an incubator that carefully controls humidity, temperature, and egg movement so conditions are perfect for embryo development. 
